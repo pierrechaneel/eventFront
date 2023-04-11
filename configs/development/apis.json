@@ -1,0 +1,10 @@
+{
+    "ldapAuthentication": "http://10.25.2.25:8080/ldap",
+    "checkBalance": "http://10.25.3.81:9001",
+    "emailApi": "http://10.25.2.104:3010/mail",
+    "omBundlePayment": "http://10.25.3.81:3006",
+    "myriadBundlePayment": "http://10.25.3.81:80",
+    "ocs": "http://10.25.3.81:8090/ocswebservices/services/CongoWebServices.CongoWebServicesHttpSoap11Endpoint/",
+    "whaatAuth": "http://waaat.orange.cd/WT/testall/printenv",
+    "cellcubePush": " http://10.25.3.81:8090/cgi-bin/cellcube_push"
+}

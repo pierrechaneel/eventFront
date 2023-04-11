@@ -1,0 +1,14 @@
+{
+    "app_name": "TABLEAU DE BORD ORANGE MONEY",
+    "menu_materials": [
+        {
+            "title": "Souscriptions"
+        },
+        {
+            "title": "Transactions Retry"
+        },
+        {
+            "title": "Paiements"
+        }
+    ]
+}
