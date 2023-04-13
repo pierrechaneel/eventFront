@@ -112,10 +112,15 @@ const PurchasResult = ({}) => {
           setISOTPCodeVisible(true);
         });
     } else {
-      requestUrl = `/api/payments/homebox?homeboxMsisdn=${customerMsisdn}&offerCode=${customerParams?.offerCode}`;
+      requestUrl = `/api/payments/homebox?homeboxMsisdn=${customerMsisdn}&offerCode=${customerParams?.offerCode?.trim()}`;
     }
 
     if (customerParams?.paymentSource !== "external") {
+      console.log("frontend params for bundle payment", {
+        link: requestUrl,
+        source: customerParams,
+      });
+
       await axios
         .get(requestUrl)
         ?.then((result) => {

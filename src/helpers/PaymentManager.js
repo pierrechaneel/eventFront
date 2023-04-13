@@ -140,6 +140,8 @@ class PaymentManager {
   }
 
   static async processHomeBoxPay({ homeboxMsisdn, offerCode }) {
+    console.log("received homebox params", { homeboxMsisdn, offerCode });
+
     let ocsUrl = ``;
     let processed = false;
 
@@ -171,6 +173,15 @@ class PaymentManager {
       -9
     )}</con:MSISDN>\r\n            <con:UserPwd></con:UserPwd>\r\n            <con:PricePlanLevel></con:PricePlanLevel>\r\n            <con:PricePlanChgDtoList>\r\n               <con:PricePlanChgDto>\r\n                  <con:PricePlanCode>${offerCode}</con:PricePlanCode>\r\n                  <con:Action>1</con:Action>\r\n                  <con:EffType></con:EffType>\r\n                  <con:EffDate></con:EffDate>\r\n                  <con:ExpDate></con:ExpDate>\r\n                  <con:PricePlanAttrDtoList>\r\n                     <con:PricePlanAttrDto>\r\n                        <con:PricePlanAttrCode></con:PricePlanAttrCode>\r\n                        <con:PricePlanAttrValue></con:PricePlanAttrValue>\r\n                     </con:PricePlanAttrDto>\r\n                  </con:PricePlanAttrDtoList>\r\n               </con:PricePlanChgDto>\r\n            </con:PricePlanChgDtoList>\r\n            <con:ChargeFlag></con:ChargeFlag>\r\n            <con:Comments></con:Comments>\r\n            <con:Location></con:Location>\r\n         </con:ModUserIndiPricePlanReqDto>\r\n      </con:modUserIndiPricePlan>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>`;
 
+    console.log("before post payments homebox", `${ocsUrl}`, data, {
+      headers: {
+        SOAPAction: '"urn:modUserIndiPricePlan"',
+        "Cache-Control": "no-cache",
+        "Content-Type": "text/xml;charset=UTF-8",
+        "Accept-Encoding": "gzip,deflate",
+      },
+    });
+
     await axios
       .post(`${ocsUrl}`, data, {
         headers: {
@@ -181,6 +192,8 @@ class PaymentManager {
         },
       })
       .then((results) => {
+        console.log("results of home box payment");
+
         let requestRes = XMLConvert.xml2js(results?.data, {
           compact: true,
           spaces: 4,
