@@ -123,6 +123,7 @@ const AuthenticateBox = ({}) => {
               label={"Numéro de téléphone"}
               fullWidth
               name={"custMsisdn"}
+              type={"number"}
               sx={{
                 width: "100%",
                 fontSize: screen750 ? "16px" : "14px",

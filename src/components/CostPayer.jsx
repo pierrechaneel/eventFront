@@ -16,16 +16,38 @@ import Link from "next/link";
 import { useEffect } from "react";
 import axios from "axios";
 import SectionLoader from "./SectionLoader";
+import { useRouter } from "next/router";
+import { PaymentParameters } from "../../context/paymentParameters";
 
 const CostPayer = ({}) => {
   const theme = useTheme();
 
+  const router = useRouter();
+
   const screen750 = useMediaQuery(theme.breakpoints.down(750));
+
+  const setCustomerParams =
+    React.useContext(PaymentParameters).setpaymentParameters;
+  const customerParams = React.useContext(PaymentParameters).paymentParameters;
 
   const [paymentOptions, setpaymentOptions] = React.useState([
     { title: "Mon compte Box", link: "/consumption/canal" },
     { title: "Un autre compte", link: "/consumption/phone-number" },
   ]);
+
+  const handlePayerSelect = (event, selection) => {
+    event?.preventDefault();
+
+    if (selection?.link === "/consumption/canal") {
+      setCustomerParams({
+        ...customerParams,
+        paymentSource: "",
+        payerMsisdn: "",
+      });
+
+      router.push(selection?.link);
+    }
+  };
 
   return (
     <Stack
@@ -101,55 +123,45 @@ const CostPayer = ({}) => {
             {paymentOptions?.length > 0 ? (
               paymentOptions?.map((target, index) => {
                 return (
-                  <Link
-                    href={`${target?.link}`}
-                    key={index}
-                    style={{
-                      textDecoration: "none",
+                  <MenuItem
+                    onClick={(event) => {
+                      handlePayerSelect(event, target);
+                    }}
+                    sx={{
                       width: "100%",
-                      "&:hover, &:focus": {
-                        color: "inherit",
-                        backgroundColor: "inherit",
+                      "&:hover": {
+                        transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
+                        bgcolor: theme.palette.grey[50],
                       },
                     }}
                   >
-                    <MenuItem
+                    <Stack
+                      direction={"row"}
                       sx={{
                         width: "100%",
-                        "&:hover": {
-                          transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
-                          bgcolor: theme.palette.grey[50],
-                        },
+                        py: "0.5rem",
+                        px: "1rem",
+                        justifyContent: "space-between",
+                        alignItems: "center",
                       }}
                     >
-                      <Stack
-                        direction={"row"}
+                      <Typography
                         sx={{
-                          width: "100%",
-                          py: "0.5rem",
-                          px: "1rem",
-                          justifyContent: "space-between",
-                          alignItems: "center",
+                          color: theme.palette.common.black,
+                          fontWeight: theme.typography.fontWeightBold,
+                          fontSize: "14px",
                         }}
                       >
-                        <Typography
-                          sx={{
-                            color: theme.palette.common.black,
-                            fontWeight: theme.typography.fontWeightBold,
-                            fontSize: "14px",
-                          }}
-                        >
-                          {target?.title}
-                        </Typography>
-                        <ChevronRight
-                          sx={{
-                            color: theme.palette.primary.main,
-                            fontSize: screen750 ? "16px" : "18px",
-                          }}
-                        />
-                      </Stack>
-                    </MenuItem>
-                  </Link>
+                        {target?.title}
+                      </Typography>
+                      <ChevronRight
+                        sx={{
+                          color: theme.palette.primary.main,
+                          fontSize: screen750 ? "16px" : "18px",
+                        }}
+                      />
+                    </Stack>
+                  </MenuItem>
                 );
               })
             ) : (

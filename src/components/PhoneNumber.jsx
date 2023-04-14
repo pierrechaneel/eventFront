@@ -17,28 +17,41 @@ import Link from "next/link";
 import { useEffect } from "react";
 import axios from "axios";
 import { PaymentParameters } from "../../context/paymentParameters";
+import { useRouter } from "next/router";
 
 const PhoneNumber = ({}) => {
   const theme = useTheme();
 
   const screen750 = useMediaQuery(theme.breakpoints.down(750));
 
+  const [payerMobileNumber, setpayerMobileNumber] = React.useState();
+
   const setCustomerParams =
     React.useContext(PaymentParameters).setpaymentParameters;
   const customerParams = React.useContext(PaymentParameters).paymentParameters;
 
-  const handleChange = (event) => {
-    event.preventDefault();
+  const router = useRouter();
+
+  const handleSwipe = (event) => {
+    event?.preventDefault();
 
     const custParams = {
       ...customerParams,
-      payerMsisdn: event?.target?.value,
+      payerMsisdn: payerMobileNumber,
       paymentSource: "external",
     };
 
     setCustomerParams(custParams);
 
     window.localStorage?.setItem("custParams", JSON.stringify(custParams));
+
+    router.push("/consumption/canal");
+  };
+
+  const handleChange = (event) => {
+    event.preventDefault();
+
+    setpayerMobileNumber(event?.target?.value);
   };
 
   return (
@@ -108,6 +121,7 @@ const PhoneNumber = ({}) => {
           <TextField
             onChange={handleChange}
             size={"small"}
+            type={"number"}
             label={"Numéro de téléphone"}
             sx={{
               width: "100%",
@@ -123,32 +137,26 @@ const PhoneNumber = ({}) => {
               mt: "1rem",
             }}
           >
-            <Link
-              href={"/consumption/canal"}
-              style={{
-                textDecoration: "none",
+            <Button
+              onClick={handleSwipe}
+              sx={{
+                bgcolor: theme.palette.common.white,
+                color: theme.palette.common.black,
+                borderRadius: "0rem",
+                px: "0.7rem",
+                py: "0.15rem",
+                fontWeight: theme.typography.fontWeightBold,
+                fontSize: "14px",
+                border: `2px solid ${theme.palette.common.black}`,
+                "&:hover": {
+                  transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
+                  bgcolor: theme.palette.common.black,
+                  color: theme.palette.common.white,
+                },
               }}
             >
-              <Button
-                sx={{
-                  bgcolor: theme.palette.common.white,
-                  color: theme.palette.common.black,
-                  borderRadius: "0rem",
-                  px: "0.7rem",
-                  py: "0.15rem",
-                  fontWeight: theme.typography.fontWeightBold,
-                  fontSize: "14px",
-                  border: `2px solid ${theme.palette.common.black}`,
-                  "&:hover": {
-                    transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
-                    bgcolor: theme.palette.common.black,
-                    color: theme.palette.common.white,
-                  },
-                }}
-              >
-                Envoyer
-              </Button>
-            </Link>
+              Envoyer
+            </Button>
           </Stack>
         </Stack>
       </Stack>
