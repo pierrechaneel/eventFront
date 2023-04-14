@@ -220,8 +220,8 @@ const AppAuth = ({}) => {
           {!isNotAuthenticated ? (
             <>
               <CircularProgress
+                size={screen750 ? 16 : 18}
                 sx={{
-                  fontSize: screen750 ? "16px" : "18px",
                   color: theme.palette.primary.main,
                   my: "2.5rem",
                 }}

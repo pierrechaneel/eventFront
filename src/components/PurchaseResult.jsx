@@ -10,6 +10,7 @@ import {
   IconButton,
   MenuItem,
   TextField,
+  CircularProgress,
 } from "@mui/material";
 import { ArrowBack, ChevronRight } from "@mui/icons-material";
 import Link from "next/link";
@@ -38,6 +39,8 @@ const PurchasResult = ({}) => {
 
   const [isOTPCodeVisible, setISOTPCodeVisible] = React.useState();
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -51,6 +54,8 @@ const PurchasResult = ({}) => {
 
   const handlePurchaseOut = async (event) => {
     event?.preventDefault();
+
+    setIsLoading(true);
 
     let requestUrl = ``;
 
@@ -95,6 +100,8 @@ const PurchasResult = ({}) => {
           setSeverity("info");
           setIsSnackVisible(true);
 
+          setIsLoading(false);
+
           setISOTPCodeVisible(true);
         })
         .catch((error) => {
@@ -102,6 +109,8 @@ const PurchasResult = ({}) => {
             `an error has occured when trying to generate otp code`,
             error
           );
+
+          setIsLoading(false);
 
           setSnackMessage(
             `Le code OTP n'a pu être envoyé au ${customerMsisdn}. Veuillez réessayer`
@@ -126,8 +135,6 @@ const PurchasResult = ({}) => {
         ?.then((result) => {
           console.log("payment results", { result });
 
-          router.push("/consumption");
-
           setIsSnackVisible(true);
           setSeverity("success");
           setSnackMessage(
@@ -135,6 +142,10 @@ const PurchasResult = ({}) => {
               ? "Veuillez poursuivre le paiement sur votre téléphone"
               : "Paiement effectué avec succès"
           );
+
+          setIsLoading(false);
+
+          router.push("/consumption");
         })
         .catch((error) => {
           console.log("an error has occured when processing payments", error);
@@ -142,11 +153,15 @@ const PurchasResult = ({}) => {
           setIsSnackVisible(true);
           setSeverity("error");
           setSnackMessage("Erreur! Veuillez réessayer plus tard");
+
+          setIsLoading(false);
         });
     }
   };
 
   const externalMyriadPay = async () => {
+    setIsLoading(true);
+
     await axios
       .get(
         `/api/payments/external?payer=${customerParams?.payerMsisdn}&receiver=${customerMsisdn}&offerComName=${customerParams?.offerName}&offerCode=${customerParams?.offerCode}`
@@ -154,10 +169,14 @@ const PurchasResult = ({}) => {
       ?.then((result) => {
         console.log("payment results", { result });
 
+        setIsLoading(false);
+
         router.push("/consumption");
       })
       .catch((error) => {
         console.log("an error has occured when processing payments", error);
+
+        setIsLoading(false);
 
         setIsSnackVisible(true);
         setSeverity("error");
@@ -335,10 +354,27 @@ const PurchasResult = ({}) => {
                     transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
                     bgcolor: theme.palette.common.black,
                     color: theme.palette.common.white,
+                    "& span": {
+                      color: theme.palette.common.white,
+                    },
                   },
+                  height: "27px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "70px",
                 }}
               >
-                Envoyer
+                {isLoading ? (
+                  <CircularProgress
+                    size={16}
+                    sx={{
+                      color: theme.palette.common.black,
+                    }}
+                  />
+                ) : (
+                  "Envoyer"
+                )}
               </Button>
             </Stack>
           </Stack>

@@ -23,6 +23,7 @@ const PromoPubs = ({}) => {
         indicatorContainerProps={false}
         indicators={false}
         direction={"column"}
+        interval={15000}
         sx={{}}
       >
         {new Array(5).fill("value").map((target, index) => {

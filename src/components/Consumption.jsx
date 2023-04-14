@@ -72,8 +72,34 @@ const Consumption = ({}) => {
 
   const customerProperties =
     React.useContext(PaymentParameters)?.customerProperties;
+  const setCustomerProperties =
+    React.useContext(PaymentParameters)?.setCustomerProperties;
 
   console.log("customer props", { customerProperties });
+
+  React.useEffect(() => {
+    (async () => {
+      await axios
+        .get(`/api/customers/get-properties?customerMsisdn=${customerMsisdn}`)
+        .then((results) => {
+          const custProp = {
+            customerName: results?.data?.properties?.customerName,
+            serviceClass: results?.data?.properties?.serviceClass,
+            mainBalance: results?.data?.properties?.mainBalance,
+          };
+
+          setCustomerProperties(custProp);
+
+          // window.localStorage.setItem("custProp", JSON.stringify(custProp));
+        })
+        .catch((error) => {
+          console.log(
+            "an error has occured when trying to get cust properties",
+            error
+          );
+        });
+    })();
+  }, []);
 
   return (
     <Stack
