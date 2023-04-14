@@ -55,6 +55,12 @@ const PurchasResult = ({}) => {
   const handlePurchaseOut = async (event) => {
     event?.preventDefault();
 
+    console.log("log of cust params before payment be done ::: ", {
+      customerParams,
+    });
+
+    customerParams.offerCode = customerParams?.offerCode?.toString();
+
     setIsLoading(true);
 
     let requestUrl = ``;
@@ -64,7 +70,7 @@ const PurchasResult = ({}) => {
         customerParams?.paymentSource === "external"
           ? customerParams?.payerMsisdn
           : customerMsisdn
-      }&offerCode=${customerParams?.offerCode}&offerComName=${
+      }&offerCode=${customerParams?.offerCode?.trim()}&offerComName=${
         customerParams?.offerName
       }&receiverMsisdn=${customerMsisdn}&bundlePrice=${
         customerParams?.bundlePrice
@@ -164,7 +170,11 @@ const PurchasResult = ({}) => {
 
     await axios
       .get(
-        `/api/payments/external?payer=${customerParams?.payerMsisdn}&receiver=${customerMsisdn}&offerComName=${customerParams?.offerName}&offerCode=${customerParams?.offerCode}`
+        `/api/payments/external?payer=${
+          customerParams?.payerMsisdn
+        }&receiver=${customerMsisdn}&offerComName=${
+          customerParams?.offerName
+        }&offerCode=${customerParams?.trim()}`
       )
       ?.then((result) => {
         console.log("payment results", { result });

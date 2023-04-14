@@ -15,7 +15,7 @@ import SectionLoader from "./SectionLoader";
 import { PaymentParameters } from "../../context/paymentParameters";
 import configs from "../../configs/generals.json";
 
-const Consumption = ({}) => {
+const Consumption = ({ updateTime }) => {
   const theme = useTheme();
 
   const screen1500 = useMediaQuery(theme.breakpoints.up(1500));
@@ -25,7 +25,6 @@ const Consumption = ({}) => {
   const screen1250 = useMediaQuery(theme.breakpoints.up(1250));
 
   const [customerBalanceData, setcustomerBalanceData] = React.useState([]);
-  const [rechargeTime, setRechargeTime] = React.useState("");
 
   const customerMsisdn = React.useContext(PaymentParameters)?.customerMsisdn;
   const triggerMessage = React.useContext(PaymentParameters)?.triggerMessage;
@@ -33,8 +32,6 @@ const Consumption = ({}) => {
   const [searchFailed, setSearchFailed] = React.useState(false);
 
   React.useEffect(() => {
-    setRechargeTime(new Date().toLocaleString("fr-FR"));
-
     (async () => {
       setSearchFailed(false);
       await axios
@@ -137,7 +134,7 @@ const Consumption = ({}) => {
               //mb: screen900 ? ".7rem" : "1.5rem",
             }}
           >
-            Dernière mise à jour {rechargeTime}
+            Dernière mise à jour {updateTime}
           </Typography>
         </Stack>
         <Stack
@@ -454,5 +451,9 @@ const Consumption = ({}) => {
     </Stack>
   );
 };
+
+export async function getServerSideProps() {
+  return { props: { updateTime: new Date().toLocaleString("fr-FR") } };
+}
 
 export default Consumption;
