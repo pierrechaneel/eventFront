@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 import SectionLoader from "./SectionLoader";
 import configs from "../../configs/generals.json";
 
-const CustomerContact = ({}) => {
+const CustomerContact = ({ updateTime }) => {
   const theme = useTheme();
 
   const [customerContacts, setcustomerContacts] = React.useState([]);
@@ -32,8 +32,6 @@ const CustomerContact = ({}) => {
   const screen750 = useMediaQuery(theme.breakpoints.down(750));
   const screen450 = useMediaQuery(theme.breakpoints.down(450));
   const screen1250 = useMediaQuery(theme.breakpoints.up(1250));
-
-  const [rechargeTime, setRechargeTime] = React.useState("");
 
   const customerMsisdn = React.useContext(PaymentParameters)?.customerMsisdn;
 
@@ -98,10 +96,6 @@ const CustomerContact = ({}) => {
     })();
   }, []);
 
-  React.useEffect(() => {
-    setRechargeTime(new Date().toLocaleString("fr-FR"));
-  }, []);
-
   const handleClick = (event, obj) => {
     event?.preventDefault();
 
@@ -156,7 +150,7 @@ const CustomerContact = ({}) => {
               mb: screen900 ? ".7rem" : "1.5rem",
             }}
           >
-            Dernière mise à jour {rechargeTime}
+            Dernière mise à jour {updateTime}
           </Typography>
         </Stack>
         <Stack

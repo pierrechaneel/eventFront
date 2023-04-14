@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { Dangerous } from "@mui/icons-material";
 
-const StartPage = ({}) => {
+const StartPage = ({ updateTime }) => {
   const theme = useTheme();
 
   const screen750 = useMediaQuery(theme.breakpoints.down(750));
@@ -25,10 +25,18 @@ const StartPage = ({}) => {
   return (
     <>
       <PubLayout title="Mes numéros de contacts">
-        <CustomerContact />
+        <CustomerContact updateTime={updateTime} />
       </PubLayout>
     </>
   );
 };
+
+export async function getServerSideProps() {
+  console.log("datime to delive to clients", {
+    props: { updateTime: new Date().toLocaleString("fr-FR") },
+  });
+
+  return { props: { updateTime: new Date().toLocaleString("fr-FR") } };
+}
 
 export default StartPage;

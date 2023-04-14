@@ -18,6 +18,8 @@ import configs from "../../configs/generals.json";
 const Consumption = ({ updateTime }) => {
   const theme = useTheme();
 
+  console.log("update time", { updateTime });
+
   const screen1500 = useMediaQuery(theme.breakpoints.up(1500));
   const screen900 = useMediaQuery(theme.breakpoints.down(900));
   const screen940 = useMediaQuery(theme.breakpoints.down(940));
@@ -451,9 +453,5 @@ const Consumption = ({ updateTime }) => {
     </Stack>
   );
 };
-
-export async function getServerSideProps() {
-  return { props: { updateTime: new Date().toLocaleString("fr-FR") } };
-}
 
 export default Consumption;
