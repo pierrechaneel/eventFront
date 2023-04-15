@@ -55,10 +55,6 @@ const PurchasResult = ({}) => {
   const handlePurchaseOut = async (event) => {
     event?.preventDefault();
 
-    console.log("log of cust params before payment be done ::: ", {
-      customerParams,
-    });
-
     customerParams.offerCode = customerParams?.offerCode?.toString();
 
     setIsLoading(true);
@@ -130,7 +126,11 @@ const PurchasResult = ({}) => {
       requestUrl = `/api/payments/homebox?homeboxMsisdn=${customerMsisdn}&offerCode=${customerParams?.offerCode?.trim()}`;
     }
 
-    if (customerParams?.paymentSource !== "external") {
+    if (
+      customerParams?.canal === "Orange Money" ||
+      (customerParams?.canal === "Unités" &&
+        customerParams?.paymentSource !== "external")
+    ) {
       console.log("frontend params for bundle payment", {
         link: requestUrl,
         source: customerParams,
@@ -151,6 +151,8 @@ const PurchasResult = ({}) => {
 
           setIsLoading(false);
 
+          setISOTPCodeVisible(false);
+
           router.push("/consumption");
         })
         .catch((error) => {
@@ -159,6 +161,8 @@ const PurchasResult = ({}) => {
           setIsSnackVisible(true);
           setSeverity("error");
           setSnackMessage("Erreur! Veuillez réessayer plus tard");
+
+          setISOTPCodeVisible(false);
 
           setIsLoading(false);
         });
@@ -174,7 +178,7 @@ const PurchasResult = ({}) => {
           customerParams?.payerMsisdn
         }&receiver=${customerMsisdn}&offerComName=${
           customerParams?.offerName
-        }&offerCode=${customerParams?.trim()}`
+        }&offerCode=${customerParams?.offerCode?.trim()}`
       )
       ?.then((result) => {
         console.log("payment results", { result });
@@ -202,7 +206,11 @@ const PurchasResult = ({}) => {
           close={() => {
             setISOTPCodeVisible(false);
           }}
-          customerMsisdn={customerMsisdn}
+          customerMsisdn={
+            customerParams?.paymentSource === "external"
+              ? customerParams?.payerMsisdn
+              : customerMsisdn
+          }
         />
       ) : (
         ""

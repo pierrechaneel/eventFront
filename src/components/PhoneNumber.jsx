@@ -32,7 +32,7 @@ const PhoneNumber = ({}) => {
 
   const router = useRouter();
 
-  const handleSwipe = (event) => {
+  const handleSubmit = (event) => {
     event?.preventDefault();
 
     const custParams = {
@@ -101,65 +101,72 @@ const PhoneNumber = ({}) => {
           Insérer le numéro de paiment
         </Typography>
       </Stack>
-      <Stack
-        sx={{
-          mt: "1rem",
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          width: "100%",
         }}
       >
         <Stack
           sx={{
-            boxShadow: `0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)`,
-            borderRadius: "0.3rem",
-            bgcolor: theme.palette.common.white,
-            p: 0,
-            m: 0,
-            height: "max-content",
-            width: "100%",
-            p: "1rem",
+            mt: "1rem",
           }}
         >
-          <TextField
-            onChange={handleChange}
-            size={"small"}
-            type={"number"}
-            label={"Numéro de téléphone"}
-            sx={{
-              width: "100%",
-              my: "0.5rem",
-              fontSize: screen750 ? "16px" : "14px",
-            }}
-          />
           <Stack
-            direction={"row"}
             sx={{
-              alignItems: "center",
-              justifyContent: "flex-end",
-              mt: "1rem",
+              boxShadow: `0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)`,
+              borderRadius: "0.3rem",
+              bgcolor: theme.palette.common.white,
+              p: 0,
+              m: 0,
+              height: "max-content",
+              width: "100%",
+              p: "1rem",
             }}
           >
-            <Button
-              onClick={handleSwipe}
+            <TextField
+              onChange={handleChange}
+              size={"small"}
+              type={"number"}
+              label={"Numéro de téléphone"}
               sx={{
-                bgcolor: theme.palette.common.white,
-                color: theme.palette.common.black,
-                borderRadius: "0rem",
-                px: "0.7rem",
-                py: "0.15rem",
-                fontWeight: theme.typography.fontWeightBold,
-                fontSize: "14px",
-                border: `2px solid ${theme.palette.common.black}`,
-                "&:hover": {
-                  transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
-                  bgcolor: theme.palette.common.black,
-                  color: theme.palette.common.white,
-                },
+                width: "100%",
+                my: "0.5rem",
+                fontSize: screen750 ? "16px" : "14px",
+              }}
+            />
+            <Stack
+              direction={"row"}
+              sx={{
+                alignItems: "center",
+                justifyContent: "flex-end",
+                mt: "1rem",
               }}
             >
-              Envoyer
-            </Button>
+              <Button
+                onClick={handleSwipe}
+                sx={{
+                  bgcolor: theme.palette.common.white,
+                  color: theme.palette.common.black,
+                  borderRadius: "0rem",
+                  px: "0.7rem",
+                  py: "0.15rem",
+                  fontWeight: theme.typography.fontWeightBold,
+                  fontSize: "14px",
+                  border: `2px solid ${theme.palette.common.black}`,
+                  "&:hover": {
+                    transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
+                    bgcolor: theme.palette.common.black,
+                    color: theme.palette.common.white,
+                  },
+                }}
+              >
+                Envoyer
+              </Button>
+            </Stack>
           </Stack>
         </Stack>
-      </Stack>
+      </form>
     </Stack>
   );
 };

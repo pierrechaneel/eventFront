@@ -156,12 +156,12 @@ const OTPCode = ({ customerMsisdn, close, callback }) => {
               bgcolor: theme.palette.common.black,
               justifyContent: "space-between",
               width: "100%",
-              px: "1rem",
+              px: ".7rem",
             }}
           >
             <Typography
               sx={{
-                color: theme.palette.primary.main,
+                color: theme.palette.common.white,
                 fontWeight: theme.typography.fontWeightBold,
                 fontSize: "16px",
               }}
@@ -195,6 +195,7 @@ const OTPCode = ({ customerMsisdn, close, callback }) => {
               <TextField
                 size={"small"}
                 label={"Code OTP"}
+                autoComplete="off"
                 name="otpCode"
                 sx={{
                   width: "100%",
