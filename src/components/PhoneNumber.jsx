@@ -144,7 +144,7 @@ const PhoneNumber = ({}) => {
               }}
             >
               <Button
-                onClick={handleSwipe}
+                type={"submit"}
                 sx={{
                   bgcolor: theme.palette.common.white,
                   color: theme.palette.common.black,
