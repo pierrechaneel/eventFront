@@ -44,9 +44,9 @@ const CostPayer = ({}) => {
         paymentSource: "",
         payerMsisdn: "",
       });
-
-      router.push(selection?.link);
     }
+
+    router.push(selection?.link);
   };
 
   return (
