@@ -185,6 +185,12 @@ const PurchasResult = ({}) => {
 
         setIsLoading(false);
 
+        setIsLoading(false);
+
+        setIsSnackVisible(true);
+        setSeverity("success");
+        setSnackMessage("Paiment effectué avec succès");
+
         router.push("/consumption");
       })
       .catch((error) => {

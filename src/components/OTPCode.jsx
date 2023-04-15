@@ -90,7 +90,7 @@ const OTPCode = ({ customerMsisdn, close, callback }) => {
         } else {
           setsnackMessage("Le code entré est incorrect");
           setMessageVisible(true);
-          setSeverity("error");
+          setSeverity("warning");
         }
       })
       .catch((error) => {
@@ -99,9 +99,7 @@ const OTPCode = ({ customerMsisdn, close, callback }) => {
           error
         );
 
-        setsnackMessage(
-          "Une erreur est survenue, veuillez réessayer plus tard"
-        );
+        setsnackMessage("Veuillez entrer le code réçu ou réessayer");
         setMessageVisible(true);
         setSeverity("error");
       });
