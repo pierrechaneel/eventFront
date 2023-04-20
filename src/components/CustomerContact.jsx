@@ -220,7 +220,7 @@ const CustomerContact = ({ updateTime }) => {
         </Stack>
         <Stack
           sx={{
-            mt: "1rem",
+            mt: searchFailed ? undefined : "1rem",
           }}
         >
           <Stack

@@ -53,8 +53,6 @@ const Consumption = ({ updateTime }) => {
   }, []);
 
   const handleRetry = (event) => {
-    setRechargeTime(new Date().toLocaleString("fr-FR"));
-
     (async () => {
       setSearchFailed(false);
       await axios
@@ -514,7 +512,7 @@ const Consumption = ({ updateTime }) => {
               my: "1.5rem",
               px: "1rem",
               py: "2rem",
-              border: `1px solid ${theme.palette.grey[300]}`,
+              border: `1px solid ${theme.palette.grey[400]}`,
               mb: "1rem",
               width: "45%",
               maxWidth: "700px",
@@ -560,62 +558,66 @@ const Consumption = ({ updateTime }) => {
               Je m'approvisionne
             </Button>
           </Stack>
-          <Stack
-            direction={"column"}
-            sx={{
-              alignItems: "flex-start",
-              justifyContent: "flex-start",
-              my: "1.5rem",
-              px: "1rem",
-              py: "2rem",
-              border: `1px solid ${theme.palette.grey[400]}`,
-              mb: "1rem",
-              ml: "3%",
-              width: "45%",
-              maxWidth: "700px",
-              pl: "2rem",
-            }}
-          >
-            <Typography
+          {Number.parseFloat(endlessOffer?.cost) > 0 ? (
+            <Stack
+              direction={"column"}
               sx={{
-                color: theme.palette.common.black,
-                fontWeight: theme.typography.fontWeightRegular,
-                fontSize: screen750 ? "14px" : "16px",
+                alignItems: "flex-start",
+                justifyContent: "flex-start",
+                my: "1.5rem",
+                px: "1rem",
+                py: "2rem",
+                border: `1px solid ${theme.palette.grey[400]}`,
+                mb: "1rem",
+                ml: "3%",
+                width: "45%",
+                maxWidth: "700px",
+                pl: "2rem",
               }}
             >
-              A seulement {endlessOffer?.cost} Unités, restez connectés pendant
-              1 mois et consommez jusqu'à la hauteur de vos besoins
-            </Typography>
-            <img
-              src="/handStar.svg"
-              alt="shop"
-              style={{
-                marginTop: "1rem",
-                marginBottom: "1rem",
-                width: "100px",
-              }}
-            />
-            <Button
-              onClick={handleEndlessPurchase}
-              sx={{
-                bgcolor: theme.palette.common.white,
-                color: theme.palette.common.black,
-                borderRadius: "0rem",
-                px: ".7rem",
-                py: "0.2rem",
-                fontWeight: theme.typography.fontWeightBold,
-                fontSize: screen900 ? "12px" : "14px",
-                border: `2px solid ${theme.palette.common.black}`,
-                "&:hover": {
-                  transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
-                  bgcolor: theme.palette.common.black,
-                  color: theme.palette.common.white,
-                },
-              }}
-            >
-              Je paie l'Illimité
-            </Button>
-          </Stack>
+              <Typography
+                sx={{
+                  color: theme.palette.common.black,
+                  fontWeight: theme.typography.fontWeightRegular,
+                  fontSize: screen750 ? "14px" : "16px",
+                }}
+              >
+                A seulement {endlessOffer?.cost} Unités, restez connectés
+                pendant 1 mois et consommez jusqu'à la hauteur de vos besoins
+              </Typography>
+              <img
+                src="/handStar.svg"
+                alt="shop"
+                style={{
+                  marginTop: "1rem",
+                  marginBottom: "1rem",
+                  width: "100px",
+                }}
+              />
+              <Button
+                onClick={handleEndlessPurchase}
+                sx={{
+                  bgcolor: theme.palette.common.white,
+                  color: theme.palette.common.black,
+                  borderRadius: "0rem",
+                  px: ".7rem",
+                  py: "0.2rem",
+                  fontWeight: theme.typography.fontWeightBold,
+                  fontSize: screen900 ? "12px" : "14px",
+                  border: `2px solid ${theme.palette.common.black}`,
+                  "&:hover": {
+                    transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
+                    bgcolor: theme.palette.common.black,
+                    color: theme.palette.common.white,
+                  },
+                }}
+              >
+                Je paie l'Illimité
+              </Button>
+            </Stack>
+          ) : (
+            ""
+          )}
         </Stack>
       </Stack>
     </Stack>

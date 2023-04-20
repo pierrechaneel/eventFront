@@ -66,6 +66,8 @@ class CustomerManager {
       data: data,
     };
 
+    // console.log("customer request", { config });
+
     await axios(config)
       .then(function (response) {
         let requestRes = XMLConvert.xml2js(response?.data, {
