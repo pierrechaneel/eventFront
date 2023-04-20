@@ -8,12 +8,15 @@
 # testing
 /coverage
 
+#configs
+/configs
+
 # next.js
 /.next/
 /out/
 
 #log files
-/logs/*.log
+/logs/
 
 # production
 /build
