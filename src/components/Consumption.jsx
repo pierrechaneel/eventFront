@@ -77,7 +77,52 @@ const Consumption = ({ updateTime }) => {
   const setCustomerProperties =
     React.useContext(PaymentParameters)?.setCustomerProperties;
 
-  console.log("customer props", { customerProperties });
+  const [endlessOffer, setEndlessOffer] = React.useState({});
+
+  React.useEffect(() => {
+    axios
+      .get("/api/consumption/offers/pricing?group=box")
+      .then((results) => {
+        console.log("endless offer", {
+          data: results?.data,
+        });
+        setEndlessOffer(
+          results?.data?.groups?.find(
+            (res) => res?.offerName === "Illimité - 30J"
+          )
+        );
+      })
+      .catch((error) => {
+        console.log(
+          "an error has occured when fetchin the endless offer info",
+          error
+        );
+      });
+  }, []);
+
+  const handleEndlessPurchase = async (event) => {
+    event?.preventDefault();
+
+    setTransitState(true);
+
+    await axios
+      .get("/api/consumption/offers/pricing?group=box")
+      .then((results) => {});
+
+    setpaymentParameters({
+      ...paymentParameters,
+      bundlePrice: Number.parseFloat(
+        endlessOffer?.cost?.toString()?.trim()
+      )?.toFixed(1),
+      offerName: endlessOffer?.offerName,
+      offerCode: endlessOffer?.offerCode?.toString()?.trim(),
+      offerDuration: "30 jours",
+    });
+
+    setTransitState(true);
+
+    router.push(`/consumption/cost-payer`);
+  };
 
   React.useEffect(() => {
     (async () => {
@@ -219,7 +264,7 @@ const Consumption = ({ updateTime }) => {
         <Stack
           sx={{
             borderRadius: "0.3rem",
-            p: "1rem",
+            p: searchFailed ? undefined : "1rem",
             height: "max-content",
             width: "100%",
           }}
@@ -365,8 +410,6 @@ const Consumption = ({ updateTime }) => {
                 sx={{
                   mb: "1.3rem",
                   width: "max-content",
-
-                  bgcolor: theme.palette.common.white,
                 }}
               >
                 <Stack
@@ -447,64 +490,132 @@ const Consumption = ({ updateTime }) => {
           sx={{
             color: theme.palette.common.black,
             fontWeight: theme.typography.fontWeightBold,
-            fontSize: screen900 ? "14px" : "16px",
+            fontSize: screen900 ? "16px" : "18px",
             mt: "1rem",
           }}
         >
           {triggerMessage}
         </Typography>
         <Stack
-          direction={"column"}
+          direction={"row"}
           sx={{
             alignItems: "flex-start",
+            flexWrap: "wrap",
+            width: "100%",
             justifyContent: "flex-start",
-            my: "1.5rem",
-            px: "1rem",
-            py: "2rem",
-            border: `1px solid ${theme.palette.grey[300]}`,
-            mb: "1rem",
-            width: "max-content",
-            maxWidth: "100%",
+            mt: "2rem",
           }}
         >
-          <Typography
+          <Stack
+            direction={"column"}
             sx={{
-              color: theme.palette.common.black,
-              fontWeight: theme.typography.fontWeightRegular,
-              fontSize: screen750 ? "14px" : "16px",
+              alignItems: "flex-start",
+              justifyContent: "flex-start",
+              my: "1.5rem",
+              px: "1rem",
+              py: "2rem",
+              border: `1px solid ${theme.palette.grey[300]}`,
+              mb: "1rem",
+              width: "45%",
+              maxWidth: "700px",
+              pl: "2rem",
             }}
           >
-            Rechargez-vous avant que vous ne soyez déconnectés du monde
-          </Typography>
-          <img
-            src="/orange-shop-market.svg"
-            alt="shop"
-            style={{
-              marginTop: "1rem",
-              marginBottom: "1rem",
-              width: "100px",
-            }}
-          />
-          <Button
-            onClick={handlePurchase}
+            <Typography
+              sx={{
+                color: theme.palette.common.black,
+                fontWeight: theme.typography.fontWeightRegular,
+                fontSize: screen750 ? "14px" : "16px",
+              }}
+            >
+              Rechargez-vous avant que vous ne soyez déconnectés du monde
+            </Typography>
+            <img
+              src="/orange-shop-market.svg"
+              alt="shop"
+              style={{
+                marginTop: "1rem",
+                marginBottom: "1rem",
+                width: "100px",
+              }}
+            />
+            <Button
+              onClick={handlePurchase}
+              sx={{
+                bgcolor: theme.palette.common.white,
+                color: theme.palette.common.black,
+                borderRadius: "0rem",
+                px: ".7rem",
+                py: "0.2rem",
+                fontWeight: theme.typography.fontWeightBold,
+                fontSize: screen900 ? "12px" : "14px",
+                border: `2px solid ${theme.palette.common.black}`,
+                "&:hover": {
+                  transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
+                  bgcolor: theme.palette.common.black,
+                  color: theme.palette.common.white,
+                },
+              }}
+            >
+              Je m'approvisionne
+            </Button>
+          </Stack>
+          <Stack
+            direction={"column"}
             sx={{
-              bgcolor: theme.palette.common.white,
-              color: theme.palette.common.black,
-              borderRadius: "0rem",
-              px: ".7rem",
-              py: "0.2rem",
-              fontWeight: theme.typography.fontWeightBold,
-              fontSize: screen900 ? "12px" : "14px",
-              border: `2px solid ${theme.palette.common.black}`,
-              "&:hover": {
-                transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
-                bgcolor: theme.palette.common.black,
-                color: theme.palette.common.white,
-              },
+              alignItems: "flex-start",
+              justifyContent: "flex-start",
+              my: "1.5rem",
+              px: "1rem",
+              py: "2rem",
+              border: `1px solid ${theme.palette.grey[400]}`,
+              mb: "1rem",
+              ml: "3%",
+              width: "45%",
+              maxWidth: "700px",
+              pl: "2rem",
             }}
           >
-            Je m'approvisionne
-          </Button>
+            <Typography
+              sx={{
+                color: theme.palette.common.black,
+                fontWeight: theme.typography.fontWeightRegular,
+                fontSize: screen750 ? "14px" : "16px",
+              }}
+            >
+              A seulement {endlessOffer?.cost} Unités, restez connectés pendant
+              1 mois et consommez jusqu'à la hauteur de vos besoins
+            </Typography>
+            <img
+              src="/handStar.svg"
+              alt="shop"
+              style={{
+                marginTop: "1rem",
+                marginBottom: "1rem",
+                width: "100px",
+              }}
+            />
+            <Button
+              onClick={handleEndlessPurchase}
+              sx={{
+                bgcolor: theme.palette.common.white,
+                color: theme.palette.common.black,
+                borderRadius: "0rem",
+                px: ".7rem",
+                py: "0.2rem",
+                fontWeight: theme.typography.fontWeightBold,
+                fontSize: screen900 ? "12px" : "14px",
+                border: `2px solid ${theme.palette.common.black}`,
+                "&:hover": {
+                  transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
+                  bgcolor: theme.palette.common.black,
+                  color: theme.palette.common.white,
+                },
+              }}
+            >
+              Je paie l'Illimité
+            </Button>
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

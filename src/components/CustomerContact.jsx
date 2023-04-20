@@ -302,8 +302,6 @@ const CustomerContact = ({ updateTime }) => {
                 sx={{
                   mb: "1.3rem",
                   width: "max-content",
-
-                  bgcolor: theme.palette.common.white,
                 }}
               >
                 <Stack

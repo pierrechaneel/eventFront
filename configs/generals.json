@@ -43,5 +43,7 @@
   "otpEndpoint": "http://10.25.3.81:5002/api",
   "whaatUrl": "http://waaat.orange.cd/WT/testall/printenv",
   "defaultTriggerMessage": "Bienvenue sur le portail Homebox",
-  "pushUssdPath": "file:/mcel/acceptance/tango_g4_ocd_dev/service_push_homebox/service_push.xml"
+  "pushUssdPath": "file:/mcel/acceptance/tango_g4_ocd_dev/service_push_homebox/service_push.xml",
+  "endlessDataPrice": 10000,
+  "endlessDurationInMonth": 1
 }

@@ -87,7 +87,7 @@ const OffersList = ({ updateTime }) => {
         1
       ),
       offerName: target?.offerName?.toString()?.trim(),
-      offercode: target?.offerCode?.toString()?.trim(),
+      offerCode: target?.offerCode?.toString()?.trim(),
       offerDuration: "30 jours",
     });
 
