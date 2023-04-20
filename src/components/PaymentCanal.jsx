@@ -50,7 +50,7 @@ const PaymentCanal = ({}) => {
 
     window.localStorage?.setItem("custParams", JSON.stringify(custParams));
 
-    if (transitState) {
+    if (transitState && canal !== "Orange Money") {
       router.push(`/consumption/recharge-result`);
     } else {
       router.push(

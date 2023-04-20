@@ -11,7 +11,7 @@ import {
   MenuItem,
   useMediaQuery,
 } from "@mui/material";
-import { ArrowBack, ChevronRight } from "@mui/icons-material";
+import { ArrowBack, ChevronRight, RestartAlt } from "@mui/icons-material";
 import Link from "next/link";
 import { useEffect } from "react";
 import axios from "axios";
@@ -19,6 +19,7 @@ import { PaymentParameters } from "../../context/paymentParameters";
 import { useRouter } from "next/router";
 import SectionLoader from "./SectionLoader";
 import configs from "../../configs/generals.json";
+import SnackMessage from "./SnackMessage";
 
 const CustomerContact = ({ updateTime }) => {
   const theme = useTheme();
@@ -65,6 +66,8 @@ const CustomerContact = ({ updateTime }) => {
             error
           );
 
+          setIsSnackVisible(true);
+
           setSearchFailed(true);
         });
     })();
@@ -90,6 +93,7 @@ const CustomerContact = ({ updateTime }) => {
             "an error has occured when trying to get contact number",
             error
           );
+          setIsSnackVisible(true);
 
           setSearchFailed(true);
         });
@@ -114,202 +118,258 @@ const CustomerContact = ({ updateTime }) => {
   const customerProperties =
     React.useContext(PaymentParameters)?.customerProperties;
 
+  const [snackVisible, setIsSnackVisible] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsSnackVisible(false);
+  };
+
   return (
-    <Stack
-      sx={{
-        width: "100%",
-      }}
-    >
+    <>
+      {snackVisible ? (
+        <SnackMessage
+          message={"Une erreur est survenue"}
+          severity={"error"}
+          handleClose={handleClose}
+        />
+      ) : (
+        ""
+      )}
       <Stack
-        direction={screen750 ? "column" : "row"}
         sx={{
-          alignItems: screen750 ? undefined : "center",
-          justifyContent: screen750 ? undefined : "space-between",
+          width: "100%",
         }}
       >
         <Stack
-          direction={"column"}
+          direction={screen750 ? "column" : "row"}
           sx={{
-            alignItems: "flex-start",
-          }}
-        >
-          <Typography
-            sx={{
-              color: theme.palette.common?.black,
-              fontWeight: theme.typography.fontWeightBold,
-              fontSize: screen900 ? "16px" : "20px",
-            }}
-          >
-            Bonjour 0{customerMsisdn?.slice(-9)},
-          </Typography>
-          <Typography
-            sx={{
-              color: theme.palette.grey[500],
-              fontWeight: theme.typography.fontWeightBold,
-              fontSize: screen900 ? "14px" : "16px",
-              mb: screen900 ? ".7rem" : "1.5rem",
-            }}
-          >
-            Dernière mise à jour {updateTime}
-          </Typography>
-        </Stack>
-        <Stack
-          direction={screen750 ? "row" : "column"}
-          sx={{
-            alignItems: "flex-end",
-            borderradius: "0px",
-            overflowX: "hidden",
-            width: screen750 ? "100%" : undefined,
-            justifyContent: screen750 ? "space-between" : undefined,
-            bgcolor: theme.palette.common.white,
-            // boxShadow: `0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)`,
-          }}
-        >
-          {Object.keys(customerProperties)
-            ?.filter((key) => key !== "mainBalance")
-            ?.map((key) => {
-              return (
-                <Typography
-                  sx={{
-                    fontSize: "12px",
-                    fontWeight: theme.typography.fontWeightBold,
-                    color: theme.palette.common.black,
-                  }}
-                >
-                  {configs?.translates[key]} : {screen750 ? <br /> : ""}
-                  <Typography
-                    component={"span"}
-                    sx={{
-                      color: theme.palette.primary.main,
-                      fontWeight: theme.typography.fontWeightBold,
-                      fontSize: "12px",
-                    }}
-                  >
-                    {customerProperties[key]
-                      ? customerProperties[key]
-                      : "Aucun(e)"}
-                  </Typography>
-                </Typography>
-              );
-            })}
-        </Stack>
-      </Stack>
-      <Stack
-        sx={{
-          mt: "1rem",
-        }}
-      >
-        <Stack
-          sx={{
-            boxShadow: `0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)`,
-            borderRadius: "0.3rem",
-            bgcolor: theme.palette.common.white,
-            p: 0,
-            m: 0,
-            height: "max-content",
-            width: "100%",
+            alignItems: screen750 ? undefined : "center",
+            justifyContent: screen750 ? undefined : "space-between",
           }}
         >
           <Stack
             direction={"column"}
             sx={{
-              alignItems: "center",
+              alignItems: "flex-start",
+            }}
+          >
+            <Typography
+              sx={{
+                color: theme.palette.common?.black,
+                fontWeight: theme.typography.fontWeightBold,
+                fontSize: screen900 ? "16px" : "20px",
+              }}
+            >
+              Bonjour 0{customerMsisdn?.slice(-9)},
+            </Typography>
+            <Typography
+              sx={{
+                color: theme.palette.grey[500],
+                fontWeight: theme.typography.fontWeightBold,
+                fontSize: screen900 ? "14px" : "16px",
+                mb: screen900 ? ".7rem" : "1.5rem",
+              }}
+            >
+              Dernière mise à jour {updateTime}
+            </Typography>
+          </Stack>
+          <Stack
+            direction={screen750 ? "row" : "column"}
+            sx={{
+              alignItems: "flex-end",
+              borderradius: "0px",
+              overflowX: "hidden",
+              width: screen750 ? "100%" : undefined,
+              justifyContent: screen750 ? "space-between" : undefined,
+              bgcolor: theme.palette.common.white,
+              // boxShadow: `0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)`,
+            }}
+          >
+            {Object.keys(customerProperties)
+              ?.filter((key) => key !== "mainBalance")
+              ?.map((key) => {
+                return (
+                  <Typography
+                    sx={{
+                      fontSize: "12px",
+                      fontWeight: theme.typography.fontWeightBold,
+                      color: theme.palette.common.black,
+                    }}
+                  >
+                    {configs?.translates[key]} : {screen750 ? <br /> : ""}
+                    <Typography
+                      component={"span"}
+                      sx={{
+                        color: theme.palette.primary.main,
+                        fontWeight: theme.typography.fontWeightBold,
+                        fontSize: "12px",
+                      }}
+                    >
+                      {customerProperties[key]
+                        ? customerProperties[key]
+                        : "Aucun(e)"}
+                    </Typography>
+                  </Typography>
+                );
+              })}
+          </Stack>
+        </Stack>
+        <Stack
+          sx={{
+            mt: "1rem",
+          }}
+        >
+          <Stack
+            direction={"column"}
+            sx={{
               m: 0,
               width: "100%",
             }}
           >
             {customerContacts?.length > 0 ? (
-              customerContacts?.map((target, index) => {
-                return (
-                  <MenuItem
-                    onClick={(event) => {
-                      handleClick(event, target);
-                    }}
-                    key={index}
-                    sx={{
-                      width: "100%",
-                      "&:hover": {
-                        transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
-                        bgcolor: theme.palette.grey[50],
-                      },
-                    }}
-                  >
-                    <Stack
-                      direction={"row"}
+              <Stack
+                sx={{
+                  boxShadow: `0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)`,
+                  borderRadius: "0.3rem",
+                  bgcolor: theme.palette.common.white,
+                  p: 0,
+                  m: 0,
+                  height: "max-content",
+                  width: "100%",
+                }}
+              >
+                {customerContacts?.map((target, index) => {
+                  return (
+                    <MenuItem
+                      onClick={(event) => {
+                        handleClick(event, target);
+                      }}
+                      key={index}
                       sx={{
                         width: "100%",
-                        py: "0.5rem",
-                        px: "1rem",
-                        justifyContent: "space-between",
-                        alignItems: "center",
+                        "&:hover": {
+                          transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
+                          bgcolor: theme.palette.grey[50],
+                        },
                       }}
                     >
-                      <Typography
+                      <Stack
+                        direction={"row"}
                         sx={{
-                          color: theme.palette.common.black,
-                          fontWeight: theme.typography.fontWeightBold,
-                          fontSize: "14px",
+                          width: "100%",
+                          py: "0.5rem",
+                          px: "1rem",
+                          justifyContent: "space-between",
+                          alignItems: "center",
                         }}
                       >
-                        {target?.title}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          color: theme.palette.common.black,
-                          fontWeight: theme.typography.fontWeightBold,
-                          fontSize: "14px",
-                        }}
-                      >
-                        {target?.msisdn}
-                      </Typography>
-                      <ChevronRight
-                        sx={{
-                          color: theme.palette.primary.main,
-                          fontSize: screen750 ? "16px" : "18px",
-                        }}
-                      />
-                    </Stack>
-                  </MenuItem>
-                );
-              })
+                        <Typography
+                          sx={{
+                            color: theme.palette.common.black,
+                            fontWeight: theme.typography.fontWeightBold,
+                            fontSize: "14px",
+                          }}
+                        >
+                          {target?.title}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            color: theme.palette.common.black,
+                            fontWeight: theme.typography.fontWeightBold,
+                            fontSize: "14px",
+                          }}
+                        >
+                          {target?.msisdn}
+                        </Typography>
+                        <ChevronRight
+                          sx={{
+                            color: theme.palette.primary.main,
+                            fontSize: screen750 ? "16px" : "18px",
+                          }}
+                        />
+                      </Stack>
+                    </MenuItem>
+                  );
+                })}
+              </Stack>
             ) : searchFailed ? (
               <Stack
                 direction={"column"}
                 sx={{
-                  alignItems: "center",
-                  my: "1.3rem",
-                  width: "70%",
+                  mb: "1.3rem",
+                  width: "max-content",
+
+                  bgcolor: theme.palette.common.white,
                 }}
               >
+                <Stack
+                  direction={"row"}
+                  sx={{
+                    alignItems: "center",
+                    mb: "1.5rem",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontWeight: theme.typography.fontWeightBold,
+                      color: theme.palette.common.black,
+                      fontSize: "24px",
+                    }}
+                  >
+                    Aucun numéro n'a été trouvé
+                  </Typography>
+                  <img
+                    src="/digit-touch-phone.svg"
+                    alt="title"
+                    style={{
+                      width: "100px",
+                      marginLeft: ".5rem",
+                    }}
+                  />
+                </Stack>
                 <Typography
                   sx={{
                     textAlign: "center",
                     fontWeight: theme.typography.fontWeightBold,
-                    color: theme.palette.grey[700],
+                    color: theme.palette.common.black,
                     fontSize: "14px",
+                    mb: "1.5rem",
                   }}
                 >
-                  Aucun numéro n'est associé à votre compte. Contactez le
-                  service client au 1555
+                  Votre compte n'a apparemment aucun numéro de contact associé.
+                  Veuillez contacter le service client au 1555 pour plus d'info
                 </Typography>
                 <Button
+                  startIcon={
+                    <RestartAlt
+                      sx={{
+                        fontSize: "16px",
+                      }}
+                    />
+                  }
                   onClick={(event) => {
                     handleRetry(event);
                   }}
                   sx={{
-                    bgcolor: theme.palette.common.black,
-                    color: theme.palette.common.white,
-                    fontWeight: theme.typography.fontWeightBold,
-                    fontSize: "16px",
+                    bgcolor: theme.palette.common.white,
+                    color: theme.palette.common.black,
+                    borderRadius: "0rem",
+                    px: ".7rem",
+                    width: "max-content",
                     py: "0.2rem",
-                    px: "1rem",
-                    borderradius: "0px",
-                    cursor: "pointer",
+                    fontWeight: theme.typography.fontWeightBold,
+                    fontSize: screen900 ? "12px" : "14px",
+                    border: `2px solid ${theme.palette.common.black}`,
                     "&:hover": {
+                      transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
                       bgcolor: theme.palette.common.black,
                       color: theme.palette.common.white,
                     },
-                    mt: "1rem",
                   }}
                 >
                   Réessayer
@@ -321,7 +381,7 @@ const CustomerContact = ({ updateTime }) => {
           </Stack>
         </Stack>
       </Stack>
-    </Stack>
+    </>
   );
 };
 

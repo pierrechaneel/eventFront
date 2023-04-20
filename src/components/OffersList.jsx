@@ -19,7 +19,6 @@ import { PaymentParameters } from "../../context/paymentParameters";
 import { useRouter } from "next/router";
 import SectionLoader from "./SectionLoader";
 import configs from "../../configs/generals.json";
-import clearState from "../utils/clearState";
 
 const OffersList = ({ updateTime }) => {
   const theme = useTheme();

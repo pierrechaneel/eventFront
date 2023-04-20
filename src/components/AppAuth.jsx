@@ -231,7 +231,7 @@ const AppAuth = ({}) => {
                   color: theme.palette.grey[700],
                   fontWeight: theme.typography.fontWeightBold,
                   textAlign: "center",
-                  fontSize: screen750 ? "14px" : "16px",
+                  fontSize: screen750 ? "12px" : "14px",
                 }}
               >
                 Authentification ...
@@ -254,7 +254,7 @@ const AppAuth = ({}) => {
                   sx={{
                     color: theme.palette.common.white,
                     fontWeight: theme.typography.fontWeightBold,
-                    fontSize: screen750 ? "14px" : "16px",
+                    fontSize: screen750 ? "12px" : "14px",
                     mr: "1.5rem",
                   }}
                 >

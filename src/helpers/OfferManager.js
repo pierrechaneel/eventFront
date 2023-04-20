@@ -32,6 +32,10 @@ class OfferManager {
       }
     });
 
+    offersByDurationList = offersByDurationList?.filter((target) => {
+      return !["Jour", "Semaine"]?.includes(target);
+    });
+
     if (Object.keys(worksheets)?.length > 0) {
       return {
         processed: true,

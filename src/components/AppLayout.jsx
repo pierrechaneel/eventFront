@@ -222,9 +222,10 @@ const AppLayout = ({ children, pageTitle }) => {
           ""
         ) : (
           <Stack
-            direction={screen750 ? "row" : "column"}
+            direction={"row"}
             sx={{
-              p: "2rem",
+              px: "1rem",
+              py: "0.7rem",
               width: "100%",
               justifyContent: "center",
               alignItems: "center",
@@ -238,6 +239,17 @@ const AppLayout = ({ children, pageTitle }) => {
                 height: "40px",
               }}
             />
+            <Typography
+              sx={{
+                color: theme.palette.common.white,
+                fontWeight: theme.typography.fontWeightRegular,
+                fontSize: "9px",
+                ml: ".2rem",
+                fontStyle: "italic",
+              }}
+            >
+              Vous rapprocher de l'essentiel
+            </Typography>
           </Stack>
         )}
         <Stack

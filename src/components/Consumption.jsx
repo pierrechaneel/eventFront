@@ -16,6 +16,7 @@ import { PaymentParameters } from "../../context/paymentParameters";
 import configs from "../../configs/generals.json";
 import { useRouter } from "next/router";
 import clearState from "../utils/clearState";
+import { RestartAlt } from "@mui/icons-material";
 
 const Consumption = ({ updateTime }) => {
   const theme = useTheme();
@@ -362,46 +363,76 @@ const Consumption = ({ updateTime }) => {
               <Stack
                 direction={"column"}
                 sx={{
-                  alignItems: "center",
-                  my: "1.3rem",
-                  width: "100%",
+                  mb: "1.3rem",
+                  width: "max-content",
 
-                  p: "1rem",
-                  borderradius: "0px",
                   bgcolor: theme.palette.common.white,
-                  boxShadow: `0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)`,
                 }}
               >
+                <Stack
+                  direction={"row"}
+                  sx={{
+                    alignItems: "center",
+                    mb: "1.5rem",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontWeight: theme.typography.fontWeightBold,
+                      color: theme.palette.common.black,
+                      fontSize: "24px",
+                    }}
+                  >
+                    Aucune balance
+                  </Typography>
+                  <img
+                    src="/digit-touch-phone.svg"
+                    alt="title"
+                    style={{
+                      width: "100px",
+                      marginLeft: ".5rem",
+                    }}
+                  />
+                </Stack>
                 <Typography
                   sx={{
                     textAlign: "center",
                     fontWeight: theme.typography.fontWeightBold,
-                    color: theme.palette.grey[700],
+                    color: theme.palette.common.black,
                     fontSize: "14px",
+                    mb: "1.5rem",
                   }}
                 >
-                  Votre compte n'a malheureusement aucune balance active,
-                  veuillez vous recharger et rester connecté avec Orange
+                  Votre compte n'a pas de balance active. Approvisionnez-vous et
+                  restez connectés avec Orange
                 </Typography>
                 <Button
+                  startIcon={
+                    <RestartAlt
+                      sx={{
+                        fontSize: "16px",
+                      }}
+                    />
+                  }
                   onClick={(event) => {
                     handleRetry(event);
                   }}
                   sx={{
-                    bgcolor: theme.palette.common.black,
-                    color: theme.palette.common.white,
-                    fontWeight: theme.typography.fontWeightBold,
-
-                    fontSize: screen750 ? "16px" : "14px",
+                    bgcolor: theme.palette.common.white,
+                    color: theme.palette.common.black,
+                    borderRadius: "0rem",
+                    px: ".7rem",
+                    width: "max-content",
                     py: "0.2rem",
-                    px: "1rem",
-                    borderradius: "0px",
-                    cursor: "pointer",
+                    fontWeight: theme.typography.fontWeightBold,
+                    fontSize: screen900 ? "12px" : "14px",
+                    border: `2px solid ${theme.palette.common.black}`,
                     "&:hover": {
+                      transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
                       bgcolor: theme.palette.common.black,
                       color: theme.palette.common.white,
                     },
-                    mt: "1rem",
                   }}
                 >
                   Réessayer

@@ -23,6 +23,8 @@ const PaymentCurrency = ({}) => {
 
   const router = useRouter();
 
+  const transitState = React.useContext(PaymentParameters)?.transitState;
+
   const [paymentOptions, setpaymentOptions] = React.useState([
     { title: "USD", link: "/consumption/group-list" },
     { title: "CDF", link: "/consumption/group-list" },
@@ -46,9 +48,13 @@ const PaymentCurrency = ({}) => {
 
     window.localStorage?.setItem("custParams", JSON.stringify(custParams));
 
-    router.push(
-      paymentOptions?.find((target) => target?.title === currency)?.link
-    );
+    if (transitState) {
+      router.push(`/consumption/recharge-result`);
+    } else {
+      router.push(
+        paymentOptions?.find((target) => target?.title === currency)?.link
+      );
+    }
   };
 
   return (

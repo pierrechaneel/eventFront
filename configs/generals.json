@@ -42,6 +42,6 @@
   "otpSender": "Orange",
   "otpEndpoint": "http://10.25.3.81:5002/api",
   "whaatUrl": "http://waaat.orange.cd/WT/testall/printenv",
-  "defaultTriggerMessage": "Bienvenue sur le portail d'activation de forfaits Internet de Orange. Approvisionnez-vous et restez connectés avec vos proches",
+  "defaultTriggerMessage": "Bienvenue sur le portail Homebox",
   "pushUssdPath": "file:/mcel/acceptance/tango_g4_ocd_dev/service_push_homebox/service_push.xml"
 }
