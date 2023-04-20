@@ -1,7 +1,7 @@
 // section loader component defintion
 
 import * as React from "react";
-import { Stack, useTheme, CircularProgress } from "@mui/material";
+import { Stack, useTheme, CircularProgress, Typography } from "@mui/material";
 
 const SectionLoader = ({}) => {
   const theme = useTheme();
@@ -19,6 +19,16 @@ const SectionLoader = ({}) => {
         py: "1.5rem",
       }}
     >
+      <Typography
+        sx={{
+          color: theme.palette.common.black,
+          fontSize: "14px",
+          fontWeight: theme.typography.fontWeightRegular,
+          mb: ".5rem",
+        }}
+      >
+        Chargement ...
+      </Typography>
       <CircularProgress
         size={"16px"}
         sx={{

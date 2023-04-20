@@ -30,10 +30,14 @@ const CostPayer = ({}) => {
     React.useContext(PaymentParameters).setpaymentParameters;
   const customerParams = React.useContext(PaymentParameters).paymentParameters;
 
+  const transitState = React.useContext(PaymentParameters)?.transitState;
+
   const [paymentOptions, setpaymentOptions] = React.useState([
     { title: "Mon compte Box", link: "/consumption/canal" },
     { title: "Un autre compte", link: "/consumption/phone-number" },
   ]);
+
+  console.log("transiting state", { customerParams, transitState });
 
   const handlePayerSelect = (event, selection) => {
     event?.preventDefault();
@@ -46,7 +50,13 @@ const CostPayer = ({}) => {
       });
     }
 
-    router.push(selection?.link);
+    if (transitState) {
+      // router?.push(`/consumption/canal`);
+
+      router.push(selection?.link);
+    } else {
+      router.push(selection?.link);
+    }
   };
 
   return (

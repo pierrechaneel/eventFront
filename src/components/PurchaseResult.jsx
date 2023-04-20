@@ -29,6 +29,9 @@ const PurchasResult = ({}) => {
   const router = useRouter();
 
   const customerParams = React.useContext(PaymentParameters).paymentParameters;
+
+  const transitState = React.useContext(PaymentParameters).transitState;
+
   const customerMsisdn = React?.useContext(PaymentParameters)?.customerMsisdn;
   const payerMsisdn =
     React.useContext(PaymentParameters).paymentParameters?.payerMsisdn;
@@ -204,6 +207,18 @@ const PurchasResult = ({}) => {
       });
   };
 
+  const handleSwitch = (event) => {
+    event?.preventDefault();
+
+    if (transitState) {
+      router.push("/offers");
+    } else {
+      router.push(
+        `/consumption/price-list?group=${customerParams?.offerDuration}`
+      );
+    }
+  };
+
   return (
     <>
       {isOTPCodeVisible ? (
@@ -244,23 +259,17 @@ const PurchasResult = ({}) => {
             mb: "1rem",
           }}
         >
-          <Link
-            href={`/consumption/price-list?group=${customerParams?.offerDuration}`}
-            style={{
-              textDecoration: "none",
+          <IconButton
+            onClick={handleSwitch}
+            sx={{
+              width: "min-content",
+              position: "relative",
+              left: "-.7rem",
+              mr: "1rem",
             }}
           >
-            <IconButton
-              sx={{
-                width: "min-content",
-                position: "relative",
-                left: "-.7rem",
-                mr: "1rem",
-              }}
-            >
-              <ArrowBack />
-            </IconButton>
-          </Link>
+            <ArrowBack />
+          </IconButton>
 
           <Typography
             sx={{

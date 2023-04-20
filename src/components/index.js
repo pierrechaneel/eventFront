@@ -15,3 +15,4 @@ export { default as PaymentCurrency } from "./PaymentCurrency";
 export { default as CustomerContact } from "./CustomerContact";
 export { default as EditContact } from "./EditContact";
 export { default as AppAuth } from "./AppAuth";
+export { default as OffersList } from "./OffersList";

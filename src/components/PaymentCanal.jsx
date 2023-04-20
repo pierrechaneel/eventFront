@@ -35,6 +35,8 @@ const PaymentCanal = ({}) => {
     React.useContext(PaymentParameters).setpaymentParameters;
   const customerParams = React.useContext(PaymentParameters).paymentParameters;
 
+  const transitState = React.useContext(PaymentParameters)?.transitState;
+
   const handleClick = (event, canal) => {
     event.preventDefault();
 
@@ -48,9 +50,13 @@ const PaymentCanal = ({}) => {
 
     window.localStorage?.setItem("custParams", JSON.stringify(custParams));
 
-    router.push(
-      paymentOptions?.find((target) => target?.title === canal)?.link
-    );
+    if (transitState) {
+      router.push(`/consumption/recharge-result`);
+    } else {
+      router.push(
+        paymentOptions?.find((target) => target?.title === canal)?.link
+      );
+    }
   };
 
   const screen750 = useMediaQuery(theme.breakpoints.down(750));

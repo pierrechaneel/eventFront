@@ -31,7 +31,7 @@ const PaymentParamsContext = ({ children }) => {
 
   const [customerMainAccount, setCustomerMainAccount] = React.useState({});
 
-  React.useEffect(() => {}, []);
+  const [transitState, setTransitState] = React.useState(false);
 
   return (
     <PaymentParameters.Provider
@@ -47,6 +47,8 @@ const PaymentParamsContext = ({ children }) => {
         triggerMessage,
         customerMainAccount,
         setCustomerMainAccount,
+        transitState,
+        setTransitState,
         setTriggerMessage,
       }}
     >

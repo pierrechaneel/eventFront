@@ -14,11 +14,13 @@ import Link from "next/link";
 import SectionLoader from "./SectionLoader";
 import { PaymentParameters } from "../../context/paymentParameters";
 import configs from "../../configs/generals.json";
+import { useRouter } from "next/router";
+import clearState from "../utils/clearState";
 
 const Consumption = ({ updateTime }) => {
   const theme = useTheme();
 
-  console.log("update time", { updateTime });
+  const router = useRouter();
 
   const screen1500 = useMediaQuery(theme.breakpoints.up(1500));
   const screen900 = useMediaQuery(theme.breakpoints.down(900));
@@ -98,6 +100,32 @@ const Consumption = ({ updateTime }) => {
           );
         });
     })();
+  }, []);
+
+  const handlePurchase = (event) => {
+    event?.preventDefault();
+
+    router.push(`/consumption/cost-payer`);
+  };
+
+  const setpaymentParameters =
+    React.useContext(PaymentParameters)?.setpaymentParameters;
+
+  const setTransitState = React.useContext(PaymentParameters)?.setTransitState;
+
+  const paymentParameters =
+    React.useContext(PaymentParameters)?.paymentParameters;
+
+  React.useEffect(() => {
+    setTransitState(false);
+
+    Object.keys(paymentParameters)?.forEach((key) => {
+      paymentParameters[key] = "";
+    });
+
+    // console.log("final payment parameters", { paymentParameters });
+
+    setpaymentParameters(paymentParameters);
   }, []);
 
   return (
@@ -201,7 +229,7 @@ const Consumption = ({ updateTime }) => {
               alignItems: "space-between",
               flexWrap: "wrap",
               // mt: screen900 ? "0rem" : "1.5rem",
-              widtj: "100%",
+              width: "100%",
               justifyContent: screen1250 ? "flex-start" : "flex-start",
             }}
           >
@@ -213,7 +241,7 @@ const Consumption = ({ updateTime }) => {
                 ? [customerProperties?.mainBalance, ...customerBalanceData]
                 : customerBalanceData
               )?.map((target, index) => {
-                console.log("target", { target });
+                // console.log("target", { target });
 
                 return (
                   <Stack
@@ -231,6 +259,10 @@ const Consumption = ({ updateTime }) => {
                       bgcolor: theme.palette.common.white,
                       p: screen450 ? "0.5rem" : "1rem",
                       flexGrow: 1,
+                      "&:hover": {
+                        transition: `all .5s`,
+                        boxShadow: "none",
+                      },
                     }}
                   >
                     <Stack
@@ -422,32 +454,26 @@ const Consumption = ({ updateTime }) => {
               width: "100px",
             }}
           />
-          <Link
-            href="/consumption/cost-payer"
-            style={{
-              textDecoration: "none",
+          <Button
+            onClick={handlePurchase}
+            sx={{
+              bgcolor: theme.palette.common.white,
+              color: theme.palette.common.black,
+              borderRadius: "0rem",
+              px: ".7rem",
+              py: "0.2rem",
+              fontWeight: theme.typography.fontWeightBold,
+              fontSize: screen900 ? "12px" : "14px",
+              border: `2px solid ${theme.palette.common.black}`,
+              "&:hover": {
+                transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
+                bgcolor: theme.palette.common.black,
+                color: theme.palette.common.white,
+              },
             }}
           >
-            <Button
-              sx={{
-                bgcolor: theme.palette.common.white,
-                color: theme.palette.common.black,
-                borderRadius: "0rem",
-                px: ".7rem",
-                py: "0.2rem",
-                fontWeight: theme.typography.fontWeightBold,
-                fontSize: screen900 ? "12px" : "14px",
-                border: `2px solid ${theme.palette.common.black}`,
-                "&:hover": {
-                  transition: `all ${theme.transitions.duration.complex} ${theme.transitions.easing.easeInOut}`,
-                  bgcolor: theme.palette.common.black,
-                  color: theme.palette.common.white,
-                },
-              }}
-            >
-              Je m'approvisionne
-            </Button>
-          </Link>
+            Je m'approvisionne
+          </Button>
         </Stack>
       </Stack>
     </Stack>

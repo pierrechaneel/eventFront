@@ -2,12 +2,17 @@
 
 import {
   BrokenImage,
+  CheckOutlined,
   ContactMail,
+  Error,
   Home,
   Message,
+  Notifications,
   OfflineBolt,
   PermIdentity,
   PowerOff,
+  Sell,
+  Shop,
 } from "@mui/icons-material";
 import configs from "../../configs/generals.json";
 import Link from "next/link";
@@ -29,6 +34,7 @@ const {
   MenuItem,
   useMediaQuery,
   ButtonBase,
+  Badge,
 } = require("@mui/material");
 
 const AppLayout = ({ children, pageTitle }) => {
@@ -59,6 +65,16 @@ const AppLayout = ({ children, pageTitle }) => {
       link: "/identity",
       icon: (props) => <ContactMail {...props} />,
       title: "Mes numéros",
+    },
+    {
+      link: "/offers",
+      icon: (props) => <Sell {...props} />,
+      title: "Mes offres",
+    },
+    {
+      link: "/notifications",
+      icon: (props) => <Notifications {...props} />,
+      title: "Mes notifications",
     },
     {
       link: "/offline",
@@ -299,33 +315,73 @@ const AppLayout = ({ children, pageTitle }) => {
                         overflowX: "hidden",
                       }}
                     >
-                      {menuItem.icon({
+                      {menuItem?.icon({
                         sx: {
                           color: theme.palette.primary.main,
                           fontSize: "18px",
                           mr: screen750 ? "0px" : "1.5rem",
                         },
-                      })}
+                      }) || (
+                        <Error
+                          sx={{
+                            color: theme.palette.primary.main,
+                            fontSize: "18px",
+                            mr: screen750 ? "0px" : "1.5rem",
+                          }}
+                        />
+                      )}
 
-                      <Typography
-                        component={"span"}
-                        sx={{
-                          color: !screen750
-                            ? theme.palette.common.white
-                            : router?.asPath?.includes(menuItem?.link)
-                            ? theme.palette.common.white
-                            : theme.palette.common.black,
-                          fontSize: screen500
-                            ? "9px"
-                            : screen750
-                            ? "12px"
-                            : "14px",
-                          textAlign: screen750 ? "center" : undefined,
-                          fontWeight: theme.typography.fontWeightBold,
-                        }}
-                      >
-                        {menuItem?.title}
-                      </Typography>
+                      {menuItem?.title === "Mes notifications" ? (
+                        <Badge
+                          badgeContent={4}
+                          color="primary"
+                          sx={{
+                            ".MuiBadge-badge": {
+                              transform: "scale(1) translate(70%, -60%)",
+                            },
+                          }}
+                        >
+                          <Typography
+                            component={"span"}
+                            sx={{
+                              color: !screen750
+                                ? theme.palette.common.white
+                                : router?.asPath?.includes(menuItem?.link)
+                                ? theme.palette.common.white
+                                : theme.palette.common.black,
+                              fontSize: screen500
+                                ? "9px"
+                                : screen750
+                                ? "12px"
+                                : "14px",
+                              textAlign: screen750 ? "center" : undefined,
+                              fontWeight: theme.typography.fontWeightBold,
+                            }}
+                          >
+                            {menuItem?.title}
+                          </Typography>
+                        </Badge>
+                      ) : (
+                        <Typography
+                          component={"span"}
+                          sx={{
+                            color: !screen750
+                              ? theme.palette.common.white
+                              : router?.asPath?.includes(menuItem?.link)
+                              ? theme.palette.common.white
+                              : theme.palette.common.black,
+                            fontSize: screen500
+                              ? "9px"
+                              : screen750
+                              ? "12px"
+                              : "14px",
+                            textAlign: screen750 ? "center" : undefined,
+                            fontWeight: theme.typography.fontWeightBold,
+                          }}
+                        >
+                          {menuItem?.title}
+                        </Typography>
+                      )}
                     </Stack>
                   </ButtonBase>
                 </Link>
@@ -383,13 +439,22 @@ const AppLayout = ({ children, pageTitle }) => {
           >
             {menuMaterialObjects
               ?.find((menu) => router?.asPath?.includes(menu?.link))
-              .icon({
+              ?.icon({
                 sx: {
                   color: theme.palette.primary.main,
                   fontSize: screen750 ? "18px" : "26px",
                   mr: "1rem",
                 },
-              })}
+              }) || (
+              <Error
+                sx={{
+                  color: theme.palette.primary.main,
+                  fontSize: "18px",
+                  mr: screen750 ? "0px" : "1.5rem",
+                }}
+              />
+            )}
+
             <Typography
               sx={{
                 color: screen750
