@@ -175,6 +175,8 @@ const AuthenticateBox = ({}) => {
           style={{
             width: "150px",
             transform: "rotate(90deg)",
+            position: "relative",
+            right: "-.85rem",
           }}
         />
       </Stack>

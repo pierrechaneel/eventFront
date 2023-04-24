@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { PaymentParameters } from "../../context/paymentParameters";
 import { useRouter } from "next/router";
+import pricefromUnitsAndCurrency from "../utils/pricefromUnitsAndCurrency";
 
 const PaymentCurrency = ({}) => {
   const theme = useTheme();
@@ -42,6 +43,10 @@ const PaymentCurrency = ({}) => {
     const custParams = {
       ...customerParams,
       currency: currency,
+      bundlePrice: pricefromUnitsAndCurrency({
+        currency,
+        unitsAmount: customerParams?.bundlePrice,
+      }),
     };
 
     setCustomerParams(custParams);

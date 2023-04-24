@@ -228,7 +228,7 @@ const AppLayout = ({ children, pageTitle }) => {
               py: "0.7rem",
               width: "100%",
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "flex-start",
             }}
           >
             <img
@@ -239,17 +239,6 @@ const AppLayout = ({ children, pageTitle }) => {
                 height: "40px",
               }}
             />
-            <Typography
-              sx={{
-                color: theme.palette.common.white,
-                fontWeight: theme.typography.fontWeightRegular,
-                fontSize: "9px",
-                ml: ".2rem",
-                fontStyle: "italic",
-              }}
-            >
-              Vous rapprocher de l'essentiel
-            </Typography>
           </Stack>
         )}
         <Stack

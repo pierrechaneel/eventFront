@@ -58,6 +58,7 @@ const PubLayout = ({ children, title = null }) => {
             style={{
               width: "150px",
               transform: "rotate(90deg)",
+              right: "-.85rem",
             }}
           />
         </Stack>

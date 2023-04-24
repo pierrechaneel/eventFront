@@ -582,8 +582,8 @@ const Consumption = ({ updateTime }) => {
                   fontSize: screen750 ? "14px" : "16px",
                 }}
               >
-                A seulement {endlessOffer?.cost} Unités, restez connectés
-                pendant 1 mois et consommez jusqu'à la hauteur de vos besoins
+                Restez connectés pendant 1 mois à seulement {endlessOffer?.cost}{" "}
+                Unités
               </Typography>
               <img
                 src="/handStar.svg"
