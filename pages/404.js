@@ -9,17 +9,7 @@ const Page404 = ({}) => {
 
   return (
     <>
-      <PubLayout title="Page introuvable">
-        <Typography
-          sx={{
-            my: "30vh",
-            color: theme.palette.common.black,
-            fontSize: "24px",
-          }}
-        >
-          Oups ! Cette page n'existe pas
-        </Typography>
-      </PubLayout>
+      <Typography>Not found</Typography>
     </>
   );
 };

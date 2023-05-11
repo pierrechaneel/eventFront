@@ -56,7 +56,11 @@ class CustomServer {
 
       // set global io server
 
-      server.use("/assets", express.static(path.join(__dirname, "public/")));
+      server.use(
+        "/media",
+        express.static(path.join(__dirname, "../", "public/"))
+      );
+
       server.use(
         express.json({
           limit: 52428800,

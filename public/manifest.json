@@ -1,6 +1,6 @@
 {
-    "name": "Ma Box Orange",
-    "short_name": "Ma Box",
+    "name": "ORDC Events",
+    "short_name": "ORDC Events",
     "icons": [
         {
             "src": "/icons/icon-192x192.png",
@@ -24,6 +24,6 @@
     "start_url": "/",
     "display": "standalone",
     "orientation": "portrait",
-    "description": "Recharger votre box Orange facilement et en sécurité",
+    "description": "Restons connectés pour bien contribuer à nos évenements",
     "id": "/"
 }

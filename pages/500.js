@@ -9,17 +9,7 @@ const Page500 = ({}) => {
 
   return (
     <>
-      <PubLayout title="Erreur">
-        <Typography
-          sx={{
-            my: "30vh",
-            color: theme.palette.common.black,
-            fontSize: "24px",
-          }}
-        >
-          Oups ! Veuillez réessayer plus tard
-        </Typography>
-      </PubLayout>
+      <Typography>Server Error</Typography>
     </>
   );
 };

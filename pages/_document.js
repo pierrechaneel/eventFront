@@ -13,13 +13,13 @@ class TheDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta name="application-name" content="Orange MyBox" />
+          <meta name="application-name" content="ORDC Events" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta
             name="apple-mobile-web-app-status-bar-style"
             content="default"
           />
-          <meta name="apple-mobile-web-app-title" content="Orange MyBox" />
+          <meta name="apple-mobile-web-app-title" content="ORDC Events" />
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta

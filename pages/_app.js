@@ -2,22 +2,16 @@
 import "../styles/globals.css";
 
 import * as React from "react";
-import ThemeContext from "../store/context";
+import ThemeContext from "../context/theme";
 import { CssBaseline } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import SocketContext from "../context/socket";
-import PaymentParamsContext from "../context/paymentParameters";
+import GuestContext from "../context/guest";
+import LangContext from "../context/lang";
 import Head from "next/head";
 
 const TheApp = ({ Component, pageProps }) => {
-  React.useEffect(() => {
-    window.addEventListener("beforeunload", function (e) {
-      e.preventDefault();
-      e.returnValue = "";
-    });
-  }, []);
-
   return (
     <>
       <Head>
@@ -28,12 +22,14 @@ const TheApp = ({ Component, pageProps }) => {
       </Head>
       <ThemeContext>
         <SocketContext>
-          <PaymentParamsContext>
-            <LocalizationProvider dateAdapter={AdapterMoment}>
-              <CssBaseline />
-              <Component {...pageProps} />
-            </LocalizationProvider>
-          </PaymentParamsContext>
+          <LangContext>
+            <GuestContext>
+              <LocalizationProvider dateAdapter={AdapterMoment}>
+                <CssBaseline />
+                <Component {...pageProps} />
+              </LocalizationProvider>
+            </GuestContext>
+          </LangContext>
         </SocketContext>
       </ThemeContext>
     </>

@@ -1,7 +1,7 @@
-// index page definition
+// guest index page definition
 
 import React from "react";
-import { Welcome } from "../src/components";
+import OTP from "../../../src/components/OTP";
 
 const StartPage = ({}) => {
   React.useEffect(() => {
@@ -24,7 +24,7 @@ const StartPage = ({}) => {
 
   return (
     <>
-      <Welcome />
+      <OTP />
     </>
   );
 };
