@@ -6,10 +6,9 @@ import { subsSocket } from "../services/sockets";
 const SocketCtx = React.createContext({});
 
 const SocketContext = ({ children }) => {
-  const [notifications, setNotifications] = React.useState([]);
-
+  const [isConnected, setIsConnected] = React.useState(false);
   return (
-    <SocketCtx.Provider value={{ subsSocket, notifications, setNotifications }}>
+    <SocketCtx.Provider value={{ subsSocket, isConnected, setIsConnected }}>
       {children}
     </SocketCtx.Provider>
   );

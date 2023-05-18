@@ -198,7 +198,7 @@ const OTP = ({}) => {
               m: 0,
             }}
           >
-            Orange RDC Events
+            Digitizing our events
           </Typography>
           <Stack
             direction={"row"}

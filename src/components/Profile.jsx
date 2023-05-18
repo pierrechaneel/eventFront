@@ -20,6 +20,7 @@ import UploadProfile from "./UploadProfile";
 import axios from "axios";
 
 import configs from "../../configs/generals.json";
+import { LangCtx } from "../../context/lang";
 
 const Profile = ({ setSecondaryMenu }) => {
   const theme = useTheme();
@@ -122,6 +123,16 @@ const Profile = ({ setSecondaryMenu }) => {
   const [isSnackVisible, setIsnackVisible] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
 
+  const currentLanguage = React.useContext(LangCtx).lang;
+
+  const setCurrentLanguage = React.useContext(LangCtx).setLang;
+
+  const handleLnChange = (event) => {
+    event?.preventDefault();
+
+    setCurrentLanguage(event?.target?.value);
+  };
+
   return (
     <Stack
       direction={"column"}
@@ -129,7 +140,7 @@ const Profile = ({ setSecondaryMenu }) => {
         justifyContent: "flex-start",
         width: "100%",
         height: "max-content",
-        bgcolor: theme.palette.common.white,
+        //bgcolor: theme.palette.common.white,
         pb: "5rem",
       }}
     >
@@ -157,10 +168,11 @@ const Profile = ({ setSecondaryMenu }) => {
       <Stack
         direction={"row"}
         sx={{
-          bgcolor: theme.palette.grey[500],
+          bgcolor: theme.palette.common.black,
           height: "200px",
           position: "relative",
           top: 0,
+          borderRadius: "2.5rem",
         }}
       >
         <Avatar
@@ -185,7 +197,7 @@ const Profile = ({ setSecondaryMenu }) => {
         sx={{
           width: "100%",
           alignItem: "flex-start",
-          bgcolor: theme.palette.common.white,
+          //bgcolor: theme.palette.common.white,
           pt: "3rem",
         }}
       ></Stack>
@@ -196,6 +208,10 @@ const Profile = ({ setSecondaryMenu }) => {
           width: "100%",
           px: "10%",
           mt: "2rem",
+          "& *": {
+            color: "#ffffff!important",
+            borderColor: "#ffffff!important",
+          },
         }}
       >
         <form
@@ -212,11 +228,14 @@ const Profile = ({ setSecondaryMenu }) => {
             direction={"column"}
             sx={{
               alignItems: "flex-start",
+              "& *": {
+                color: theme.palette.common.white,
+              },
             }}
           >
             <Typography
               sx={{
-                color: theme.palette.common.black,
+                color: theme.palette.common.white,
                 fontWeight: theme.typography.fontWeightBold,
                 // textAlign: "center",
                 fontSize: "24px",
@@ -226,7 +245,7 @@ const Profile = ({ setSecondaryMenu }) => {
             </Typography>
             <Typography
               sx={{
-                color: theme.palette.common.black,
+                color: theme.palette.common.white,
                 fontWeight: theme.typography.fontWeightRegular,
                 //textAlign: "center",
                 fontSize: "14px",
@@ -252,10 +271,11 @@ const Profile = ({ setSecondaryMenu }) => {
               labelId="demo-select-small"
               id="demo-select-small"
               label={"Langue"}
-              defaultValue={"fr"}
+              defaultValue={currentLanguage}
               name={"language"}
               size={"small"}
               fullWidth
+              onChange={handleLnChange}
             >
               <MenuItem value={"fr"}>Français</MenuItem>
               <MenuItem value={"en"}>Anglais</MenuItem>

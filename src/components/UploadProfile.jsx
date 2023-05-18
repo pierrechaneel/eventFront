@@ -3,12 +3,15 @@
 import * as React from "react";
 import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
 import { Close, Image, UnfoldLess, UploadFile } from "@mui/icons-material";
+import { LangCtx } from "../../context/lang";
 
 const UploadProfile = ({ onClose, handleSubmit }) => {
   const theme = useTheme();
 
   const [fileSelected, setFileSelected] = React.useState(null);
   const [fileBlob, setFileBlob] = React.useState(null);
+
+  const lang = React.useContext(LangCtx);
 
   const handleChange = async (event) => {
     event?.preventDefault();
@@ -18,7 +21,6 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
 
     fReader.onload = function (oFREvent) {
       setFileSelected(oFREvent.target.result);
-
       setFileBlob(event?.target?.files[0]);
     };
   };
@@ -66,7 +68,7 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
               fontWeight: theme.typography.fontWeightMedium,
             }}
           >
-            Modifier le profile
+            {lang === "fr" ? "Modifier le profile" : "Update profile"}
           </Typography>
           <Close
             onClick={onClose}
@@ -125,7 +127,9 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
                     mt: ".5rem",
                   }}
                 >
-                  Veuillez selectionner une image
+                  {lang === "fr"
+                    ? "Veuillez selectionner une image"
+                    : "Please select a picture"}
                 </Typography>
               </Stack>
             )}

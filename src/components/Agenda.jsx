@@ -15,19 +15,13 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import LocationOn from "@mui/icons-material/LocationOn";
 import AccessTime from "@mui/icons-material/PunchClock";
 import CalendarToday from "@mui/icons-material/CalendarToday";
+import axios from "axios";
+import configs from "../../configs/generals.json";
+import { GuestCtx } from "../../context/guest";
+import { LangCtx } from "../../context/lang";
 
 const Agenda = ({}) => {
   const theme = useTheme();
-
-  const [daysList, setDaysList] = React.useState(new Array(28).fill(""));
-
-  React.useEffect(() => {
-    setDaysList(
-      daysList?.map((day, index) => {
-        return `Mardi, le ${index + 1} mars 2003`;
-      })
-    );
-  }, []);
 
   const [programsData, setProgramsData] = React.useState([
     {
@@ -43,6 +37,8 @@ const Agenda = ({}) => {
     },
   ]);
 
+  const lang = React.useContext(LangCtx);
+
   const [currentMenu, setCurrentMenu] = React.useState("");
 
   const [expanded, setExpanded] = React.useState(false);
@@ -51,27 +47,85 @@ const Agenda = ({}) => {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const [agenda, setAgenda] = React.useState({});
+
+  const guest = React.useContext(GuestCtx).guest;
+
+  React.useEffect(() => {
+    (async () => {
+      await axios
+        .get(`${configs?.backendUrl}/api/programs?eventId=${guest?.eventId}`)
+        .then((results) => {
+          console.log("agenda data gotten", results.data);
+
+          let agendaData = {};
+
+          results?.data?.result?.forEach((target) => {
+            if (
+              Object.keys(agendaData)?.includes(
+                new Date(target?.date).toLocaleDateString("fr-FR")
+              )
+            ) {
+              agendaData[
+                new Date(target?.date).toLocaleDateString("fr-FR")
+              ].push({
+                ...target,
+              });
+            } else {
+              const baseTime = new Date(target?.date);
+
+              agendaData[new Date(baseTime).toLocaleDateString("fr-FR")] = [
+                {
+                  ...target,
+                },
+              ];
+            }
+          });
+
+          setCurrentMenu(Object.keys(agendaData)[0]);
+
+          setAgenda(agendaData);
+        })
+        .catch((error) => {
+          console.log(
+            "an error has occured when trying to get agenda data",
+            error
+          );
+        });
+    })();
+  }, []);
+
   return (
     <Stack
       direction={"column"}
       sx={{
         alignItems: "flex-start",
         width: "100%",
-        px: "5vw",
-        py: "2rem",
         height: "100%",
-        maxHeight: "100%",
       }}
     >
-      <Typography
+      <Stack
+        direction={"row"}
         sx={{
-          color: theme.palette.common.black,
-          fontSize: "24px",
-          fontWeight: theme.typography.fontWeightBold,
+          alignItems: "flex-end",
+          height: "200px",
+          px: "5vw",
+          py: "2rem",
+          bgcolor: theme.palette.common.black,
+          width: "100%",
+          borderRadius: "2.5rem",
         }}
       >
-        MON AGENDA
-      </Typography>
+        <Typography
+          sx={{
+            color: theme.palette.common.white,
+            fontSize: "24px",
+            fontWeight: theme.typography.fontWeightBold,
+          }}
+        >
+          {lang === "fr" ? "MON AGENDA" : "MY AGENDA"}
+        </Typography>
+      </Stack>
       <Stack
         direction={"row"}
         sx={{
@@ -79,9 +133,11 @@ const Agenda = ({}) => {
           width: "100%",
           flexWrap: "wrap",
           mt: "1rem",
-          px: "2rem",
+          p: "2rem",
           height: "100%",
-          maxHeight: "100%",
+          bgcolor: theme.palette.common.black,
+          borderRadius: "2.5rem",
+          overflow: "hidden",
         }}
       >
         <Stack
@@ -91,220 +147,254 @@ const Agenda = ({}) => {
             p: "1.5rem",
             minWidth: "200px",
             width: "max-content",
-            bgcolor: theme.palette.common.white,
+            bgcolor: theme.palette.grey[900],
             maxHeight: "100%",
-            overflowY: "auto",
-            height: "100%",
-            m: "1rem",
+            mx: "1rem",
+            minHeight: "200px",
+            boxShadow:
+              "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
+            borderRadius: "2.5rem",
           }}
         >
-          {daysList?.map((target, index) => {
-            return (
-              <Stack
-                onClick={(event) => {
-                  event?.preventDefault();
+          <Stack
+            sx={{
+              width: "100%",
+              overflowY: "auto",
+              height: "100%",
+            }}
+          >
+            {" "}
+            {Object.keys(agenda)?.map((target, index) => {
+              return (
+                <Stack
+                  onClick={(event) => {
+                    event?.preventDefault();
 
-                  setCurrentMenu(target);
-                }}
-                direction={"row"}
-                key={index}
-                sx={{
-                  width: "100%",
-                  alignItems: "center",
-                  px: "1.5rem",
-                  bgcolor:
-                    currentMenu === target
-                      ? theme.palette.primary.main
-                      : undefined,
-                  my: ".3rem",
-                  cursor: "pointer",
-                }}
-              >
-                <CalendarToday
-                  sx={{
-                    color:
-                      currentMenu === target
-                        ? theme.palette.common.white
-                        : theme.palette.common["black"],
-                    fontSize: "18px",
-                    mr: ".5rem",
+                    setCurrentMenu(target);
                   }}
-                />
-                <Typography
+                  direction={"row"}
+                  key={index}
                   sx={{
                     width: "100%",
-                    textAlign: "left",
-                    color:
-                      theme.palette.common[
-                        currentMenu === target ? "white" : "black"
-                      ],
-                    fontWeight:
-                      currentMenu === target
-                        ? theme.typography.fontWeightMedium
-                        : theme.typography.fontWeightLight,
-                    fontSize: "14px",
+                    alignItems: "center",
                     px: "1rem",
-                    py: ".5rem",
+                    bgcolor:
+                      currentMenu === target
+                        ? `${theme.palette.primary.main}20`
+                        : undefined,
+                    my: ".3rem",
+                    cursor: "pointer",
+                    borderRadius: "1rem",
+                    height: "max-content!important",
                   }}
                 >
-                  {target}
-                </Typography>
-              </Stack>
-            );
-          })}
+                  <CalendarToday
+                    sx={{
+                      color: theme.palette.common["white"],
+                      fontSize: "18px",
+                      mr: ".1rem",
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      width: "100%",
+                      textAlign: "left",
+                      color: theme.palette.primary.main,
+                      fontWeight:
+                        currentMenu === target
+                          ? theme.typography.fontWeightMedium
+                          : theme.typography.fontWeightLight,
+                      fontSize: "14px",
+                      px: "1rem",
+                      py: ".5rem",
+                    }}
+                  >
+                    {target}
+                  </Typography>
+                </Stack>
+              );
+            })}
+          </Stack>
         </Stack>
         <Stack
           direction={"column"}
           sx={{
             flexGrow: 1,
             p: "2rem",
-            bgcolor: theme.palette.common.white,
-            m: "1rem",
+            bgcolor: theme.palette.grey[900],
+            mx: "1rem",
             height: "100%",
             maxHeight: "100%",
+            boxShadow:
+              "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
+            borderRadius: "2.5rem",
             overflowY: "auto",
           }}
         >
-          {new Array(7).fill(programsData[0])?.map((target, id) => {
-            return (
-              <Accordion
-                expanded={expanded === id}
-                sx={{
-                  mb: ".5rem",
-                }}
-                onChange={handleChange(id)}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMore />}
-                  aria-controls="panel1bh-content"
-                  id="panel1bh-header"
+          {agenda[currentMenu]?.length > 0 ? (
+            agenda[currentMenu]?.map((target, id) => {
+              console.log("agendum data", target);
+              return (
+                <Accordion
+                  expanded={expanded === id}
                   sx={{
-                    borderLeft: `5px solid ${
-                      target?.time >= Date.now()
-                        ? theme.palette.primary.main
-                        : theme.palette.grey[700]
-                    }`,
+                    my: ".5rem",
+                    bgcolor: theme.palette.common.black,
                   }}
+                  onChange={handleChange(id)}
                 >
-                  <Stack
-                    direction={"column"}
-                    spacing={1}
+                  <AccordionSummary
+                    expandIcon={<ExpandMore />}
+                    aria-controls="panel1bh-content"
+                    id="panel1bh-header"
                     sx={{
-                      alignItems: "flex-start",
-                      width: "45%",
+                      borderLeft: `5px solid ${
+                        new Date(target?.date).getTime() >= Date.now()
+                          ? theme.palette.primary.main
+                          : theme.palette.grey[700]
+                      }`,
                     }}
                   >
                     <Stack
-                      direction={"row"}
+                      direction={"column"}
+                      spacing={1}
                       sx={{
-                        alignItems: "center",
-                        px: ".5rem",
-                        py: ".2rem",
-                        borderRadius: "10px",
-                        bgcolor:
-                          target?.time >= Date.now()
-                            ? theme.palette.primary.main
-                            : theme.palette.grey[700],
+                        alignItems: "flex-start",
+                        width: "45%",
                       }}
                     >
-                      <CalendarToday
+                      <Stack
+                        direction={"row"}
                         sx={{
-                          color: theme.palette.common.white,
-                          fontSize: "12px",
-                          mr: ".2rem",
+                          alignItems: "center",
+                          px: ".5rem",
+                          py: ".2rem",
+                          borderRadius: "10px",
+                          bgcolor:
+                            new Date(target?.date).getTime() >= Date.now()
+                              ? theme.palette.primary.main
+                              : theme.palette.grey[700],
                         }}
-                      />
+                      >
+                        <CalendarToday
+                          sx={{
+                            color: theme.palette.common.white,
+                            fontSize: "12px",
+                            mr: ".2rem",
+                          }}
+                        />
 
-                      <Typography
+                        <Typography
+                          sx={{
+                            color: theme.palette.common.white,
+                            fontSize: "9px",
+                          }}
+                        >
+                          {target?.subject}
+                        </Typography>
+                      </Stack>
+                      <Stack
+                        direction={"row"}
                         sx={{
-                          color: theme.palette.common.white,
-                          fontSize: "9px",
+                          alignItems: "center",
                         }}
                       >
-                        {target?.title}
-                      </Typography>
+                        <AccessTime
+                          sx={{
+                            color: theme.palette.common.white,
+                            fontSize: "24px",
+                          }}
+                        />
+                        <Typography
+                          sx={{
+                            fontSize: "12px",
+                            color: theme.palette.common.white,
+                            fontWeight: theme.typography.fontWeightMedium,
+                          }}
+                        >
+                          {`${new Date(target?.date)?.getHours()}h${new Date(
+                            target?.date
+                          )?.getMinutes()}min - ${new Date(
+                            new Date(target?.date).getTime() +
+                              Number.parseInt(target?.timing) * 60 * 1000
+                          )?.getHours()}h${new Date(
+                            new Date(target?.date).getTime() +
+                              Number.parseInt(target?.timing) * 60 * 1000
+                          )?.getMinutes()}min`}
+                        </Typography>
+                      </Stack>
+                      <Stack
+                        direction={"row"}
+                        sx={{
+                          alignItems: "center",
+                        }}
+                      >
+                        <LocationOn
+                          sx={{
+                            color: theme.palette.common.white,
+                            fontSize: "24px",
+                          }}
+                        />
+                        <Typography
+                          sx={{
+                            fontSize: "12px",
+                            color: theme.palette.common.white,
+                            fontWeight: theme.typography.fontWeightMedium,
+                          }}
+                        >
+                          {target?.place}
+                        </Typography>
+                      </Stack>
                     </Stack>
                     <Stack
                       direction={"row"}
                       sx={{
-                        alignItems: "center",
+                        alignITems: "center",
+                        height: "100%",
+                        flexGrow: 1,
                       }}
                     >
-                      <AccessTime
-                        sx={{
-                          color: theme.palette.common.black,
-                          fontSize: "24px",
-                        }}
-                      />
                       <Typography
                         sx={{
-                          fontSize: "12px",
-                          color: theme.palette.common.black,
-                          fontWeight: theme.typography.fontWeightMedium,
+                          color:
+                            new Date(target?.date).getTime() >= Date.now()
+                              ? theme.palette.primary.main
+                              : theme.palette.grey[300],
+                          fontSize: "14px",
+                          fontWeight: theme.typography.fontWeightBold,
                         }}
                       >
-                        {target?.duration}
+                        {target?.subject}
                       </Typography>
                     </Stack>
-                    <Stack
-                      direction={"row"}
-                      sx={{
-                        alignItems: "center",
-                      }}
-                    >
-                      <LocationOn
-                        sx={{
-                          color: theme.palette.common.black,
-                          fontSize: "24px",
-                        }}
-                      />
-                      <Typography
-                        sx={{
-                          fontSize: "12px",
-                          color: theme.palette.common.black,
-                          fontWeight: theme.typography.fontWeightMedium,
-                        }}
-                      >
-                        {target?.location}
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                  <Stack
-                    direction={"row"}
-                    sx={{
-                      alignITems: "center",
-                      height: "100%",
-                      flexGrow: 1,
-                    }}
-                  >
+                  </AccordionSummary>
+                  <AccordionDetails>
                     <Typography
                       sx={{
-                        color:
-                          target?.time >= Date.now()
-                            ? theme.palette.primary.main
-                            : theme.palette.grey[700],
+                        color: theme.palette.grey[500],
                         fontSize: "14px",
-                        fontWeight: theme.typography.fontWeightBold,
+                        fontWeight: theme.typography.fontWeightRegular,
                       }}
                     >
-                      {target?.description?.title}
+                      {target?.description}
                     </Typography>
-                  </Stack>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography
-                    sx={{
-                      color: theme.palette.common.black,
-                      fontSize: "14px",
-                      fontWeight: theme.typography.fontWeightRegular,
-                    }}
-                  >
-                    {target?.description?.content}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            );
-          })}
+                  </AccordionDetails>
+                </Accordion>
+              );
+            })
+          ) : (
+            <Typography
+              sx={{
+                width: "100%",
+                textAlign: "center",
+                my: "3rem",
+                fontSize: "16px",
+                color: theme.palette.common.white,
+              }}
+            >
+              Loading ...
+            </Typography>
+          )}
         </Stack>
       </Stack>
     </Stack>

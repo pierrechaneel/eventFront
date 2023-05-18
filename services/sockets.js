@@ -3,6 +3,8 @@
 // import io from "socket.io-client";
 import generals from "../configs/generals.json";
 
-const subsSocket = null;
+import { io } from "socket.io-client";
+
+const subsSocket = io(generals?.backendUrl, { autoConnect: false });
 
 export { subsSocket };
