@@ -266,6 +266,7 @@ const OTP = ({}) => {
                   placeholder="Entrer le code récu"
                   type="password"
                   name={"otpCode"}
+                  autoFocus={true}
                   sx={{
                     color: theme.palette.common.white,
                     fontSize: "16px",

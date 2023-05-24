@@ -92,6 +92,8 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
             htmlFor="profile"
             style={{
               cursor: "pointer",
+              border: `2px dashed ${theme.palette.common.black}`,
+              padding: "1rem",
             }}
           >
             {fileSelected !== null ? (

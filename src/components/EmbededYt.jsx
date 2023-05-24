@@ -18,12 +18,15 @@ const EmbededYt = ({}) => {
         width: "100%",
         p: 0,
         m: 0,
+        height: "100%",
+        flexGrow: 1,
       }}
     >
       <Box
         sx={{
           width: "100%",
-          height: "70vh",
+          height: "90%",
+          flexGrow: 1,
         }}
       >
         <iframe
@@ -41,7 +44,7 @@ const EmbededYt = ({}) => {
       <Stack
         sx={{
           width: "100%",
-          height: "100%",
+          height: "max-content",
           bgcolor: theme.palette.common.black,
           borderRadius: `0px 0px 2.5rem 2.5rem`,
         }}

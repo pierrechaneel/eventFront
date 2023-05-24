@@ -59,6 +59,8 @@ const QrCode = ({}) => {
           borderRadius: "2.5rem",
           bgcolor: theme.palette.common.black,
           mt: "1.5rem",
+          flexGrow: 1,
+          height: "100%",
         }}
       >
         <Stack
@@ -66,7 +68,7 @@ const QrCode = ({}) => {
           sx={{
             p: "2rem",
             width: "45%",
-            bgcolor: theme.palette.grey[900],
+            // bgcolor: theme.palette.grey[900],
             pb: "4rem",
             display: "flex",
             flexDirection: "column",
@@ -75,6 +77,7 @@ const QrCode = ({}) => {
             m: "1rem",
             alignItems: "center",
             borderRadius: "2.5rem",
+            border: `1px solid ${theme.palette.grey[900]}`,
             overflow: "hidden",
           }}
         >
@@ -121,13 +124,14 @@ const QrCode = ({}) => {
           sx={{
             p: "2rem",
             width: "45%",
-            bgcolor: theme.palette.grey[900],
+            //  bgcolor: theme.palette.grey[900],
             pb: "4rem",
             boxShadow:
               "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
             m: "1rem",
             borderRadius: "2.5rem",
             overflow: "hidden",
+            border: `1px solid ${theme.palette.grey[900]}`,
           }}
         >
           <Stack

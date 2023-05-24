@@ -344,7 +344,9 @@ const AppLayout = ({ children }) => {
                   whiteSpace: "nowrap",
                 }}
               >
-                {guest?.event?.subject?.split(" ")[0]?.toUpperCase() + " "}
+                {guest?.event?.subject
+                  ? guest?.event?.subject?.split(" ")[0]?.toUpperCase() + " "
+                  : ""}
               </Typography>
               {"."}
               <Typography
@@ -389,15 +391,9 @@ const AppLayout = ({ children }) => {
               }}
             >
               <Skeleton
-                variant="rectangular"
-                width={"45%"}
-                height={260}
-                animation="wave"
-              />
-              <Skeleton
                 variant="rounded"
-                width={"45%"}
-                height={260}
+                width={"100%"}
+                height={"100%"}
                 animation="wave"
               />
             </Stack>

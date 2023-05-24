@@ -171,9 +171,10 @@ const Contacts = ({}) => {
             minWidth: "300px",
             height: "100%",
             width: "30%",
-            bgcolor: theme.palette.grey[900],
+            // bgcolor: theme.palette.grey[900],
             borderRadius: "2rem",
             mx: "1rem",
+            border: `1px solid ${theme.palette.grey[900]}`,
           }}
         >
           <form
@@ -333,204 +334,213 @@ const Contacts = ({}) => {
           sx={{
             flexGrow: 1,
             // p: "2rem",
-            bgcolor: theme.palette.grey[900],
+            // bgcolor: theme.palette.grey[900],
             mx: "1rem",
             // position: "relative",
             height: "100%",
             overflowY: "hidden",
             maxHeight: "100%",
             borderRadius: "2rem",
+            border: `1px solid ${theme.palette.grey[900]}`,
           }}
         >
-          {Object.keys(chatSubject)?.length === 0 ? (
+          <Stack
+            sx={{
+              width: "100%",
+              height: "100%",
+              //  mb: "3rem",
+            }}
+          >
             <Stack
-              direction={"column"}
+              direction={"row"}
               sx={{
                 alignItems: "center",
-                justifyContent: "center",
                 width: "100%",
-                height: "100%",
+                justifyContent: "space-between",
+                py: ".65rem",
+                borderBottom: `1px solid ${theme.palette.grey[500]}`,
+                px: "1rem",
               }}
             >
-              <PersonAddDisabled
-                sx={{
-                  color: theme.palette.common.black,
-                  mb: ".5rem",
-                  fontSize: "74px",
-                }}
-              />
               <Typography
                 sx={{
-                  textAlign: "center",
-                  color: theme.palette.grey[700],
-                  fontWeight: theme.typography.fontWeightMedium,
-                  fontSize: "16px",
+                  color: theme.palette.primary.main,
+                  fontSize: "24px",
+                  fontWeight: theme.typography.fontWeightBold,
                 }}
               >
-                {lang === "fr"
-                  ? " Aucune discussion\nselectionée"
-                  : "No thread is yet selected"}
+                Discussion
               </Typography>
-            </Stack>
-          ) : (
-            <Stack
-              sx={{
-                width: "100%",
-                height: "100%",
-                //  mb: "3rem",
-              }}
-            >
-              <Stack
-                direction={"row"}
-                sx={{
-                  alignItems: "center",
-                  width: "100%",
-                  justifyContent: "space-between",
-                  py: ".65rem",
-                  borderBottom: `1px solid ${theme.palette.grey[500]}`,
-                  px: "1rem",
-                }}
-              >
+              <Badge color="success" badgeContent=" " variant="dot">
                 <Typography
                   sx={{
-                    color: theme.palette.primary.main,
-                    fontSize: "24px",
+                    color: theme.palette.common.white,
+                    fontSize: "14px",
                     fontWeight: theme.typography.fontWeightBold,
                   }}
                 >
-                  Discussion
+                  {chatSubject?.fullName}
                 </Typography>
-                <Badge color="success" badgeContent=" " variant="dot">
-                  <Typography
-                    sx={{
-                      color: theme.palette.common.white,
-                      fontSize: "14px",
-                      fontWeight: theme.typography.fontWeightBold,
-                    }}
-                  >
-                    {chatSubject?.fullName}
-                  </Typography>
-                </Badge>
-              </Stack>
+              </Badge>
+            </Stack>
+            {Object.keys(chatSubject)?.length === 0 ? (
               <Stack
                 direction={"column"}
                 sx={{
+                  alignItems: "center",
+                  justifyContent: "center",
                   width: "100%",
-                  //flexGrow: 1,
-                  overflowY: "auto",
-                  justifyContent: "flex-end",
-                  flexGrow: 1,
-                  pt: "1rem",
-                  pb: "3rem",
-                  px: "2rem",
+                  height: "100%",
                 }}
               >
-                {chatMsgs?.map((target) => {
-                  return (
-                    <Stack
-                      direction={"row"}
-                      sx={{
-                        alignItems: "center",
-                        width: "100%",
-                        my: "0.3rem",
-                        justifyContent:
-                          target?.from === "self" ? "flex-end" : "flex-start",
-                      }}
-                    >
+                <PersonAddDisabled
+                  sx={{
+                    color: theme.palette.grey[900],
+                    mb: ".5rem",
+                    fontSize: "74px",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    textAlign: "center",
+                    color: theme.palette.grey[700],
+                    fontWeight: theme.typography.fontWeightMedium,
+                    fontSize: "14px",
+                  }}
+                >
+                  {lang === "fr"
+                    ? " Aucune discussion\nselectionée"
+                    : "No thread is yet selected"}
+                </Typography>
+              </Stack>
+            ) : (
+              <>
+                <Stack
+                  direction={"column"}
+                  sx={{
+                    width: "100%",
+                    //flexGrow: 1,
+                    overflowY: "auto",
+                    justifyContent: "flex-end",
+                    flexGrow: 1,
+                    pt: "1rem",
+                    pb: "3rem",
+                    px: "2rem",
+                  }}
+                >
+                  {chatMsgs?.map((target) => {
+                    return (
                       <Stack
-                        direction={"column"}
+                        direction={"row"}
                         sx={{
-                          width: "max-content",
-                          bgcolor:
-                            target?.from === "self"
-                              ? theme.palette.primary.main
-                              : theme.palette.common.black,
-                          py: ".5rem",
-                          px: ".7rem",
-                          borderRadius: "1rem",
-                          maxWidth: "40%",
+                          alignItems: "center",
+                          width: "100%",
+                          my: "0.3rem",
+                          justifyContent:
+                            target?.from === "self" ? "flex-end" : "flex-start",
                         }}
                       >
-                        <Typography
+                        <Stack
+                          direction={"column"}
                           sx={{
-                            fontSize: "14px",
-                            fontWeight: theme.typography.fontWeightRegular,
-                            color: theme.palette.common.white,
-                            textAlign: "left",
+                            width: "max-content",
+                            bgcolor:
+                              target?.from === "self"
+                                ? theme.palette.primary.main
+                                : theme.palette.common.black,
+                            py: ".5rem",
+                            px: ".7rem",
+                            borderRadius: "1rem",
+                            maxWidth: "40%",
+                            border:
+                              target?.from === "self"
+                                ? undefined
+                                : `1px solid ${theme.palette?.grey[900]}`,
                           }}
                         >
-                          {target?.content}
-                        </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "14px",
+                              fontWeight: theme.typography.fontWeightRegular,
+                              color: theme.palette.common.white,
+                              textAlign: "left",
+                            }}
+                          >
+                            {target?.content}
+                          </Typography>
+                        </Stack>
                       </Stack>
-                    </Stack>
-                  );
-                })}
-              </Stack>
+                    );
+                  })}
+                </Stack>
 
-              <form
-                onSubmit={handleChat}
-                style={{
-                  width: "100%",
-                  height: "5rem",
-                  display: "flex",
-                }}
-              >
-                <Stack
-                  direction={"row"}
-                  sx={{
-                    alignItems: "flex-end",
+                <form
+                  onSubmit={handleChat}
+                  style={{
                     width: "100%",
-                    py: "0.7rem",
-                    px: "1rem",
-                    bgcolor: theme.palette.grey[900],
-                    height: "max-content",
-                    borderTop: `1px solid ${theme.palette.grey[500]}`,
+                    height: "5rem",
+                    display: "flex",
                   }}
                 >
                   <Stack
                     direction={"row"}
                     sx={{
-                      px: ".5rem",
-                      py: ".0rem",
-                      border: `2px solid ${theme.palette.grey[700]}`,
-                      alignItems: "center",
-                      flexGrow: 1,
-                    }}
-                  >
-                    <InputBase
-                      name={"contact_search"}
-                      placeholder="Taper quelque chose"
-                      multiline={true}
-                      rows={1}
-                      // value={searchKey}
-                      sx={{
-                        fontSize: "14px",
-                        color: theme.palette.common.white,
-                        width: "100%",
-                      }}
-                    />
-                  </Stack>
-                  <Button
-                    type={"submit"}
-                    sx={{
-                      color: theme.palette.common.white,
-                      bgcolor: theme.palette.common.black,
+                      alignItems: "flex-end",
+                      width: "100%",
+                      py: "0.7rem",
                       px: "1rem",
-                      py: ".3rem",
-                      "&:hover": {
-                        bgcolor: theme.palette.common.black,
-                      },
-                      width: "max-content",
-                      borderRadius: "0px",
-                      ml: "1rem",
+                      //  bgcolor: theme.palette.grey[900],
+                      height: "max-content",
+                      borderTop: `1px solid ${theme.palette.grey[900]}`,
                     }}
                   >
-                    Envoyer
-                  </Button>
-                </Stack>
-              </form>
-            </Stack>
-          )}
+                    <Stack
+                      direction={"row"}
+                      sx={{
+                        px: ".5rem",
+                        py: ".0rem",
+                        border: `2px solid ${theme.palette.grey[700]}`,
+                        alignItems: "center",
+                        flexGrow: 1,
+                        borderRadius: "1rem",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <InputBase
+                        name={"contact_search"}
+                        placeholder="Taper quelque chose"
+                        multiline={true}
+                        rows={1}
+                        // value={searchKey}
+                        sx={{
+                          fontSize: "14px",
+                          color: theme.palette.common.white,
+                          width: "100%",
+                        }}
+                      />
+                    </Stack>
+                    <Button
+                      type={"submit"}
+                      sx={{
+                        color: theme.palette.common.white,
+                        bgcolor: theme.palette.common.black,
+                        px: "1rem",
+                        py: ".3rem",
+                        "&:hover": {
+                          bgcolor: theme.palette.common.black,
+                        },
+                        width: "max-content",
+                        borderRadius: "0px",
+                        ml: "1rem",
+                      }}
+                    >
+                      Envoyer
+                    </Button>
+                  </Stack>
+                </form>
+              </>
+            )}
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

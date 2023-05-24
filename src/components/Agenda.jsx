@@ -147,13 +147,14 @@ const Agenda = ({}) => {
             p: "1.5rem",
             minWidth: "200px",
             width: "max-content",
-            bgcolor: theme.palette.grey[900],
+            //bgcolor: theme.palette.grey[900],
             maxHeight: "100%",
             mx: "1rem",
             minHeight: "200px",
             boxShadow:
               "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
             borderRadius: "2.5rem",
+            border: `1px solid ${theme.palette.grey[900]}`,
           }}
         >
           <Stack
@@ -221,7 +222,7 @@ const Agenda = ({}) => {
           sx={{
             flexGrow: 1,
             p: "2rem",
-            bgcolor: theme.palette.grey[900],
+            // bgcolor: theme.palette.grey[900],
             mx: "1rem",
             height: "100%",
             maxHeight: "100%",
@@ -229,6 +230,7 @@ const Agenda = ({}) => {
               "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
             borderRadius: "2.5rem",
             overflowY: "auto",
+            border: `1px solid ${theme.palette.grey[900]}`,
           }}
         >
           {agenda[currentMenu]?.length > 0 ? (
@@ -240,6 +242,7 @@ const Agenda = ({}) => {
                   sx={{
                     my: ".5rem",
                     bgcolor: theme.palette.common.black,
+                    border: `1px solid ${theme.palette.grey[900]}`,
                   }}
                   onChange={handleChange(id)}
                 >

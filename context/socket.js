@@ -7,6 +7,7 @@ const SocketCtx = React.createContext({});
 
 const SocketContext = ({ children }) => {
   const [isConnected, setIsConnected] = React.useState(false);
+
   return (
     <SocketCtx.Provider value={{ subsSocket, isConnected, setIsConnected }}>
       {children}
