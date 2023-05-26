@@ -9,6 +9,7 @@ import QrCodeIcon from "@mui/icons-material/QrCode";
 import FormatQuote from "@mui/icons-material/FormatQuote";
 import { GuestCtx } from "../../context/guest";
 import { LangCtx } from "../../context/lang";
+import { viewportsCtx } from "../../context/viewports";
 
 const QrCode = ({}) => {
   const theme = useTheme();
@@ -16,6 +17,8 @@ const QrCode = ({}) => {
   const guest = React.useContext(GuestCtx)?.guest;
 
   const lang = React.useContext(LangCtx).lang;
+
+  const screen870 = React.useContext(viewportsCtx)?.screen870;
 
   return (
     <Stack
@@ -29,9 +32,9 @@ const QrCode = ({}) => {
         direction={"row"}
         sx={{
           alignItems: "flex-end",
-          height: "200px",
-          px: "5vw",
-          py: "2rem",
+          px: "2rem",
+          pb: "1rem",
+          pt: "2rem",
           bgcolor: theme.palette.common.black,
           width: "100%",
           borderRadius: "2.5rem",
@@ -40,11 +43,12 @@ const QrCode = ({}) => {
         <Typography
           sx={{
             color: theme.palette.common.white,
-            fontSize: "24px",
-            fontWeight: theme.typography.fontWeightBold,
+            fontSize: "16px",
+            fontWeight: theme.typography.fontWeightThin,
+            textTransform: "uppercase",
           }}
         >
-          {lang === "fr" ? " BIENVENUE ENCORE !" : "WELCOME AGAIN"}
+          {lang === "fr" ? "Bienvenue encore !" : "Welcome again !"}
         </Typography>
       </Stack>
 
@@ -61,12 +65,14 @@ const QrCode = ({}) => {
           mt: "1.5rem",
           flexGrow: 1,
           height: "100%",
+          overflow: "hidden",
         }}
       >
         <Stack
           direction={"column"}
           sx={{
-            p: "2rem",
+            p: screen870 ? "1rem" : "2rem",
+            m: screen870 ? "0.5rem" : "1rem",
             width: "45%",
             // bgcolor: theme.palette.grey[900],
             pb: "4rem",
@@ -74,7 +80,7 @@ const QrCode = ({}) => {
             flexDirection: "column",
             boxShadow:
               "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
-            m: "1rem",
+
             alignItems: "center",
             borderRadius: "2.5rem",
             border: `1px solid ${theme.palette.grey[900]}`,
@@ -100,7 +106,7 @@ const QrCode = ({}) => {
             src={guest?.qrCodeLink}
             alt="qrcode"
             style={{
-              width: "200px",
+              width: screen870 ? "100px" : "200px",
               mx: "auto",
             }}
           />
@@ -108,7 +114,7 @@ const QrCode = ({}) => {
           {/**<Typography
             sx={{
               color: theme.palette.common.white,
-              fontWeight: theme.typography.fontWeightMedium,
+              fontWeight: theme.t(ypography.fontWeightMedium,
               fontSize: "14px",
               fontStyle: "italic",
               mt: "1rem",
@@ -122,16 +128,18 @@ const QrCode = ({}) => {
         <Stack
           direction={"column"}
           sx={{
-            p: "2rem",
+            p: screen870 ? "1rem" : "2rem",
+            m: screen870 ? "0.5rem" : "1rem",
             width: "45%",
             //  bgcolor: theme.palette.grey[900],
             pb: "4rem",
             boxShadow:
               "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
-            m: "1rem",
+
             borderRadius: "2.5rem",
             overflow: "hidden",
             border: `1px solid ${theme.palette.grey[900]}`,
+            maxHeight: "100%",
           }}
         >
           <Stack
@@ -161,13 +169,13 @@ const QrCode = ({}) => {
             <FormatQuote
               sx={{
                 color: theme.palette.common.white,
-                fontSize: "24px",
+                fontSize: "18px",
               }}
             />
             <Typography
               sx={{
                 color: theme.palette.common.white,
-                fontSize: "22px",
+                fontSize: screen870 ? "18px" : "22px",
                 fontWeight: theme.typography.fontWeightBlack,
                 textAlign: "center",
                 maxWidth: "70%",
@@ -204,7 +212,7 @@ const QrCode = ({}) => {
               sx={{
                 color: theme.palette.grey[700],
                 fontWeight: theme.typography.fontWeightRegular,
-                fontSize: "16px",
+                fontSize: "14px",
                 color: theme.palette.common.white,
               }}
             >
@@ -230,7 +238,7 @@ const QrCode = ({}) => {
               sx={{
                 color: theme.palette.grey[200],
                 fontWeight: theme.typography.fontWeightRegular,
-                fontSize: "16px",
+                fontSize: "14px",
               }}
             >
               {new Date(guest?.event?.date).toLocaleDateString()} -{" "}

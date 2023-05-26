@@ -90,7 +90,7 @@ const AppLayout = ({ children }) => {
   console.log("log in guest status", { loggedIn });
 
   React.useEffect(() => {
-    if (!loggedIn && false) {
+    if (!loggedIn) {
       router.push("/");
     }
   }, []);
@@ -220,7 +220,7 @@ const AppLayout = ({ children }) => {
             sx={{
               flexWrap: "wrap",
               justifyContent: "space-between",
-              mt: "10vh",
+              mt: "3vh",
             }}
           >
             {apps?.map((target, index) => {
@@ -244,7 +244,7 @@ const AppLayout = ({ children }) => {
                     py: ".5rem",
                     cursor: "pointer",
                     justifySelf: "flex-start",
-                    my: ".5rem",
+                    my: ".3rem",
                     borderRadius: "1rem",
                   }}
                 >
@@ -401,12 +401,12 @@ const AppLayout = ({ children }) => {
             maxHeight: "calc(100vh - 80px)",
             mr: "1.5rem",
             mb: "1.5rem",
-            borderRadius: "2.5rem",
+            //borderRadius: "2.5rem",
             // p: "2rem",
             overflow: "hidden",
           }}
         >
-          {loggedIn || true ? (
+          {loggedIn ? (
             children
           ) : (
             <Stack

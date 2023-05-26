@@ -10,6 +10,7 @@ import SocketContext from "../context/socket";
 import GuestContext from "../context/guest";
 import LangContext from "../context/lang";
 import Head from "next/head";
+import ViewportsContext from "../context/viewports";
 
 const TheApp = ({ Component, pageProps }) => {
   return (
@@ -21,16 +22,18 @@ const TheApp = ({ Component, pageProps }) => {
         />
       </Head>
       <ThemeContext>
-        <SocketContext>
-          <LangContext>
-            <GuestContext>
-              <LocalizationProvider dateAdapter={AdapterMoment}>
-                <CssBaseline />
-                <Component {...pageProps} />
-              </LocalizationProvider>
-            </GuestContext>
-          </LangContext>
-        </SocketContext>
+        <ViewportsContext>
+          <SocketContext>
+            <LangContext>
+              <GuestContext>
+                <LocalizationProvider dateAdapter={AdapterMoment}>
+                  <CssBaseline />
+                  <Component {...pageProps} />
+                </LocalizationProvider>
+              </GuestContext>
+            </LangContext>
+          </SocketContext>
+        </ViewportsContext>
       </ThemeContext>
     </>
   );

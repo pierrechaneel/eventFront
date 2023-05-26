@@ -283,9 +283,9 @@ const Contacts = ({}) => {
         direction={"row"}
         sx={{
           alignItems: "flex-end",
-          height: "200px",
-          px: "5vw",
-          py: "2rem",
+          px: "2rem",
+          pb: "1rem",
+          pt: "2rem",
           bgcolor: theme.palette.common.black,
           width: "100%",
           borderRadius: "2.5rem",
@@ -294,8 +294,8 @@ const Contacts = ({}) => {
         <Typography
           sx={{
             color: theme.palette.common.white,
-            fontSize: "24px",
-            fontWeight: theme.typography.fontWeightBold,
+            fontSize: "16px",
+            fontWeight: theme.typography.fontWeightThin,
           }}
         >
           {lang === "fr" ? "ILS PARTICIPENT" : "THEY ARE ATTENDING"}
@@ -314,6 +314,7 @@ const Contacts = ({}) => {
           overflow: "hidden",
           bgcolor: theme.palette.common.black,
           borderRadius: "2.5rem",
+          justifyContent: "center",
         }}
       >
         <Stack
@@ -321,9 +322,10 @@ const Contacts = ({}) => {
           sx={{
             alignItems: "center",
             p: "1.5rem",
-            minWidth: "300px",
+            minWidth: "250px",
             height: "100%",
-            width: "30%",
+            width: "25%",
+            maxWidth: "25%",
             // bgcolor: theme.palette.grey[900],
             borderRadius: "2rem",
             mx: "1rem",
@@ -494,6 +496,8 @@ const Contacts = ({}) => {
             maxHeight: "100%",
             borderRadius: "2rem",
             border: `1px solid ${theme.palette.grey[900]}`,
+            width: "70%",
+            maxWidth: "70%",
           }}
         >
           <Stack

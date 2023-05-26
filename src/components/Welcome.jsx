@@ -45,7 +45,7 @@ const Welcome = ({}) => {
           height: "100%",
           backgroundImage: "url('/web_events_okapi.svg')",
           backgroundPosition: "center",
-          backgroundSize: "100%",
+          backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           // bacgroundAttachement: "fixed",
           minHeight: "100vh",
@@ -62,7 +62,7 @@ const Welcome = ({}) => {
             alignItems: "center",
             justifyContent: "center",
             minHeight: "100vh",
-            position: "relative",
+            overflowY: "auto",
           }}
         >
           <Typography
@@ -73,6 +73,7 @@ const Welcome = ({}) => {
               textAlign: "center",
               color: theme.palette.primary.main,
               m: 0,
+              textAlign: "center",
             }}
           >
             LET'S CONNECT
@@ -84,6 +85,7 @@ const Welcome = ({}) => {
               fontSize: "50px",
               fontWeight: theme.typography.fontWeightBlack,
               m: 0,
+              textAlign: "center",
             }}
           >
             Digitizing our events
@@ -109,6 +111,7 @@ const Welcome = ({}) => {
                 fontSize: "16px",
                 fopntWeight: theme.typography.fontWeightLight,
                 m: 0,
+                textAlign: "center",
               }}
             >
               Vous rapprocher de l'essentiel
@@ -126,13 +129,13 @@ const Welcome = ({}) => {
 
           <Stack
             direction={"row"}
-            spacing={5}
             sx={{
               flexWrap: "wrap",
               alignItems: "stretch",
               width: "100%",
               justifyContent: "center",
-              mt: "2.5rem",
+              my: "2.5rem",
+              flexWrap: "wrap",
             }}
           >
             {talkMaterials?.map((target, id) => {
@@ -144,7 +147,8 @@ const Welcome = ({}) => {
                     p: "2rem",
                     border: `2px solid ${theme.palette.primary.main}`,
                     alignItems: "center",
-                    maxWidth: "20vw",
+                    minWidth: "150px",
+                    maxWidth: "300px",
                     "&:hover": {
                       transition: `all .3s`,
                       bgcolor: theme.palette.common.black,
@@ -154,6 +158,7 @@ const Welcome = ({}) => {
                         fontWeight: theme.typography.fontWeightMedium,
                       },
                     },
+                    m: "1vw",
                   }}
                 >
                   {target?.icon({
@@ -182,14 +187,14 @@ const Welcome = ({}) => {
               color: theme.palette.grey[500],
               fontWeight: theme.typography.fontWeightLight,
               textAlign: "center",
-              position: "absolute",
-              bottom: "2rem",
               fontSize: "14px",
-              maxWidth: "60%",
+              maxWidth: "100%",
+              my: "1rem",
             }}
           >
-            Powered by Orange RDC Developers Team. All rights reserved
-            &copy;Orange RDC SA {new Date().getFullYear()}
+            Powered by Orange RDC Developers Team. All rights reserved &copy;
+            <br />
+            Orange RDC SA {new Date().getFullYear()}
           </Typography>
         </Stack>
       </Box>

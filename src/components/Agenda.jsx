@@ -19,6 +19,7 @@ import axios from "axios";
 import configs from "../../configs/generals.json";
 import { GuestCtx } from "../../context/guest";
 import { LangCtx } from "../../context/lang";
+import { EmojiPeople } from "@mui/icons-material";
 
 const Agenda = ({}) => {
   const theme = useTheme();
@@ -108,9 +109,9 @@ const Agenda = ({}) => {
         direction={"row"}
         sx={{
           alignItems: "flex-end",
-          height: "200px",
-          px: "5vw",
-          py: "2rem",
+          px: "2rem",
+          pb: "1rem",
+          pt: "2rem",
           bgcolor: theme.palette.common.black,
           width: "100%",
           borderRadius: "2.5rem",
@@ -119,8 +120,8 @@ const Agenda = ({}) => {
         <Typography
           sx={{
             color: theme.palette.common.white,
-            fontSize: "24px",
-            fontWeight: theme.typography.fontWeightBold,
+            fontSize: "16px",
+            fontWeight: theme.typography.fontWeightThin,
           }}
         >
           {lang === "fr" ? "MON AGENDA" : "MY AGENDA"}
@@ -247,7 +248,7 @@ const Agenda = ({}) => {
                   onChange={handleChange(id)}
                 >
                   <AccordionSummary
-                    expandIcon={<ExpandMore />}
+                    expandIcon={false}
                     aria-controls="panel1bh-content"
                     id="panel1bh-header"
                     sx={{
@@ -293,7 +294,7 @@ const Agenda = ({}) => {
                             fontSize: "9px",
                           }}
                         >
-                          {target?.subject}
+                          {target?.label}
                         </Typography>
                       </Stack>
                       <Stack
@@ -350,9 +351,9 @@ const Agenda = ({}) => {
                       </Stack>
                     </Stack>
                     <Stack
-                      direction={"row"}
+                      direction={"column"}
                       sx={{
-                        alignITems: "center",
+                        alignItems: "center",
                         height: "100%",
                         flexGrow: 1,
                       }}
@@ -369,19 +370,68 @@ const Agenda = ({}) => {
                       >
                         {target?.subject}
                       </Typography>
+                      <Stack
+                        direction={"row"}
+                        sx={{
+                          alignItems: "center",
+                          mt: "1rem",
+                        }}
+                      >
+                        <EmojiPeople
+                          sx={{
+                            color: theme.palette.primary.main,
+                            fontSize: "24px",
+                            mr: ".2rem",
+                          }}
+                        />
+                        <Typography
+                          sx={{
+                            color: theme.palette.grey[500],
+                            fontWeight: theme.typography.fontWeightRegular,
+                            fontSize: "12px",
+                          }}
+                        >
+                          {target?.speaker}
+                        </Typography>
+                      </Stack>
                     </Stack>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography
+                    <Stack
+                      direction={"column"}
                       sx={{
-                        color: theme.palette.grey[500],
-                        fontSize: "14px",
-                        fontWeight: theme.typography.fontWeightRegular,
+                        height: "100%",
+                        justifyContent: "flex-end",
+                        flexGrow: 1,
+                        alignItems: "flex-end",
                       }}
                     >
-                      {target?.description}
-                    </Typography>
-                  </AccordionDetails>
+                      {target?.description?.length > 0 ? (
+                        <ExpandMore
+                          sx={{
+                            color: theme.palette.common.white,
+                            fontSize: "18px",
+                            mt: "4.5rem",
+                          }}
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </Stack>
+                  </AccordionSummary>
+                  {target?.description?.length > 0 ? (
+                    <AccordionDetails>
+                      <Typography
+                        sx={{
+                          color: theme.palette.grey[500],
+                          fontSize: "14px",
+                          fontWeight: theme.typography.fontWeightRegular,
+                        }}
+                      >
+                        {target?.description}
+                      </Typography>
+                    </AccordionDetails>
+                  ) : (
+                    ""
+                  )}
                 </Accordion>
               );
             })

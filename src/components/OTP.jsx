@@ -158,7 +158,7 @@ const OTP = ({}) => {
           height: "100%",
           backgroundImage: "url('/web_events_okapi.svg')",
           backgroundPosition: "center",
-          backgroundSize: "100%",
+          backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           minHeight: "100vh",
           m: 0,
@@ -196,6 +196,7 @@ const OTP = ({}) => {
               fontSize: "50px",
               fontWeight: theme.typography.fontWeightBlack,
               m: 0,
+              textAlign: "center",
             }}
           >
             Digitizing our events
@@ -221,6 +222,7 @@ const OTP = ({}) => {
                 fontSize: "16px",
                 fopntWeight: theme.typography.fontWeightLight,
                 m: 0,
+                textAlign: "center",
               }}
             >
               Vous rapprocher de l'essentiel

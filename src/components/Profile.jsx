@@ -169,7 +169,7 @@ const Profile = ({ setSecondaryMenu }) => {
         direction={"row"}
         sx={{
           bgcolor: theme.palette.common.black,
-          height: "200px",
+          height: "100px",
           position: "relative",
           top: 0,
           borderRadius: "2.5rem",
@@ -182,11 +182,11 @@ const Profile = ({ setSecondaryMenu }) => {
             setISEditProfileVisible(true);
           }}
           sx={{
-            width: "150px",
-            height: "150px",
+            width: "100px",
+            height: "100px",
             cursor: "pointer",
             position: "absolute",
-            bottom: "-3.5rem",
+            bottom: "-2.5rem",
             left: "5vw",
           }}
         />
@@ -198,7 +198,7 @@ const Profile = ({ setSecondaryMenu }) => {
           width: "100%",
           alignItem: "flex-start",
           //bgcolor: theme.palette.common.white,
-          pt: "3rem",
+          pt: "1rem",
         }}
       ></Stack>
       <Stack
@@ -238,7 +238,7 @@ const Profile = ({ setSecondaryMenu }) => {
                 color: theme.palette.common.white,
                 fontWeight: theme.typography.fontWeightBold,
                 // textAlign: "center",
-                fontSize: "24px",
+                fontSize: "18px",
               }}
             >
               {guest?.fullName}
@@ -248,54 +248,63 @@ const Profile = ({ setSecondaryMenu }) => {
                 color: theme.palette.common.white,
                 fontWeight: theme.typography.fontWeightRegular,
                 //textAlign: "center",
-                fontSize: "14px",
+                fontSize: "12px",
               }}
             >
               {guest?.title}
             </Typography>
           </Stack>
-          <FormControl
-            size="small"
+          <Stack
+            direction={"row"}
             sx={{
-              width: "12rem",
-              "&:hover": {
-                borderColor: theme.palette.common.white,
-                "& *": {
-                  borderColor: theme.palette.common.white,
-                },
-              },
+              alignItems: "center",
             }}
           >
-            <InputLabel id="demo-select-small">Langue</InputLabel>
+            {" "}
+            <Typography
+              sx={{
+                color: theme.palette.grey[500],
+                fontWeight: theme.palette.fontWeightLight,
+                fontSize: "14px",
+                mr: "1rem",
+              }}
+            >
+              {currentLanguage === "en" ? "Language" : "Langue"}
+            </Typography>
             <Select
               labelId="demo-select-small"
               id="demo-select-small"
-              label={"Langue"}
               defaultValue={currentLanguage}
               name={"language"}
               size={"small"}
-              fullWidth
               onChange={handleLnChange}
+              SelectDisplayProps={{
+                style: {
+                  paddingTop: ".2rem",
+                  paddingBottom: ".2rem",
+                  fontSize: "12px",
+                  width: "70px",
+                },
+              }}
             >
-              <MenuItem value={"fr"}>Français</MenuItem>
-              <MenuItem value={"en"}>Anglais</MenuItem>
+              <MenuItem
+                sx={{
+                  fontSize: "12px",
+                }}
+                value={"fr"}
+              >
+                Français
+              </MenuItem>
+              <MenuItem
+                sx={{
+                  fontSize: "12px",
+                }}
+                value={"en"}
+              >
+                Anglais
+              </MenuItem>
             </Select>
-          </FormControl>
-          {/** <Button
-            type={"submit"}
-            sx={{
-              color: theme.palette.common.black,
-              fontSize: "14px",
-              fontWeight: theme.typography.fontWeightBold,
-              px: "1rem",
-              py: ".3rem",
-              mt: "1.5rem",
-              bgcolor: theme.palette.common.white,
-              borderRadius: "0px",
-            }}
-          >
-            Appliquer
-          </Button> */}
+          </Stack>
         </form>
       </Stack>
     </Stack>
