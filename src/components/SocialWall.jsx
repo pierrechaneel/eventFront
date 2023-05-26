@@ -323,7 +323,7 @@ const SocialWall = ({}) => {
 
           if (newPost?.commentOf === null) {
             socket?.emit("NEW_DATUM", {
-              action: "CREATE",
+              eventId: guest?.event?.id,
               datum: newPost,
             });
 
@@ -332,7 +332,7 @@ const SocialWall = ({}) => {
             setPrintablePosts(posts?.current);
           } else {
             socket.emit("NEW_COMMENT", {
-              action: "CREATE",
+              eventId: guest?.event?.id,
               datum: newPost,
             });
 
@@ -403,7 +403,7 @@ const SocialWall = ({}) => {
           console.log("like/unlike post result", results);
 
           socket.emit("NEW_LIKE", {
-            action: "CREATE",
+            eventId: guest?.event?.id,
             postId,
           });
         })
@@ -428,7 +428,7 @@ const SocialWall = ({}) => {
           console.log("like/unlike post result", results);
 
           socket.emit("NEW_LIKE", {
-            action: "CREATE",
+            eventId: guest?.event?.id,
             postId,
           });
         })
@@ -469,7 +469,7 @@ const SocialWall = ({}) => {
       )
       .then((res) => {
         socket.emit("POST_REMOVED", {
-          action: "DELETE",
+          eventId: guest?.event?.id,
           postId,
         });
 
