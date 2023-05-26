@@ -458,7 +458,7 @@ const SocialWall = ({}) => {
   };
 
   const popoverOpen = Boolean(anchorEl);
-  const popoverId = open ? "simple-popover" : undefined;
+  const popoverId = popoverOpen ? "simple-popover" : undefined;
 
   const handleRemovePost = async (event, postId) => {
     event?.preventDefault();

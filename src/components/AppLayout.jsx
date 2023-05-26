@@ -26,6 +26,7 @@ import { GuestCtx } from "../../context/guest";
 import { LangCtx } from "../../context/lang";
 import PostAdd from "@mui/icons-material/PostAdd";
 import { SocketCtx } from "../../context/socket";
+import SnackMessage from "./SnackMessage";
 
 const AppLayout = ({ children }) => {
   const theme = useTheme();
@@ -89,15 +90,25 @@ const AppLayout = ({ children }) => {
   console.log("log in guest status", { loggedIn });
 
   React.useEffect(() => {
-    if (!loggedIn) {
+    if (!loggedIn && false) {
       router.push("/");
     }
   }, []);
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsnackVisible(false);
+  };
+
+  const [snackMessage, setSnackMessage] = React.useState("");
+  const [isSnackVisible, setIsnackVisible] = React.useState(false);
+  const [severity, setSeverity] = React.useState("");
+
   React.useEffect(() => {
     if (!isConnected) {
-      console.log("siata", subsSocket);
-
       subsSocket.auth = {
         guest: {
           fullName: guest?.fullName,
@@ -117,6 +128,14 @@ const AppLayout = ({ children }) => {
       console.log("Connection failed, please retry later");
 
       setIsConnected(false);
+
+      setSnackMessage("Vous êtes hors connexion");
+      setSeverity("warning");
+      setIsnackVisible(true);
+    });
+
+    subsSocket.on("HELD_MESSAGES", (payload) => {
+      console.log("current help messages from socket", payload);
     });
 
     console.log("current connection status", { isConnected, subsSocket });
@@ -133,6 +152,15 @@ const AppLayout = ({ children }) => {
         bgcolor: theme.palette.grey[900],
       }}
     >
+      {isSnackVisible ? (
+        <SnackMessage
+          handleClose={handleClose}
+          message={snackMessage}
+          severity={severity}
+        />
+      ) : (
+        ""
+      )}
       <Stack
         direction={"column"}
         sx={{
@@ -378,7 +406,7 @@ const AppLayout = ({ children }) => {
             overflow: "hidden",
           }}
         >
-          {loggedIn ? (
+          {loggedIn || true ? (
             children
           ) : (
             <Stack

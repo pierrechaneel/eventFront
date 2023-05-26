@@ -105,7 +105,7 @@ const QrCode = ({}) => {
             }}
           />
 
-          <Typography
+          {/**<Typography
             sx={{
               color: theme.palette.common.white,
               fontWeight: theme.typography.fontWeightMedium,
@@ -117,7 +117,7 @@ const QrCode = ({}) => {
             {lang === "fr"
               ? "Prière de présenter ce code aux hotesses"
               : "Please present this code to our hostesses"}
-          </Typography>
+          </Typography> */}
         </Stack>
         <Stack
           direction={"column"}
@@ -233,7 +233,8 @@ const QrCode = ({}) => {
                 fontSize: "16px",
               }}
             >
-              {new Date(guest?.event?.date).toLocaleDateString()}
+              {new Date(guest?.event?.date).toLocaleDateString()} -{" "}
+              {new Date(guest?.event?.endDate).toLocaleDateString()}
             </Typography>
           </Stack>
         </Stack>
