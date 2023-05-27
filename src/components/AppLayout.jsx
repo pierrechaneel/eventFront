@@ -169,7 +169,7 @@ const AppLayout = ({ children }) => {
           p: "1.5rem",
           top: 0,
           bottom: 0,
-          width: isMenuCollapsed ? "calc(70px + 1.5rem)" : "300px",
+          width: isMenuCollapsed ? "calc(50px + 1.5rem)" : "250px",
           left: 0,
         }}
       >
@@ -180,8 +180,8 @@ const AppLayout = ({ children }) => {
             bgcolor: theme.palette.common.black,
             width: "100%",
             height: "100%",
-            p: "2rem",
-            borderRadius: "2.5rem",
+            p: "1.5rem",
+            borderRadius: "1.5rem",
           }}
         >
           <Stack
@@ -196,7 +196,7 @@ const AppLayout = ({ children }) => {
               src="/orange-less.png"
               alt="ordc"
               style={{
-                width: isMenuCollapsed ? "30px" : "50px",
+                width: isMenuCollapsed ? "20px" : "30px",
               }}
             />
             {!isMenuCollapsed ? (
@@ -207,6 +207,7 @@ const AppLayout = ({ children }) => {
                   fontWeight: theme.typography.fontWeightBold,
                   textAlign: "center",
                   mt: ".5rem",
+                  fontSize: "12px",
                 }}
               >
                 Orange RDC
@@ -220,7 +221,7 @@ const AppLayout = ({ children }) => {
             sx={{
               flexWrap: "wrap",
               justifyContent: "space-between",
-              mt: "3vh",
+              mt: "4vh",
             }}
           >
             {apps?.map((target, index) => {
@@ -250,7 +251,8 @@ const AppLayout = ({ children }) => {
                 >
                   {target?.icon({
                     sx: {
-                      fontSize: "28px",
+                      fontSize: "18px",
+                      width: "18px",
                       color: isMenuCollapsed
                         ? router?.asPath?.includes(target?.link)
                           ? theme.palette.common.white
@@ -266,7 +268,7 @@ const AppLayout = ({ children }) => {
                         color: router?.asPath?.includes(target?.link)
                           ? theme.palette.common.white
                           : theme.palette.grey[500],
-                        fontSize: "16px",
+                        fontSize: "12px",
                         ml: ".7rem",
                         textAlign: "center",
                       }}
@@ -285,23 +287,25 @@ const AppLayout = ({ children }) => {
       <Stack
         direction={"column"}
         sx={{
-          ml: isMenuCollapsed ? "calc(70px + 1.5rem)" : "300px",
+          ml: isMenuCollapsed ? "calc(50px + 1.5rem)" : "250px",
           bgcolor: theme.palette.grey[0],
           width: "100%",
+          maxWidth: "100%",
+          overflowX: "hidden",
           height: "100vh",
           maxHeight: "100vh",
-          pt: "calc(70px + 3rem)",
+          pt: "calc(50px + 3rem)",
           pr: "1.5rem",
         }}
       >
         <Stack
           direction={"row"}
           sx={{
-            height: "70px",
+            height: "50px",
             position: "fixed",
             top: 0,
             right: 0,
-            left: isMenuCollapsed ? "calc(70px + 1.5rem)" : "300px",
+            left: isMenuCollapsed ? "calc(50px + 1.5rem)" : "250px",
           }}
         >
           <Stack
@@ -314,7 +318,7 @@ const AppLayout = ({ children }) => {
               bgcolor: theme.palette.common.black,
               px: "1rem",
               boxShadow: theme.shadows[1],
-              borderRadius: "2.5rem",
+              borderRadius: "1.5rem",
               justifyContent: "space-between",
               alignItems: "center",
               mt: "1.5rem",
@@ -335,12 +339,12 @@ const AppLayout = ({ children }) => {
                   setIsMenuCollapsed(!isMenuCollapsed);
                 }}
                 sx={{
-                  mr: "1rem",
+                  mr: ".3rem",
                 }}
               >
                 <Menu
                   sx={{
-                    fontSize: "22px",
+                    fontSize: "18px",
                     color: theme.palette.common.white,
                     cursor: "pointer",
                   }}
@@ -349,7 +353,7 @@ const AppLayout = ({ children }) => {
               <Typography
                 sx={{
                   color: theme.palette.common.white,
-                  fontSize: "18px",
+                  fontSize: "16px",
                   fontWeight: theme.typography.fontWeightBold,
                 }}
               >
@@ -368,7 +372,7 @@ const AppLayout = ({ children }) => {
                 sx={{
                   color: theme.palette.common.white,
                   fontWeight: theme.typography.fontWeightBold,
-                  fontSize: "18px",
+                  fontSize: "16px",
                   whiteSpace: "nowrap",
                 }}
               >
@@ -381,7 +385,7 @@ const AppLayout = ({ children }) => {
                 sx={{
                   color: theme.palette.primary.main,
                   fontWeight: theme.typography.fontWeightBold,
-                  fontSize: "18px",
+                  fontSize: "16px",
                   whiteSpace: "nowrap",
                 }}
               >
@@ -397,11 +401,12 @@ const AppLayout = ({ children }) => {
         <Box
           sx={{
             width: "100%",
+            maxWidth: "100%",
             height: "calc(100vh - 80px)",
             maxHeight: "calc(100vh - 80px)",
             mr: "1.5rem",
             mb: "1.5rem",
-            //borderRadius: "2.5rem",
+            //borderRadius: "1.5rem",
             // p: "2rem",
             overflow: "hidden",
           }}

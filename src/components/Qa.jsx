@@ -66,7 +66,7 @@ const Qa = ({}) => {
           py: "2rem",
           bgcolor: theme.palette.common.black,
           width: "100%",
-          borderRadius: "2.5rem",
+          borderRadius: "1.5rem",
         }}
       >
         <Typography
@@ -86,7 +86,7 @@ const Qa = ({}) => {
           width: "100%",
           flexWrap: "wrap",
           mt: "2rem",
-          p: "2.5rem",
+          p: "1.5rem",
           height: "100%",
           maxHeight: "100%",
         }}

@@ -37,7 +37,7 @@ const QrCode = ({}) => {
           pt: "2rem",
           bgcolor: theme.palette.common.black,
           width: "100%",
-          borderRadius: "2.5rem",
+          borderRadius: "1.5rem",
         }}
       >
         <Typography
@@ -60,7 +60,7 @@ const QrCode = ({}) => {
           flexWrap: "wrap",
           py: "2rem",
           px: "5vw",
-          borderRadius: "2.5rem",
+          borderRadius: "1.5rem",
           bgcolor: theme.palette.common.black,
           mt: "1.5rem",
           flexGrow: 1,
@@ -82,7 +82,7 @@ const QrCode = ({}) => {
               "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
 
             alignItems: "center",
-            borderRadius: "2.5rem",
+            borderRadius: "1.5rem",
             border: `1px solid ${theme.palette.grey[900]}`,
             overflow: "hidden",
           }}
@@ -136,7 +136,7 @@ const QrCode = ({}) => {
             boxShadow:
               "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
 
-            borderRadius: "2.5rem",
+            borderRadius: "1.5rem",
             overflow: "hidden",
             border: `1px solid ${theme.palette.grey[900]}`,
             maxHeight: "100%",

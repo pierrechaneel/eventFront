@@ -513,6 +513,7 @@ const SocialWall = ({}) => {
           flexGrow: 1,
           bgcolor: theme.palette.common.black,
           alignItems: "flex-start",
+          borderRadius: "1.5rem",
         }}
       >
         <Stack
@@ -536,7 +537,7 @@ const SocialWall = ({}) => {
             <Typography
               sx={{
                 color: theme.palette.common.white,
-                fontSize: "16px",
+                fontSize: "14px",
                 fontWeight: theme.typography.fontWeightBold,
               }}
             >
@@ -567,7 +568,13 @@ const SocialWall = ({}) => {
                 },
               }}
             >
-              <Avatar src={guest?.profile} />
+              <Avatar
+                src={guest?.profile}
+                sx={{
+                  width: "30px",
+                  height: "30px",
+                }}
+              />
               <TextField
                 id="standard-basic"
                 placeholder="Ecrivez quelque chose"
@@ -583,6 +590,11 @@ const SocialWall = ({}) => {
                 sx={{
                   borderBottom: `.5px solid ${theme.palette.grey[500]}`,
                   ml: "1rem",
+                }}
+                inputProps={{
+                  style: {
+                    fontSize: "12px",
+                  },
                 }}
               />
               <input
@@ -617,7 +629,7 @@ const SocialWall = ({}) => {
                   <Send
                     sx={{
                       color: theme.palette.primary.main,
-                      fontSize: "12px",
+                      fontSize: "10px",
                       width: "14px",
                     }}
                   />
@@ -630,9 +642,9 @@ const SocialWall = ({}) => {
                   "&:hover": {
                     bgcolor: theme.palette.primary?.main,
                   },
-                  px: "1.3rem",
-                  py: ".2rem",
-                  fontSize: "14px",
+                  px: "1.2rem",
+                  py: ".1rem",
+                  fontSize: "12px",
                   borderRadius: 0,
                 }}
               >
@@ -695,7 +707,7 @@ const SocialWall = ({}) => {
                           sx={{
                             color: theme.palette.common.white,
                             fontWeight: theme.typography.fontWeightBold,
-                            fontSize: "16px",
+                            fontSize: "14px",
                           }}
                         >
                           {post?.authorName}
@@ -704,7 +716,7 @@ const SocialWall = ({}) => {
                           sx={{
                             color: theme.palette.grey[700],
                             fontWeight: theme.typography.fontWeightLight,
-                            fontSize: "12px",
+                            fontSize: "10px",
                           }}
                         >
                           {new Date(post?.createdAt).toLocaleString()}
@@ -722,7 +734,7 @@ const SocialWall = ({}) => {
                           <Delete
                             sx={{
                               color: theme.palette.error.main,
-                              fontSize: "20px",
+                              fontSize: "18px",
                             }}
                           />
                         </IconButton>
@@ -734,7 +746,7 @@ const SocialWall = ({}) => {
                       sx={{
                         color: theme.palette.common.white,
                         fontWeight: theme.typography.fontWeightRegular,
-                        fontSize: "13px",
+                        fontSize: "12px",
                       }}
                     >
                       {post?.textContent}
@@ -832,7 +844,7 @@ const SocialWall = ({}) => {
                             sx={{
                               color: theme.palette.grey[700],
                               fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: "12px",
+                              fontSize: "10px",
                               cursor: "pointer",
                             }}
                           >
@@ -883,7 +895,7 @@ const SocialWall = ({}) => {
                             sx={{
                               color: theme.palette.grey[700],
                               fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: "12px",
+                              fontSize: "10px",
                               cursor: "pointer",
                             }}
                           >
@@ -901,7 +913,7 @@ const SocialWall = ({}) => {
                         sx={{
                           color: theme.palette.grey[700],
                           fontWeight: theme.typography.fontWeightRegular,
-                          fontSize: "12px",
+                          fontSize: "10px",
                           cursor: "pointer",
                         }}
                       >
@@ -942,7 +954,7 @@ const SocialWall = ({}) => {
             <Typography
               sx={{
                 color: theme.palette.common.white,
-                fontSize: "16px",
+                fontSize: "14px",
                 fontWeight: theme.typography.fontWeightBold,
               }}
             >
@@ -978,6 +990,8 @@ const SocialWall = ({}) => {
               size="small"
               sx={{
                 mr: ".5rem",
+                width: "30px",
+                height: "30px",
               }}
             />
             <Stack
@@ -1004,7 +1018,7 @@ const SocialWall = ({}) => {
                     sx={{
                       color: theme.palette.common.white,
                       fontWeight: theme.typography.fontWeightBold,
-                      fontSize: "16px",
+                      fontSize: "14px",
                     }}
                   >
                     {threadData?.authorName}
@@ -1013,7 +1027,7 @@ const SocialWall = ({}) => {
                     sx={{
                       color: theme.palette.grey[700],
                       fontWeight: theme.typography.fontWeightLight,
-                      fontSize: "12px",
+                      fontSize: "10px",
                     }}
                   >
                     {new Date(threadData?.createdAt)?.toLocaleString()}
@@ -1030,7 +1044,7 @@ const SocialWall = ({}) => {
                     <Delete
                       sx={{
                         color: theme.palette.error.main,
-                        fontSize: "20px",
+                        fontSize: "18px",
                       }}
                     />
                   </IconButton>
@@ -1042,7 +1056,7 @@ const SocialWall = ({}) => {
                 sx={{
                   color: theme.palette.common.white,
                   fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: "13px",
+                  fontSize: "12px",
                 }}
               >
                 {threadData?.textContent}
@@ -1134,7 +1148,7 @@ const SocialWall = ({}) => {
                     sx={{
                       color: theme.palette.grey[700],
                       fontWeight: theme.typography.fontWeightRegular,
-                      fontSize: "12px",
+                      fontSize: "10px",
                       cursor: "pointer",
                     }}
                   >
@@ -1185,7 +1199,7 @@ const SocialWall = ({}) => {
                     sx={{
                       color: theme.palette.grey[700],
                       fontWeight: theme.typography.fontWeightRegular,
-                      fontSize: "12px",
+                      fontSize: "10px",
                       cursor: "pointer",
                     }}
                   >
@@ -1200,7 +1214,7 @@ const SocialWall = ({}) => {
             sx={{
               color: theme.palette.grey[700],
               fontWeight: theme.typography.fontWeightRegular,
-              fontSize: "14px",
+              fontSize: "10px",
               my: ".5rem",
             }}
           >
@@ -1290,7 +1304,7 @@ const SocialWall = ({}) => {
                           <Delete
                             sx={{
                               color: theme.palette.error.main,
-                              fontSize: "20px",
+                              fontSize: "18px",
                             }}
                           />
                         </IconButton>
@@ -1302,7 +1316,7 @@ const SocialWall = ({}) => {
                       sx={{
                         color: theme.palette.common.white,
                         fontWeight: theme.typography.fontWeightRegular,
-                        fontSize: "13px",
+                        fontSize: "12px",
                       }}
                     >
                       {post?.textContent}
@@ -1397,7 +1411,7 @@ const SocialWall = ({}) => {
                             sx={{
                               color: theme.palette.grey[700],
                               fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: "12px",
+                              fontSize: "10px",
                               cursor: "pointer",
                             }}
                           >
@@ -1449,7 +1463,7 @@ const SocialWall = ({}) => {
                             sx={{
                               color: theme.palette.grey[700],
                               fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: "12px",
+                              fontSize: "10px",
                               cursor: "pointer",
                             }}
                           >
@@ -1500,6 +1514,11 @@ const SocialWall = ({}) => {
                   borderBottom: `.5px solid ${theme.palette.grey[500]}`,
                   ml: "1rem",
                   fontSize: "12px",
+                }}
+                inputProps={{
+                  style: {
+                    fontSize: "12px",
+                  },
                 }}
               />
               <input

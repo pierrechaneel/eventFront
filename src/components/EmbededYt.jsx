@@ -20,6 +20,8 @@ const EmbededYt = ({}) => {
         m: 0,
         height: "100%",
         flexGrow: 1,
+        borderRadius: "1.5rem",
+        overflow: "hidden",
       }}
     >
       <Box
@@ -46,16 +48,15 @@ const EmbededYt = ({}) => {
           width: "100%",
           height: "max-content",
           bgcolor: theme.palette.common.black,
-          borderRadius: `0px 0px 2.5rem 2.5rem`,
         }}
       >
         <Typography
           sx={{
             color: theme.palette.grey[700],
-            fontSize: "14px",
-            fontWeight: theme.typography.fontWeightMedium,
+            fontSize: "12px",
+            fontWeight: theme.typography.fontWeightThin,
             width: "100%",
-            my: "2rem",
+            my: "1rem",
             textAlign: "center",
           }}
         >

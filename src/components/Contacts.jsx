@@ -288,7 +288,7 @@ const Contacts = ({}) => {
           pt: "2rem",
           bgcolor: theme.palette.common.black,
           width: "100%",
-          borderRadius: "2.5rem",
+          borderRadius: "1.5rem",
         }}
       >
         <Typography
@@ -307,21 +307,22 @@ const Contacts = ({}) => {
           alignItems: "flex-start",
           alignItems: "shrink",
           width: "100%",
-          flexWrap: "wrap",
+          flexWrap: "no-wrap",
           mt: "1.5rem",
           p: "2rem",
           height: "100%",
           overflow: "hidden",
           bgcolor: theme.palette.common.black,
-          borderRadius: "2.5rem",
-          justifyContent: "center",
+          borderRadius: "1.5rem",
+          justifyContent: "space-between",
         }}
       >
         <Stack
           direction={"column"}
           sx={{
             alignItems: "center",
-            p: "1.5rem",
+            py: "1.5rem",
+            px: "1rem",
             minWidth: "250px",
             height: "100%",
             width: "25%",
@@ -350,8 +351,8 @@ const Contacts = ({}) => {
                 sx={{
                   color: theme.palette.common.white,
                   fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: "14px",
-                  mr: ".5rem",
+                  fontSize: "12px",
+                  mr: ".2rem",
                 }}
               >
                 {lang === "fr" ? "Rechercher" : "Search"}
@@ -359,7 +360,7 @@ const Contacts = ({}) => {
               <Stack
                 direction={"row"}
                 sx={{
-                  px: ".5rem",
+                  px: ".2rem",
                   py: ".0rem",
                   border: `2px solid ${theme.palette.common.black}`,
                   alignItems: "center",
@@ -372,7 +373,7 @@ const Contacts = ({}) => {
                   onChange={handleSearch}
                   value={searchKey}
                   sx={{
-                    fontSize: "14px",
+                    fontSize: "12px",
                     color: theme.palette.grey[500],
                     width: "100%",
                   }}
@@ -382,16 +383,17 @@ const Contacts = ({}) => {
               <Button
                 type={"submit"}
                 sx={{
-                  color: theme.palette.common.white,
-                  bgcolor: theme.palette.common.black,
-                  px: "1rem",
-                  py: ".3rem",
+                  color: theme.palette.common.black,
+                  bgcolor: theme.palette.common.white,
+                  px: ".5rem",
+                  py: ".05rem",
                   "&:hover": {
-                    bgcolor: theme.palette.common.black,
+                    bgcolor: theme.palette.common.white,
                   },
                   width: "max-content",
                   borderRadius: "0px",
-                  ml: "1rem",
+                  ml: ".2rem",
+                  fontSize: "12px",
                 }}
               >
                 Envoyer
@@ -436,8 +438,8 @@ const Contacts = ({}) => {
                     direction={"row"}
                     sx={{
                       alignItems: "center",
-                      px: ".3rem",
-                      py: ".2rem",
+                      px: ".1rem",
+                      py: ".0rem",
                     }}
                   >
                     <Avatar
@@ -445,8 +447,8 @@ const Contacts = ({}) => {
                       alt="Profile"
                       sx={{
                         mr: ".5rem",
-                        width: "50px",
-                        height: "50px",
+                        width: "30px",
+                        height: "30px",
                       }}
                     />
                     <Stack
@@ -462,7 +464,7 @@ const Contacts = ({}) => {
                         sx={{
                           color: theme.palette.common.white,
                           fontWeight: theme.typography.fontWeightRegular,
-                          fontSize: "16px",
+                          fontSize: "14px",
                           mb: ".2rem",
                         }}
                       >
@@ -472,7 +474,7 @@ const Contacts = ({}) => {
                         sx={{
                           color: theme.palette.common.white,
                           fontWeight: theme.typography.fontWeightThin,
-                          fontSize: "14px",
+                          fontSize: "12px",
                         }}
                       >
                         {target?.title}
@@ -496,7 +498,7 @@ const Contacts = ({}) => {
             maxHeight: "100%",
             borderRadius: "2rem",
             border: `1px solid ${theme.palette.grey[900]}`,
-            width: "70%",
+            width: "73%",
             maxWidth: "70%",
           }}
         >
@@ -521,7 +523,7 @@ const Contacts = ({}) => {
               <Typography
                 sx={{
                   color: theme.palette.primary.main,
-                  fontSize: "24px",
+                  fontSize: "14px",
                   fontWeight: theme.typography.fontWeightBold,
                 }}
               >
@@ -606,131 +608,134 @@ const Contacts = ({}) => {
                       // justifyContent: "flex-end",
                     }}
                   >
-                    {Object.keys(chatMsgs)?.map((key) => {
-                      return (
-                        <Stack
-                          direction={"column"}
-                          sx={{
-                            width: "100%",
-                            //height: "100%",
-                            alignItems: "center",
-                            //justifyContent: "flex-end",
-                            py: "1rem",
-                          }}
-                        >
-                          <Typography
-                            sx={{
-                              textAlign: "center",
-                              color: theme.palette.common.white,
-                              fontWeight: theme.typography.fontWeightLight,
-                              fontSize: "12px",
-                              px: "1rem",
-                              py: ".15rem",
-                              bgcolor: "#FFFFFF10",
-                              borderRadius: "2rem",
-                              width: "max-content",
-                              ly: ".7rem",
-                            }}
-                          >
-                            {key}
-                          </Typography>
+                    {Object.keys(chatMsgs)
+                      ?.reverse()
+                      ?.map((key) => {
+                        return (
                           <Stack
-                            direction={"column-reverse"}
+                            direction={"column"}
                             sx={{
                               width: "100%",
-                              maxWidth: "100%",
-                              overflowX: "hidden",
                               //height: "100%",
-                              //  justifyContent: "flex-end",
+                              alignItems: "center",
+                              //justifyContent: "flex-end",
+                              py: "1rem",
                             }}
                           >
-                            {chatMsgs[key]?.map((target) => {
-                              return (
-                                <Stack
-                                  direction={"row"}
-                                  sx={{
-                                    alignItems: "center",
-                                    //height: "max-content",
-                                    width: "100%",
-                                    maxWidth: "100%",
-                                    overflowX: "hidden",
-                                    my: "0.3rem",
-                                    justifyContent:
-                                      target?.from === guest?.accessKey
-                                        ? "flex-end"
-                                        : "flex-start",
-                                    justifySelf: "flex-end",
-                                  }}
-                                >
+                            <Typography
+                              sx={{
+                                textAlign: "center",
+                                color: theme.palette.common.white,
+                                fontWeight: theme.typography.fontWeightLight,
+                                fontSize: "12px",
+                                px: "1rem",
+                                py: ".15rem",
+                                bgcolor: "#FFFFFF10",
+                                borderRadius: "2rem",
+                                width: "max-content",
+                                ly: ".7rem",
+                              }}
+                            >
+                              {key}
+                            </Typography>
+                            <Stack
+                              direction={"column-reverse"}
+                              sx={{
+                                width: "100%",
+                                maxWidth: "100%",
+                                overflowX: "hidden",
+                                //height: "100%",
+                                //  justifyContent: "flex-end",
+                              }}
+                            >
+                              {chatMsgs[key]?.map((target) => {
+                                return (
                                   <Stack
-                                    direction={"column"}
+                                    direction={"row"}
                                     sx={{
-                                      alignItems:
+                                      alignItems: "center",
+                                      //height: "max-content",
+                                      width: "100%",
+                                      maxWidth: "100%",
+                                      overflowX: "hidden",
+                                      my: "0.3rem",
+                                      justifyContent:
                                         target?.from === guest?.accessKey
                                           ? "flex-end"
                                           : "flex-start",
-                                      maxWidth: "40%",
-                                      width: "40%",
-                                      overflowX: "hidden",
+                                      justifySelf: "flex-end",
                                     }}
                                   >
                                     <Stack
                                       direction={"column"}
                                       sx={{
-                                        width: "max-content",
-                                        bgcolor:
+                                        alignItems:
                                           target?.from === guest?.accessKey
-                                            ? theme.palette.primary.main
-                                            : theme.palette.common.black,
-                                        py: ".5rem",
-                                        px: ".7rem",
-                                        borderRadius: "1rem",
-                                        maxWidth: "100%",
+                                            ? "flex-end"
+                                            : "flex-start",
+                                        maxWidth: "40%",
+                                        width: "40%",
                                         overflowX: "hidden",
-                                        border:
-                                          target?.from === guest?.accessKey
-                                            ? undefined
-                                            : `1px solid ${theme.palette?.grey[900]}`,
                                       }}
                                     >
-                                      <Typography
+                                      <Stack
+                                        direction={"column"}
                                         sx={{
-                                          fontSize: "14px",
-                                          fontWeight:
-                                            theme.typography.fontWeightRegular,
-                                          color: theme.palette.common.white,
-                                          textAlign: "left",
-                                          width: "100%",
+                                          width: "max-content",
+                                          bgcolor:
+                                            target?.from === guest?.accessKey
+                                              ? theme.palette.primary.main
+                                              : theme.palette.common.black,
+                                          py: ".5rem",
+                                          px: ".7rem",
+                                          borderRadius: "1rem",
                                           maxWidth: "100%",
-                                          overflowWrap: "break-word",
-                                          //height: "max-content",
+                                          overflowX: "hidden",
+                                          border:
+                                            target?.from === guest?.accessKey
+                                              ? undefined
+                                              : `1px solid ${theme.palette?.grey[900]}`,
                                         }}
                                       >
-                                        {target?.content}
+                                        <Typography
+                                          sx={{
+                                            fontSize: "12px",
+                                            fontWeight:
+                                              theme.typography
+                                                .fontWeightRegular,
+                                            color: theme.palette.common.white,
+                                            textAlign: "left",
+                                            width: "100%",
+                                            maxWidth: "100%",
+                                            overflowWrap: "break-word",
+                                            //height: "max-content",
+                                          }}
+                                        >
+                                          {target?.content}
+                                        </Typography>
+                                      </Stack>
+                                      <Typography
+                                        sx={{
+                                          color: theme.palette.grey[500],
+                                          fontSize: "10px",
+                                          mt: ".2rem",
+                                          mx: ".5rem",
+                                          fontWeight:
+                                            theme.typography.fontWeightRegular,
+                                        }}
+                                      >
+                                        {new Date(
+                                          target?.createdAt
+                                        ).toLocaleTimeString()}
                                       </Typography>
                                     </Stack>
-                                    <Typography
-                                      sx={{
-                                        color: theme.palette.grey[500],
-                                        fontSize: "12px",
-                                        mt: ".2rem",
-                                        mx: ".5rem",
-                                        fontWeight:
-                                          theme.typography.fontWeightRegular,
-                                      }}
-                                    >
-                                      {new Date(
-                                        target?.createdAt
-                                      ).toLocaleTimeString()}
-                                    </Typography>
                                   </Stack>
-                                </Stack>
-                              );
-                            })}
+                                );
+                              })}
+                            </Stack>
                           </Stack>
-                        </Stack>
-                      );
-                    })}
+                        );
+                      })}
                   </Stack>
                 </Stack>
 
@@ -763,7 +768,7 @@ const Contacts = ({}) => {
                       sx={{
                         px: ".5rem",
                         py: ".0rem",
-                        border: `2px solid ${theme.palette.grey[700]}`,
+                        border: `1px solid ${theme.palette.grey[700]}`,
                         alignItems: "center",
                         flexGrow: 1,
                         borderRadius: "1rem",
@@ -778,6 +783,11 @@ const Contacts = ({}) => {
                           fontSize: "14px",
                           color: theme.palette.common.white,
                           width: "100%",
+                        }}
+                        inputProps={{
+                          style: {
+                            fontSize: "12px",
+                          },
                         }}
                       />
                     </Stack>
@@ -794,6 +804,7 @@ const Contacts = ({}) => {
                         width: "max-content",
                         borderRadius: "0px",
                         ml: "1rem",
+                        fontSize: "12px",
                       }}
                     >
                       Envoyer

@@ -172,7 +172,7 @@ const Profile = ({ setSecondaryMenu }) => {
           height: "100px",
           position: "relative",
           top: 0,
-          borderRadius: "2.5rem",
+          borderRadius: "1.5rem",
         }}
       >
         <Avatar
@@ -238,7 +238,7 @@ const Profile = ({ setSecondaryMenu }) => {
                 color: theme.palette.common.white,
                 fontWeight: theme.typography.fontWeightBold,
                 // textAlign: "center",
-                fontSize: "18px",
+                fontSize: "14px",
               }}
             >
               {guest?.fullName}
@@ -265,7 +265,7 @@ const Profile = ({ setSecondaryMenu }) => {
               sx={{
                 color: theme.palette.grey[500],
                 fontWeight: theme.palette.fontWeightLight,
-                fontSize: "14px",
+                fontSize: "12px",
                 mr: "1rem",
               }}
             >
@@ -282,14 +282,14 @@ const Profile = ({ setSecondaryMenu }) => {
                 style: {
                   paddingTop: ".2rem",
                   paddingBottom: ".2rem",
-                  fontSize: "12px",
+                  fontSize: "10px",
                   width: "70px",
                 },
               }}
             >
               <MenuItem
                 sx={{
-                  fontSize: "12px",
+                  fontSize: "10px",
                 }}
                 value={"fr"}
               >
@@ -297,7 +297,7 @@ const Profile = ({ setSecondaryMenu }) => {
               </MenuItem>
               <MenuItem
                 sx={{
-                  fontSize: "12px",
+                  fontSize: "10px",
                 }}
                 value={"en"}
               >
