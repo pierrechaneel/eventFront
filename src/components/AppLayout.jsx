@@ -294,7 +294,7 @@ const AppLayout = ({ children }) => {
           overflowX: "hidden",
           height: "100vh",
           maxHeight: "100vh",
-          pt: "calc(50px + 3rem)",
+          pt: "calc(50px + 2.5rem)",
           pr: "1.5rem",
         }}
       >

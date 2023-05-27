@@ -1278,7 +1278,7 @@ const SocialWall = ({}) => {
                           sx={{
                             color: theme.palette.common.white,
                             fontWeight: theme.typography.fontWeightBold,
-                            fontSize: "16px",
+                            fontSize: "14px",
                           }}
                         >
                           {post?.authorName}
@@ -1287,7 +1287,7 @@ const SocialWall = ({}) => {
                           sx={{
                             color: theme.palette.grey[700],
                             fontWeight: theme.typography.fontWeightLight,
-                            fontSize: "12px",
+                            fontSize: "10px",
                           }}
                         >
                           {new Date(post?.createdAt)?.toLocaleString()}
@@ -1343,7 +1343,7 @@ const SocialWall = ({}) => {
                           <Typography
                             sx={{
                               textAlign: "center",
-                              fontSize: "14px",
+                              fontSize: "12px",
                               fontWeight: theme.typography.fontWeightRegular,
                               color: theme.palette.common.white,
                             }}

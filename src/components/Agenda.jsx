@@ -231,7 +231,7 @@ const Agenda = ({}) => {
                           ? theme.typography.fontWeightMedium
                           : theme.typography.fontWeightLight,
                       fontSize: "12px",
-                      px: "1rem",
+                      px: ".5rem",
                       py: ".5rem",
                       textTransform: "capitalize",
                     }}
