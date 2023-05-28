@@ -27,11 +27,14 @@ import { LangCtx } from "../../context/lang";
 import PostAdd from "@mui/icons-material/PostAdd";
 import { SocketCtx } from "../../context/socket";
 import SnackMessage from "./SnackMessage";
+import { viewportsCtx } from "../../context/viewports";
 
 const AppLayout = ({ children }) => {
   const theme = useTheme();
 
   const router = useRouter();
+
+  const screen870 = React.useContext(viewportsCtx)?.screen870;
 
   React.useEffect(() => {
     window.addEventListener("beforeunload", function (e) {
@@ -353,7 +356,7 @@ const AppLayout = ({ children }) => {
               <Typography
                 sx={{
                   color: theme.palette.common.white,
-                  fontSize: "16px",
+                  fontSize: screen870 ? "14px" : "16px",
                   fontWeight: theme.typography.fontWeightBold,
                 }}
               >
@@ -374,6 +377,7 @@ const AppLayout = ({ children }) => {
                   fontWeight: theme.typography.fontWeightBold,
                   fontSize: "16px",
                   whiteSpace: "nowrap",
+                  fontSize: screen870 ? "14px" : "16px",
                 }}
               >
                 {guest?.event?.subject
@@ -387,6 +391,7 @@ const AppLayout = ({ children }) => {
                   fontWeight: theme.typography.fontWeightBold,
                   fontSize: "16px",
                   whiteSpace: "nowrap",
+                  fontSize: screen870 ? "14px" : "16px",
                 }}
               >
                 {guest?.event?.subject

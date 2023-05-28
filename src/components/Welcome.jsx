@@ -144,8 +144,8 @@ const Welcome = ({}) => {
                   direction={"column"}
                   key={id}
                   sx={{
-                    px: "2rem",
-                    py: "1rem",
+                    px: "5vw",
+                    py: "1.2rem",
                     border: `2px solid ${theme.palette.primary.main}`,
                     alignItems: "center",
                     minWidth: "150px",
@@ -172,7 +172,7 @@ const Welcome = ({}) => {
                   <Typography
                     sx={{
                       color: theme.palette.common.white,
-                      fontWeight: theme.typography.fontWeightThin,
+                      fontWeight: theme.typography.fontWeightRegular,
                       fontSize: "14px",
                       textAlign: "center",
                     }}
@@ -188,7 +188,7 @@ const Welcome = ({}) => {
               color: theme.palette.grey[500],
               fontWeight: theme.typography.fontWeightLight,
               textAlign: "center",
-              fontSize: "10px",
+              fontSize: "12px",
               maxWidth: "100%",
               my: "1rem",
             }}

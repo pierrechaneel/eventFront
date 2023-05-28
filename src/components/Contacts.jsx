@@ -327,8 +327,8 @@ const Contacts = ({}) => {
           sx={{
             alignItems: "center",
             py: "1.5rem",
-            px: "1rem",
-            minWidth: "250px",
+            mx: screen870 ? ".5rem" : "1rem",
+            minWidth: "150px",
             height: "100%",
             width: "25%",
             maxWidth: "25%",
@@ -350,6 +350,7 @@ const Contacts = ({}) => {
                 alignItems: "center",
                 width: "100%",
                 justifyContent: "center",
+                px: ".5rem",
               }}
             >
               <Typography
@@ -385,24 +386,28 @@ const Contacts = ({}) => {
                 />
               </Stack>
 
-              <Button
-                type={"submit"}
-                sx={{
-                  color: theme.palette.common.black,
-                  bgcolor: theme.palette.common.white,
-                  px: ".5rem",
-                  py: ".05rem",
-                  "&:hover": {
+              {!screen870 ? (
+                <Button
+                  type={"submit"}
+                  sx={{
+                    color: theme.palette.common.black,
                     bgcolor: theme.palette.common.white,
-                  },
-                  width: "max-content",
-                  borderRadius: "0px",
-                  ml: ".2rem",
-                  fontSize: "12px",
-                }}
-              >
-                Envoyer
-              </Button>
+                    px: ".5rem",
+                    py: ".05rem",
+                    "&:hover": {
+                      bgcolor: theme.palette.common.white,
+                    },
+                    width: "max-content",
+                    borderRadius: "0px",
+                    ml: ".2rem",
+                    fontSize: "12px",
+                  }}
+                >
+                  Envoyer
+                </Button>
+              ) : (
+                ""
+              )}
             </Stack>
           </form>
 
@@ -437,6 +442,8 @@ const Contacts = ({}) => {
                     "&:hover": {
                       transition: "all .3s",
                     },
+                    p: 0.3,
+                    m: 0,
                   }}
                 >
                   <Stack
@@ -451,7 +458,7 @@ const Contacts = ({}) => {
                       src={target?.profile}
                       alt="Profile"
                       sx={{
-                        mr: ".5rem",
+                        mr: screen870 ? ".2rem" : ".5rem",
                         width: "30px",
                         height: "30px",
                       }}
@@ -497,14 +504,14 @@ const Contacts = ({}) => {
             flexGrow: 1,
             // p: "2rem",
             // bgcolor: theme.palette.grey[900],
-            mx: "1rem",
+            mx: screen870 ? ".5rem" : "1rem",
             // position: "relative",
             height: "100%",
             maxHeight: "100%",
             borderRadius: "2rem",
             border: `1px solid ${theme.palette.grey[900]}`,
             width: "73%",
-            maxWidth: "70%",
+            maxWidth: "73%",
             overflowX: "auto",
           }}
         >
@@ -525,29 +532,29 @@ const Contacts = ({}) => {
                 justifyContent: "space-between",
                 py: ".65rem",
                 borderBottom: `1px solid ${theme.palette.grey[500]}`,
-                px: "1rem",
+                px: screen870 ? ".5rem" : "1rem",
               }}
             >
               <Typography
                 sx={{
                   color: theme.palette.primary.main,
-                  fontSize: "14px",
+                  fontSize: screen870 ? "12px" : "14px",
                   fontWeight: theme.typography.fontWeightBold,
                 }}
               >
                 Discussion
               </Typography>
-              <Badge color="success" badgeContent=" " variant="dot">
-                <Typography
-                  sx={{
-                    color: theme.palette.common.white,
-                    fontSize: "14px",
-                    fontWeight: theme.typography.fontWeightBold,
-                  }}
-                >
-                  {chatSubject?.fullName}
-                </Typography>
-              </Badge>
+              {/*** <Badge color="success" badgeContent=" " variant="dot"> */}
+              <Typography
+                sx={{
+                  color: theme.palette.common.white,
+                  fontSize: screen870 ? "12px" : "14px",
+                  fontWeight: theme.typography.fontWeightBold,
+                }}
+              >
+                {chatSubject?.fullName}
+              </Typography>
+              {/*** </Badge> */}
             </Stack>
             {Object.keys(chatSubject)?.length === 0 ? (
               <Stack
@@ -601,7 +608,7 @@ const Contacts = ({}) => {
                     //flexGrow: 1,
                     pt: "1rem",
                     // pb: "3rem",
-                    px: "2rem",
+                    px: screen870 ? "1rem" : "2rem",
                     maxHeight: "100%",
                     height: "100%",
                     overflowY: "auto",
@@ -635,13 +642,13 @@ const Contacts = ({}) => {
                                 textAlign: "center",
                                 color: theme.palette.common.white,
                                 fontWeight: theme.typography.fontWeightLight,
-                                fontSize: "12px",
-                                px: "1rem",
+                                fontSize: screen870 ? "10px" : "12px",
+                                px: screen870 ? ".5rem" : "1rem",
                                 py: ".15rem",
                                 bgcolor: "#FFFFFF10",
                                 borderRadius: "2rem",
                                 width: "max-content",
-                                ly: ".7rem",
+                                py: ".7rem",
                               }}
                             >
                               {key}
@@ -695,8 +702,10 @@ const Contacts = ({}) => {
                                               ? theme.palette.primary.main
                                               : theme.palette.common.black,
                                           py: ".5rem",
-                                          px: ".7rem",
-                                          borderRadius: "1rem",
+                                          px: screen870 ? ".3rem" : ".7rem",
+                                          borderRadius: screen870
+                                            ? ".5rem"
+                                            : "1rem",
                                           maxWidth: "100%",
                                           overflowX: "hidden",
                                           border:
@@ -707,7 +716,9 @@ const Contacts = ({}) => {
                                       >
                                         <Typography
                                           sx={{
-                                            fontSize: "12px",
+                                            fontSize: screen870
+                                              ? "10px"
+                                              : "12px",
                                             fontWeight:
                                               theme.typography
                                                 .fontWeightRegular,
@@ -725,7 +736,7 @@ const Contacts = ({}) => {
                                       <Typography
                                         sx={{
                                           color: theme.palette.grey[500],
-                                          fontSize: "10px",
+                                          fontSize: screen870 ? "8px" : "10px",
                                           mt: ".2rem",
                                           mx: ".5rem",
                                           fontWeight:

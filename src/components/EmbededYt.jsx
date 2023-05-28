@@ -54,7 +54,7 @@ const EmbededYt = ({}) => {
           sx={{
             color: theme.palette.grey[700],
             fontSize: "12px",
-            fontWeight: theme.typography.fontWeightThin,
+            fontWeight: theme.typography.fontWeightRegular,
             width: "100%",
             my: "1rem",
             textAlign: "center",

@@ -11,8 +11,10 @@ const ViewportsContext = ({ children }) => {
 
   const screen870 = useMediaQuery(theme.breakpoints.down(870));
 
+  const screen660 = useMediaQuery(theme.breakpoints.down(660));
+
   return (
-    <viewportsCtx.Provider value={{ screen870 }}>
+    <viewportsCtx.Provider value={{ screen870, screen660 }}>
       {children}
     </viewportsCtx.Provider>
   );

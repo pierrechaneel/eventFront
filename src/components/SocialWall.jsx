@@ -34,6 +34,7 @@ import axios from "axios";
 import configs from "../../configs/generals.json";
 
 import { SocketCtx } from "../../context/socket";
+import { viewportsCtx } from "../../context/viewports";
 
 const SocialWall = ({}) => {
   const theme = useTheme();
@@ -242,9 +243,14 @@ const SocialWall = ({}) => {
 
     fReader.onload = function (oFREvent) {
       setFileSelected(oFREvent.target.result);
+
+      console.log("blob value content", event?.target?.files[0]);
+
       setFileBlob(event?.target?.files[0]);
     };
   };
+
+  const [commentfileSelected, setCommentFileSelected] = React.useState(null);
 
   const handleCommentChange = async (event) => {
     event?.preventDefault();
@@ -253,7 +259,7 @@ const SocialWall = ({}) => {
     fReader.readAsDataURL(event?.target?.files[0]);
 
     fReader.onload = function (oFREvent) {
-      setFileSelected(oFREvent.target.result);
+      setCommentFileSelected(oFREvent.target.result);
       setCommentFileBlob(event?.target?.files[0]);
     };
   };
@@ -354,9 +360,11 @@ const SocialWall = ({}) => {
           if (isCommenting) {
             setCommentText("");
             setFileBlob(null);
+            setCommentFileBlob(null);
           } else {
             setPubTextContent("");
             setFileBlob(null);
+            setFileSelected(null);
           }
 
           setSnackMessage(
@@ -486,6 +494,10 @@ const SocialWall = ({}) => {
       });
   };
 
+  const screen870 = React.useContext(viewportsCtx)?.screen870;
+
+  const setIsMenuCollapsed = React.useContext(LangCtx).setIsMenuCollapsed;
+
   return (
     <Stack
       sx={{
@@ -522,7 +534,7 @@ const SocialWall = ({}) => {
             height: "100%",
             maxHeight: "100%",
             overflowY: "auto",
-            p: "2rem",
+            p: screen870 ? "1rem" : "2rem",
           }}
         >
           <Stack
@@ -559,7 +571,7 @@ const SocialWall = ({}) => {
                 py: "1rem",
                 alignItems: "center",
                 //px: "1rem",
-                width: "70%",
+                width: screen870 ? "95%" : "70%",
                 maxWidth: "700px",
                 minWidth: "200px",
                 justifyContent: "space-between",
@@ -589,7 +601,7 @@ const SocialWall = ({}) => {
                 fullWidth
                 sx={{
                   borderBottom: `.5px solid ${theme.palette.grey[500]}`,
-                  ml: "1rem",
+                  ml: screen870 ? ".5rem" : "1rem",
                 }}
                 inputProps={{
                   style: {
@@ -614,14 +626,27 @@ const SocialWall = ({}) => {
                   justifyContent: "center",
                 }}
               >
-                <Image
-                  sx={{
-                    color: theme.palette.common.white,
-                    fontSize: "22px",
-                    ml: "1rem",
-                    cursor: "pointer",
-                  }}
-                />
+                {fileSelected ? (
+                  <Avatar
+                    src={fileSelected}
+                    sx={{
+                      color: theme.palette.common.white,
+                      width: "20px",
+                      height: "20px",
+                      mx: screen870 ? ".2rem" : ".5rem",
+                      cursor: "pointer",
+                    }}
+                  />
+                ) : (
+                  <Image
+                    sx={{
+                      color: theme.palette.grey[500],
+                      fontSize: "20px",
+                      mx: screen870 ? ".2rem" : ".5rem",
+                      cursor: "pointer",
+                    }}
+                  />
+                )}
               </label>
               <Button
                 type={"submit"}
@@ -636,7 +661,6 @@ const SocialWall = ({}) => {
                 }
                 sx={{
                   cursor: "pointer",
-                  ml: "1rem",
                   color: theme.palette.common.white,
                   bgcolor: theme.palette.primary?.main,
                   "&:hover": {
@@ -669,7 +693,7 @@ const SocialWall = ({}) => {
                 <Stack
                   direction={"row"}
                   sx={{
-                    width: "70%",
+                    width: screen870 ? "95%" : "70%",
                     maxWidth: "700px",
                     minWidth: "200px",
                     alignItems: "flex-start",
@@ -934,13 +958,14 @@ const SocialWall = ({}) => {
             width: isThreaVisible ? "30%" : "0px",
             height: "100%",
             maxHeight: "100%",
+            maxWidth: "30%",
             overflowY: "auto",
             borderLeft: `1px solid ${theme.palette.grey[900]}`,
-            overflowX: "hidden",
-            p: "2rem",
+            overflowX: "auto",
+            p: screen870 ? "1rem" : "2rem",
             display: !isThreaVisible ? "none" : undefined,
             transition: `.3s all`,
-            overflowX: "hidden",
+            overflowX: "auto",
           }}
         >
           <Stack
@@ -956,7 +981,7 @@ const SocialWall = ({}) => {
             <Typography
               sx={{
                 color: theme.palette.common.white,
-                fontSize: "14px",
+                fontSize: screen870 ? "12px" : "14px",
                 fontWeight: theme.typography.fontWeightBold,
               }}
             >
@@ -981,9 +1006,9 @@ const SocialWall = ({}) => {
               width: "100%",
               alignItems: "flex-start",
               maxWidth: "700px",
-              minWidth: "200px",
+              minWidth: "150px",
               my: "1rem",
-              overflowX: "hidden",
+              overflowX: "auto",
               pr: "1rem",
             }}
           >
@@ -992,8 +1017,8 @@ const SocialWall = ({}) => {
               size="small"
               sx={{
                 mr: ".5rem",
-                width: "30px",
-                height: "30px",
+                width: screen870 ? "15px" : "30px",
+                height: screen870 ? "15px" : "30px",
               }}
             />
             <Stack
@@ -1020,7 +1045,7 @@ const SocialWall = ({}) => {
                     sx={{
                       color: theme.palette.common.white,
                       fontWeight: theme.typography.fontWeightBold,
-                      fontSize: "14px",
+                      fontSize: screen870 ? "12px" : "14px",
                     }}
                   >
                     {threadData?.authorName}
@@ -1029,7 +1054,7 @@ const SocialWall = ({}) => {
                     sx={{
                       color: theme.palette.grey[700],
                       fontWeight: theme.typography.fontWeightLight,
-                      fontSize: "10px",
+                      fontSize: screen870 ? "8px" : "10px",
                     }}
                   >
                     {new Date(threadData?.createdAt)?.toLocaleString()}
@@ -1046,7 +1071,7 @@ const SocialWall = ({}) => {
                     <Delete
                       sx={{
                         color: theme.palette.error.main,
-                        fontSize: "18px",
+                        fontSize: screen870 ? "14px" : "18px",
                       }}
                     />
                   </IconButton>
@@ -1058,7 +1083,7 @@ const SocialWall = ({}) => {
                 sx={{
                   color: theme.palette.common.white,
                   fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: "12px",
+                  fontSize: screen870 ? "10px" : "12px",
                 }}
               >
                 {threadData?.textContent}
@@ -1150,7 +1175,7 @@ const SocialWall = ({}) => {
                     sx={{
                       color: theme.palette.grey[700],
                       fontWeight: theme.typography.fontWeightRegular,
-                      fontSize: "10px",
+                      fontSize: screen870 ? "8px" : "10px",
                       cursor: "pointer",
                     }}
                   >
@@ -1201,7 +1226,7 @@ const SocialWall = ({}) => {
                     sx={{
                       color: theme.palette.grey[700],
                       fontWeight: theme.typography.fontWeightRegular,
-                      fontSize: "10px",
+                      fontSize: screen870 ? "8px" : "10px",
                       cursor: "pointer",
                     }}
                   >
@@ -1216,7 +1241,7 @@ const SocialWall = ({}) => {
             sx={{
               color: theme.palette.grey[700],
               fontWeight: theme.typography.fontWeightRegular,
-              fontSize: "10px",
+              fontSize: screen870 ? "8px" : "10px",
               my: ".5rem",
             }}
           >
@@ -1232,7 +1257,7 @@ const SocialWall = ({}) => {
               height: "100%",
               maxHeight: "100%",
               overflowY: "auto",
-              overflowX: "hidden",
+              overflowX: "auto",
               flexGrow: 1,
               overflowX: "hidden",
               pr: "1rem",
@@ -1245,9 +1270,10 @@ const SocialWall = ({}) => {
                   sx={{
                     width: "100%",
                     alignItems: "flex-start",
-                    maxWidth: "700px",
-                    minWidth: "200px",
+                    maxWidth: "100%",
+                    minWidth: "150px",
                     my: "1rem",
+                    overflowX: "auto",
                   }}
                 >
                   <Avatar
@@ -1255,8 +1281,8 @@ const SocialWall = ({}) => {
                     size="small"
                     sx={{
                       mr: ".5rem",
-                      width: "30px",
-                      height: "30px",
+                      width: screen870 ? "15px" : "30px",
+                      height: screen870 ? "15px" : "30px",
                     }}
                   />
                   <Stack
@@ -1282,7 +1308,7 @@ const SocialWall = ({}) => {
                           sx={{
                             color: theme.palette.common.white,
                             fontWeight: theme.typography.fontWeightBold,
-                            fontSize: "14px",
+                            fontSize: screen870 ? "12px" : "14px",
                           }}
                         >
                           {post?.authorName}
@@ -1291,7 +1317,7 @@ const SocialWall = ({}) => {
                           sx={{
                             color: theme.palette.grey[700],
                             fontWeight: theme.typography.fontWeightLight,
-                            fontSize: "10px",
+                            fontSize: screen870 ? "12px" : "10px",
                           }}
                         >
                           {new Date(post?.createdAt)?.toLocaleString()}
@@ -1308,7 +1334,7 @@ const SocialWall = ({}) => {
                           <Delete
                             sx={{
                               color: theme.palette.error.main,
-                              fontSize: "18px",
+                              fontSize: screen870 ? "14px" : "18px",
                             }}
                           />
                         </IconButton>
@@ -1320,7 +1346,7 @@ const SocialWall = ({}) => {
                       sx={{
                         color: theme.palette.common.white,
                         fontWeight: theme.typography.fontWeightRegular,
-                        fontSize: "12px",
+                        fontSize: screen870 ? "10px" : "12px",
                       }}
                     >
                       {post?.textContent}
@@ -1415,7 +1441,7 @@ const SocialWall = ({}) => {
                             sx={{
                               color: theme.palette.grey[700],
                               fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: "10px",
+                              fontSize: screen870 ? "8px" : "10px",
                               cursor: "pointer",
                             }}
                           >
@@ -1467,7 +1493,7 @@ const SocialWall = ({}) => {
                             sx={{
                               color: theme.palette.grey[700],
                               fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: "10px",
+                              fontSize: screen870 ? "8px" : "10px",
                               cursor: "pointer",
                             }}
                           >
@@ -1542,14 +1568,27 @@ const SocialWall = ({}) => {
                   justifyContent: "center",
                 }}
               >
-                <Image
-                  sx={{
-                    color: theme.palette.common.white,
-                    fontSize: "22px",
-                    ml: "1rem",
-                    cursor: "pointer",
-                  }}
-                />
+                {fileSelected ? (
+                  <Avatar
+                    src={commentfileSelected}
+                    sx={{
+                      color: theme.palette.common.white,
+                      width: "20px",
+                      height: "20px",
+                      mx: screen870 ? ".2rem" : ".5rem",
+                      cursor: "pointer",
+                    }}
+                  />
+                ) : (
+                  <Image
+                    sx={{
+                      color: theme.palette.grey[500],
+                      fontSize: "20px",
+                      mx: screen870 ? ".2rem" : ".5rem",
+                      cursor: "pointer",
+                    }}
+                  />
+                )}
               </label>
               <IconButton
                 type={"submit"}
