@@ -8,6 +8,7 @@ import configs from "../../configs/generals.json";
 import Mail from "@mui/icons-material/Mail";
 import Pin from "@mui/icons-material/Pin";
 import Link from "@mui/icons-material/Link";
+import { viewportsCtx } from "../../context/viewports";
 
 const Welcome = ({}) => {
   const theme = useTheme();
@@ -28,6 +29,8 @@ const Welcome = ({}) => {
       icon: (props) => <Pin {...props} />,
     },
   ];
+
+  const screen870 = React.useContext(viewportsCtx)?.screen870;
 
   return (
     <Box
@@ -51,6 +54,7 @@ const Welcome = ({}) => {
           minHeight: "100vh",
           m: 0,
           p: 0,
+          overflowY: "hidden",
         }}
       >
         <Stack
@@ -61,6 +65,7 @@ const Welcome = ({}) => {
             height: "100%",
             alignItems: "center",
             justifyContent: "center",
+            maxHeight: "100vh",
             minHeight: "100vh",
             overflowY: "auto",
           }}
@@ -68,7 +73,7 @@ const Welcome = ({}) => {
           <Typography
             component={"h2"}
             sx={{
-              fontSize: "24px",
+              fontSize: screen870 ? "18px" : "24px",
               fontWeight: theme.typography.fontWeightThin,
               textAlign: "center",
               color: theme.palette.primary.main,
@@ -82,7 +87,7 @@ const Welcome = ({}) => {
             component={"h1"}
             sx={{
               color: theme.palette.common.white,
-              fontSize: "50px",
+              fontSize: screen870 ? "26px" : "50px",
               fontWeight: theme.typography.fontWeightBlack,
               m: 0,
               textAlign: "center",
@@ -102,13 +107,14 @@ const Welcome = ({}) => {
                 bgcolor: theme.palette.grey[500],
                 mr: "2rem",
                 width: "5vw",
+                minWidth: "50px",
               }}
             ></Box>
             <Typography
               component={"h3"}
               sx={{
                 color: theme.palette.grey[500],
-                fontSize: "16px",
+                fontSize: screen870 ? "14px" : "16px",
                 fopntWeight: theme.typography.fontWeightLight,
                 m: 0,
                 textAlign: "center",
@@ -123,6 +129,7 @@ const Welcome = ({}) => {
                 bgcolor: theme.palette.grey[500],
                 ml: "2rem",
                 width: "5vw",
+                minWidth: "50px",
               }}
             ></Box>
           </Stack>
@@ -144,7 +151,7 @@ const Welcome = ({}) => {
                   direction={"column"}
                   key={id}
                   sx={{
-                    px: "5vw",
+                    px: "2vw",
                     py: "1.2rem",
                     border: `2px solid ${theme.palette.primary.main}`,
                     alignItems: "center",

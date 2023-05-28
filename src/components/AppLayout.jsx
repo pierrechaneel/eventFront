@@ -98,6 +98,8 @@ const AppLayout = ({ children }) => {
     }
   }, []);
 
+  const screen660 = React.useContext(viewportsCtx).screen660;
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -363,44 +365,48 @@ const AppLayout = ({ children }) => {
                 DIGITIZING OUR EVENTS
               </Typography>
             </Stack>
-            <Stack
-              direction={"row"}
-              sx={{
-                alignItems: "flex-start",
-                width: "max-content",
-                mr: "1.5rem",
-              }}
-            >
-              <Typography
+            {!isMenuCollapsed && screen870 ? (
+              ""
+            ) : (
+              <Stack
+                direction={"row"}
                 sx={{
-                  color: theme.palette.common.white,
-                  fontWeight: theme.typography.fontWeightBold,
-                  fontSize: "16px",
-                  whiteSpace: "nowrap",
-                  fontSize: screen870 ? "14px" : "16px",
+                  alignItems: "flex-start",
+                  width: "max-content",
+                  mr: "1.5rem",
                 }}
               >
-                {guest?.event?.subject
-                  ? guest?.event?.subject?.split(" ")[0]?.toUpperCase() + " "
-                  : ""}
-              </Typography>
-              {"."}
-              <Typography
-                sx={{
-                  color: theme.palette.primary.main,
-                  fontWeight: theme.typography.fontWeightBold,
-                  fontSize: "16px",
-                  whiteSpace: "nowrap",
-                  fontSize: screen870 ? "14px" : "16px",
-                }}
-              >
-                {guest?.event?.subject
-                  ?.split(" ")
-                  .slice(1)
-                  ?.join(" ")
-                  ?.toUpperCase()}
-              </Typography>
-            </Stack>
+                <Typography
+                  sx={{
+                    color: theme.palette.common.white,
+                    fontWeight: theme.typography.fontWeightBold,
+                    fontSize: "16px",
+                    whiteSpace: "nowrap",
+                    fontSize: screen870 ? "14px" : "16px",
+                  }}
+                >
+                  {guest?.event?.subject
+                    ? guest?.event?.subject?.split(" ")[0]?.toUpperCase() + " "
+                    : ""}
+                </Typography>
+                {"."}
+                <Typography
+                  sx={{
+                    color: theme.palette.primary.main,
+                    fontWeight: theme.typography.fontWeightBold,
+                    fontSize: "16px",
+                    whiteSpace: "nowrap",
+                    fontSize: screen870 ? "14px" : "16px",
+                  }}
+                >
+                  {guest?.event?.subject
+                    ?.split(" ")
+                    .slice(1)
+                    ?.join(" ")
+                    ?.toUpperCase()}
+                </Typography>
+              </Stack>
+            )}
           </Stack>
         </Stack>
         <Box

@@ -255,6 +255,8 @@ const SocialWall = ({}) => {
   const handleCommentChange = async (event) => {
     event?.preventDefault();
 
+    console.log("changes for comments");
+
     let fReader = new FileReader();
     fReader.readAsDataURL(event?.target?.files[0]);
 
@@ -269,13 +271,13 @@ const SocialWall = ({}) => {
 
     const form = new FormData();
 
-    form.append("media", fileBlob);
+    form.append("media", isCommenting ? commentFileBlob : fileBlob);
 
     // upload media file
 
     let mediaFile = "";
 
-    if (fileBlob !== null) {
+    if (fileBlob !== null || commentFileBlob !== null) {
       await axios
         .post("/api/uploads/media", form, {
           headers: {
@@ -497,6 +499,7 @@ const SocialWall = ({}) => {
   const screen870 = React.useContext(viewportsCtx)?.screen870;
 
   const setIsMenuCollapsed = React.useContext(LangCtx).setIsMenuCollapsed;
+  const isMenuCollapsed = React.useContext(LangCtx).isMenuCollapsed;
 
   return (
     <Stack
@@ -526,11 +529,12 @@ const SocialWall = ({}) => {
           bgcolor: theme.palette.common.black,
           alignItems: "flex-start",
           borderRadius: "1.5rem",
+          flexWrap: "no-wrap",
         }}
       >
         <Stack
           sx={{
-            width: isThreaVisible ? "70%" : "100%",
+            width: isThreaVisible ? (screen870 ? "60%" : "70%") : "100%",
             height: "100%",
             maxHeight: "100%",
             overflowY: "auto",
@@ -935,6 +939,12 @@ const SocialWall = ({}) => {
 
                           setThreadData(post);
                           setISThreadVisisble(true);
+
+                          // collapsing the menu if on tablet and under
+
+                          if (screen870) {
+                            setIsMenuCollapsed(true);
+                          }
                         }}
                         sx={{
                           color: theme.palette.grey[700],
@@ -955,17 +965,20 @@ const SocialWall = ({}) => {
         <Stack
           direction={"column"}
           sx={{
-            width: isThreaVisible ? "30%" : "0px",
+            width: isThreaVisible ? (screen870 ? "40%" : "30%") : "0px",
             height: "100%",
             maxHeight: "100%",
-            maxWidth: "30%",
+            maxWidth: screen870 ? "40%" : "30%",
             overflowY: "auto",
             borderLeft: `1px solid ${theme.palette.grey[900]}`,
             overflowX: "auto",
             p: screen870 ? "1rem" : "2rem",
-            display: !isThreaVisible ? "none" : undefined,
             transition: `.3s all`,
             overflowX: "auto",
+            display:
+              (!isMenuCollapsed && screen870) || !isThreaVisible
+                ? "none"
+                : undefined,
           }}
         >
           <Stack
@@ -1256,7 +1269,6 @@ const SocialWall = ({}) => {
               maxWidth: "100%",
               height: "100%",
               maxHeight: "100%",
-              overflowY: "auto",
               overflowX: "auto",
               flexGrow: 1,
               overflowX: "hidden",
@@ -1273,7 +1285,7 @@ const SocialWall = ({}) => {
                     maxWidth: "100%",
                     minWidth: "150px",
                     my: "1rem",
-                    overflowX: "auto",
+                    //overflowX: "auto",
                   }}
                 >
                   <Avatar
@@ -1542,7 +1554,7 @@ const SocialWall = ({}) => {
                 fullWidth
                 sx={{
                   borderBottom: `.5px solid ${theme.palette.grey[500]}`,
-                  ml: "1rem",
+                  ml: screen870 ? ".5rem" : "1rem",
                   fontSize: "12px",
                 }}
                 inputProps={{
@@ -1553,22 +1565,22 @@ const SocialWall = ({}) => {
               />
               <input
                 type="file"
-                id={"mediaLink"}
-                name={"mediaLink"}
+                id={"mediaLinkComment"}
+                name={"mediaLinkComment"}
                 style={{
                   display: "none",
                 }}
                 onChange={handleCommentChange}
               />
               <label
-                htmlFor="mediaLink"
+                htmlFor="mediaLinkComment"
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-                {fileSelected ? (
+                {commentfileSelected ? (
                   <Avatar
                     src={commentfileSelected}
                     sx={{

@@ -313,7 +313,7 @@ const Contacts = ({}) => {
           alignItems: "shrink",
           width: "100%",
           flexWrap: "no-wrap",
-          mt: "1.5rem",
+          mt: "1rem",
           p: "2rem",
           height: "100%",
           overflow: "hidden",

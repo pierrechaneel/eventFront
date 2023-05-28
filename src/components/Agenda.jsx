@@ -124,6 +124,8 @@ const Agenda = ({}) => {
 
   const screen870 = React.useContext(viewportsCtx)?.screen870;
 
+  const isMenuCollapsed = React.useContext(LangCtx)?.isMenuCollapsed;
+
   return (
     <Stack
       direction={"column"}
@@ -177,7 +179,7 @@ const Agenda = ({}) => {
             py: "1.5rem",
             px: screen870 ? ".7rem" : "1.5rem",
             minWidth: "150px",
-            width: "25%",
+            width: !isMenuCollapsed && screen870 ? "100%" : "25%",
             //bgcolor: theme.palette.grey[900],
             maxHeight: "100%",
             mx: "1rem",
@@ -263,6 +265,7 @@ const Agenda = ({}) => {
             borderRadius: "1.5rem",
             overflowY: "auto",
             border: `1px solid ${theme.palette.grey[900]}`,
+            display: !isMenuCollapsed && screen870 ? "none" : undefined,
           }}
         >
           {agenda[currentMenu]?.length > 0 ? (
