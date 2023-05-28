@@ -22,6 +22,7 @@ import configs from "../../configs/generals.json";
 import { LangCtx } from "../../context/lang";
 import { SocketCtx } from "../../context/socket";
 import SnackMessage from "./SnackMessage";
+import { viewportsCtx } from "../../context/viewports";
 
 const Contacts = ({}) => {
   const theme = useTheme();
@@ -79,6 +80,8 @@ const Contacts = ({}) => {
   React.useEffect(() => {
     (async () => {
       console.log("chat thread base value", chatSubject);
+
+      chats.current = {};
 
       await axios
         .get(
@@ -259,6 +262,8 @@ const Contacts = ({}) => {
   }, []);
 
   const lang = React.useContext(LangCtx).lang;
+
+  const screen870 = React.useContext(viewportsCtx)?.screen870;
 
   return (
     <Stack
@@ -500,11 +505,14 @@ const Contacts = ({}) => {
             border: `1px solid ${theme.palette.grey[900]}`,
             width: "73%",
             maxWidth: "70%",
+            overflowX: "auto",
           }}
         >
           <Stack
             sx={{
               width: "100%",
+              maxWidth: "100%",
+              overflowX: "auto",
               height: "100%",
               //  mb: "3rem",
             }}

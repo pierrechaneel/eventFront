@@ -103,7 +103,6 @@ const Qa = ({}) => {
               <Accordion
                 expanded={expanded === id}
                 sx={{
-                  // mb: ".5rem",
                   width: "100%",
                 }}
                 onChange={handleChange(id)}

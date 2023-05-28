@@ -681,6 +681,8 @@ const SocialWall = ({}) => {
                     size="small"
                     sx={{
                       mr: ".5rem",
+                      width: "30px",
+                      height: "30px",
                     }}
                   />
                   <Stack
@@ -1253,6 +1255,8 @@ const SocialWall = ({}) => {
                     size="small"
                     sx={{
                       mr: ".5rem",
+                      width: "30px",
+                      height: "30px",
                     }}
                   />
                   <Stack

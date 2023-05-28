@@ -20,6 +20,7 @@ import configs from "../../configs/generals.json";
 import { GuestCtx } from "../../context/guest";
 import { LangCtx } from "../../context/lang";
 import { EmojiPeople } from "@mui/icons-material";
+import { viewportsCtx } from "../../context/viewports";
 
 const Agenda = ({}) => {
   const theme = useTheme();
@@ -121,6 +122,8 @@ const Agenda = ({}) => {
     })();
   }, []);
 
+  const screen870 = React.useContext(viewportsCtx)?.screen870;
+
   return (
     <Stack
       direction={"column"}
@@ -157,9 +160,10 @@ const Agenda = ({}) => {
         sx={{
           alignItems: "flex-start",
           width: "100%",
-          flexWrap: "wrap",
+          flexWrap: "no-wrap",
           mt: "1rem",
-          p: "2rem",
+          py: "2rem",
+          px: screen ? "1rem" : "2rem",
           height: "100%",
           bgcolor: theme.palette.common.black,
           borderRadius: "1.5rem",
@@ -170,9 +174,10 @@ const Agenda = ({}) => {
           direction={"column"}
           sx={{
             alignItems: "center",
-            p: "1.5rem",
-            minWidth: "200px",
-            width: "max-content",
+            py: "1.5rem",
+            px: screen870 ? ".7rem" : "1.5rem",
+            minWidth: "150px",
+            width: "25%",
             //bgcolor: theme.palette.grey[900],
             maxHeight: "100%",
             mx: "1rem",
@@ -247,7 +252,8 @@ const Agenda = ({}) => {
           direction={"column"}
           sx={{
             flexGrow: 1,
-            p: "2rem",
+            py: "1.5rem",
+            px: screen870 ? ".7rem" : "1.5rem",
             // bgcolor: theme.palette.grey[900],
             mx: "1rem",
             height: "100%",

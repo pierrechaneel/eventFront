@@ -59,59 +59,71 @@ const QrCode = ({}) => {
           justifyContent: "flex-start",
           flexWrap: "wrap",
           py: "2rem",
-          px: "5vw",
+          px: "7vw",
           borderRadius: "1.5rem",
           bgcolor: theme.palette.common.black,
-          mt: "1.5rem",
+          mt: "1rem",
           flexGrow: 1,
-          height: "100%",
+          height: "max-content",
+          maxHeight: "100%",
           overflow: "hidden",
         }}
       >
         <Stack
-          direction={"column"}
+          direction={"row"}
           sx={{
-            p: screen870 ? "1rem" : "2rem",
-            m: screen870 ? "0.5rem" : "1rem",
-            width: "45%",
-            // bgcolor: theme.palette.grey[900],
-            pb: "4rem",
-            display: "flex",
-            flexDirection: "column",
-            boxShadow:
-              "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
-
-            alignItems: "center",
-            borderRadius: "1.5rem",
-            border: `1px solid ${theme.palette.grey[900]}`,
-            overflow: "hidden",
+            alignItems: "shrink",
+            justifyContent: "center",
+            width: "100%",
+            height: "max-content",
+            maxHeight: "100%",
+            overflowY: "auto",
           }}
         >
           <Stack
-            direction={"row"}
+            direction={"column"}
             sx={{
+              p: screen870 ? "1rem" : "2rem",
+              m: screen870 ? "0.5rem" : "1rem",
+              width: "45%",
+              // bgcolor: theme.palette.grey[900],
+              pb: "4rem",
+              display: "flex",
+              flexDirection: "column",
+              boxShadow:
+                "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
+
               alignItems: "center",
-              justifyContent: "center",
+              borderRadius: "1.5rem",
+              border: `1px solid ${theme.palette.grey[900]}`,
+              overflow: "hidden",
             }}
           >
-            <QrCodeIcon
+            <Stack
+              direction={"row"}
               sx={{
-                color: theme.palette.primary.main,
-                fontSize: "44px",
-                mb: "1rem",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <QrCodeIcon
+                sx={{
+                  color: theme.palette.primary.main,
+                  fontSize: "44px",
+                  mb: "1rem",
+                }}
+              />
+            </Stack>
+            <img
+              src={guest?.qrCodeLink}
+              alt="qrcode"
+              style={{
+                width: screen870 ? "100px" : "200px",
+                mx: "auto",
               }}
             />
-          </Stack>
-          <img
-            src={guest?.qrCodeLink}
-            alt="qrcode"
-            style={{
-              width: screen870 ? "100px" : "200px",
-              mx: "auto",
-            }}
-          />
 
-          {/**<Typography
+            {/**<Typography
             sx={{
               color: theme.palette.common.white,
               fontWeight: theme.t(ypography.fontWeightMedium,
@@ -124,126 +136,130 @@ const QrCode = ({}) => {
               ? "Prière de présenter ce code aux hotesses"
               : "Please present this code to our hostesses"}
           </Typography> */}
-        </Stack>
-        <Stack
-          direction={"column"}
-          sx={{
-            p: screen870 ? "1rem" : "2rem",
-            m: screen870 ? "0.5rem" : "1rem",
-            width: "45%",
-            //  bgcolor: theme.palette.grey[900],
-            pb: "4rem",
-            boxShadow:
-              "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
-
-            borderRadius: "1.5rem",
-            overflow: "hidden",
-            border: `1px solid ${theme.palette.grey[900]}`,
-            maxHeight: "100%",
-          }}
-        >
+          </Stack>
           <Stack
-            direction={"row"}
+            direction={"column"}
             sx={{
-              alignItems: "center",
-              justifyContent: "center",
+              p: screen870 ? "1rem" : "2rem",
+              m: screen870 ? "0.5rem" : "1rem",
+              width: "45%",
+              //  bgcolor: theme.palette.grey[900],
+              pb: "4rem",
+              boxShadow:
+                "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
+
+              borderRadius: "1.5rem",
+              overflow: "hidden",
+              border: `1px solid ${theme.palette.grey[900]}`,
+              maxHeight: "100%",
             }}
           >
-            <Home
+            <Stack
+              direction={"row"}
               sx={{
-                color: theme.palette.primary.main,
-                fontSize: "44px",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Home
+                sx={{
+                  color: theme.palette.primary.main,
+                  fontSize: "44px",
+                  mb: "1rem",
+                }}
+              />
+            </Stack>
+            <Stack
+              direction={"row"}
+              sx={{
+                alignItems: "center",
+                width: "100%",
+                mb: screen870 ? ".5rem" : "1.5rem",
+                justifyContent: "center",
+              }}
+            >
+              <FormatQuote
+                sx={{
+                  color: theme.palette.common.white,
+                  fontSize: screen870 ? "14px" : "18px",
+                }}
+              />
+              <Typography
+                sx={{
+                  color: theme.palette.common.white,
+                  fontSize: screen870 ? "18px" : "22px",
+                  fontWeight: theme.typography.fontWeightBlack,
+                  textAlign: "center",
+                  maxWidth: "100%",
+                  mx: screen870 ? ".3rem" : ".7rem",
+                  p: 0,
+                  mt: "1rem",
+                  whiteSpace: "no-wrap",
+                }}
+              >
+                {guest?.event?.subject}
+              </Typography>
+              <FormatQuote
+                sx={{
+                  color: theme.palette.common.white,
+                  fontSize: "18px",
+                }}
+              />
+            </Stack>
+            <Stack
+              direction={"row"}
+              sx={{
+                alignItems: "center",
+                justifyContent: "center",
                 mb: "1rem",
               }}
-            />
-          </Stack>
-          <Stack
-            direction={"row"}
-            sx={{
-              alignItems: "center",
-              width: "100%",
-              mb: "1.5rem",
-              justifyContent: "center",
-            }}
-          >
-            <FormatQuote
+            >
+              <LocationOn
+                sx={{
+                  color: theme.palette.common.white,
+                  fontSize: screen870 ? "16px" : "24px",
+                  mr: screen870 ? ".3rem" : "1rem",
+                }}
+              />
+              <Typography
+                sx={{
+                  color: theme.palette.grey[700],
+                  fontWeight: theme.typography.fontWeightRegular,
+                  fontSize: screen870 ? "12px" : "14px",
+                  color: theme.palette.common.white,
+                }}
+              >
+                {guest?.event?.place}
+              </Typography>
+            </Stack>
+            <Stack
+              direction={"row"}
               sx={{
-                color: theme.palette.common.white,
-                fontSize: "18px",
-              }}
-            />
-            <Typography
-              sx={{
-                color: theme.palette.common.white,
-                fontSize: screen870 ? "18px" : "22px",
-                fontWeight: theme.typography.fontWeightBlack,
-                textAlign: "center",
-                maxWidth: "70%",
-                mx: ".7rem",
-                p: 0,
-                mt: "1rem",
+                alignItems: "center",
+                justifyContent: "center",
+                mb: "1rem",
               }}
             >
-              {guest?.event?.subject}
-            </Typography>
-            <FormatQuote
-              sx={{
-                color: theme.palette.common.white,
-                fontSize: "24px",
-              }}
-            />
-          </Stack>
-          <Stack
-            direction={"row"}
-            sx={{
-              alignItems: "center",
-              justifyContent: "center",
-              mb: "1rem",
-            }}
-          >
-            <LocationOn
-              sx={{
-                color: theme.palette.common.white,
-                fontSize: "24px",
-                mr: "1rem",
-              }}
-            />
-            <Typography
-              sx={{
-                color: theme.palette.grey[700],
-                fontWeight: theme.typography.fontWeightRegular,
-                fontSize: "14px",
-                color: theme.palette.common.white,
-              }}
-            >
-              {guest?.event?.place}
-            </Typography>
-          </Stack>
-          <Stack
-            direction={"row"}
-            sx={{
-              alignItems: "flex-start",
-              justifyContent: "center",
-              mb: "1rem",
-            }}
-          >
-            <AccessTime
-              sx={{
-                color: theme.palette.common.white,
-                fontSize: "24px",
-                mr: "1rem",
-              }}
-            />
-            <Typography
-              sx={{
-                color: theme.palette.grey[200],
-                fontWeight: theme.typography.fontWeightRegular,
-                fontSize: "14px",
-              }}
-            >
-              {new Date(guest?.event?.date).toLocaleDateString()} -{" "}
-              {new Date(guest?.event?.endDate).toLocaleDateString()}
-            </Typography>
+              <AccessTime
+                sx={{
+                  color: theme.palette.common.white,
+                  fontSize: screen870 ? "16px" : "24px",
+                  mr: screen870 ? ".3rem" : "1rem",
+                }}
+              />
+              <Typography
+                sx={{
+                  color: theme.palette.grey[200],
+                  fontWeight: theme.typography.fontWeightRegular,
+                  fontSize: screen870 ? "12px" : "14px",
+                  whiteSpace: "no-wrap",
+                  textAlign: "center",
+                }}
+              >
+                {new Date(guest?.event?.date).toLocaleDateString()} -{" "}
+                {new Date(guest?.event?.endDate).toLocaleDateString()}
+              </Typography>
+            </Stack>
           </Stack>
         </Stack>
       </Stack>

@@ -144,7 +144,8 @@ const Welcome = ({}) => {
                   direction={"column"}
                   key={id}
                   sx={{
-                    p: "2rem",
+                    px: "2rem",
+                    py: "1rem",
                     border: `2px solid ${theme.palette.primary.main}`,
                     alignItems: "center",
                     minWidth: "150px",
@@ -155,7 +156,7 @@ const Welcome = ({}) => {
                       borderColor: theme.palette.common.black,
                       "& p": {
                         color: theme.palette.primary.main,
-                        fontWeight: theme.typography.fontWeightMedium,
+                        //  fontWeight: theme.typography.fontWeightMedium,
                       },
                     },
                     m: "1vw",
@@ -164,15 +165,15 @@ const Welcome = ({}) => {
                   {target?.icon({
                     sx: {
                       color: theme.palette.primary.main,
-                      fontSize: "42px",
-                      mb: "1rem",
+                      fontSize: "24px",
+                      mb: ".2rem",
                     },
                   })}
                   <Typography
                     sx={{
                       color: theme.palette.common.white,
-                      fontWeight: theme.typography.fontWeightLight,
-                      fontSize: "16px",
+                      fontWeight: theme.typography.fontWeightThin,
+                      fontSize: "14px",
                       textAlign: "center",
                     }}
                   >
@@ -187,7 +188,7 @@ const Welcome = ({}) => {
               color: theme.palette.grey[500],
               fontWeight: theme.typography.fontWeightLight,
               textAlign: "center",
-              fontSize: "14px",
+              fontSize: "10px",
               maxWidth: "100%",
               my: "1rem",
             }}
