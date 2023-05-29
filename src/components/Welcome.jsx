@@ -68,6 +68,7 @@ const Welcome = ({}) => {
             maxHeight: "100vh",
             minHeight: "100vh",
             overflowY: "auto",
+            px: "2rem",
           }}
         >
           <Typography

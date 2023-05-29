@@ -19,6 +19,7 @@ const QrCode = ({}) => {
   const lang = React.useContext(LangCtx).lang;
 
   const screen870 = React.useContext(viewportsCtx)?.screen870;
+  const screen660 = React.useContext(viewportsCtx)?.screen660;
 
   return (
     <Stack
@@ -33,8 +34,8 @@ const QrCode = ({}) => {
         sx={{
           alignItems: "flex-end",
           px: "2rem",
-          pb: "1rem",
-          pt: "2rem",
+          pb: screen660 ? ".5rem" : "1rem",
+          pt: screen660 ? "1rem" : "2rem",
           bgcolor: theme.palette.common.black,
           width: "100%",
           borderRadius: "1.5rem",
@@ -43,7 +44,7 @@ const QrCode = ({}) => {
         <Typography
           sx={{
             color: theme.palette.common.white,
-            fontSize: "16px",
+            fontSize: screen660 ? "14px" : "16px",
             fontWeight: theme.typography.fontWeightThin,
             textTransform: "uppercase",
           }}
@@ -78,6 +79,7 @@ const QrCode = ({}) => {
             height: "max-content",
             maxHeight: "100%",
             overflowY: "auto",
+            flexWrap: screen660 ? "wrap" : "no-wrap",
           }}
         >
           <Stack
@@ -85,7 +87,7 @@ const QrCode = ({}) => {
             sx={{
               p: screen870 ? "1rem" : "2rem",
               m: screen870 ? "0.5rem" : "1rem",
-              width: "45%",
+              width: screen660 ? "95%" : "45%",
               // bgcolor: theme.palette.grey[900],
               pb: "4rem",
               display: "flex",
@@ -109,7 +111,7 @@ const QrCode = ({}) => {
               <QrCodeIcon
                 sx={{
                   color: theme.palette.primary.main,
-                  fontSize: "44px",
+                  fontSize: screen870 ? "24px" : "44px",
                   mb: "1rem",
                 }}
               />
@@ -142,7 +144,7 @@ const QrCode = ({}) => {
             sx={{
               p: screen870 ? "1rem" : "2rem",
               m: screen870 ? "0.5rem" : "1rem",
-              width: "45%",
+              width: screen660 ? "95%" : "45%",
               //  bgcolor: theme.palette.grey[900],
               pb: "4rem",
               boxShadow:
@@ -164,7 +166,7 @@ const QrCode = ({}) => {
               <Home
                 sx={{
                   color: theme.palette.primary.main,
-                  fontSize: "44px",
+                  fontSize: screen870 ? "24px" : "44px",
                   mb: "1rem",
                 }}
               />

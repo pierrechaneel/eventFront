@@ -21,6 +21,7 @@ import { useRouter } from "next/router";
 import packageCfg from "../../package.json";
 import SnackMessage from "./SnackMessage";
 import axios from "axios";
+import { viewportsCtx } from "../../context/viewports";
 
 const OTP = ({}) => {
   const theme = useTheme();
@@ -133,6 +134,8 @@ const OTP = ({}) => {
       });
   };
 
+  const screen870 = React.useContext(viewportsCtx)?.screen870;
+
   return (
     <Box
       sx={{
@@ -180,11 +183,12 @@ const OTP = ({}) => {
           <Typography
             component={"h2"}
             sx={{
-              fontSize: "24px",
+              fontSize: screen870 ? "18px" : "24px",
               fontWeight: theme.typography.fontWeightThin,
               textAlign: "center",
               color: theme.palette.primary.main,
               m: 0,
+              textAlign: "center",
             }}
           >
             LET'S CONNECT
@@ -193,7 +197,7 @@ const OTP = ({}) => {
             component={"h1"}
             sx={{
               color: theme.palette.common.white,
-              fontSize: "50px",
+              fontSize: screen870 ? "26px" : "50px",
               fontWeight: theme.typography.fontWeightBlack,
               m: 0,
               textAlign: "center",
@@ -213,13 +217,14 @@ const OTP = ({}) => {
                 bgcolor: theme.palette.grey[500],
                 mr: "2rem",
                 width: "5vw",
+                minWidth: "50px",
               }}
             ></Box>
             <Typography
               component={"h3"}
               sx={{
                 color: theme.palette.grey[500],
-                fontSize: "16px",
+                fontSize: screen870 ? "14px" : "16px",
                 fopntWeight: theme.typography.fontWeightLight,
                 m: 0,
                 textAlign: "center",
@@ -234,6 +239,7 @@ const OTP = ({}) => {
                 bgcolor: theme.palette.grey[500],
                 ml: "2rem",
                 width: "5vw",
+                minWidth: "50px",
               }}
             ></Box>
           </Stack>

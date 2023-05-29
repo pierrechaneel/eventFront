@@ -28,6 +28,7 @@ import PostAdd from "@mui/icons-material/PostAdd";
 import { SocketCtx } from "../../context/socket";
 import SnackMessage from "./SnackMessage";
 import { viewportsCtx } from "../../context/viewports";
+import BottomSwippeable from "./BottomSwippeable";
 
 const AppLayout = ({ children }) => {
   const theme = useTheme();
@@ -35,6 +36,7 @@ const AppLayout = ({ children }) => {
   const router = useRouter();
 
   const screen870 = React.useContext(viewportsCtx)?.screen870;
+  const screen660 = React.useContext(viewportsCtx)?.screen660;
 
   React.useEffect(() => {
     window.addEventListener("beforeunload", function (e) {
@@ -97,8 +99,6 @@ const AppLayout = ({ children }) => {
       router.push("/");
     }
   }, []);
-
-  const screen660 = React.useContext(viewportsCtx).screen660;
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -176,6 +176,7 @@ const AppLayout = ({ children }) => {
           bottom: 0,
           width: isMenuCollapsed ? "calc(50px + 1.5rem)" : "250px",
           left: 0,
+          display: screen660 ? "none" : undefined,
         }}
       >
         <Stack
@@ -292,14 +293,18 @@ const AppLayout = ({ children }) => {
       <Stack
         direction={"column"}
         sx={{
-          ml: isMenuCollapsed ? "calc(50px + 1.5rem)" : "250px",
+          ml: screen660
+            ? "1.5rem"
+            : isMenuCollapsed
+            ? "calc(50px + 1.5rem)"
+            : "250px",
           bgcolor: theme.palette.grey[0],
           width: "100%",
           maxWidth: "100%",
           overflowX: "hidden",
           height: "100vh",
           maxHeight: "100vh",
-          pt: "calc(50px + 2.5rem)",
+          pt: screen660 ? "calc(50px + 1.5rem)" : "calc(50px + 2.5rem)",
           pr: "1.5rem",
         }}
       >
@@ -310,7 +315,11 @@ const AppLayout = ({ children }) => {
             position: "fixed",
             top: 0,
             right: 0,
-            left: isMenuCollapsed ? "calc(50px + 1.5rem)" : "250px",
+            left: screen660
+              ? "0rem"
+              : isMenuCollapsed
+              ? "calc(50px + 1.5rem)"
+              : "250px",
           }}
         >
           <Stack
@@ -323,11 +332,11 @@ const AppLayout = ({ children }) => {
               bgcolor: theme.palette.common.black,
               px: "1rem",
               boxShadow: theme.shadows[1],
-              borderRadius: "1.5rem",
+              borderRadius: screen660 ? "0px 0px 1.5rem 1.5rem" : "1.5rem",
               justifyContent: "space-between",
               alignItems: "center",
-              mt: "1.5rem",
-              mr: "1.5rem",
+              mt: screen660 ? "0rem" : "1.5rem",
+              mr: screen660 ? "0rem" : "1.5rem",
             }}
           >
             <Stack
@@ -416,7 +425,7 @@ const AppLayout = ({ children }) => {
             height: "calc(100vh - 80px)",
             maxHeight: "calc(100vh - 80px)",
             mr: "1.5rem",
-            mb: "1.5rem",
+            mb: screen660 ? "90px" : "1.5rem",
             //borderRadius: "1.5rem",
             // p: "2rem",
             overflow: "hidden",
@@ -444,6 +453,22 @@ const AppLayout = ({ children }) => {
           )}
         </Box>
       </Stack>
+      {screen660 ? (
+        <Box
+          sx={{
+            position: "fixed",
+            right: 0,
+            left: 0,
+            bottom: 0,
+            bgcolor: theme.palette.common.black,
+            zIndex: 1500,
+          }}
+        >
+          <BottomSwippeable apps={apps} />
+        </Box>
+      ) : (
+        ""
+      )}
     </Stack>
   );
 };
