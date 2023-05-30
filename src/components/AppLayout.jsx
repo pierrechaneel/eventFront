@@ -39,12 +39,12 @@ const AppLayout = ({ children }) => {
   const screen870 = React.useContext(viewportsCtx)?.screen870;
   const screen660 = React.useContext(viewportsCtx)?.screen660;
 
-  React.useEffect(() => {
+  /** React.useEffect(() => {
     window.addEventListener("beforeunload", function (e) {
       e.preventDefault();
       e.returnValue = "";
     });
-  }, []);
+  }, []); */
 
   const apps = [
     {
