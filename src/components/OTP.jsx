@@ -71,6 +71,11 @@ const OTP = ({}) => {
               setSnackMessage("Veuillez entrer le code réçu");
               setSeverity("info");
               setIsnackVisible(true);
+
+              window.sessionStorage.setItem(
+                "guest",
+                JSON.stringify(guestDatum)
+              );
             })
             .catch((error) => {
               console.log("an error has occured when sending OTP code", error);

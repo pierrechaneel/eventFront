@@ -24,6 +24,20 @@ const GuestContext = ({ children }) => {
   const [isSnackVisible, setIsnackVisible] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
 
+  React.useEffect(() => {
+    let guestObj = JSON.parse(window.sessionStorage.getItem("guest"));
+
+    console.log("guest oibject def received", guestObj);
+
+    if (guestObj) {
+      setLoggedIn(true);
+
+      setGuest(guestObj);
+
+      console.log("updated guest loggin in status");
+    }
+  }, []);
+
   return (
     <GuestCtx.Provider
       value={{

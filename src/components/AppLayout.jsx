@@ -29,6 +29,7 @@ import { SocketCtx } from "../../context/socket";
 import SnackMessage from "./SnackMessage";
 import { viewportsCtx } from "../../context/viewports";
 import BottomSwippeable from "./BottomSwippeable";
+import { Logout } from "@mui/icons-material";
 
 const AppLayout = ({ children }) => {
   const theme = useTheme();
@@ -84,7 +85,9 @@ const AppLayout = ({ children }) => {
   ];
 
   const loggedIn = React.useContext(GuestCtx)?.loggedIn;
+  const setLoggedIn = React.useContext(GuestCtx)?.setLoggedIn;
   const guest = React.useContext(GuestCtx)?.guest;
+  const setGuest = React.useContext(GuestCtx)?.setGuest;
   const subsSocket = React.useContext(SocketCtx).subsSocket;
   const isConnected = React.useContext(SocketCtx).isConnected;
   const setIsConnected = React.useContext(SocketCtx).setIsConnected;
@@ -96,7 +99,23 @@ const AppLayout = ({ children }) => {
 
   React.useEffect(() => {
     if (!loggedIn) {
-      router.push("/");
+      console.log("guest is not logged in");
+
+      let guestObj = JSON.parse(window.sessionStorage.getItem("guest"));
+
+      // console.log("guest oibject def received", guestObj);
+
+      if (guestObj) {
+        setLoggedIn(true);
+
+        setGuest(guestObj);
+
+        console.log("updated guest loggin in status");
+      } else {
+        router.push("/");
+
+        console.log("No user data set, loggin out");
+      }
     }
   }, []);
 
@@ -106,6 +125,14 @@ const AppLayout = ({ children }) => {
     }
 
     setIsnackVisible(false);
+  };
+
+  const handleLogout = (event) => {
+    event?.preventDefault();
+
+    window.sessionStorage.clear();
+
+    router.push("/");
   };
 
   const [snackMessage, setSnackMessage] = React.useState("");
@@ -188,6 +215,7 @@ const AppLayout = ({ children }) => {
             height: "100%",
             p: "1.5rem",
             borderRadius: "1.5rem",
+            position: "relative",
           }}
         >
           <Stack
@@ -287,6 +315,52 @@ const AppLayout = ({ children }) => {
                 </Stack>
               );
             })}
+          </Stack>
+          <Stack
+            onClick={handleLogout}
+            direction={"row"}
+            sx={{
+              alignItems: "center",
+              width: "max-content",
+              position: "absolute",
+              right: 0,
+              left: 0,
+              bottom: "1.5rem",
+              justifyContent: "center",
+              mx: "auto",
+              bgcolor: "#FFFFFF10",
+              py: ".2rem",
+              px: ".7rem",
+              borderRadius: "1.5rem",
+              overflow: "hidden",
+              cursor: "pointer",
+              "&:hover": {
+                "& *": {
+                  transition: `all .3s`,
+                  color: theme.palette.grey[300],
+                },
+              },
+            }}
+          >
+            <Logout
+              sx={{
+                color: theme.palette.grey[500],
+                fontSize: "18px",
+              }}
+            />
+            {isMenuCollapsed ? (
+              ""
+            ) : (
+              <Typography
+                sx={{
+                  color: theme.palette.grey[500],
+                  fontSize: "13px",
+                  ml: ".3rem",
+                }}
+              >
+                Déconnnexion
+              </Typography>
+            )}
           </Stack>
         </Stack>
       </Stack>

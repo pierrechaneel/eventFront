@@ -89,6 +89,11 @@ const Profile = ({ setSecondaryMenu }) => {
 
                 setGuest(guestDatum);
 
+                window.sessionStorage.setItem(
+                  "guest",
+                  JSON.stringify(guestDatum)
+                );
+
                 setISEditProfileVisible(false);
 
                 setSnackMessage("Votre profil a été mis à jour");
