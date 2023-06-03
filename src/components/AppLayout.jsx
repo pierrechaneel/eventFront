@@ -30,6 +30,7 @@ import SnackMessage from "./SnackMessage";
 import { viewportsCtx } from "../../context/viewports";
 import BottomSwippeable from "./BottomSwippeable";
 import { Logout } from "@mui/icons-material";
+import MenuItems from "./MenuItems";
 
 const AppLayout = ({ children }) => {
   const theme = useTheme();
@@ -46,43 +47,7 @@ const AppLayout = ({ children }) => {
     });
   }, []); */
 
-  const apps = [
-    {
-      title: "Profile",
-      link: `/guests/${router?.query?.guest}/profile`,
-      icon: (props) => <Person {...props} />,
-    },
-    {
-      title: "QR Code",
-      link: `/guests/${router?.query?.guest}/qrcode`,
-      icon: (props) => <QrCode {...props} />,
-    },
-    {
-      title: "Agenda",
-      link: `/guests/${router?.query?.guest}/agenda`,
-      icon: (props) => <ViewAgenda {...props} />,
-    },
-    {
-      title: "Contacts",
-      link: `/guests/${router?.query?.guest}/contacts`,
-      icon: (props) => <People {...props} />,
-    },
-    {
-      title: "Informations",
-      link: `/guests/${router?.query?.guest}/infos`,
-      icon: (props) => <Info {...props} />,
-    },
-    {
-      title: "Live",
-      link: `/guests/${router?.query?.guest}/meeting`,
-      icon: (props) => <LiveTv {...props} />,
-    },
-    {
-      title: "Networking",
-      link: `/guests/${router?.query?.guest}/social-wall`,
-      icon: (props) => <PostAdd {...props} />,
-    },
-  ];
+  const apps = React.useContext(viewportsCtx)?.apps;
 
   const loggedIn = React.useContext(GuestCtx)?.loggedIn;
   const setLoggedIn = React.useContext(GuestCtx)?.setLoggedIn;
@@ -92,8 +57,15 @@ const AppLayout = ({ children }) => {
   const isConnected = React.useContext(SocketCtx).isConnected;
   const setIsConnected = React.useContext(SocketCtx).setIsConnected;
 
-  const isMenuCollapsed = React.useContext(LangCtx)?.isMenuCollapsed;
-  const setIsMenuCollapsed = React.useContext(LangCtx)?.setIsMenuCollapsed;
+  const isMenuCollapsed = React.useContext(viewportsCtx)?.isMenuCollapsed;
+  const setIsMenuCollapsed = React.useContext(viewportsCtx)?.setIsMenuCollapsed;
+  const setIsSwippeableVisible =
+    React?.useContext(viewportsCtx)?.setIsSwippeableVisible;
+  const isSwippeableVisible =
+    React.useContext(viewportsCtx)?.isSwippeableVisible;
+
+  const setDefaultSwippeableContent =
+    React.useContext(viewportsCtx)?.setDefaultSwippeableContent;
 
   console.log("log in guest status", { loggedIn });
 
@@ -103,7 +75,7 @@ const AppLayout = ({ children }) => {
 
       let guestObj = JSON.parse(window.sessionStorage.getItem("guest"));
 
-      // console.log("guest oibject def received", guestObj);
+      console.log("guest oibject def received", guestObj);
 
       if (guestObj) {
         setLoggedIn(true);
@@ -111,6 +83,60 @@ const AppLayout = ({ children }) => {
         setGuest(guestObj);
 
         console.log("updated guest loggin in status");
+
+        if (!isConnected) {
+          subsSocket.auth = {
+            guest: {
+              fullName: guestObj?.fullName,
+              accessKey: guestObj?.accessKey,
+              profile: guestObj?.profile,
+              eventId: guestObj?.event?.id,
+              eventSubject: guestObj?.event?.subject,
+            },
+          };
+
+          console.log(
+            "auth params we are sending to the io server for realtime communications",
+            {
+              guest: {
+                fullName: guestObj?.fullName,
+                accessKey: guestObj?.accessKey,
+                profile: guestObj?.profile,
+                eventId: guestObj?.event?.id,
+                eventSubject: guestObj?.event?.subject,
+              },
+            }
+          );
+
+          subsSocket.connect();
+
+          console.log("connected the server socket io successfully");
+
+          setIsConnected(true);
+        }
+
+        subsSocket.on("connect_error", function () {
+          console.log("Connection failed, please retry later");
+
+          setIsConnected(false);
+
+          setSnackMessage("Vous êtes hors connexion");
+          setSeverity("warning");
+          setIsnackVisible(true);
+        });
+
+        subsSocket.on("HELD_MESSAGES", (payload) => {
+          console.log("current help messages from socket", payload);
+        });
+
+        console.log("current connection status", { isConnected, subsSocket });
+
+        return () => {
+          console.log("cleaning up handlers");
+
+          subsSocket.off("connect_error");
+          subsSocket.off("HELD_MESSAGES");
+        };
       } else {
         router.push("/");
 
@@ -138,40 +164,6 @@ const AppLayout = ({ children }) => {
   const [snackMessage, setSnackMessage] = React.useState("");
   const [isSnackVisible, setIsnackVisible] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
-
-  React.useEffect(() => {
-    if (!isConnected) {
-      subsSocket.auth = {
-        guest: {
-          fullName: guest?.fullName,
-          accessKey: guest?.accessKey,
-          profile: guest?.profile,
-          eventId: guest?.event?.id,
-          eventSubject: guest?.event?.subject,
-        },
-      };
-
-      subsSocket.connect();
-
-      setIsConnected(true);
-    }
-
-    subsSocket.on("connect_error", function () {
-      console.log("Connection failed, please retry later");
-
-      setIsConnected(false);
-
-      setSnackMessage("Vous êtes hors connexion");
-      setSeverity("warning");
-      setIsnackVisible(true);
-    });
-
-    subsSocket.on("HELD_MESSAGES", (payload) => {
-      console.log("current help messages from socket", payload);
-    });
-
-    console.log("current connection status", { isConnected, subsSocket });
-  }, []);
 
   return (
     <Stack
@@ -405,7 +397,6 @@ const AppLayout = ({ children }) => {
               justifyContent: "space-between",
               bgcolor: theme.palette.common.black,
               px: "1rem",
-              boxShadow: theme.shadows[1],
               borderRadius: screen660 ? "0px 0px 1.5rem 1.5rem" : "1.5rem",
               justifyContent: "space-between",
               alignItems: "center",
@@ -424,7 +415,13 @@ const AppLayout = ({ children }) => {
               <IconButton
                 onClick={(event) => {
                   event?.preventDefault();
-                  setIsMenuCollapsed(!isMenuCollapsed);
+
+                  if (screen660) {
+                    setDefaultSwippeableContent(<MenuItems apps={apps} />);
+                    setIsSwippeableVisible(true);
+                  } else {
+                    setIsMenuCollapsed(!isMenuCollapsed);
+                  }
                 }}
                 sx={{
                   mr: ".3rem",
@@ -499,7 +496,7 @@ const AppLayout = ({ children }) => {
             height: "calc(100vh - 80px)",
             maxHeight: "calc(100vh - 80px)",
             mr: "1.5rem",
-            mb: screen660 ? "90px" : "1.5rem",
+            mb: screen660 ? "2rem" : "1.5rem",
             //borderRadius: "1.5rem",
             // p: "2rem",
             overflow: "hidden",
@@ -527,22 +524,6 @@ const AppLayout = ({ children }) => {
           )}
         </Box>
       </Stack>
-      {screen660 ? (
-        <Box
-          sx={{
-            position: "fixed",
-            right: 0,
-            left: 0,
-            bottom: 0,
-            bgcolor: theme.palette.common.black,
-            zIndex: 1500,
-          }}
-        >
-          <BottomSwippeable apps={apps} />
-        </Box>
-      ) : (
-        ""
-      )}
     </Stack>
   );
 };

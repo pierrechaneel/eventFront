@@ -10,6 +10,7 @@ import FormatQuote from "@mui/icons-material/FormatQuote";
 import { GuestCtx } from "../../context/guest";
 import { LangCtx } from "../../context/lang";
 import { viewportsCtx } from "../../context/viewports";
+import axios from "axios";
 
 const QrCode = ({}) => {
   const theme = useTheme();
@@ -21,6 +22,8 @@ const QrCode = ({}) => {
   const screen870 = React.useContext(viewportsCtx)?.screen870;
   const screen660 = React.useContext(viewportsCtx)?.screen660;
 
+  const [enEventName, setEnEventName] = React.useState("");
+
   return (
     <Stack
       direction={"column"}
@@ -29,30 +32,6 @@ const QrCode = ({}) => {
         height: "100%",
       }}
     >
-      <Stack
-        direction={"row"}
-        sx={{
-          alignItems: "flex-end",
-          px: "2rem",
-          pb: screen660 ? ".5rem" : "1rem",
-          pt: screen660 ? "1rem" : "2rem",
-          bgcolor: theme.palette.common.black,
-          width: "100%",
-          borderRadius: "1.5rem",
-        }}
-      >
-        <Typography
-          sx={{
-            color: theme.palette.common.white,
-            fontSize: screen660 ? "14px" : "16px",
-            fontWeight: theme.typography.fontWeightThin,
-            textTransform: "uppercase",
-          }}
-        >
-          {lang === "fr" ? "Bienvenue encore !" : "Welcome again !"}
-        </Typography>
-      </Stack>
-
       <Stack
         direction={"row"}
         sx={{
@@ -220,15 +199,16 @@ const QrCode = ({}) => {
                 sx={{
                   color: theme.palette.common.white,
                   fontSize: screen870 ? "16px" : "24px",
-                  mr: screen870 ? ".3rem" : "1rem",
+                  mr: screen870 ? ".2rem" : ".5rem",
                 }}
               />
               <Typography
                 sx={{
                   color: theme.palette.grey[700],
                   fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: screen870 ? "12px" : "14px",
+                  mr: screen870 ? ".2rem" : ".5rem",
                   color: theme.palette.common.white,
+                  fontSize: screen870 ? "10px" : "12px",
                 }}
               >
                 {guest?.event?.place}
@@ -246,20 +226,62 @@ const QrCode = ({}) => {
                 sx={{
                   color: theme.palette.common.white,
                   fontSize: screen870 ? "16px" : "24px",
-                  mr: screen870 ? ".3rem" : "1rem",
+                  mr: screen870 ? ".2rem" : ".5rem",
                 }}
               />
               <Typography
                 sx={{
                   color: theme.palette.grey[200],
                   fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: screen870 ? "12px" : "14px",
+                  fontSize: screen870 ? "10px" : "12px",
                   whiteSpace: "no-wrap",
                   textAlign: "center",
                 }}
               >
-                {new Date(guest?.event?.date).toLocaleDateString()} -{" "}
-                {new Date(guest?.event?.endDate).toLocaleDateString()}
+                <Typography
+                  component={"span"}
+                  sx={{
+                    textTransform: "capitalize",
+
+                    color: theme.palette.grey[200],
+                    fontWeight: theme.typography.fontWeightRegular,
+                    fontSize: screen870 ? "10px" : "12px",
+                    whiteSpace: "no-wrap",
+                    textAlign: "center",
+                  }}
+                >
+                  {new Date(guest?.event?.date).toLocaleDateString(
+                    `${lang}-${lang?.toUpperCase()}`,
+                    {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  )}
+                </Typography>{" "}
+                -{" "}
+                <Typography
+                  component={"span"}
+                  sx={{
+                    textTransform: "capitalize",
+                    color: theme.palette.grey[200],
+                    fontWeight: theme.typography.fontWeightRegular,
+                    fontSize: screen870 ? "10px" : "12px",
+                    whiteSpace: "no-wrap",
+                    textAlign: "center",
+                  }}
+                >
+                  {new Date(guest?.event?.endDate).toLocaleDateString(
+                    `${lang}-${lang?.toUpperCase()}`,
+                    {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  )}
+                </Typography>
               </Typography>
             </Stack>
           </Stack>

@@ -21,15 +21,20 @@ import Person from "@mui/icons-material/Person";
 import QrCode from "@mui/icons-material/QrCode";
 import QuestionAnswer from "@mui/icons-material/QuestionAnswer";
 import People from "@mui/icons-material/People";
+import { LangCtx } from "../../context/lang";
 
 const Plugins = ({ collapsedPlugin, setCollapsedPlugin, handleEditSelf }) => {
   const theme = useTheme();
 
   const router = useRouter();
 
+  const lang = React.useContext(LangCtx)?.lang;
+
+  console.log("current language", { lang });
+
   const pluginsMaterials = [
     {
-      title: "Profile",
+      title: lang === "fr" ? "Profil" : "Profile",
       link: `/guests/${router?.query?.guest}/profile`,
       icon: (props) => <Person {...props} />,
     },

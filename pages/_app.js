@@ -11,6 +11,8 @@ import GuestContext from "../context/guest";
 import LangContext from "../context/lang";
 import Head from "next/head";
 import ViewportsContext from "../context/viewports";
+import PostContext from "../context/posts";
+import ContactsContext from "../context/contacts";
 
 const TheApp = ({ Component, pageProps }) => {
   return (
@@ -22,18 +24,22 @@ const TheApp = ({ Component, pageProps }) => {
         />
       </Head>
       <ThemeContext>
-        <ViewportsContext>
-          <SocketContext>
-            <LangContext>
-              <GuestContext>
-                <LocalizationProvider dateAdapter={AdapterMoment}>
-                  <CssBaseline />
-                  <Component {...pageProps} />
-                </LocalizationProvider>
-              </GuestContext>
-            </LangContext>
-          </SocketContext>
-        </ViewportsContext>
+        <SocketContext>
+          <LangContext>
+            <GuestContext>
+              <PostContext>
+                <ContactsContext>
+                  <LocalizationProvider dateAdapter={AdapterMoment}>
+                    <CssBaseline />
+                    <ViewportsContext>
+                      <Component {...pageProps} />
+                    </ViewportsContext>
+                  </LocalizationProvider>
+                </ContactsContext>
+              </PostContext>
+            </GuestContext>
+          </LangContext>
+        </SocketContext>
       </ThemeContext>
     </>
   );

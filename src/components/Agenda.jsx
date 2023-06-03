@@ -70,7 +70,6 @@ const Agenda = ({}) => {
                   {
                     weekday: "long",
                     year: "numeric",
-                    month: "long",
                     day: "numeric",
                   }
                 )
@@ -81,7 +80,6 @@ const Agenda = ({}) => {
                   `${lang}-${lang?.toUpperCase()}`,
                   {
                     weekday: "long",
-                    year: "numeric",
                     month: "long",
                     day: "numeric",
                   }
@@ -123,8 +121,101 @@ const Agenda = ({}) => {
   }, []);
 
   const screen870 = React.useContext(viewportsCtx)?.screen870;
+  const screen660 = React.useContext(viewportsCtx)?.screen660;
 
-  const isMenuCollapsed = React.useContext(LangCtx)?.isMenuCollapsed;
+  const isMenuCollapsed = React.useContext(viewportsCtx)?.isMenuCollapsed;
+
+  const AgendaGroups = () => {
+    return (
+      <Stack
+        direction={"column"}
+        sx={{
+          alignItems: "center",
+          py: "1.5rem",
+          px: screen870 ? ".7rem" : "1.5rem",
+          minWidth: "150px",
+          width: screen660 ? "90%" : "25%",
+          //bgcolor: theme.palette.grey[900],
+          maxHeight: screen660 ? "90%" : "100%",
+          mx: screen660 ? "auto" : "1rem",
+          minHeight: "200px",
+          boxShadow:
+            "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
+          borderRadius: "1.5rem",
+          border: `1px solid ${theme.palette.grey[900]}`,
+          height: screen660 ? "max-content" : undefined,
+        }}
+      >
+        <Stack
+          sx={{
+            width: "100%",
+            overflowY: "auto",
+            height: "100%",
+          }}
+        >
+          {Object.keys(agenda)?.map((target, index) => {
+            return (
+              <Stack
+                onClick={(event) => {
+                  event?.preventDefault();
+
+                  setCurrentMenu(target);
+
+                  setIsSwippeableVisible(false);
+                }}
+                direction={"row"}
+                key={index}
+                sx={{
+                  width: "100%",
+                  alignItems: "center",
+                  px: "1rem",
+                  bgcolor:
+                    currentMenu === target
+                      ? `${theme.palette.primary.main}20`
+                      : undefined,
+                  my: ".3rem",
+                  cursor: "pointer",
+                  borderRadius: "1rem",
+                  height: "max-content!important",
+                }}
+              >
+                <CalendarToday
+                  sx={{
+                    color: theme.palette.common["white"],
+                    fontSize: "18px",
+                    mr: ".1rem",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    width: "100%",
+                    textAlign: "left",
+                    color: theme.palette.primary.main,
+                    fontWeight:
+                      currentMenu === target
+                        ? theme.typography.fontWeightMedium
+                        : theme.typography.fontWeightLight,
+                    fontSize: "10px",
+                    px: ".5rem",
+                    py: ".5rem",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {target}
+                </Typography>
+              </Stack>
+            );
+          })}
+        </Stack>
+      </Stack>
+    );
+  };
+
+  const setDefaultSwippeableContent =
+    React.useContext(viewportsCtx)?.setDefaultSwippeableContent;
+
+  const setIsSwippeableVisible =
+    React.useContext(viewportsCtx)?.setIsSwippeableVisible;
 
   return (
     <Stack
@@ -172,84 +263,7 @@ const Agenda = ({}) => {
           overflow: "hidden",
         }}
       >
-        <Stack
-          direction={"column"}
-          sx={{
-            alignItems: "center",
-            py: "1.5rem",
-            px: screen870 ? ".7rem" : "1.5rem",
-            minWidth: "150px",
-            width: !isMenuCollapsed && screen870 ? "100%" : "25%",
-            //bgcolor: theme.palette.grey[900],
-            maxHeight: "100%",
-            mx: "1rem",
-            minHeight: "200px",
-            boxShadow:
-              "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
-            borderRadius: "1.5rem",
-            border: `1px solid ${theme.palette.grey[900]}`,
-          }}
-        >
-          <Stack
-            sx={{
-              width: "100%",
-              overflowY: "auto",
-              height: "100%",
-            }}
-          >
-            {Object.keys(agenda)?.map((target, index) => {
-              return (
-                <Stack
-                  onClick={(event) => {
-                    event?.preventDefault();
-
-                    setCurrentMenu(target);
-                  }}
-                  direction={"row"}
-                  key={index}
-                  sx={{
-                    width: "100%",
-                    alignItems: "center",
-                    px: "1rem",
-                    bgcolor:
-                      currentMenu === target
-                        ? `${theme.palette.primary.main}20`
-                        : undefined,
-                    my: ".3rem",
-                    cursor: "pointer",
-                    borderRadius: "1rem",
-                    height: "max-content!important",
-                  }}
-                >
-                  <CalendarToday
-                    sx={{
-                      color: theme.palette.common["white"],
-                      fontSize: "18px",
-                      mr: ".1rem",
-                    }}
-                  />
-                  <Typography
-                    sx={{
-                      width: "100%",
-                      textAlign: "left",
-                      color: theme.palette.primary.main,
-                      fontWeight:
-                        currentMenu === target
-                          ? theme.typography.fontWeightMedium
-                          : theme.typography.fontWeightLight,
-                      fontSize: "12px",
-                      px: ".5rem",
-                      py: ".5rem",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {target}
-                  </Typography>
-                </Stack>
-              );
-            })}
-          </Stack>
-        </Stack>
+        {!screen660 ? <AgendaGroups /> : ""}
         <Stack
           direction={"column"}
           sx={{
@@ -265,9 +279,52 @@ const Agenda = ({}) => {
             borderRadius: "1.5rem",
             overflowY: "auto",
             border: `1px solid ${theme.palette.grey[900]}`,
-            display: !isMenuCollapsed && screen870 ? "none" : undefined,
           }}
         >
+          {screen660 ? (
+            <Stack
+              direction={"row"}
+              sx={{
+                alignItems: "center",
+                justifyContent: "space-between",
+                py: ".5rem",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: theme.palette.primary.main,
+                  fontSize: "12px",
+                  fontWeight: theme.typography.fontWeightBold,
+                  textTransform: "uppercase",
+                }}
+              >
+                {currentMenu}
+              </Typography>
+              <Typography
+                onClick={(event) => {
+                  event?.preventDefault();
+
+                  setDefaultSwippeableContent(AgendaGroups);
+
+                  setIsSwippeableVisible(true);
+                }}
+                sx={{
+                  color: theme.palette.grey[500],
+                  fontSize: "12px",
+                  fontWeight: theme.typography.fontWeightLight,
+                  "&:hover": {
+                    transition: `all .2s`,
+                    color: theme.palette.common.white,
+                  },
+                  cursor: "pointer",
+                }}
+              >
+                {lang === "fr" ? "Voir tous les jours" : "View all days"}
+              </Typography>
+            </Stack>
+          ) : (
+            ""
+          )}
           {agenda[currentMenu]?.length > 0 ? (
             agenda[currentMenu]?.map((target, id) => {
               console.log("agendum data", target);
@@ -350,15 +407,22 @@ const Agenda = ({}) => {
                             fontWeight: theme.typography.fontWeightMedium,
                           }}
                         >
-                          {`${new Date(target?.date)?.getHours()}h${new Date(
-                            target?.date
-                          )?.getMinutes()}min - ${new Date(
+                          {`${new Date(target?.date)?.toLocaleTimeString(
+                            `${lang}-${lang?.toUpperCase()}`,
+                            {
+                              hour: "numeric",
+                              minute: "numeric",
+                            }
+                          )} - ${new Date(
                             new Date(target?.date).getTime() +
                               Number.parseInt(target?.timing) * 60 * 1000
-                          )?.getHours()}h${new Date(
-                            new Date(target?.date).getTime() +
-                              Number.parseInt(target?.timing) * 60 * 1000
-                          )?.getMinutes()}min`}
+                          )?.toLocaleTimeString(
+                            `${lang}-${lang?.toUpperCase()}`,
+                            {
+                              hour: "numeric",
+                              minute: "numeric",
+                            }
+                          )}`}
                         </Typography>
                       </Stack>
                       <Stack
@@ -398,7 +462,7 @@ const Agenda = ({}) => {
                             new Date(target?.date).getTime() >= Date.now()
                               ? theme.palette.primary.main
                               : theme.palette.grey[300],
-                          fontSize: "14px",
+                          fontSize: "12px",
                           fontWeight: theme.typography.fontWeightBold,
                         }}
                       >
@@ -456,7 +520,7 @@ const Agenda = ({}) => {
                       <Typography
                         sx={{
                           color: theme.palette.grey[500],
-                          fontSize: "14px",
+                          fontSize: "12px",
                           fontWeight: theme.typography.fontWeightRegular,
                         }}
                       >

@@ -35,6 +35,8 @@ import configs from "../../configs/generals.json";
 
 import { SocketCtx } from "../../context/socket";
 import { viewportsCtx } from "../../context/viewports";
+import ChatThread from "./ChatThread";
+import PostContext, { postCtx } from "../../context/posts";
 
 const SocialWall = ({}) => {
   const theme = useTheme();
@@ -44,150 +46,16 @@ const SocialWall = ({}) => {
 
   const [isThreaVisible, setISThreadVisisble] = React.useState(false);
 
-  const posts = React.useRef([]);
+  const posts = React.useContext(postCtx)?.posts;
 
   const [threadData, setThreadData] = React.useState({});
 
-  const [commentText, setCommentText] = React.useState("");
-
-  const [printablePosts, setPrintablePosts] = React.useState([]);
+  const setPrintablePosts = React.useContext(postCtx)?.setPrintablePosts;
+  const printablePosts = React.useContext(postCtx)?.printablePosts;
 
   const socket = React.useContext(SocketCtx).subsSocket;
 
-  React.useEffect(() => {
-    socket.on("NEW_DATUM", (datum) => {
-      console.log("received the broadcasted datum", datum);
-
-      new Audio("/sounds/post.mp3")?.play();
-
-      console.log("current posts", posts);
-
-      const newPosts = [datum, ...posts?.current];
-
-      posts.current = newPosts;
-
-      setPrintablePosts(posts.current);
-    });
-
-    socket.on("NEW_COMMENT", (datum) => {
-      let postRows = [...posts?.current];
-
-      new Audio("/sounds/post.mp3")?.play().catch((error) => {
-        console.log(
-          "an error has occured when trying to play The Sound",
-          error
-        );
-      });
-
-      [...postRows]?.some((target, index) => {
-        if (target?.id === datum?.commentOf) {
-          postRows[index]?.comments?.push(datum);
-
-          return true;
-        }
-      });
-
-      posts.current = postRows;
-
-      setPrintablePosts(posts.current);
-    });
-
-    socket.on("NEW_LIKE", (payload) => {
-      (async () => {
-        await axios
-          .get(
-            `${configs?.backendUrl}/api/posts/${payload?.postId}?authorId=${guest?.id}&eventId=${guest?.event?.id}`
-          )
-          .then((result) => {
-            let postRows = [...posts?.current];
-
-            console.log("computed posts before like notif", postRows);
-
-            [...postRows]?.some((target, index) => {
-              if (target?.id === result?.data?.result[0]?.id) {
-                postRows[index] = result?.data?.result[0];
-
-                return true;
-              } else {
-                let isComment = false;
-
-                console.log("didn't pass affter event");
-
-                target?.comments?.some((_target, _index) => {
-                  if (result?.data?.result[0]?.id === _target?.id) {
-                    postRows[index].comments[_index] = result?.data?.result[0];
-
-                    console.log("pass for comments");
-
-                    isComment = true;
-
-                    return true;
-                  } else {
-                    console.log("didn't pass for comment");
-                  }
-                });
-
-                if (isComment) {
-                  return true;
-                }
-              }
-            });
-
-            new Audio("/sounds/like.mp3")?.play().catch((error) => {
-              console.log(
-                "an error has occured when trying to play The Sound",
-                error
-              );
-            });
-
-            console.log("computed posts after like notif", postRows);
-
-            posts.current = postRows;
-
-            setPrintablePosts(posts.current);
-          })
-          .catch((error) => {
-            console.log(
-              "an error has occured when trying to get single post item",
-              error
-            );
-          });
-      })();
-    });
-
-    socket.on("POST_REMOVED", (payload) => {
-      let newPosts = [...posts?.current];
-
-      console.log("post remove evnt payload", payload);
-
-      newPosts = [...newPosts]?.filter((post, index) => {
-        if (post?.id !== payload?.postId) {
-          newPosts[index].comments = newPosts[index].comments?.filter(
-            (comment) => {
-              return comment?.id !== payload?.postId;
-            }
-          );
-
-          return true;
-        }
-
-        return false;
-      });
-
-      new Audio("/sounds/delete.mp3")?.play().catch((error) => {
-        console.log(
-          "an error has occured when trying to play The Sound",
-          error
-        );
-      });
-
-      console.log("computed posts", newPosts);
-
-      posts.current = newPosts;
-
-      setPrintablePosts(posts?.current);
-    });
-  }, []);
+  const staticThreadData = React.useRef({});
 
   React?.useEffect(() => {
     (async () => {
@@ -231,8 +99,6 @@ const SocialWall = ({}) => {
   const [fileSelected, setFileSelected] = React.useState(null);
   const [fileBlob, setFileBlob] = React.useState(null);
 
-  const [commentFileBlob, setCommentFileBlob] = React.useState(null);
-
   const [pubTextContent, setPubTextContent] = React.useState("");
 
   const handleChange = async (event) => {
@@ -250,8 +116,6 @@ const SocialWall = ({}) => {
     };
   };
 
-  const [commentfileSelected, setCommentFileSelected] = React.useState(null);
-
   const handleCommentChange = async (event) => {
     event?.preventDefault();
 
@@ -266,18 +130,18 @@ const SocialWall = ({}) => {
     };
   };
 
-  const handlePost = async (event, isCommenting) => {
+  const handlePost = async (event) => {
     event?.preventDefault();
 
     const form = new FormData();
 
-    form.append("media", isCommenting ? commentFileBlob : fileBlob);
+    form.append("media", fileBlob);
 
     // upload media file
 
     let mediaFile = "";
 
-    if (fileBlob !== null || commentFileBlob !== null) {
+    if (fileBlob !== null) {
       await axios
         .post("/api/uploads/media", form, {
           headers: {
@@ -300,13 +164,13 @@ const SocialWall = ({}) => {
         });
     }
 
-    if (isCommenting ? commentText?.length > 3 : pubTextContent?.length > 3) {
+    if (pubTextContent?.length > 3) {
       let submitObject = {
         mediaLink: mediaFile,
         authorPic: guest?.profile,
         authorName: guest?.fullName,
-        textContent: isCommenting ? commentText : pubTextContent,
-        commentOf: isCommenting ? threadData?.id : null,
+        textContent: pubTextContent,
+        commentOf: null,
         eventId: guest?.event?.id,
       };
 
@@ -359,21 +223,11 @@ const SocialWall = ({}) => {
             setPrintablePosts(posts?.current);
           }
 
-          if (isCommenting) {
-            setCommentText("");
-            setFileBlob(null);
-            setCommentFileBlob(null);
-          } else {
-            setPubTextContent("");
-            setFileBlob(null);
-            setFileSelected(null);
-          }
+          setPubTextContent("");
+          setFileBlob(null);
+          setFileSelected(null);
 
-          setSnackMessage(
-            isCommenting
-              ? "Commentaire ajoutée avec succès"
-              : "Publication envoyéee avec succès"
-          );
+          setSnackMessage("Publication envoyéee avec succès");
           setSeverity("success");
           setIsnackVisible(true);
         })
@@ -390,9 +244,8 @@ const SocialWall = ({}) => {
         });
     } else {
       setSnackMessage(
-        `${
-          isCommenting ? "Le commentaire" : "La publication"
-        } doit avoir 3 caractères au moins`
+        `
+         La publication est trop courte`
       );
       setSeverity("error");
       setIsnackVisible(true);
@@ -410,7 +263,12 @@ const SocialWall = ({}) => {
           `${configs?.backendUrl}/api/posts/likes?postId=${postId}&score=${score}&authorId=${guest?.id}`
         )
         .then((results) => {
-          console.log("like/unlike post result", results);
+          console.log("like/unlike post result and socket", results, socket);
+
+          console.log("like/dislike event payload", {
+            eventId: guest?.event?.id,
+            postId,
+          });
 
           socket.emit("NEW_LIKE", {
             eventId: guest?.event?.id,
@@ -435,7 +293,17 @@ const SocialWall = ({}) => {
           author: guest?.id,
         })
         .then((results) => {
-          console.log("like/unlike post result", results);
+          console.log("like/unlike post result and socket", results, socket);
+
+          console.log("like/dislike event payload", {
+            eventId: guest?.event?.id,
+            postId,
+          });
+
+          console.log("like/dislike event payload", {
+            eventId: guest?.event?.id,
+            postId,
+          });
 
           socket.emit("NEW_LIKE", {
             eventId: guest?.event?.id,
@@ -497,9 +365,16 @@ const SocialWall = ({}) => {
   };
 
   const screen870 = React.useContext(viewportsCtx)?.screen870;
+  const screen660 = React.useContext(viewportsCtx)?.screen660;
 
-  const setIsMenuCollapsed = React.useContext(LangCtx).setIsMenuCollapsed;
+  const setIsMenuCollapsed = React.useContext(viewportsCtx).setIsMenuCollapsed;
   const isMenuCollapsed = React.useContext(LangCtx).isMenuCollapsed;
+
+  const setDefaultSwippeableContent =
+    React.useContext(viewportsCtx)?.setDefaultSwippeableContent;
+
+  const setIsSwippeableVisible =
+    React.useContext(viewportsCtx)?.setIsSwippeableVisible;
 
   return (
     <Stack
@@ -534,7 +409,8 @@ const SocialWall = ({}) => {
       >
         <Stack
           sx={{
-            width: isThreaVisible ? (screen870 ? "60%" : "70%") : "100%",
+            width:
+              screen660 || !isThreaVisible ? "100%" : screen870 ? "60%" : "70%",
             height: "100%",
             maxHeight: "100%",
             overflowY: "auto",
@@ -557,7 +433,7 @@ const SocialWall = ({}) => {
                 fontWeight: theme.typography.fontWeightBold,
               }}
             >
-              Publications
+              {lang === "fr" ? "Publications" : "Posts"}
             </Typography>
           </Stack>
           <form
@@ -593,7 +469,9 @@ const SocialWall = ({}) => {
               />
               <TextField
                 id="standard-basic"
-                placeholder="Ecrivez quelque chose"
+                placeholder={
+                  lang === "fr" ? "Ecrivez quelque chose" : "Type something"
+                }
                 label={null}
                 variant="standard"
                 name={"textContent"}
@@ -749,7 +627,15 @@ const SocialWall = ({}) => {
                             fontSize: "10px",
                           }}
                         >
-                          {new Date(post?.createdAt).toLocaleString()}
+                          {new Date(post?.createdAt).toLocaleDateString(
+                            `${lang}-${lang?.toUpperCase()}`,
+                            {
+                              weekday: "long",
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            }
+                          )}
                         </Typography>
                       </Stack>
 
@@ -938,12 +824,25 @@ const SocialWall = ({}) => {
                           event?.preventDefault();
 
                           setThreadData(post);
+
+                          staticThreadData.current = post;
+
                           setISThreadVisisble(true);
 
                           // collapsing the menu if on tablet and under
 
-                          if (screen870) {
+                          if (!screen660) {
                             setIsMenuCollapsed(true);
+                          } else {
+                            setDefaultSwippeableContent(
+                              <ChatThread
+                                threadData={staticThreadData?.current}
+                                isThreaVisible={isThreaVisible}
+                                setISThreadVisisble={setISThreadVisisble}
+                              />
+                            );
+
+                            setIsSwippeableVisible(true);
                           }
                         }}
                         sx={{
@@ -953,7 +852,8 @@ const SocialWall = ({}) => {
                           cursor: "pointer",
                         }}
                       >
-                        {post?.comments?.length} commentaires
+                        {post?.comments?.length}{" "}
+                        {lang === "fr" ? "commentaires" : "Comments"}
                       </Typography>
                     </Stack>
                   </Stack>
@@ -962,663 +862,15 @@ const SocialWall = ({}) => {
             })}
           </Stack>
         </Stack>
-        <Stack
-          direction={"column"}
-          sx={{
-            width: isThreaVisible ? (screen870 ? "40%" : "30%") : "0px",
-            height: "100%",
-            maxHeight: "100%",
-            maxWidth: screen870 ? "40%" : "30%",
-            overflowY: "auto",
-            borderLeft: `1px solid ${theme.palette.grey[900]}`,
-            overflowX: "auto",
-            p: screen870 ? "1rem" : "2rem",
-            transition: `.3s all`,
-            overflowX: "auto",
-            display:
-              (!isMenuCollapsed && screen870) || !isThreaVisible
-                ? "none"
-                : undefined,
-          }}
-        >
-          <Stack
-            direction={"row"}
-            sx={{
-              alignItems: "center",
-              pb: "1rem",
-              borderBottom: `1px solid ${theme.palette.grey[900]}`,
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <Typography
-              sx={{
-                color: theme.palette.common.white,
-                fontSize: screen870 ? "12px" : "14px",
-                fontWeight: theme.typography.fontWeightBold,
-              }}
-            >
-              Thread
-            </Typography>
-            <Close
-              onClick={(event) => {
-                event?.preventDefault();
-                setISThreadVisisble(false);
-              }}
-              sx={{
-                color: theme.palette.common.white,
-                fontSize: "22px",
-                cursor: "pointer",
-              }}
-            />
-          </Stack>
-
-          <Stack
-            direction={"row"}
-            sx={{
-              width: "100%",
-              alignItems: "flex-start",
-              maxWidth: "700px",
-              minWidth: "150px",
-              my: "1rem",
-              overflowX: "auto",
-              pr: "1rem",
-            }}
-          >
-            <Avatar
-              src={threadData?.authorPic}
-              size="small"
-              sx={{
-                mr: ".5rem",
-                width: screen870 ? "15px" : "30px",
-                height: screen870 ? "15px" : "30px",
-              }}
-            />
-            <Stack
-              direction={"column"}
-              sx={{
-                flexGrow: 1,
-              }}
-            >
-              <Stack
-                direction={"row"}
-                sx={{
-                  width: "100%",
-                  alignItems: "flex-start",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Stack
-                  direction={"column"}
-                  sx={{
-                    mb: ".5rem",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: theme.palette.common.white,
-                      fontWeight: theme.typography.fontWeightBold,
-                      fontSize: screen870 ? "12px" : "14px",
-                    }}
-                  >
-                    {threadData?.authorName}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: theme.palette.grey[700],
-                      fontWeight: theme.typography.fontWeightLight,
-                      fontSize: screen870 ? "8px" : "10px",
-                    }}
-                  >
-                    {new Date(threadData?.createdAt)?.toLocaleString()}
-                  </Typography>
-                </Stack>
-                {threadData.authorPic === guest?.profile ? (
-                  <IconButton
-                    onClick={(event) => {
-                      console.log("post to remove from list", threadData);
-
-                      handleRemovePost(event, threadData?.id);
-                    }}
-                  >
-                    <Delete
-                      sx={{
-                        color: theme.palette.error.main,
-                        fontSize: screen870 ? "14px" : "18px",
-                      }}
-                    />
-                  </IconButton>
-                ) : (
-                  ""
-                )}
-              </Stack>
-              <Typography
-                sx={{
-                  color: theme.palette.common.white,
-                  fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: screen870 ? "10px" : "12px",
-                }}
-              >
-                {threadData?.textContent}
-              </Typography>
-              <Box
-                sx={{
-                  width: "100%",
-                  maxWidth: "100%",
-                  my: ".5rem",
-                  overflowX: "hidden",
-                }}
-              >
-                {mediaExtensionDetector({ fileName: threadData?.mediaLink })
-                  ?.type === "picture" ? (
-                  <img
-                    src={threadData?.mediaLink}
-                    alt={"media"}
-                    style={{
-                      width: "100%",
-                    }}
-                  />
-                ) : mediaExtensionDetector({ fileName: threadData?.mediaLink })
-                    ?.type === "video" ? (
-                  <video width="100%" height="max-content" controls>
-                    <source src={threadData?.mediaLink} type="video/mp4" />
-                    <Typography
-                      sx={{
-                        textAlign: "center",
-                        fontSize: "14px",
-                        fontWeight: theme.typography.fontWeightRegular,
-                        color: theme.palette.common.white,
-                      }}
-                    >
-                      Your browser does not support the video
-                    </Typography>
-                  </video>
-                ) : (
-                  ""
-                )}
-              </Box>
-              <Stack
-                direction={"row"}
-                sx={{
-                  alignItems: "center",
-                }}
-              >
-                <Stack
-                  direction={"row"}
-                  sx={{
-                    alignItems: "center",
-                    mr: "1rem",
-                  }}
-                >
-                  <Box
-                    onClick={(event) => {
-                      handleLike({
-                        event,
-                        isLiked: threadData?.isLiked,
-                        postId: threadData?.id,
-                        score: 1,
-                      });
-                    }}
-                    sx={{
-                      m: 0,
-                      p: 0,
-                    }}
-                  >
-                    {threadData?.isLiked ? (
-                      <ThumbUpAlt
-                        sx={{
-                          color: theme.palette.common.white,
-                          fontSize: "16px",
-                          mr: ".5rem",
-                          cursor: "pointer",
-                        }}
-                      />
-                    ) : (
-                      <ThumbUpOffAlt
-                        sx={{
-                          color: theme.palette.common.white,
-                          fontSize: "16px",
-                          mr: ".2rem",
-                          cursor: "pointer",
-                        }}
-                      />
-                    )}
-                  </Box>
-                  <Typography
-                    sx={{
-                      color: theme.palette.grey[700],
-                      fontWeight: theme.typography.fontWeightRegular,
-                      fontSize: screen870 ? "8px" : "10px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {threadData?.likes}
-                  </Typography>
-                </Stack>
-                <Stack
-                  direction={"row"}
-                  sx={{
-                    alignItems: "center",
-                  }}
-                >
-                  <Box
-                    onClick={(event) => {
-                      handleLike({
-                        event,
-                        isLiked: threadData?.isDisliked,
-                        postId: threadData?.id,
-                        score: -1,
-                      });
-                    }}
-                    sx={{
-                      m: 0,
-                      p: 0,
-                    }}
-                  >
-                    {threadData?.isDisliked ? (
-                      <ThumbDownAlt
-                        sx={{
-                          color: theme.palette.common.white,
-                          fontSize: "16px",
-                          mr: ".2rem",
-                          cursor: "pointer",
-                        }}
-                      />
-                    ) : (
-                      <ThumbDownOffAlt
-                        sx={{
-                          color: theme.palette.common.white,
-                          fontSize: "16px",
-                          mr: ".2rem",
-                          cursor: "pointer",
-                        }}
-                      />
-                    )}
-                  </Box>
-                  <Typography
-                    sx={{
-                      color: theme.palette.grey[700],
-                      fontWeight: theme.typography.fontWeightRegular,
-                      fontSize: screen870 ? "8px" : "10px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {threadData?.unlikes}
-                  </Typography>
-                </Stack>
-              </Stack>
-            </Stack>
-          </Stack>
-
-          <Typography
-            sx={{
-              color: theme.palette.grey[700],
-              fontWeight: theme.typography.fontWeightRegular,
-              fontSize: screen870 ? "8px" : "10px",
-              my: ".5rem",
-            }}
-          >
-            Commentaires
-          </Typography>
-
-          <Stack
-            direction={"column"}
-            sx={{
-              alignItems: "center",
-              width: "100%",
-              maxWidth: "100%",
-              height: "100%",
-              maxHeight: "100%",
-              overflowX: "auto",
-              flexGrow: 1,
-              overflowX: "hidden",
-              pr: "1rem",
-            }}
-          >
-            {threadData?.comments?.map((post) => {
-              return (
-                <Stack
-                  direction={"row"}
-                  sx={{
-                    width: "100%",
-                    alignItems: "flex-start",
-                    maxWidth: "100%",
-                    minWidth: "150px",
-                    my: "1rem",
-                    //overflowX: "auto",
-                  }}
-                >
-                  <Avatar
-                    src={post?.authorPic}
-                    size="small"
-                    sx={{
-                      mr: ".5rem",
-                      width: screen870 ? "15px" : "30px",
-                      height: screen870 ? "15px" : "30px",
-                    }}
-                  />
-                  <Stack
-                    direction={"column"}
-                    sx={{
-                      flexGrow: 1,
-                    }}
-                  >
-                    <Stack
-                      direction={"row"}
-                      sx={{
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                      }}
-                    >
-                      <Stack
-                        direction={"column"}
-                        sx={{
-                          mb: ".5rem",
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            color: theme.palette.common.white,
-                            fontWeight: theme.typography.fontWeightBold,
-                            fontSize: screen870 ? "12px" : "14px",
-                          }}
-                        >
-                          {post?.authorName}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            color: theme.palette.grey[700],
-                            fontWeight: theme.typography.fontWeightLight,
-                            fontSize: screen870 ? "12px" : "10px",
-                          }}
-                        >
-                          {new Date(post?.createdAt)?.toLocaleString()}
-                        </Typography>
-                      </Stack>
-                      {post.authorPic === guest?.profile ? (
-                        <IconButton
-                          onClick={(event) => {
-                            console.log("post to remove from list", post);
-
-                            handleRemovePost(event, post?.id);
-                          }}
-                        >
-                          <Delete
-                            sx={{
-                              color: theme.palette.error.main,
-                              fontSize: screen870 ? "14px" : "18px",
-                            }}
-                          />
-                        </IconButton>
-                      ) : (
-                        ""
-                      )}
-                    </Stack>
-                    <Typography
-                      sx={{
-                        color: theme.palette.common.white,
-                        fontWeight: theme.typography.fontWeightRegular,
-                        fontSize: screen870 ? "10px" : "12px",
-                      }}
-                    >
-                      {post?.textContent}
-                    </Typography>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        my: ".5rem",
-                      }}
-                    >
-                      {mediaExtensionDetector({ fileName: post?.mediaLink })
-                        ?.type === "picture" ? (
-                        <img
-                          src={post?.mediaLink}
-                          alt={"media"}
-                          style={{
-                            width: "100%",
-                          }}
-                        />
-                      ) : mediaExtensionDetector({ fileName: post?.mediaLink })
-                          ?.type === "video" ? (
-                        <video width="100%" height="max-content" controls>
-                          <source src={post?.mediaLink} type="video/mp4" />
-                          <Typography
-                            sx={{
-                              textAlign: "center",
-                              fontSize: "12px",
-                              fontWeight: theme.typography.fontWeightRegular,
-                              color: theme.palette.common.white,
-                            }}
-                          >
-                            Your browser does not support the video
-                          </Typography>
-                        </video>
-                      ) : (
-                        ""
-                      )}
-                    </Box>
-                    <Stack
-                      direction={"row"}
-                      sx={{
-                        alignItems: "center",
-                        width: "100%",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Stack
-                        direction={"row"}
-                        sx={{
-                          alignItems: "center",
-                        }}
-                      >
-                        <Stack
-                          direction={"row"}
-                          sx={{
-                            alignItems: "center",
-                            mr: "1rem",
-                          }}
-                        >
-                          <Box
-                            onClick={(event) => {
-                              console.log("current post for likes", post);
-                              handleLike({
-                                event,
-                                isLiked: post?.isLiked,
-                                postId: post?.id,
-                                score: 1,
-                              });
-                            }}
-                          >
-                            {post?.isLiked ? (
-                              <ThumbUpAlt
-                                sx={{
-                                  color: theme.palette.common.white,
-                                  fontSize: "16px",
-                                  mr: ".5rem",
-                                  cursor: "pointer",
-                                }}
-                              />
-                            ) : (
-                              <ThumbUpOffAlt
-                                sx={{
-                                  color: theme.palette.common.white,
-                                  fontSize: "16px",
-                                  mr: ".2rem",
-                                  cursor: "pointer",
-                                }}
-                              />
-                            )}
-                          </Box>
-                          <Typography
-                            sx={{
-                              color: theme.palette.grey[700],
-                              fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: screen870 ? "8px" : "10px",
-                              cursor: "pointer",
-                            }}
-                          >
-                            {post?.likes}
-                          </Typography>
-                        </Stack>
-                        <Stack
-                          direction={"row"}
-                          sx={{
-                            alignItems: "center",
-                          }}
-                        >
-                          <Box
-                            onClick={(event) => {
-                              console.log("current post for likes", post);
-                              handleLike({
-                                event,
-                                isLiked: post?.isDisliked,
-                                postId: post?.id,
-                                score: -1,
-                              });
-                            }}
-                            sx={{
-                              m: 0,
-                              p: 0,
-                            }}
-                          >
-                            {post?.isDisliked ? (
-                              <ThumbDownAlt
-                                sx={{
-                                  color: theme.palette.common.white,
-                                  fontSize: "16px",
-                                  mr: ".2rem",
-                                  cursor: "pointer",
-                                }}
-                              />
-                            ) : (
-                              <ThumbDownOffAlt
-                                sx={{
-                                  color: theme.palette.common.white,
-                                  fontSize: "16px",
-                                  mr: ".2rem",
-                                  cursor: "pointer",
-                                }}
-                              />
-                            )}
-                          </Box>
-                          <Typography
-                            sx={{
-                              color: theme.palette.grey[700],
-                              fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: screen870 ? "8px" : "10px",
-                              cursor: "pointer",
-                            }}
-                          >
-                            {post?.unlikes}
-                          </Typography>
-                        </Stack>
-                      </Stack>
-                    </Stack>
-                  </Stack>
-                </Stack>
-              );
-            })}
-          </Stack>
-          <form
-            onSubmit={(event) => {
-              handlePost(event, true);
-            }}
-            style={{
-              width: "100%",
-            }}
-          >
-            <Stack
-              direction={"row"}
-              sx={{
-                py: "1rem",
-                alignItems: "center",
-                px: "0rem",
-                width: "100%",
-                justifyContent: "space-between",
-                "& *": {
-                  color: `${theme.palette.common.white}!important`,
-                },
-              }}
-            >
-              <TextField
-                id="standard-basic"
-                placeholder="Votre commentaire"
-                label={null}
-                variant="standard"
-                name={"commentText"}
-                value={commentText}
-                onChange={(event) => {
-                  event?.preventDefault();
-                  setCommentText(event?.target?.value);
-                }}
-                fullWidth
-                sx={{
-                  borderBottom: `.5px solid ${theme.palette.grey[500]}`,
-                  ml: screen870 ? ".5rem" : "1rem",
-                  fontSize: "12px",
-                }}
-                inputProps={{
-                  style: {
-                    fontSize: "12px",
-                  },
-                }}
-              />
-              <input
-                type="file"
-                id={"mediaLinkComment"}
-                name={"mediaLinkComment"}
-                style={{
-                  display: "none",
-                }}
-                onChange={handleCommentChange}
-              />
-              <label
-                htmlFor="mediaLinkComment"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                {commentfileSelected ? (
-                  <Avatar
-                    src={commentfileSelected}
-                    sx={{
-                      color: theme.palette.common.white,
-                      width: "20px",
-                      height: "20px",
-                      mx: screen870 ? ".2rem" : ".5rem",
-                      cursor: "pointer",
-                    }}
-                  />
-                ) : (
-                  <Image
-                    sx={{
-                      color: theme.palette.grey[500],
-                      fontSize: "20px",
-                      mx: screen870 ? ".2rem" : ".5rem",
-                      cursor: "pointer",
-                    }}
-                  />
-                )}
-              </label>
-              <IconButton
-                type={"submit"}
-                sx={{
-                  cursor: "pointer",
-                }}
-              >
-                <Send
-                  sx={{
-                    color: theme.palette.primary.main,
-                    fontSize: "12px",
-                    width: "14px",
-                  }}
-                />
-              </IconButton>
-            </Stack>
-          </form>
-        </Stack>
+        {!screen660 ? (
+          <ChatThread
+            threadData={staticThreadData?.current}
+            isThreaVisible={isThreaVisible}
+            setISThreadVisisble={setISThreadVisisble}
+          />
+        ) : (
+          ""
+        )}
       </Stack>
     </Stack>
   );

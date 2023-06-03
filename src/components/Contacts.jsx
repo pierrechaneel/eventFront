@@ -23,19 +23,25 @@ import { LangCtx } from "../../context/lang";
 import { SocketCtx } from "../../context/socket";
 import SnackMessage from "./SnackMessage";
 import { viewportsCtx } from "../../context/viewports";
+import { contactsCtx } from "../../context/contacts";
+import ContactsList from "./ContactsList";
 
 const Contacts = ({}) => {
   const theme = useTheme();
 
+  const chatSubject = React.useContext(contactsCtx)?.chatSubject;
+  const setChatSubject = React.useContext(contactsCtx)?.setChatSubject;
+  const filterGuests = React.useContext(contactsCtx)?.filterGuests;
+  const setFilteGuests = React.useContext(contactsCtx)?.setFilteGuests;
+  const setguests = React.useContext(contactsCtx)?.setguests;
+  const guests = React.useContext(contactsCtx)?.guests;
+
   const socket = React.useContext(SocketCtx).subsSocket;
 
-  const [searchKey, setSearchKey] = React.useState("");
+  const chatMsgs = React.useContext(contactsCtx)?.chatMsgs;
+  const setChatMsgs = React.useContext(contactsCtx)?.setChatMsgs;
 
-  const [chatSubject, setChatSubject] = React.useState({});
-
-  const [chatMsgs, setChatMsgs] = React.useState({});
-
-  const chats = React.useRef({});
+  const chats = React.useContext(contactsCtx)?.chats;
 
   React.useEffect(() => {
     socket.on("NEW_PRIVATE_MSG", (payload) => {
@@ -62,6 +68,12 @@ const Contacts = ({}) => {
       new Audio("/sounds/post.mp3")?.play();
 
       setChatMsgs(chats.current);
+
+      return () => {
+        console.log("cleaning up handlers");
+
+        socket.off("NEW_PRIVATE_MSG");
+      };
     });
   }, []);
 
@@ -77,58 +89,6 @@ const Contacts = ({}) => {
   const [isSnackVisible, setIsnackVisible] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
 
-  React.useEffect(() => {
-    (async () => {
-      console.log("chat thread base value", chatSubject);
-
-      chats.current = {};
-
-      await axios
-        .get(
-          `${configs.backendUrl}/api/messages?eventId=${guest?.event?.id}&from=${guest?.accessKey}&to=${chatSubject?.accessKey}`
-        )
-        .then((results) => {
-          console.log("message data received", results?.data);
-
-          results?.data?.messageData?.forEach((target) => {
-            const groupKey = new Date(target?.createdAt).toLocaleDateString();
-
-            if (Object.keys(chats?.current)?.includes(groupKey)) {
-              chats.current[groupKey] = [target, ...chats?.current[groupKey]];
-            } else {
-              const newChats = { ...chats.current };
-
-              newChats[groupKey] = [target];
-
-              chats.current = newChats;
-            }
-
-            //   console.log("new chat messages", chats.current);
-          });
-
-          console.log("received stored chats", chats.current);
-
-          setChatMsgs(chats.current);
-        })
-        .catch((error) => {
-          console.log(
-            "an error has occured when trying to get messages",
-            error
-          );
-
-          if (Object.keys(chatSubject).length > 0) {
-            setSnackMessage("Erreur de chargement du chat");
-            setSeverity("error");
-            setIsnackVisible(true);
-          }
-        });
-    })();
-  }, [chatSubject]);
-
-  const [guests, setguests] = React.useState([]);
-
-  const [filterGuests, setFilteGuests] = React.useState([]);
-
   const handleSearch = (event) => {
     event?.preventDefault();
 
@@ -136,7 +96,7 @@ const Contacts = ({}) => {
 
     setSearchKey(search);
 
-    console.log("search stat, ", guests, searchKey);
+    // console.log("search stat, ", guests, searchKey);
 
     setFilteGuests(
       guests?.filter((target) => {
@@ -146,10 +106,6 @@ const Contacts = ({}) => {
         );
       })
     );
-  };
-
-  const handleSearchSubmit = async (event) => {
-    event?.preventDefault();
   };
 
   const handleChat = async (event) => {
@@ -264,6 +220,13 @@ const Contacts = ({}) => {
   const lang = React.useContext(LangCtx).lang;
 
   const screen870 = React.useContext(viewportsCtx)?.screen870;
+  const screen660 = React.useContext(viewportsCtx)?.screen660;
+
+  const setDefaultSwippeableContent =
+    React.useContext(viewportsCtx)?.setDefaultSwippeableContent;
+
+  const setIsSwippeableVisible =
+    React.useContext(viewportsCtx)?.setIsSwippeableVisible;
 
   return (
     <Stack
@@ -322,182 +285,15 @@ const Contacts = ({}) => {
           justifyContent: "space-between",
         }}
       >
-        <Stack
-          direction={"column"}
-          sx={{
-            alignItems: "center",
-            py: "1.5rem",
-            mx: screen870 ? ".5rem" : "1rem",
-            minWidth: "150px",
-            height: "100%",
-            width: "25%",
-            maxWidth: "25%",
-            // bgcolor: theme.palette.grey[900],
-            borderRadius: "2rem",
-            mx: "1rem",
-            border: `1px solid ${theme.palette.grey[900]}`,
-          }}
-        >
-          <form
-            onSubmit={handleSearchSubmit}
-            style={{
-              width: "100%",
-            }}
-          >
-            <Stack
-              direction={"row"}
-              sx={{
-                alignItems: "center",
-                width: "100%",
-                justifyContent: "center",
-                px: ".5rem",
-              }}
-            >
-              <Typography
-                sx={{
-                  color: theme.palette.common.white,
-                  fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: "12px",
-                  mr: ".2rem",
-                }}
-              >
-                {lang === "fr" ? "Rechercher" : "Search"}
-              </Typography>
-              <Stack
-                direction={"row"}
-                sx={{
-                  px: ".2rem",
-                  py: ".0rem",
-                  border: `2px solid ${theme.palette.common.black}`,
-                  alignItems: "center",
-                  flexGrow: 1,
-                }}
-              >
-                <InputBase
-                  name={"contact_search"}
-                  placeholder="Taper un nom"
-                  onChange={handleSearch}
-                  value={searchKey}
-                  sx={{
-                    fontSize: "12px",
-                    color: theme.palette.grey[500],
-                    width: "100%",
-                  }}
-                />
-              </Stack>
-
-              {!screen870 ? (
-                <Button
-                  type={"submit"}
-                  sx={{
-                    color: theme.palette.common.black,
-                    bgcolor: theme.palette.common.white,
-                    px: ".5rem",
-                    py: ".05rem",
-                    "&:hover": {
-                      bgcolor: theme.palette.common.white,
-                    },
-                    width: "max-content",
-                    borderRadius: "0px",
-                    ml: ".2rem",
-                    fontSize: "12px",
-                  }}
-                >
-                  Envoyer
-                </Button>
-              ) : (
-                ""
-              )}
-            </Stack>
-          </form>
-
-          <Stack
-            direction={"column"}
-            sx={{
-              mt: "2rem",
-              width: "100%",
-              height: "100%",
-              overflowY: "auto",
-            }}
-          >
-            {filterGuests?.map((target) => {
-              return (
-                <MenuItem
-                  onClick={(event) => {
-                    event?.preventDefault();
-
-                    setChatSubject(target);
-                  }}
-                  sx={{
-                    width: "100%",
-                    borderLeft: `5px solid ${theme.palette.grey[900]}`,
-                    borderColor:
-                      target?.id === chatSubject?.id
-                        ? theme.palette.primary.main
-                        : undefined,
-                    bgcolor:
-                      target?.id === chatSubject?.id
-                        ? `${theme.palette.primary.main}10`
-                        : undefined,
-                    "&:hover": {
-                      transition: "all .3s",
-                    },
-                    p: 0.3,
-                    m: 0,
-                  }}
-                >
-                  <Stack
-                    direction={"row"}
-                    sx={{
-                      alignItems: "center",
-                      px: ".1rem",
-                      py: ".0rem",
-                    }}
-                  >
-                    <Avatar
-                      src={target?.profile}
-                      alt="Profile"
-                      sx={{
-                        mr: screen870 ? ".2rem" : ".5rem",
-                        width: "30px",
-                        height: "30px",
-                      }}
-                    />
-                    <Stack
-                      direction={"column"}
-                      sx={{
-                        alignItems: "flex-start",
-                        flexGrow: 1,
-                        height: "100%",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          color: theme.palette.common.white,
-                          fontWeight: theme.typography.fontWeightRegular,
-                          fontSize: "14px",
-                          mb: ".2rem",
-                        }}
-                      >
-                        {target?.fullName}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          color: theme.palette.common.white,
-                          fontWeight: theme.typography.fontWeightThin,
-                          fontSize: "12px",
-                        }}
-                      >
-                        {target?.title}
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </MenuItem>
-              );
-            })}
-          </Stack>
-        </Stack>
+        {!screen660 ? (
+          <ContactsList
+            screen660={screen660}
+            setIsSwippeableVisible={setIsSwippeableVisible}
+            screen870={screen870}
+          />
+        ) : (
+          ""
+        )}
         <Stack
           direction={"column"}
           sx={{
@@ -510,8 +306,8 @@ const Contacts = ({}) => {
             maxHeight: "100%",
             borderRadius: "2rem",
             border: `1px solid ${theme.palette.grey[900]}`,
-            width: "73%",
-            maxWidth: "73%",
+            width: screen660 ? "100%" : "73%",
+            maxWidth: screen660 ? "100%" : "73%",
             overflowX: "auto",
           }}
         >
@@ -545,15 +341,50 @@ const Contacts = ({}) => {
                 Discussion
               </Typography>
               {/*** <Badge color="success" badgeContent=" " variant="dot"> */}
-              <Typography
-                sx={{
-                  color: theme.palette.common.white,
-                  fontSize: screen870 ? "12px" : "14px",
-                  fontWeight: theme.typography.fontWeightBold,
-                }}
-              >
-                {chatSubject?.fullName}
-              </Typography>
+              {screen660 ? (
+                <Typography
+                  onClick={(event) => {
+                    event?.preventDefault();
+
+                    setDefaultSwippeableContent(
+                      <ContactsList
+                        screen660={screen660}
+                        screen870={screen870}
+                        setIsSwippeableVisible={setIsSwippeableVisible}
+                      />
+                    );
+
+                    setIsSwippeableVisible(true);
+                  }}
+                  sx={{
+                    color: theme.palette.grey[500],
+                    fontSize: "12px",
+                    fontWeight: theme.typography.fontWeightLight,
+                    "&:hover": {
+                      transition: `all .2s`,
+                      color: theme.palette.common.white,
+                    },
+                    cursor: "pointer",
+                  }}
+                >
+                  View all contacts
+                </Typography>
+              ) : (
+                ""
+              )}
+              {chatSubject?.fullName ? (
+                <Typography
+                  sx={{
+                    color: theme.palette.common.white,
+                    fontSize: screen870 ? "12px" : "14px",
+                    fontWeight: theme.typography.fontWeightBold,
+                  }}
+                >
+                  {chatSubject?.fullName}
+                </Typography>
+              ) : (
+                ""
+              )}
               {/*** </Badge> */}
             </Stack>
             {Object.keys(chatSubject)?.length === 0 ? (
@@ -643,12 +474,11 @@ const Contacts = ({}) => {
                                 color: theme.palette.common.white,
                                 fontWeight: theme.typography.fontWeightLight,
                                 fontSize: screen870 ? "10px" : "12px",
-                                px: screen870 ? ".5rem" : "1rem",
-                                py: ".15rem",
                                 bgcolor: "#FFFFFF10",
                                 borderRadius: "2rem",
                                 width: "max-content",
-                                py: ".7rem",
+                                py: screen660 ? ".3" : ".5rem",
+                                px: screen870 ? ".3rem" : ".7rem",
                               }}
                             >
                               {key}
@@ -701,8 +531,8 @@ const Contacts = ({}) => {
                                             target?.from === guest?.accessKey
                                               ? theme.palette.primary.main
                                               : theme.palette.common.black,
-                                          py: ".5rem",
-                                          px: screen870 ? ".3rem" : ".7rem",
+                                          py: screen660 ? ".5" : ".5rem",
+                                          px: screen870 ? ".4rem" : ".8rem",
                                           borderRadius: screen870
                                             ? ".5rem"
                                             : "1rem",
