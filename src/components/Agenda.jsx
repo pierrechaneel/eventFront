@@ -69,7 +69,7 @@ const Agenda = ({}) => {
                   `${lang}-${lang?.toUpperCase()}`,
                   {
                     weekday: "long",
-                    year: "numeric",
+                    month: "long",
                     day: "numeric",
                   }
                 )
