@@ -48,6 +48,8 @@ const OTP = ({}) => {
 
   React.useEffect(() => {
     (async () => {
+      window.sessionStorage.clear();
+
       await axios
         .get(
           `${configs?.backendUrl}/api/guests/properties?accessKey=${

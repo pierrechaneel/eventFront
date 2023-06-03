@@ -30,6 +30,10 @@ const Welcome = ({}) => {
     },
   ];
 
+  React.useEffect(() => {
+    window.sessionStorage.clear();
+  }, []);
+
   const screen870 = React.useContext(viewportsCtx)?.screen870;
 
   return (
