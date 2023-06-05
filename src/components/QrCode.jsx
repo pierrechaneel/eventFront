@@ -168,7 +168,7 @@ const QrCode = ({}) => {
               <Typography
                 sx={{
                   color: theme.palette.common.white,
-                  fontSize: screen870 ? "18px" : "22px",
+                  fontSize: screen870 ? "14px" : "16px",
                   fontWeight: theme.typography.fontWeightBlack,
                   textAlign: "center",
                   maxWidth: "100%",
@@ -198,7 +198,7 @@ const QrCode = ({}) => {
               <LocationOn
                 sx={{
                   color: theme.palette.common.white,
-                  fontSize: screen870 ? "16px" : "24px",
+                  fontSize: screen870 ? "14px" : "20px",
                   mr: screen870 ? ".2rem" : ".5rem",
                 }}
               />
@@ -209,6 +209,8 @@ const QrCode = ({}) => {
                   mr: screen870 ? ".2rem" : ".5rem",
                   color: theme.palette.common.white,
                   fontSize: screen870 ? "10px" : "12px",
+                  textAlign: "justify",
+                  width: "max-content",
                 }}
               >
                 {guest?.event?.place}
@@ -220,12 +222,13 @@ const QrCode = ({}) => {
                 alignItems: "center",
                 justifyContent: "center",
                 mb: "1rem",
+                width: "100%",
               }}
             >
               <AccessTime
                 sx={{
                   color: theme.palette.common.white,
-                  fontSize: screen870 ? "16px" : "24px",
+                  fontSize: screen870 ? "14px" : "20px",
                   mr: screen870 ? ".2rem" : ".5rem",
                 }}
               />
@@ -235,7 +238,8 @@ const QrCode = ({}) => {
                   fontWeight: theme.typography.fontWeightRegular,
                   fontSize: screen870 ? "10px" : "12px",
                   whiteSpace: "no-wrap",
-                  textAlign: "center",
+                  textAlign: "justify",
+                  width: "max-content",
                 }}
               >
                 <Typography

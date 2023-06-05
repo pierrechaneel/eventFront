@@ -355,7 +355,7 @@ const Agenda = ({}) => {
                       spacing={1}
                       sx={{
                         alignItems: "flex-start",
-                        width: "45%",
+                        width: "max-content",
                       }}
                     >
                       <Stack
@@ -464,6 +464,8 @@ const Agenda = ({}) => {
                               : theme.palette.grey[300],
                           fontSize: "12px",
                           fontWeight: theme.typography.fontWeightBold,
+                          width: "100%",
+                          textAlign: "center",
                         }}
                       >
                         {target?.subject}
@@ -473,6 +475,8 @@ const Agenda = ({}) => {
                         sx={{
                           alignItems: "center",
                           mt: "1rem",
+                          width: "100%",
+                          justifyContent: "center",
                         }}
                       >
                         <EmojiPeople
@@ -498,7 +502,7 @@ const Agenda = ({}) => {
                       sx={{
                         height: "100%",
                         justifyContent: "flex-end",
-                        flexGrow: 1,
+                        width: "max-content",
                         alignItems: "flex-end",
                       }}
                     >

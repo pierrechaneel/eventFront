@@ -1,7 +1,14 @@
 // component definition
 
 import * as React from "react";
-import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { Close, Image, UnfoldLess, UploadFile } from "@mui/icons-material";
 import { LangCtx } from "../../context/lang";
 
@@ -12,6 +19,8 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
   const [fileBlob, setFileBlob] = React.useState(null);
 
   const lang = React.useContext(LangCtx);
+
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleChange = async (event) => {
     event?.preventDefault();
@@ -55,8 +64,8 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
           sx={{
             m: 0,
             width: "100%",
-            py: "1rem",
-            px: "1.5rem",
+            py: ".5rem",
+            px: "1rem",
             bgcolor: theme.palette.common.white,
             boxShadow:
               "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
@@ -66,7 +75,7 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
           <Typography
             sx={{
               color: theme.palette.common.black,
-              fontSize: "16px",
+              fontSize: "14px",
               fontWeight: theme.typography.fontWeightMedium,
             }}
           >
@@ -151,15 +160,24 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
             disabled={fileSelected === null}
             onClick={async (event) => {
               event?.preventDefault();
-              await handleSubmit(fileBlob);
+
+              setIsLoading(true);
+
+              await handleSubmit(fileBlob)
+                .then(() => {
+                  setIsLoading(false);
+                })
+                .catch((error) => {
+                  setIsLoading(false);
+                });
             }}
             sx={{
               bgcolor:
                 fileSelected === null
                   ? theme.palette.grey[500]
                   : theme.palette.common.black,
-              px: "1.5rem",
-              py: ".3rem",
+              px: "1rem",
+              py: ".2rem",
               color: theme.palette.common.white,
               borderRadius: "0rem",
               m: "2rem",
@@ -169,9 +187,20 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
                     ? theme.palette.grey[500]
                     : theme.palette.common.black,
               },
+              fontSize: "12px",
             }}
           >
-            Envoyer
+            {isLoading ? (
+              <CircularProgress
+                size={"14px"}
+                color={"primary"}
+                sx={{
+                  mx: "0.7rem",
+                }}
+              />
+            ) : (
+              "Envoyer"
+            )}
           </Button>
         </Stack>
       </Box>

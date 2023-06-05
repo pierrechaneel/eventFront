@@ -22,9 +22,11 @@ import axios from "axios";
 import configs from "../../configs/generals.json";
 import { LangCtx } from "../../context/lang";
 import {
+  Accessibility,
   DateRange,
   FlightLand,
   FlightTakeoff,
+  LocalAirport,
   Restaurant,
   Thermostat,
 } from "@mui/icons-material";
@@ -131,6 +133,35 @@ const Profile = ({ setSecondaryMenu }) => {
 
     setIsnackVisible(false);
   };
+
+  const [smsMessages, setSmsMessages] = React.useState([]);
+
+  React.useEffect(() => {
+    (async () => {
+      await axios
+        .get(`${configs?.backendUrl}/api/groups/messaging?guestId=${guest?.id}`)
+        .then((results) => {
+          setSmsMessages(results?.data?.smsMessages);
+
+          // console.log("sms data", results);
+        })
+        .catch((error) => {
+          console.log(
+            "an error has occured when trying to get guest sms data",
+            error
+          );
+
+          setSnackMessage(
+            currentLanguage === "fr"
+              ? "Erreur de chargement de messages! Réessayer"
+              : "Messages loading failed. Retry"
+          );
+
+          setSeverity("error");
+          setIsnackVisible(true);
+        });
+    })();
+  }, []);
 
   const [snackMessage, setSnackMessage] = React.useState("");
   const [isSnackVisible, setIsnackVisible] = React.useState(false);
@@ -437,7 +468,6 @@ const Profile = ({ setSecondaryMenu }) => {
                     {new Date(guest?.arrivalDate).toLocaleDateString(
                       `${currentLanguage}-${currentLanguage?.toUpperCase()}`,
                       {
-                        year: "numeric",
                         month: "long",
                         day: "numeric",
                         hour: "numeric",
@@ -479,6 +509,70 @@ const Profile = ({ setSecondaryMenu }) => {
                 ) : (
                   ""
                 )}
+                {guest?.arrivalAirport ? (
+                  <Stack
+                    direction={"row"}
+                    sx={{
+                      width: "100%",
+                      justifyContent: "center",
+                      my: ".3rem",
+                    }}
+                  >
+                    <LocalAirport
+                      sx={{
+                        color: theme.palette.primary.main,
+                        fontSize: "16px",
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        textAlign: "center",
+                        color: theme.palette.grey[500],
+                        fontWeight: theme.typography.fontWeightLight,
+                        fontSize: "12px",
+                        //width: "100%",
+                        p: 0,
+                        ml: "0.3rem",
+                      }}
+                    >
+                      {guest?.arrivalAirport}
+                    </Typography>
+                  </Stack>
+                ) : (
+                  ""
+                )}
+                {guest?.arrivalProtocol ? (
+                  <Stack
+                    direction={"row"}
+                    sx={{
+                      width: "100%",
+                      justifyContent: "center",
+                      my: ".3rem",
+                    }}
+                  >
+                    <Accessibility
+                      sx={{
+                        color: theme.palette.primary.main,
+                        fontSize: "16px",
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        textAlign: "center",
+                        color: theme.palette.grey[500],
+                        fontWeight: theme.typography.fontWeightLight,
+                        fontSize: "12px",
+                        //width: "100%",
+                        p: 0,
+                        ml: "0.3rem",
+                      }}
+                    >
+                      {guest?.arrivalProtocol}
+                    </Typography>
+                  </Stack>
+                ) : (
+                  ""
+                )}
                 {guest?.arrivalTemperature ? (
                   <Stack
                     direction={"row"}
@@ -505,7 +599,7 @@ const Profile = ({ setSecondaryMenu }) => {
                         ml: "0.3rem",
                       }}
                     >
-                      {guest?.arrivalTemperature}
+                      {guest?.arrivalTemperature} &#x2103;
                     </Typography>
                   </Stack>
                 ) : (
@@ -569,7 +663,6 @@ const Profile = ({ setSecondaryMenu }) => {
                     {new Date(guest?.dinerDate).toLocaleDateString(
                       `${currentLanguage}-${currentLanguage?.toUpperCase()}`,
                       {
-                        year: "numeric",
                         month: "long",
                         day: "numeric",
                         hour: "numeric",
@@ -637,7 +730,7 @@ const Profile = ({ setSecondaryMenu }) => {
                         ml: "0.3rem",
                       }}
                     >
-                      {guest?.dinerTemperature}
+                      {guest?.dinerTemperature} &#x2103;
                     </Typography>
                   </Stack>
                 ) : (
@@ -701,7 +794,6 @@ const Profile = ({ setSecondaryMenu }) => {
                     {new Date(guest?.departureDate).toLocaleDateString(
                       `${currentLanguage}-${currentLanguage?.toUpperCase()}`,
                       {
-                        year: "numeric",
                         month: "long",
                         day: "numeric",
                         hour: "numeric",
@@ -743,6 +835,70 @@ const Profile = ({ setSecondaryMenu }) => {
                 ) : (
                   ""
                 )}
+                {guest?.departureAirport ? (
+                  <Stack
+                    direction={"row"}
+                    sx={{
+                      width: "100%",
+                      justifyContent: "center",
+                      my: ".3rem",
+                    }}
+                  >
+                    <LocalAirport
+                      sx={{
+                        color: theme.palette.primary.main,
+                        fontSize: "16px",
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        textAlign: "center",
+                        color: theme.palette.grey[500],
+                        fontWeight: theme.typography.fontWeightLight,
+                        fontSize: "12px",
+                        //width: "100%",
+                        p: 0,
+                        ml: "0.3rem",
+                      }}
+                    >
+                      {guest?.departureAirport}
+                    </Typography>
+                  </Stack>
+                ) : (
+                  ""
+                )}
+                {guest?.departureProtocol ? (
+                  <Stack
+                    direction={"row"}
+                    sx={{
+                      width: "100%",
+                      justifyContent: "center",
+                      my: ".3rem",
+                    }}
+                  >
+                    <Accessibility
+                      sx={{
+                        color: theme.palette.primary.main,
+                        fontSize: "16px",
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        textAlign: "center",
+                        color: theme.palette.grey[500],
+                        fontWeight: theme.typography.fontWeightLight,
+                        fontSize: "12px",
+                        //width: "100%",
+                        p: 0,
+                        ml: "0.3rem",
+                      }}
+                    >
+                      {guest?.departureProtocol}
+                    </Typography>
+                  </Stack>
+                ) : (
+                  ""
+                )}
                 {guest?.departureTemperature ? (
                   <Stack
                     direction={"row"}
@@ -769,7 +925,7 @@ const Profile = ({ setSecondaryMenu }) => {
                         ml: "0.3rem",
                       }}
                     >
-                      {guest?.departureTemperature}
+                      {guest?.departureTemperature} &#x2103;
                     </Typography>
                   </Stack>
                 ) : (
@@ -796,12 +952,13 @@ const Profile = ({ setSecondaryMenu }) => {
           }}
         >
           <Stack
-            direction={"row"}
+            direction={"column"}
             sx={{
               alignItems: "center",
-              justifyContent: "flex-end",
+              justifyContent: "flex-start",
               py: ".5rem",
               width: "100%",
+              px: screen870 ? "0.5rem" : ".5rem",
             }}
           >
             <Typography
@@ -810,11 +967,69 @@ const Profile = ({ setSecondaryMenu }) => {
                 fontSize: screen660 ? "8px" : "14px",
                 fontWeight: theme.typography.fontWeightRegular,
                 textAlign: "right",
+                width: "100%",
                 fontSize: screen660 ? "10px" : screen870 ? "12px" : "14px",
               }}
             >
               {currentLanguage === "fr" ? "Mes messages" : "My messages"}
             </Typography>
+
+            <Stack
+              direction={"column"}
+              sx={{
+                flexGrow: 1,
+                maxHeight: !screen870 ? "50vh" : "90%",
+                mt: "1rem",
+                width: "100%",
+                overflowY: "auto",
+              }}
+            >
+              {smsMessages?.map((target) => {
+                return (
+                  <Stack
+                    direction={"column"}
+                    sx={{
+                      borderRadius: screen870 ? "0.5rem" : "1rem",
+                      bgcolor: "#FFFFFF10",
+                      p: screen870 ? "0.5rem" : ".7rem",
+                      my: ".3rem",
+                    }}
+                  >
+                    <Typography
+                      component={"p"}
+                      sx={{
+                        color: theme.palette.common.white,
+                        fontWeight: theme.typography.fontWeightRegular,
+                        fontSize: screen870 ? "11px" : "12px",
+                        textAlign: "left",
+                        width: "100%",
+                        overflowWrap: "break-word",
+                      }}
+                    >
+                      {target.textContent}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: theme.palette.common.white,
+                        fontWeight: theme.typography.fontWeightLight,
+                        fontSize: "10px",
+                        textAlign: "right",
+                        mt: ".5rem",
+                      }}
+                    >
+                      {new Date(target?.createdAt)?.toLocaleString(
+                        `${currentLanguage}-${currentLanguage?.toUpperCase()}`,
+                        {
+                          weekday: "long",
+                          month: "long",
+                          day: "numeric",
+                        }
+                      )}
+                    </Typography>
+                  </Stack>
+                );
+              })}
+            </Stack>
           </Stack>
         </Stack>
       </Stack>

@@ -87,7 +87,9 @@ const Info = ({}) => {
               mb: "1rem",
             }}
           >
-            Mot du Directeur Général
+            {lang === "fr"
+              ? "Mot du Directeur Général"
+              : "Message from the CEO"}
           </Typography>
           <Typography
             sx={{
@@ -155,7 +157,7 @@ const Info = ({}) => {
             visite chez`
               : `, I wish you and your delegation a warm welcome to Kinshasa,
             capital of the Democratic Republic of Congo. For all purposes
-            useful, the Physical Security Manager is at your disposal.
+            useful, the Physical Security Manager is at your
             disposal for any question related to your safety during your
             home visit`}{" "}
             <Typography
@@ -746,7 +748,7 @@ const Info = ({}) => {
                 {
                   name: "Fleuve Congo Hôtel",
                   addresse: "119 Bd Colonel Tshatshi, Kinshasa",
-                  contact: "+ 243 0815 090 153",
+                  contact: "+243 0815 090 153",
                 },
                 {
                   name: "UTEX, ORDC HQ",

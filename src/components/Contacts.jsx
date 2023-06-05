@@ -47,7 +47,9 @@ const Contacts = ({}) => {
     socket.on("NEW_PRIVATE_MSG", (payload) => {
       console.log("private message payload", payload);
 
-      const groupKey = new Date(payload?.createdAt).toLocaleDateString();
+      const groupKey = new Date(payload?.createdAt).toLocaleDateString(
+        `${lang}-${lang.toUpperCase()}`
+      );
 
       if (Object.keys(chats?.current)?.includes(groupKey)) {
         const newChats = { ...chats.current };
@@ -149,7 +151,9 @@ const Contacts = ({}) => {
 
           socket.emit("NEW_PRIVATE_MSG", payload);
 
-          const groupKey = new Date(payload?.createdAt).toLocaleDateString();
+          const groupKey = new Date(payload?.createdAt).toLocaleDateString(
+            `${lang}-${lang.toUpperCase()}`
+          );
 
           if (Object.keys(chats?.current)?.includes(groupKey)) {
             const newChats = { ...chats.current };
@@ -575,7 +579,9 @@ const Contacts = ({}) => {
                                       >
                                         {new Date(
                                           target?.createdAt
-                                        ).toLocaleTimeString()}
+                                        ).toLocaleTimeString(
+                                          `${lang}-${lang.toUpperCase()}`
+                                        )}
                                       </Typography>
                                     </Stack>
                                   </Stack>

@@ -24,6 +24,7 @@ import {
 import { Global } from "@emotion/react";
 import MenuItems from "../src/components/MenuItems";
 import { LangCtx } from "./lang";
+import { GuestCtx } from "./guest";
 
 const viewportsCtx = React.createContext({});
 
@@ -36,12 +37,49 @@ const ViewportsContext = ({ children }) => {
 
   const router = useRouter();
 
-  const [apps, setApps] = React.useState([]);
+  let guestObj = React?.useContext(GuestCtx)?.guest;
 
   const lang = React.useContext(LangCtx)?.lang;
 
-  console.log("current language", { lang });
+  const [apps, setApps] = React.useState([
+    {
+      title: lang === "fr" ? "Profil" : "Profile",
+      link: `/guests/${guestObj?.accessKey}/profile`,
+      icon: (props) => <Person {...props} />,
+    },
+    {
+      title: lang === "fr" ? "Code QR" : "QR Code",
+      link: `/guests/${guestObj?.accessKey}/qrcode`,
+      icon: (props) => <QrCode {...props} />,
+    },
+    {
+      title: "Agenda",
+      link: `/guests/${guestObj?.accessKey}/agenda`,
+      icon: (props) => <ViewAgenda {...props} />,
+    },
+    {
+      title: "Contacts",
+      link: `/guests/${guestObj?.accessKey}/contacts`,
+      icon: (props) => <People {...props} />,
+    },
+    {
+      title: "Informations",
+      link: `/guests/${guestObj?.accessKey}/infos`,
+      icon: (props) => <Info {...props} />,
+    },
+    {
+      title: "Live",
+      link: `/guests/${guestObj?.accessKey}/meeting`,
+      icon: (props) => <LiveTv {...props} />,
+    },
+    {
+      title: "Networking",
+      link: `/guests/${guestObj?.accessKey}/social-wall`,
+      icon: (props) => <PostAdd {...props} />,
+    },
+  ]);
 
+  // console.log("current language", { lang });
   React.useEffect(() => {
     let guestObj = JSON.parse(window.sessionStorage.getItem("guest"));
 
@@ -88,7 +126,7 @@ const ViewportsContext = ({ children }) => {
 
       setApps(menuApps);
     }
-  }, [LangCtx.lang]);
+  }, []);
 
   const [isMenuCollapsed, setIsMenuCollapsed] = React.useState(false);
   const [isSwippeableVisible, setIsSwippeableVisible] = React.useState(false);

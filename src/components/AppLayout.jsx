@@ -32,6 +32,9 @@ import BottomSwippeable from "./BottomSwippeable";
 import { Logout } from "@mui/icons-material";
 import MenuItems from "./MenuItems";
 
+import configs from "../../configs/generals.json";
+import axios from "axios";
+
 const AppLayout = ({ children }) => {
   const theme = useTheme();
 
@@ -77,6 +80,71 @@ const AppLayout = ({ children }) => {
 
       console.log("guest oibject def received", guestObj);
 
+      (async () => {
+        let trafficObj = {};
+
+        let querystring = window?.location?.search;
+
+        window.navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            trafficObj["longitude"] = position.coords.longitude;
+            trafficObj["latitude"] = position.coords.latitude;
+            trafficObj["accuracy"] = position.coords.accuracy;
+            trafficObj["altitude"] = position.coords.altitude;
+            trafficObj["altitudeAccuracy"] = position.coords.altitudeAccuracy;
+            trafficObj["visitorName"] = guestObj.fullName;
+            trafficObj["visitorEmail"] = guestObj.email;
+            trafficObj["webPage"] = window.location.href;
+
+            console.log("should send traffic data", trafficObj);
+
+            await axios
+              .post(`${configs?.backendUrl}/api/traffic`, trafficObj, {
+                headers: { "Content-Type": "application/json" },
+              })
+              .then((results) => {})
+              .catch((error) => {
+                console.log(
+                  "an error has occured when sending user traffic data",
+                  error
+                );
+              });
+          },
+          async (error) => {
+            console.log(
+              "has refused sending geographical personal data",
+              error
+            );
+
+            trafficObj["longitude"] = 0;
+            trafficObj["latitude"] = 0;
+            trafficObj["accuracy"] = 0;
+            trafficObj["altitude"] = 0;
+            trafficObj["altitudeAccuracy"] = 0;
+            trafficObj["visitorName"] = guestObj.fullName;
+            trafficObj["visitorEmail"] = guestObj.email;
+            trafficObj["webPage"] = window.location.href;
+
+            console.log(
+              "should send traffic data even if position data is null",
+              trafficObj
+            );
+
+            await axios
+              .post(`${configs?.backendUrl}/api/traffic`, trafficObj, {
+                headers: { "Content-Type": "application/json" },
+              })
+              .then((results) => {})
+              .catch((error) => {
+                console.log(
+                  "an error has occured when sending user traffic data",
+                  error
+                );
+              });
+          }
+        );
+      })();
+
       if (guestObj) {
         setLoggedIn(true);
 
@@ -120,8 +188,22 @@ const AppLayout = ({ children }) => {
 
           setIsConnected(false);
 
-          setSnackMessage("Vous êtes hors connexion");
+          setSnackMessage(
+            lang === "fr" ? "Vous êtes hors connexion" : "You are affline"
+          );
           setSeverity("warning");
+          setIsnackVisible(true);
+        });
+
+        subsSocket.io.on("reconnect", (attempt) => {
+          setIsConnected(false);
+
+          setSnackMessage(
+            lang === "fr"
+              ? "Votre connection s'est retablie"
+              : "Internet is back"
+          );
+          setSeverity("success");
           setIsnackVisible(true);
         });
 
@@ -164,6 +246,8 @@ const AppLayout = ({ children }) => {
   const [snackMessage, setSnackMessage] = React.useState("");
   const [isSnackVisible, setIsnackVisible] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
+
+  const lang = React.useContext(LangCtx)?.lang;
 
   return (
     <Stack
@@ -350,7 +434,7 @@ const AppLayout = ({ children }) => {
                   ml: ".3rem",
                 }}
               >
-                Déconnnexion
+                {lang === "fr" ? " Déconnnexion" : "Log out"}
               </Typography>
             )}
           </Stack>
