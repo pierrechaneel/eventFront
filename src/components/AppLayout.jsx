@@ -529,7 +529,7 @@ const AppLayout = ({ children }) => {
                 DIGITIZING OUR EVENTS
               </Typography>
             </Stack>
-            {!isMenuCollapsed && screen870 ? (
+            {screen870 ? (
               ""
             ) : (
               <Stack

@@ -19,6 +19,7 @@ import {
   LocationOn,
 } from "@mui/icons-material";
 import { viewportsCtx } from "../../context/viewports";
+import DownloadContacts from "./DownloadContacts";
 
 const Info = ({}) => {
   const theme = useTheme();
@@ -34,6 +35,96 @@ const Info = ({}) => {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+  /****
+     * 
+     * 
+     * 
+     * {
+      name: "Ben Cheick HAIDARA",
+      title: lang === "fr" ? `Directeur Général` : `CEO`,
+      phoneNumber: "+243 852 400 045",
+      emailAdress: "Ben-Cheick.HAIDARA@orange.com",
+    },
+    {
+      name: "Nancy  MBUNGU",
+      title:
+        lang === "fr"
+          ? "Directrice des Ressources Humaines et Sécurité"
+          : "Head of Human Ressources and Security",
+      phoneNumber: "+243 898 900 257",
+      emailAdress: "Nancy.MBUNGU@orange.com",
+    },
+    {
+      name: "Julie KOFFI",
+      title: lang === "fr" ? "PMO du Directeur Général" : "PMO Officer",
+      phoneNumber: "+243 898 900 018",
+      emailAdress: "julie.KOFFI@orange.com",
+    },
+    {
+      name: "Samantha MUKENGE",
+      title:
+        lang === "fr" ? "Assistante du Directeur Général" : "CEO's Assistant",
+      phoneNumber: "+243 898900566",
+      emailAdress: "SMukenge.ext@orange.com",
+    },
+    {
+      name: "Richard MUKENDI",
+      title: lang === "fr" ? "Chauffeur du DG" : "CEO's Driver",
+      phoneNumber: "+243 852 100 223",
+      emailAdress: "Richard.MUKENDI@orange.com",
+    },
+     * 
+     * 
+     */
+
+  const contacts = [
+    {
+      name: "Dieumerci MUEMBO",
+      title:
+        lang === "fr"
+          ? "Officier de sûreté / sécurité (OSS)"
+          : "Security Officer",
+      phoneNumber: "+243 898 900 910",
+      emailAdress: "DMUEMBO.ext@orange.com",
+    },
+    {
+      name: "Jules KWETUTUKA",
+      title: lang === "fr" ? "Responsable Protocole" : "Protocol Manager",
+      phoneNumber: "+243 894 448 767",
+      emailAdress: "JKWETUTUKA.ext@orange.com",
+    },
+    {
+      name: "Guelord MAKITU",
+      title: lang === "fr" ? "Responsable charroi" : "Transportation Manager",
+      phoneNumber: "+243 898 900 557",
+      emailAdress: "GMAKITU.ext@orange.com",
+    },
+    {
+      name: "Numéro Vert",
+      title: lang === "fr" ? "Urgence Santé" : "Health Emergency",
+      phoneNumber: "+243 851 727 547",
+      emailAdress: "",
+    },
+    {
+      name: "Junior BILO",
+      title: lang === "fr" ? "IT/Connectivité" : "IT/Internet",
+      phoneNumber: "+243 898 900 362",
+      emailAdress: "",
+    },
+    {
+      name: "Godefroid GONDA",
+      title: lang === "fr" ? "Moyens Généraux" : "General services",
+      phoneNumber: "+243 848 410 167",
+      emailAdress: "",
+    },
+    {
+      name: "Helpdesk",
+      title: "Helpdesk",
+      phoneNumber: "500",
+      emailAdress: "",
+    },
+  ];
 
   return (
     <Stack
@@ -203,6 +294,7 @@ const Info = ({}) => {
             marginBottom: "1.5rem",
           }}
         />
+        <DownloadContacts contacts={contacts} />
         <Stack
           direction={"column"}
           sx={{
@@ -220,7 +312,7 @@ const Info = ({}) => {
               mb: "1rem",
             }}
           >
-            {lang === "fr" ? "Numéros importants" : "Impoertant phone numbers"}
+            {lang === "fr" ? "Numéros importants" : "Imrtant phone numbers"}
           </Typography>
           <Stack
             direction={"column"}
@@ -232,94 +324,7 @@ const Info = ({}) => {
               borderRadius: "1.5rem",
             }}
           >
-            {[
-              {
-                name: "Ben Cheick HAIDARA",
-                title: lang === "fr" ? `Directeur Général` : `CEO`,
-                phoneNumber: "+243 852 400 045",
-                emailAdress: "Ben-Cheick.HAIDARA@orange.com",
-              },
-              {
-                name: "Nancy  MBUNGU",
-                title:
-                  lang === "fr"
-                    ? "Directrice des Ressources Humaines et Sécurité"
-                    : "Head of Human Ressources and Security",
-                phoneNumber: "+243 898 900 257",
-                emailAdress: "Nancy.MBUNGU@orange.com",
-              },
-              {
-                name: "Dieumerci MUEMBO",
-                title:
-                  lang === "fr"
-                    ? "Officier de sûreté / sécurité (OSS)"
-                    : "Security Officer",
-                phoneNumber: "+243 898 900 910",
-                emailAdress: "DMUEMBO.ext@orange.com",
-              },
-              {
-                name: "Julie KOFFI",
-                title:
-                  lang === "fr" ? "PMO du Directeur Général" : "PMO Officer",
-                phoneNumber: "+243 898 900 018",
-                emailAdress: "julie.KOFFI@orange.com",
-              },
-              {
-                name: "Jules KWETUTUKA",
-                title:
-                  lang === "fr" ? "Responsable Protocole" : "Protocol Manager",
-                phoneNumber: "+243 894 448 767",
-                emailAdress: "JKWETUTUKA.ext@orange.com",
-              },
-              {
-                name: "Samantha MUKENGE",
-                title:
-                  lang === "fr"
-                    ? "Assistante du Directeur Général"
-                    : "CEO's Assistant",
-                phoneNumber: "+243 898900566",
-                emailAdress: "SMukenge.ext@orange.com",
-              },
-              {
-                name: "Richard MUKENDI",
-                title: lang === "fr" ? "Chauffeur du DG" : "CEO's Driver",
-                phoneNumber: "+243 852 100 223",
-                emailAdress: "Richard.MUKENDI@orange.com",
-              },
-              {
-                name: "Guelord MAKITU",
-                title:
-                  lang === "fr"
-                    ? "Responsable charroi"
-                    : "Transportation Manager",
-                phoneNumber: "+243 898 900 557",
-                emailAdress: "GMAKITU.ext@orange.com",
-              },
-              {
-                name: "Numéro Vert",
-                title: lang === "fr" ? "Urgence Santé" : "Health Emergency",
-                phoneNumber: "+243 851 727 547",
-                emailAdress: "",
-              },
-              {
-                name: "Junior BILO",
-                title: lang === "fr" ? "IT/Connectivité" : "IT/Internet",
-                phoneNumber: "+243 898 900 362",
-                emailAdress: "",
-              },
-              {
-                name: "Godefroid GONDA",
-                title: lang === "fr" ? "Moyens Généraux" : "General services",
-                phoneNumber: "+243 848 410 167",
-                emailAdress: "",
-              },
-              {
-                name: "Helpdesk",
-                title: "Helpdesk",
-                phoneNumber: "500",
-                emailAdress: "",
-              },
-            ].map((target, index) => {
+            {contacts.map((target, index) => {
               return (
                 <Accordion
                   expanded={expanded === index}
@@ -515,6 +520,8 @@ const Info = ({}) => {
               General).`}
             </Typography>
           </Stack>
+
+          <DownloadContacts contacts={contacts} />
           <Stack
             direction={"column"}
             sx={{
