@@ -36,11 +36,8 @@ const Info = ({}) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  /****
-     * 
-     * 
-     * 
-     * {
+  const contacts = [
+    {
       name: "Ben Cheick HAIDARA",
       title: lang === "fr" ? `Directeur Général` : `CEO`,
       phoneNumber: "+243 852 400 045",
@@ -74,11 +71,6 @@ const Info = ({}) => {
       phoneNumber: "+243 852 100 223",
       emailAdress: "Richard.MUKENDI@orange.com",
     },
-     * 
-     * 
-     */
-
-  const contacts = [
     {
       name: "Dieumerci MUEMBO",
       title:
