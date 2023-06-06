@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "AOS Web App 7773",
+      name: "Digital Event  Web App 9991",
       script: "npm start",
       cwd: "./",
     },
