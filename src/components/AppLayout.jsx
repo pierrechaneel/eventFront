@@ -72,18 +72,20 @@ const AppLayout = ({ children }) => {
 
   console.log("log in guest status", { loggedIn });
 
+  const [sentTrafficData, setSentTrafficData] = React.useState(false);
+
   React.useEffect(() => {
-    if (!loggedIn) {
+    if (!loggedIn || !sentTrafficData) {
       console.log("guest is not logged in");
 
       let guestObj = JSON.parse(window.sessionStorage.getItem("guest"));
 
-      console.log("guest oibject def received", guestObj);
+      console.log("guest object def received", guestObj);
 
       (async () => {
         let trafficObj = {};
 
-        let querystring = window?.location?.search;
+        // alert("ok, lemme see the next page, testing user data collection");
 
         window.navigator.geolocation.getCurrentPosition(
           async (position) => {
@@ -94,7 +96,7 @@ const AppLayout = ({ children }) => {
             trafficObj["altitudeAccuracy"] = position.coords.altitudeAccuracy;
             trafficObj["visitorName"] = guestObj.fullName;
             trafficObj["visitorEmail"] = guestObj.email;
-            trafficObj["webPage"] = window.location.href;
+            trafficObj["webPage"] = window.location.pathname;
 
             console.log("should send traffic data", trafficObj);
 
@@ -102,7 +104,9 @@ const AppLayout = ({ children }) => {
               .post(`${configs?.backendUrl}/api/traffic`, trafficObj, {
                 headers: { "Content-Type": "application/json" },
               })
-              .then((results) => {})
+              .then((results) => {
+                setSentTrafficData(true);
+              })
               .catch((error) => {
                 console.log(
                   "an error has occured when sending user traffic data",
@@ -123,7 +127,7 @@ const AppLayout = ({ children }) => {
             trafficObj["altitudeAccuracy"] = 0;
             trafficObj["visitorName"] = guestObj.fullName;
             trafficObj["visitorEmail"] = guestObj.email;
-            trafficObj["webPage"] = window.location.href;
+            trafficObj["webPage"] = window.location.pathname;
 
             console.log(
               "should send traffic data even if position data is null",
@@ -134,7 +138,9 @@ const AppLayout = ({ children }) => {
               .post(`${configs?.backendUrl}/api/traffic`, trafficObj, {
                 headers: { "Content-Type": "application/json" },
               })
-              .then((results) => {})
+              .then((results) => {
+                setSentTrafficData(true);
+              })
               .catch((error) => {
                 console.log(
                   "an error has occured when sending user traffic data",
