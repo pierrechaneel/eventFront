@@ -122,7 +122,7 @@ const OTP = ({}) => {
         if (results?.data?.diagnosticResult) {
           setLoggedIn(true);
 
-          router.push(`${router.query?.guest}/qrcode`);
+          window.location.pathname = `guests/${router.query?.guest}/qrcode`;
         } else {
           setIsnackVisible(true);
           setSnackMessage("Le code OTP entré n'est pas correct");
