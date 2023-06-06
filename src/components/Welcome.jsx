@@ -25,7 +25,7 @@ const Welcome = ({}) => {
       icon: (props) => <Link {...props} />,
     },
     {
-      text: "Renseigner le OTP reçu sur votre téléphone à l'intant",
+      text: "Renseigner le OTP reçu sur votre téléphone à l'instant",
       icon: (props) => <Pin {...props} />,
     },
   ];
@@ -44,7 +44,7 @@ const Welcome = ({}) => {
       }}
     >
       <Head>
-        <title>{configs?.lang[currentLang]["welcome.page.title"]}</title>
+        <title>Welcome</title>
       </Head>
       <Box
         sx={{

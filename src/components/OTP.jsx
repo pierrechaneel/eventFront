@@ -160,7 +160,7 @@ const OTP = ({}) => {
         ""
       )}
       <Head>
-        <title>{configs?.lang[currentLang]["OTP.page.title"]}</title>
+        <title>Code OTP</title>
       </Head>
       <Box
         sx={{
