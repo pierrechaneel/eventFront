@@ -31,12 +31,12 @@ class TheDocument extends Document {
           <meta name="theme-color" content="#ff6600" />
 
           <link rel="apple-touch-icon" href="/icons/icon-144x144.png" />
-          <link rel="apple-touch-icon" sizes="152x152" href="/icons/mask.svg" />
+          <link rel="apple-touch-icon" sizes="72X72" href="/icons/mask.png" />
 
           <link rel="manifest" href="/manifest.json" />
 
           <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-          <link rel="icon" type="image/x-icon" href="/orange-less.png"></link>
+          <link rel="icon" type="image/x-icon" href="/icons/mask.png"></link>
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
