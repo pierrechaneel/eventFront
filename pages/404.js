@@ -9,7 +9,7 @@ const Page404 = ({}) => {
 
   return (
     <>
-      <Typography>Not found</Typography>
+      <Welcome />
     </>
   );
 };

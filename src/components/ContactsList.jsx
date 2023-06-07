@@ -58,16 +58,18 @@ const ContactsList = ({ screen870, screen660, setIsSwippeableVisible }) => {
         py: "1.5rem",
         mx: screen870 ? ".5rem" : "1rem",
         minWidth: "150px",
-        height: screen660 ? "max-content" : "100%",
-        maxHeight: screen660 ? "60%" : undefined,
+        height: screen660 ? "max-content" : "50%",
+        maxHeight: screen660 ? "60%" : "50%",
         minHeight: screen660 ? "60%" : undefined,
-        overflowY: screen660 ? "auto" : undefined,
+        overflowY: screen660 ? "auto" : "auto",
         width: screen660 ? "90%" : "25%",
         maxWidth: screen660 ? "90%" : "25%",
         // bgcolor: theme.palette.grey[900],
         borderRadius: "2rem",
         mx: screen660 ? "auto" : "1rem",
         border: `1px solid ${theme.palette.grey[900]}`,
+        boxShadow:
+          "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
       }}
     >
       <form

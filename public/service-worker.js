@@ -9,16 +9,7 @@ try {
   const OFFLINE_URL = "/offline";
 
   // A list of local resources we always want to be cached.
-  const PRECACHE_URLS = [
-    OFFLINE_URL,
-    "/",
-    "/consumption",
-    "/consumption/canal",
-    "/consumption/currency",
-    "/consumption/cost-payer",
-    "/identity/",
-    "/identity/contact-number",
-  ];
+  const PRECACHE_URLS = [OFFLINE_URL, "/"];
 
   // The install handler takes care of precaching the resources we always need.
   self.addEventListener("install", async (event) => {
