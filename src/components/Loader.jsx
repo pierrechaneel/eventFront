@@ -2,11 +2,12 @@
 
 import * as React from "react";
 import { useTheme, Stack } from "@mui/material";
+import { viewportsCtx } from "../../context/viewports";
 
 const Loader = ({}) => {
   const theme = useTheme();
 
-  const screen870 = React.useContext(visualViewport)?.screen870;
+  const screen870 = React.useContext(viewportsCtx)?.screen870;
 
   return (
     <Stack
