@@ -34,6 +34,7 @@ import MenuItems from "./MenuItems";
 
 import configs from "../../configs/generals.json";
 import axios from "axios";
+import Loader from "./Loader";
 
 const AppLayout = ({ children }) => {
   const theme = useTheme();
@@ -254,367 +255,374 @@ const AppLayout = ({ children }) => {
   const [severity, setSeverity] = React.useState("");
 
   const lang = React.useContext(LangCtx)?.lang;
+  const [transit, setTransit] = React.useState(true);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setTransit(false);
+    }, 1000);
+  }, []);
 
   return (
-    <Stack
-      direction={"row"}
-      sx={{
-        alignItems: "flex-start",
-        width: "100vw",
-        height: "100vh",
-        overflowX: "hidden",
-        bgcolor: theme.palette.grey[900],
-      }}
-    >
-      {isSnackVisible ? (
-        <SnackMessage
-          handleClose={handleClose}
-          message={snackMessage}
-          severity={severity}
-        />
+    <>
+      {transit ? (
+        <Loader />
       ) : (
-        ""
-      )}
-      <Stack
-        direction={"column"}
-        sx={{
-          position: "fixed",
-          alignItems: "center",
-          p: "1.5rem",
-          top: 0,
-          bottom: 0,
-          width: isMenuCollapsed ? "calc(50px + 1.5rem)" : "250px",
-          left: 0,
-          display: screen660 ? "none" : undefined,
-        }}
-      >
-        <Stack
-          direction={"column"}
-          sx={{
-            alignItems: "center",
-            bgcolor: theme.palette.common.black,
-            width: "100%",
-            height: "100%",
-            p: "1.5rem",
-            borderRadius: "1.5rem",
-            position: "relative",
-          }}
-        >
-          <Stack
-            direction={"column"}
-            sx={{
-              alignItems: "center",
-              justifyContent: "center",
-              width: "100%",
-            }}
-          >
-            <img
-              src="/orange-less.png"
-              alt="ordc"
-              style={{
-                width: isMenuCollapsed ? "20px" : "30px",
-              }}
-            />
-            {!isMenuCollapsed ? (
-              <Typography
-                component={"h2"}
-                sx={{
-                  color: theme.palette.common.white,
-                  fontWeight: theme.typography.fontWeightBold,
-                  textAlign: "center",
-                  mt: ".5rem",
-                  fontSize: "12px",
-                }}
-              >
-                Orange RDC
-              </Typography>
-            ) : (
-              ""
-            )}
-          </Stack>
-          <Stack
-            direction={"row"}
-            sx={{
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              mt: "4vh",
-            }}
-          >
-            {apps?.map((target, index) => {
-              return (
-                <Stack
-                  key={index}
-                  direction={"coulumn"}
-                  onClick={(event) => {
-                    event?.preventDefault();
-
-                    router.push(target?.link);
-                  }}
-                  sx={{
-                    alignItems: "center",
-                    bgcolor: router?.asPath?.includes(target?.link)
-                      ? "#FFFFFF10"
-                      : theme.palette.common.black,
-                    // flexGrow: 1,
-                    width: "100%",
-                    px: ".7rem",
-                    py: ".5rem",
-                    cursor: "pointer",
-                    justifySelf: "flex-start",
-                    my: ".3rem",
-                    borderRadius: "1rem",
-                  }}
-                >
-                  {target?.icon({
-                    sx: {
-                      fontSize: "18px",
-                      width: "18px",
-                      color: isMenuCollapsed
-                        ? router?.asPath?.includes(target?.link)
-                          ? theme.palette.common.white
-                          : theme.palette.grey[500]
-                        : theme.palette.primary.main,
-                    },
-                  })}
-                  {!isMenuCollapsed ? (
-                    <Typography
-                      component={"span"}
-                      sx={{
-                        fontWeight: theme.typography.fontWeightMedium,
-                        color: router?.asPath?.includes(target?.link)
-                          ? theme.palette.common.white
-                          : theme.palette.grey[500],
-                        fontSize: "12px",
-                        ml: ".7rem",
-                        textAlign: "center",
-                      }}
-                    >
-                      {target?.title}
-                    </Typography>
-                  ) : (
-                    ""
-                  )}
-                </Stack>
-              );
-            })}
-          </Stack>
-          <Stack
-            onClick={handleLogout}
-            direction={"row"}
-            sx={{
-              alignItems: "center",
-              width: "max-content",
-              position: "absolute",
-              right: 0,
-              left: 0,
-              bottom: "1.5rem",
-              justifyContent: "center",
-              mx: "auto",
-              bgcolor: "#FFFFFF10",
-              py: ".2rem",
-              px: ".7rem",
-              borderRadius: "1.5rem",
-              overflow: "hidden",
-              cursor: "pointer",
-              "&:hover": {
-                "& *": {
-                  transition: `all .3s`,
-                  color: theme.palette.grey[300],
-                },
-              },
-            }}
-          >
-            <Logout
-              sx={{
-                color: theme.palette.grey[500],
-                fontSize: "18px",
-              }}
-            />
-            {isMenuCollapsed ? (
-              ""
-            ) : (
-              <Typography
-                sx={{
-                  color: theme.palette.grey[500],
-                  fontSize: "13px",
-                  ml: ".3rem",
-                }}
-              >
-                {lang === "fr" ? " Déconnnexion" : "Log out"}
-              </Typography>
-            )}
-          </Stack>
-        </Stack>
-      </Stack>
-      <Stack
-        direction={"column"}
-        sx={{
-          ml: screen660
-            ? "1.5rem"
-            : isMenuCollapsed
-            ? "calc(50px + 1.5rem)"
-            : "250px",
-          bgcolor: theme.palette.grey[0],
-          width: "100%",
-          maxWidth: "100%",
-          overflowX: "hidden",
-          height: "100vh",
-          maxHeight: "100vh",
-          pt: screen660 ? "calc(50px + 1.5rem)" : "calc(50px + 2.5rem)",
-          pr: "1.5rem",
-        }}
-      >
         <Stack
           direction={"row"}
           sx={{
-            height: "50px",
-            position: "fixed",
-            top: 0,
-            right: 0,
-            left: screen660
-              ? "0rem"
-              : isMenuCollapsed
-              ? "calc(50px + 1.5rem)"
-              : "250px",
+            alignItems: "flex-start",
+            width: "100vw",
+            height: "100vh",
+            overflowX: "hidden",
+            bgcolor: theme.palette.grey[900],
           }}
         >
+          {isSnackVisible ? (
+            <SnackMessage
+              handleClose={handleClose}
+              message={snackMessage}
+              severity={severity}
+            />
+          ) : (
+            ""
+          )}
           <Stack
-            direction={"row"}
+            direction={"column"}
             sx={{
+              position: "fixed",
               alignItems: "center",
-              height: "100%",
+              p: "1.5rem",
+              top: 0,
+              bottom: 0,
+              width: isMenuCollapsed ? "calc(50px + 1.5rem)" : "250px",
+              left: 0,
+              display: screen660 ? "none" : undefined,
+            }}
+          >
+            <Stack
+              direction={"column"}
+              sx={{
+                alignItems: "center",
+                bgcolor: theme.palette.common.black,
+                width: "100%",
+                height: "100%",
+                p: "1.5rem",
+                borderRadius: "1.5rem",
+                position: "relative",
+              }}
+            >
+              <Stack
+                direction={"column"}
+                sx={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "100%",
+                }}
+              >
+                <img
+                  src="/orange-less.png"
+                  alt="ordc"
+                  style={{
+                    width: isMenuCollapsed ? "20px" : "30px",
+                  }}
+                />
+                {!isMenuCollapsed ? (
+                  <Typography
+                    component={"h2"}
+                    sx={{
+                      color: theme.palette.common.white,
+                      fontWeight: theme.typography.fontWeightBold,
+                      textAlign: "center",
+                      mt: ".5rem",
+                      fontSize: "12px",
+                    }}
+                  >
+                    Orange RDC
+                  </Typography>
+                ) : (
+                  ""
+                )}
+              </Stack>
+              <Stack
+                direction={"row"}
+                sx={{
+                  flexWrap: "wrap",
+                  justifyContent: "space-between",
+                  mt: "4vh",
+                }}
+              >
+                {apps?.map((target, index) => {
+                  return (
+                    <Stack
+                      key={index}
+                      direction={"coulumn"}
+                      onClick={(event) => {
+                        event?.preventDefault();
+
+                        router.push(target?.link);
+                      }}
+                      sx={{
+                        alignItems: "center",
+                        bgcolor: router?.asPath?.includes(target?.link)
+                          ? "#FFFFFF10"
+                          : theme.palette.common.black,
+                        // flexGrow: 1,
+                        width: "100%",
+                        px: ".7rem",
+                        py: ".5rem",
+                        cursor: "pointer",
+                        justifySelf: "flex-start",
+                        my: ".3rem",
+                        borderRadius: "1rem",
+                      }}
+                    >
+                      {target?.icon({
+                        sx: {
+                          fontSize: "18px",
+                          width: "18px",
+                          color: isMenuCollapsed
+                            ? router?.asPath?.includes(target?.link)
+                              ? theme.palette.common.white
+                              : theme.palette.grey[500]
+                            : theme.palette.primary.main,
+                        },
+                      })}
+                      {!isMenuCollapsed ? (
+                        <Typography
+                          component={"span"}
+                          sx={{
+                            fontWeight: theme.typography.fontWeightMedium,
+                            color: router?.asPath?.includes(target?.link)
+                              ? theme.palette.common.white
+                              : theme.palette.grey[500],
+                            fontSize: "12px",
+                            ml: ".7rem",
+                            textAlign: "center",
+                          }}
+                        >
+                          {target?.title}
+                        </Typography>
+                      ) : (
+                        ""
+                      )}
+                    </Stack>
+                  );
+                })}
+              </Stack>
+              <Stack
+                onClick={handleLogout}
+                direction={"row"}
+                sx={{
+                  alignItems: "center",
+                  width: "max-content",
+                  position: "absolute",
+                  right: 0,
+                  left: 0,
+                  bottom: "1.5rem",
+                  justifyContent: "center",
+                  mx: "auto",
+                  bgcolor: "#FFFFFF10",
+                  py: ".2rem",
+                  px: ".7rem",
+                  borderRadius: "1.5rem",
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  "&:hover": {
+                    "& *": {
+                      transition: `all .3s`,
+                      color: theme.palette.grey[300],
+                    },
+                  },
+                }}
+              >
+                <Logout
+                  sx={{
+                    color: theme.palette.grey[500],
+                    fontSize: "18px",
+                  }}
+                />
+                {isMenuCollapsed ? (
+                  ""
+                ) : (
+                  <Typography
+                    sx={{
+                      color: theme.palette.grey[500],
+                      fontSize: "13px",
+                      ml: ".3rem",
+                    }}
+                  >
+                    {lang === "fr" ? " Déconnnexion" : "Log out"}
+                  </Typography>
+                )}
+              </Stack>
+            </Stack>
+          </Stack>
+          <Stack
+            direction={"column"}
+            sx={{
+              ml: screen660
+                ? "1.5rem"
+                : isMenuCollapsed
+                ? "calc(50px + 1.5rem)"
+                : "250px",
+              bgcolor: theme.palette.grey[0],
               width: "100%",
-              justifyContent: "space-between",
-              bgcolor: theme.palette.common.black,
-              px: "1rem",
-              borderRadius: screen660 ? "0px 0px 1.5rem 1.5rem" : "1.5rem",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mt: screen660 ? "0rem" : "1.5rem",
-              mr: screen660 ? "0rem" : "1.5rem",
+              maxWidth: "100%",
+              overflowX: "hidden",
+              height: "100vh",
+              maxHeight: "100vh",
+              pt: screen660 ? "calc(50px + 1.5rem)" : "calc(50px + 2.5rem)",
+              pr: "1.5rem",
             }}
           >
             <Stack
               direction={"row"}
               sx={{
-                alignItems: "center",
-                width: "100%",
-                heigth: "100%",
+                height: "50px",
+                position: "fixed",
+                top: 0,
+                right: 0,
+                left: screen660
+                  ? "0rem"
+                  : isMenuCollapsed
+                  ? "calc(50px + 1.5rem)"
+                  : "250px",
               }}
             >
-              <IconButton
-                onClick={(event) => {
-                  event?.preventDefault();
-
-                  if (screen660) {
-                    setDefaultSwippeableContent(<MenuItems apps={apps} />);
-                    setIsSwippeableVisible(true);
-                  } else {
-                    setIsMenuCollapsed(!isMenuCollapsed);
-                  }
-                }}
-                sx={{
-                  mr: ".3rem",
-                }}
-              >
-                <Menu
-                  sx={{
-                    fontSize: "18px",
-                    color: theme.palette.common.white,
-                    cursor: "pointer",
-                  }}
-                />
-              </IconButton>
-              <Typography
-                sx={{
-                  color: theme.palette.common.white,
-                  fontSize: screen870 ? "14px" : "16px",
-                  fontWeight: theme.typography.fontWeightBold,
-                }}
-              >
-                DIGITIZING OUR EVENTS
-              </Typography>
-            </Stack>
-            {screen870 ? (
-              ""
-            ) : (
               <Stack
                 direction={"row"}
                 sx={{
-                  alignItems: "flex-start",
-                  width: "max-content",
-                  mr: "1.5rem",
+                  alignItems: "center",
+                  height: "100%",
+                  width: "100%",
+                  justifyContent: "space-between",
+                  bgcolor: theme.palette.common.black,
+                  px: "1rem",
+                  borderRadius: screen660 ? "0px 0px 1.5rem 1.5rem" : "1.5rem",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  mt: screen660 ? "0rem" : "1.5rem",
+                  mr: screen660 ? "0rem" : "1.5rem",
                 }}
               >
-                <Typography
+                <Stack
+                  direction={"row"}
                   sx={{
-                    color: theme.palette.common.white,
-                    fontWeight: theme.typography.fontWeightBold,
-                    fontSize: "16px",
-                    whiteSpace: "nowrap",
-                    fontSize: screen870 ? "14px" : "16px",
+                    alignItems: "center",
+                    width: "100%",
+                    heigth: "100%",
                   }}
                 >
-                  {guest?.event?.subject
-                    ? guest?.event?.subject?.split(" ")[0]?.toUpperCase() + " "
-                    : ""}
-                </Typography>
-                {"."}
-                <Typography
-                  sx={{
-                    color: theme.palette.primary.main,
-                    fontWeight: theme.typography.fontWeightBold,
-                    fontSize: "16px",
-                    whiteSpace: "nowrap",
-                    fontSize: screen870 ? "14px" : "16px",
-                  }}
-                >
-                  {guest?.event?.subject
-                    ?.split(" ")
-                    .slice(1)
-                    ?.join(" ")
-                    ?.toUpperCase()}
-                </Typography>
+                  <IconButton
+                    onClick={(event) => {
+                      event?.preventDefault();
+
+                      if (screen660) {
+                        setDefaultSwippeableContent(<MenuItems apps={apps} />);
+                        setIsSwippeableVisible(true);
+                      } else {
+                        setIsMenuCollapsed(!isMenuCollapsed);
+                      }
+                    }}
+                    sx={{
+                      mr: ".3rem",
+                    }}
+                  >
+                    <Menu
+                      sx={{
+                        fontSize: "18px",
+                        color: theme.palette.common.white,
+                        cursor: "pointer",
+                      }}
+                    />
+                  </IconButton>
+                  <img
+                    src={"/saio.png"}
+                    alt="orange zone saio"
+                    style={{
+                      width: screen660 ? "75px" : "120px",
+                    }}
+                  />
+                </Stack>
+                {screen870 ? (
+                  ""
+                ) : (
+                  <Stack
+                    direction={"row"}
+                    sx={{
+                      alignItems: "flex-start",
+                      width: "max-content",
+                      mr: "1.5rem",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        color: theme.palette.common.white,
+                        fontWeight: theme.typography.fontWeightBold,
+                        fontSize: "16px",
+                        whiteSpace: "nowrap",
+                        fontSize: screen870 ? "14px" : "16px",
+                      }}
+                    >
+                      {guest?.event?.subject
+                        ? guest?.event?.subject?.split(" ")[0] + " "
+                        : ""}
+                    </Typography>
+                    {"."}
+                    <Typography
+                      sx={{
+                        color: theme.palette.primary.main,
+                        fontWeight: theme.typography.fontWeightBold,
+                        fontSize: "16px",
+                        whiteSpace: "nowrap",
+                        fontSize: screen870 ? "14px" : "16px",
+                      }}
+                    >
+                      {guest?.event?.subject?.split(" ").slice(1)?.join(" ")}
+                    </Typography>
+                  </Stack>
+                )}
               </Stack>
-            )}
-          </Stack>
-        </Stack>
-        <Box
-          sx={{
-            width: "100%",
-            maxWidth: "100%",
-            height: "calc(100vh - 80px)",
-            maxHeight: "calc(100vh - 80px)",
-            mr: "1.5rem",
-            mb: screen660 ? "2rem" : "1.5rem",
-            //borderRadius: "1.5rem",
-            // p: "2rem",
-            overflow: "hidden",
-          }}
-        >
-          {loggedIn ? (
-            children
-          ) : (
-            <Stack
-              spacing={5}
-              direction={"row"}
+            </Stack>
+            <Box
               sx={{
                 width: "100%",
-                justifyContent: "center",
-                p: "5rem",
+                maxWidth: "100%",
+                height: "calc(100vh - 80px)",
+                maxHeight: "calc(100vh - 80px)",
+                mr: "1.5rem",
+                mb: screen660 ? "2rem" : "1.5rem",
+                //borderRadius: "1.5rem",
+                // p: "2rem",
+                overflow: "hidden",
               }}
             >
-              <Skeleton
-                variant="rounded"
-                width={"100%"}
-                height={"100%"}
-                animation="wave"
-              />
-            </Stack>
-          )}
-        </Box>
-      </Stack>
-    </Stack>
+              {loggedIn ? (
+                children
+              ) : (
+                <Stack
+                  spacing={5}
+                  direction={"row"}
+                  sx={{
+                    width: "100%",
+                    justifyContent: "center",
+                    p: "5rem",
+                  }}
+                >
+                  <Skeleton
+                    variant="rounded"
+                    width={"100%"}
+                    height={"100%"}
+                    animation="wave"
+                  />
+                </Stack>
+              )}
+            </Box>
+          </Stack>
+        </Stack>
+      )}
+    </>
   );
 };
 

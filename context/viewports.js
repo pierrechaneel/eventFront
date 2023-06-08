@@ -13,6 +13,7 @@ import {
 import BottomSwippeable from "../src/components/BottomSwippeable";
 import { useRouter } from "next/router";
 import {
+  Home,
   Info,
   LiveTv,
   People,
@@ -43,14 +44,14 @@ const ViewportsContext = ({ children }) => {
 
   const [apps, setApps] = React.useState([
     {
+      title: lang === "fr" ? "Acceuil" : "Home",
+      link: `/guests/${guestObj?.accessKey}/qrcode`,
+      icon: (props) => <Home {...props} />,
+    },
+    {
       title: lang === "fr" ? "Profil" : "Profile",
       link: `/guests/${guestObj?.accessKey}/profile`,
       icon: (props) => <Person {...props} />,
-    },
-    {
-      title: lang === "fr" ? "Code QR" : "QR Code",
-      link: `/guests/${guestObj?.accessKey}/qrcode`,
-      icon: (props) => <QrCode {...props} />,
     },
     {
       title: "Agenda",
@@ -86,14 +87,14 @@ const ViewportsContext = ({ children }) => {
     if (guestObj) {
       const menuApps = [
         {
+          title: lang === "fr" ? "Acceuil" : "Home",
+          link: `/guests/${guestObj?.accessKey}/qrcode`,
+          icon: (props) => <QrCode {...props} />,
+        },
+        {
           title: lang === "fr" ? "Profil" : "Profile",
           link: `/guests/${guestObj?.accessKey}/profile`,
           icon: (props) => <Person {...props} />,
-        },
-        {
-          title: lang === "fr" ? "Code QR" : "QR Code",
-          link: `/guests/${guestObj?.accessKey}/qrcode`,
-          icon: (props) => <QrCode {...props} />,
         },
         {
           title: "Agenda",
@@ -126,7 +127,7 @@ const ViewportsContext = ({ children }) => {
 
       setApps(menuApps);
     }
-  }, []);
+  }, [lang]);
 
   const [isMenuCollapsed, setIsMenuCollapsed] = React.useState(false);
   const [isSwippeableVisible, setIsSwippeableVisible] = React.useState(false);

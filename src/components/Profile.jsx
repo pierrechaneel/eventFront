@@ -24,6 +24,7 @@ import { LangCtx } from "../../context/lang";
 import {
   Accessibility,
   DateRange,
+  DirectionsWalk,
   FlightLand,
   FlightTakeoff,
   LocalAirport,
@@ -258,6 +259,7 @@ const Profile = ({ setSecondaryMenu }) => {
                 position: "absolute",
                 bottom: screen660 ? "-1rem" : "-2.5rem",
                 left: "5vw",
+                border: `3px solid #FFFFFF`,
               }}
             />
           </Stack>
@@ -366,7 +368,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     }}
                     value={"en"}
                   >
-                    Anglais
+                    English
                   </MenuItem>
                 </Select>
               </Stack>
@@ -445,6 +447,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   sx={{
                     width: "100%",
                     justifyContent: "center",
+                    alignItems: "center",
                     my: ".3rem",
                   }}
                 >
@@ -515,6 +518,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     sx={{
                       width: "100%",
                       justifyContent: "center",
+                      alignItems: "center",
                       my: ".3rem",
                     }}
                   >
@@ -547,10 +551,11 @@ const Profile = ({ setSecondaryMenu }) => {
                     sx={{
                       width: "100%",
                       justifyContent: "center",
+                      alignItems: "center",
                       my: ".3rem",
                     }}
                   >
-                    <Accessibility
+                    <DirectionsWalk
                       sx={{
                         color: theme.palette.primary.main,
                         fontSize: "16px",
@@ -579,6 +584,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     sx={{
                       width: "100%",
                       justifyContent: "center",
+                      alignItems: "center",
                       my: ".3rem",
                     }}
                   >
@@ -640,6 +646,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   sx={{
                     width: "100%",
                     justifyContent: "center",
+                    alignItems: "center",
                     my: ".3rem",
                   }}
                 >
@@ -678,6 +685,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     sx={{
                       width: "100%",
                       justifyContent: "center",
+                      alignItems: "center",
                       my: ".3rem",
                     }}
                   >
@@ -710,6 +718,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     sx={{
                       width: "100%",
                       justifyContent: "center",
+                      alignItems: "center",
                       my: ".3rem",
                     }}
                   >
@@ -771,6 +780,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   sx={{
                     width: "100%",
                     justifyContent: "center",
+                    alignItems: "center",
                     my: ".3rem",
                   }}
                 >
@@ -809,6 +819,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     sx={{
                       width: "100%",
                       justifyContent: "center",
+                      alignItems: "center",
                       my: ".3rem",
                     }}
                   >
@@ -841,6 +852,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     sx={{
                       width: "100%",
                       justifyContent: "center",
+                      alignItems: "center",
                       my: ".3rem",
                     }}
                   >
@@ -873,10 +885,11 @@ const Profile = ({ setSecondaryMenu }) => {
                     sx={{
                       width: "100%",
                       justifyContent: "center",
+                      alignItems: "center",
                       my: ".3rem",
                     }}
                   >
-                    <Accessibility
+                    <DirectionsWalk
                       sx={{
                         color: theme.palette.primary.main,
                         fontSize: "16px",
@@ -904,6 +917,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     direction={"row"}
                     sx={{
                       width: "100%",
+                      alignItems: "center",
                       justifyContent: "center",
                       my: ".3rem",
                     }}
