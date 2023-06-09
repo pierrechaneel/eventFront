@@ -39,6 +39,7 @@ const ViewportsContext = ({ children }) => {
   const router = useRouter();
 
   let guestObj = React?.useContext(GuestCtx)?.guest;
+  let loggedIn = React?.useContext(GuestCtx)?.loggedIn;
 
   const lang = React.useContext(LangCtx)?.lang;
 
@@ -151,7 +152,7 @@ const ViewportsContext = ({ children }) => {
       }}
     >
       {children}
-      {screen660 ? (
+      {screen660 && loggedIn ? (
         <Box sx={{}}>
           <CssBaseline />
           <Global

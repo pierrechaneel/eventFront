@@ -30,7 +30,7 @@ const GuestContext = ({ children }) => {
     console.log("guest oibject def received", guestObj);
 
     if (guestObj) {
-      setLoggedIn(true);
+      // setLoggedIn(true);
 
       setGuest(guestObj);
 
