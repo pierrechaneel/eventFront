@@ -66,6 +66,8 @@ const Profile = ({ setSecondaryMenu }) => {
         let submitObject = {
           accessKey: guest?.accessKey,
           profileLink: mediaFile,
+          eventId: guest?.event?.id,
+          fullName: guest?.fullName,
         };
 
         console.log("submit obj for profile update", submitObject);

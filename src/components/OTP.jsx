@@ -142,6 +142,7 @@ const OTP = ({}) => {
   };
 
   const screen870 = React.useContext(viewportsCtx)?.screen870;
+  const screen660 = React.useContext(viewportsCtx)?.screen660;
 
   return (
     <Box
@@ -190,7 +191,7 @@ const OTP = ({}) => {
           <Typography
             component={"h2"}
             sx={{
-              fontSize: screen870 ? "18px" : "24px",
+              fontSize: screen870 ? "14px" : "18px",
               fontWeight: theme.typography.fontWeightThin,
               textAlign: "center",
               color: theme.palette.primary.main,
@@ -208,6 +209,8 @@ const OTP = ({}) => {
               fontWeight: theme.typography.fontWeightBlack,
               m: 0,
               textAlign: "center",
+              lineHeight: 0.9,
+              mb: ".5rem",
             }}
           >
             Digitizing our events
@@ -216,14 +219,15 @@ const OTP = ({}) => {
             direction={"row"}
             sx={{
               alignItems: "center",
+              width: screen660 ? "90%" : screen870 ? "60%" : "30%",
+              justifyContent: "center",
             }}
           >
             <Box
               sx={{
                 height: "1px",
                 bgcolor: theme.palette.grey[300],
-                mr: "2rem",
-                width: "5vw",
+                flexGrow: 1,
                 minWidth: "50px",
               }}
             ></Box>
@@ -231,10 +235,11 @@ const OTP = ({}) => {
               component={"h3"}
               sx={{
                 color: theme.palette.grey[300],
-                fontSize: screen870 ? "14px" : "16px",
+                fontSize: screen660 ? "10px" : screen870 ? "12px" : "14px",
                 fopntWeight: theme.typography.fontWeightLight,
                 m: 0,
                 textAlign: "center",
+                mx: screen870 ? ".5rem" : "1rem",
               }}
             >
               Vous rapprocher de l'essentiel
@@ -244,8 +249,7 @@ const OTP = ({}) => {
               sx={{
                 height: "1px",
                 bgcolor: theme.palette.grey[300],
-                ml: "2rem",
-                width: "5vw",
+                flexGrow: 1,
                 minWidth: "50px",
               }}
             ></Box>
@@ -256,6 +260,7 @@ const OTP = ({}) => {
               sx={{
                 alignItems: "center",
                 mb: "3vh",
+                width: "100%",
               }}
             >
               <Stack
@@ -267,6 +272,7 @@ const OTP = ({}) => {
                   px: ".5rem",
                   py: ".2rem",
                   mt: "1.5rem",
+                  maxWidth: "90%",
                 }}
               >
                 <Pin
@@ -284,7 +290,7 @@ const OTP = ({}) => {
                   autoFocus={true}
                   sx={{
                     color: theme.palette.common.white,
-                    fontSize: "16px",
+                    fontSize: "12px",
                   }}
                 />
               </Stack>
@@ -321,8 +327,8 @@ const OTP = ({}) => {
               textAlign: "center",
               position: "absolute",
               bottom: "2rem",
-              fontSize: "14px",
-              maxWidth: "60%",
+              fontSize: "10px",
+              maxWidth: screen870 ? "90%" : "60%",
             }}
           >
             Powered by Orange RDC Developers Team. All rights reserved

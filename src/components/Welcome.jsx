@@ -35,6 +35,7 @@ const Welcome = ({}) => {
   }, []);
 
   const screen870 = React.useContext(viewportsCtx)?.screen870;
+  const screen660 = React.useContext(viewportsCtx)?.screen660;
 
   return (
     <Box
@@ -56,9 +57,10 @@ const Welcome = ({}) => {
           backgroundRepeat: "no-repeat",
           // bacgroundAttachement: "fixed",
           minHeight: "100vh",
+          minHeight: "100vh",
           m: 0,
           p: 0,
-          overflowY: "hidden",
+          overflow: "hidden",
         }}
       >
         <Stack
@@ -73,12 +75,13 @@ const Welcome = ({}) => {
             minHeight: "100vh",
             overflowY: "auto",
             px: "2rem",
+            pt: screen660 ? "10rem" : undefined,
           }}
         >
           <Typography
             component={"h2"}
             sx={{
-              fontSize: screen870 ? "18px" : "24px",
+              fontSize: screen870 ? "14px" : "18px",
               fontWeight: theme.typography.fontWeightThin,
               textAlign: "center",
               color: theme.palette.primary.main,
@@ -96,6 +99,8 @@ const Welcome = ({}) => {
               fontWeight: theme.typography.fontWeightBlack,
               m: 0,
               textAlign: "center",
+              lineHeight: 0.9,
+              mb: ".5rem",
             }}
           >
             Digitizing our events
@@ -104,14 +109,15 @@ const Welcome = ({}) => {
             direction={"row"}
             sx={{
               alignItems: "center",
+              width: screen660 ? "90%" : screen870 ? "60%" : "30%",
+              justifyContent: "center",
             }}
           >
             <Box
               sx={{
                 height: "1px",
                 bgcolor: theme.palette.grey[300],
-                mr: "2rem",
-                width: "5vw",
+                flexGrow: 1,
                 minWidth: "50px",
               }}
             ></Box>
@@ -119,10 +125,11 @@ const Welcome = ({}) => {
               component={"h3"}
               sx={{
                 color: theme.palette.grey[300],
-                fontSize: screen870 ? "14px" : "16px",
+                fontSize: screen660 ? "10px" : screen870 ? "12px" : "14px",
                 fopntWeight: theme.typography.fontWeightLight,
                 m: 0,
                 textAlign: "center",
+                mx: screen870 ? ".5rem" : "1rem",
               }}
             >
               Vous rapprocher de l'essentiel
@@ -132,8 +139,7 @@ const Welcome = ({}) => {
               sx={{
                 height: "1px",
                 bgcolor: theme.palette.grey[300],
-                ml: "2rem",
-                width: "5vw",
+                flexGrow: 1,
                 minWidth: "50px",
               }}
             ></Box>
@@ -157,7 +163,7 @@ const Welcome = ({}) => {
                   key={id}
                   sx={{
                     px: "2vw",
-                    py: "1.2rem",
+                    py: screen660 ? ".5rem" : "1.2rem",
                     border: `2px solid ${theme.palette.primary.main}`,
                     alignItems: "center",
                     minWidth: "150px",
@@ -172,6 +178,7 @@ const Welcome = ({}) => {
                       },
                     },
                     m: "1vw",
+                    my: screen660 ? ".5rem" : undefined,
                   }}
                 >
                   {target?.icon({
@@ -200,8 +207,8 @@ const Welcome = ({}) => {
               color: theme.palette.grey[300],
               fontWeight: theme.typography.fontWeightLight,
               textAlign: "center",
-              fontSize: "12px",
-              maxWidth: "100%",
+              fontSize: "10px",
+              maxWidth: screen870 ? "95%" : "60%",
               my: "1rem",
             }}
           >
