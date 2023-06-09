@@ -65,6 +65,7 @@ const QrCode = ({}) => {
           }}
         >
           <Stack
+            direction={"row"}
             sx={{
               // width: "97%",
               // maxWidth: "97%",
@@ -79,40 +80,59 @@ const QrCode = ({}) => {
               // m: screen870 ? "0.5rem" : "1rem",
               //overflowY: "auto",
               flexWrap: screen660 ? "wrap" : "no-wrap",
+              justifyContent: "space-between",
             }}
           >
-            <Typography
+            <img
+              style={{
+                height: screen660 ? "65px" : "100px",
+                marginRight: screen660 ? undefined : "1rem",
+                marginBottom: screen660 ? "1rem" : undefined,
+                border: `3px solid ${theme.palette.common.white}`,
+                borderRadius: "1rem",
+              }}
+              src="/ceo.jpg"
+              alt="CEO"
+            />
+            <Stack
+              direction={"column"}
               sx={{
-                color: theme.palette.common.white,
-                fontWeight: theme.typography.fontWeightBold,
-                fontSize: "14px",
-                mb: "1rem",
+                flexGrow: 1,
+                height: "max-content",
               }}
             >
-              {lang === "fr"
-                ? "Mot du Directeur Général"
-                : "Message from the CEO"}
-            </Typography>
-            <Typography
-              sx={{
-                color: theme.palette.common.white,
-                fontWeight: theme.typography.fontWeightLight,
-                fontSize: "12px",
-              }}
-            >
-              {lang === "fr" ? "Cher" : "Dear"}{" "}
               <Typography
-                component={"span"}
                 sx={{
-                  color: theme.palette.primary.main,
-                  fontWeight: theme.typography.fontWeightRegular,
+                  color: theme.palette.common.white,
+                  fontWeight: theme.typography.fontWeightBold,
+                  fontSize: "14px",
+                  mb: "1rem",
+                }}
+              >
+                {lang === "fr"
+                  ? "Mot du Directeur Général"
+                  : "Message from the CEO"}
+              </Typography>
+              <Typography
+                sx={{
+                  color: theme.palette.common.white,
+                  fontWeight: theme.typography.fontWeightLight,
                   fontSize: "12px",
                 }}
               >
-                {guest?.fullName}
-              </Typography>
-              {lang === "fr"
-                ? `, Je te souhaite la bienvenue en République Démocratique du Congo,
+                {lang === "fr" ? "Cher" : "Dear"}{" "}
+                <Typography
+                  component={"span"}
+                  sx={{
+                    color: theme.palette.primary.main,
+                    fontWeight: theme.typography.fontWeightRegular,
+                    fontSize: "12px",
+                  }}
+                >
+                  {guest?.fullName}
+                </Typography>
+                {lang === "fr"
+                  ? `, Je te souhaite la bienvenue en République Démocratique du Congo,
             un grand pays avec d’immenses ressources économiques. La République
             Démocratique du Congo est au centre du continent africain et se
             subdivise en 26 Provinces issues de la profonde réforme de
@@ -120,7 +140,7 @@ const QrCode = ({}) => {
             entourée de 9 pays frontaliers : République du Congo, République
             Centrafricaine, Sud-Soudan, Ouganda, Rwanda, Burundi, Tanzanie,
             Zambie et Angola. Au nom du`
-                : `, I welcome you to the Democratic Republic of Congo,
+                  : `, I welcome you to the Democratic Republic of Congo,
             a large country with immense economic resources. The Republic
             Democratic Republic of the Congo is at the center of the African continent and is
             subdivided into 26 Provinces resulting from the profound reform of
@@ -128,73 +148,81 @@ const QrCode = ({}) => {
             surrounded by 9 border countries: Republic of Congo, Republic
             Central African Republic, South Sudan, Uganda, Rwanda, Burundi, Tanzania,
             Zambia and Angola. On behalf of the`}{" "}
-              <Typography
-                component={"span"}
-                sx={{
-                  color: theme.palette.primary.main,
-                  fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: "12px",
-                }}
-              >
+                <Typography
+                  component={"span"}
+                  sx={{
+                    color: theme.palette.primary.main,
+                    fontWeight: theme.typography.fontWeightRegular,
+                    fontSize: "12px",
+                  }}
+                >
+                  {lang === "fr"
+                    ? `Comité de Direction d’Orange RDC`
+                    : `Orange DRC Management Committee`}
+                </Typography>{" "}
+                {lang === "fr" ? ` et de tous les` : `and all the`}{" "}
+                <Typography
+                  component={"span"}
+                  sx={{
+                    color: theme.palette.primary.main,
+                    fontWeight: theme.typography.fontWeightRegular,
+                    fontSize: "12px",
+                  }}
+                >
+                  {lang === "fr" ? `collègues` : `collegues`}
+                </Typography>{" "}
                 {lang === "fr"
-                  ? `Comité de Direction d’Orange RDC`
-                  : `Orange DRC Management Committee`}
-              </Typography>{" "}
-              {lang === "fr" ? ` et de tous les` : `and all the`}{" "}
-              <Typography
-                component={"span"}
-                sx={{
-                  color: theme.palette.primary.main,
-                  fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: "12px",
-                }}
-              >
-                {lang === "fr" ? `collègues` : `collegues`}
-              </Typography>{" "}
-              {lang === "fr"
-                ? ` , je vous souhaite, à toi et ta délégation, la bienvenue à Kinshasa,
+                  ? ` , je vous souhaite, à toi et ta délégation, la bienvenue à Kinshasa,
             capitale de la République Démocratique du Congo. A toutes fins
             utiles, le Responsable de la Sécurité physique se tient à votre
             disposition pour toute question liée à votre sécurité durant votre
             visite chez`
-                : `, I wish you and your delegation a warm welcome to Kinshasa,
+                  : `, I wish you and your delegation a warm welcome to Kinshasa,
             capital of the Democratic Republic of Congo. For all purposes
             useful, the Physical Security Manager is at your
             disposal for any question related to your safety during your
             home visit`}{" "}
-              <Typography
-                component={"span"}
+                <Typography
+                  component={"span"}
+                  sx={{
+                    color: theme.palette.primary.main,
+                    fontWeight: theme.typography.fontWeightRegular,
+                    fontSize: "12px",
+                  }}
+                >
+                  {lang === "fr" ? " Orange RDC" : "Orange DRC"}
+                </Typography>{" "}
+                .
+              </Typography>
+              <Stack
+                direction={"column"}
                 sx={{
-                  color: theme.palette.primary.main,
-                  fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: "12px",
+                  width: "100%",
                 }}
               >
-                {lang === "fr" ? " Orange RDC" : "Orange DRC"}
-              </Typography>{" "}
-              .
-            </Typography>
-            <Typography
-              sx={{
-                color: theme.palette.common.white,
-                textAlign: "right",
-                fontWeight: theme.typography.fontWeightBold,
-                fontSize: "14px",
-                mt: ".5rem",
-              }}
-            >
-              Ben Cheick HAIDARA
-            </Typography>
-            <Typography
-              sx={{
-                color: theme.palette.common.white,
-                textAlign: "right",
-                fontWeight: theme.typography.fontWeightLight,
-                fontSize: "12px",
-              }}
-            >
-              {lang === "fr" ? `Directeur Général` : `CEO`}
-            </Typography>
+                <Typography
+                  sx={{
+                    color: theme.palette.common.white,
+                    textAlign: "right",
+                    fontWeight: theme.typography.fontWeightBold,
+                    fontSize: "14px",
+                    mt: ".5rem",
+                  }}
+                >
+                  Ben Cheick HAIDARA
+                </Typography>
+                <Typography
+                  sx={{
+                    color: theme.palette.common.white,
+                    textAlign: "right",
+                    fontWeight: theme.typography.fontWeightLight,
+                    fontSize: "12px",
+                  }}
+                >
+                  {lang === "fr" ? `Directeur Général` : `CEO`}
+                </Typography>
+              </Stack>
+            </Stack>
           </Stack>
           <Stack
             direction={"row"}
@@ -228,6 +256,17 @@ const QrCode = ({}) => {
                 borderRadius: "1.5rem",
                 flexGrow: 1,
                 overflow: "hidden",
+                "@keyframes bump": {
+                  "0%": {
+                    transform: "scale(.8)",
+                  },
+                  "50%": {
+                    transform: "scale(1)",
+                  },
+                  "100%": {
+                    transform: "scale(.8)",
+                  },
+                },
               }}
             >
               <img
@@ -236,6 +275,7 @@ const QrCode = ({}) => {
                 style={{
                   width: screen870 ? "200px" : "350px",
                   mx: "auto",
+                  animation: "bump 3s linear infinite",
                 }}
               />
 

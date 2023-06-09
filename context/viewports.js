@@ -89,7 +89,7 @@ const ViewportsContext = ({ children }) => {
         {
           title: lang === "fr" ? "Acceuil" : "Home",
           link: `/guests/${guestObj?.accessKey}/qrcode`,
-          icon: (props) => <QrCode {...props} />,
+          icon: (props) => <Home {...props} />,
         },
         {
           title: lang === "fr" ? "Profil" : "Profile",

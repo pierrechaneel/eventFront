@@ -13,6 +13,8 @@ const PostContext = ({ children }) => {
 
   const posts = React.useRef([]);
 
+  const [threadData, setThreadData] = React.useState({});
+
   const socket = React.useContext(SocketCtx).subsSocket;
 
   React.useEffect(() => {
@@ -46,7 +48,7 @@ const PostContext = ({ children }) => {
 
       [...postRows]?.some((target, index) => {
         if (target?.id === datum?.commentOf) {
-          postRows[index]?.comments?.push(datum);
+          postRows[index]?.comments?.unshift(datum);
 
           return true;
         }
@@ -98,13 +100,6 @@ const PostContext = ({ children }) => {
                   return true;
                 }
               }
-            });
-
-            new Audio("/sounds/like.mp3")?.play().catch((error) => {
-              console.log(
-                "an error has occured when trying to play The Sound",
-                error
-              );
             });
 
             console.log("computed posts after like notif", postRows);
@@ -166,7 +161,15 @@ const PostContext = ({ children }) => {
   }, []);
 
   return (
-    <postCtx.Provider value={{ posts, printablePosts, setPrintablePosts }}>
+    <postCtx.Provider
+      value={{
+        threadData,
+        setThreadData,
+        posts,
+        printablePosts,
+        setPrintablePosts,
+      }}
+    >
       {children}
     </postCtx.Provider>
   );

@@ -30,13 +30,15 @@ import axios from "axios";
 import configs from "../../configs/generals.json";
 import SnackMessage from "./SnackMessage";
 
-const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
+const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
   const theme = useTheme();
 
   const setPrintablePosts = React.useContext(postCtx)?.setPrintablePosts;
   const printablePosts = React.useContext(postCtx)?.printablePosts;
 
   const posts = React.useContext(postCtx)?.posts;
+
+  const threadData = React.useContext(postCtx)?.threadData;
 
   const handleRemovePost = async (event, postId) => {
     event?.preventDefault();
@@ -238,6 +240,13 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
             eventId: guest?.event?.id,
             postId,
           });
+
+          new Audio("/sounds/like.mp3")?.play().catch((error) => {
+            console.log(
+              "an error has occured when trying to play The Sound",
+              error
+            );
+          });
         })
         .catch((error) => {
           console.log(
@@ -267,6 +276,13 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
           socket.emit("NEW_LIKE", {
             eventId: guest?.event?.id,
             postId,
+          });
+
+          new Audio("/sounds/like.mp3")?.play().catch((error) => {
+            console.log(
+              "an error has occured when trying to play The Sound",
+              error
+            );
           });
         })
         .catch((error) => {

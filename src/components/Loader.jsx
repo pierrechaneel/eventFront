@@ -22,9 +22,21 @@ const Loader = ({}) => {
             width: "0px",
             transform: "rotate(360deg)",
           },
-          "100%": {
+          "25%": {
+            width: screen870 ? "25px" : "75px",
+            transform: "rotate(180deg)",
+          },
+          "50%": {
             width: screen870 ? "50px" : "150px",
             transform: "rotate(0deg)",
+          },
+          "75%": {
+            width: screen870 ? "25px" : "75px",
+            transform: "rotate(-180deg)",
+          },
+          "100%": {
+            width: "0px",
+            transform: "rotate(-360deg)",
           },
         },
       }}
@@ -34,7 +46,7 @@ const Loader = ({}) => {
         alt="loader"
         style={{
           width: screen870 ? "50px" : "150px",
-          animation: "load 1s linear infinite",
+          animation: "load 3s linear infinite",
         }}
       />
     </Stack>

@@ -260,7 +260,7 @@ const AppLayout = ({ children }) => {
   React.useEffect(() => {
     setTimeout(() => {
       setTransit(false);
-    }, 1000);
+    }, 3000);
   }, []);
 
   return (
@@ -558,7 +558,7 @@ const AppLayout = ({ children }) => {
                   >
                     <Typography
                       sx={{
-                        color: theme.palette.common.white,
+                        color: theme.palette.primary.main,
                         fontWeight: theme.typography.fontWeightBold,
                         fontSize: "16px",
                         whiteSpace: "nowrap",
@@ -572,7 +572,7 @@ const AppLayout = ({ children }) => {
                     {"."}
                     <Typography
                       sx={{
-                        color: theme.palette.primary.main,
+                        color: theme.palette.common.white,
                         fontWeight: theme.typography.fontWeightBold,
                         fontSize: "16px",
                         whiteSpace: "nowrap",

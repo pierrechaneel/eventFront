@@ -48,14 +48,14 @@ const SocialWall = ({}) => {
 
   const posts = React.useContext(postCtx)?.posts;
 
-  const [threadData, setThreadData] = React.useState({});
-
   const setPrintablePosts = React.useContext(postCtx)?.setPrintablePosts;
   const printablePosts = React.useContext(postCtx)?.printablePosts;
 
   const socket = React.useContext(SocketCtx).subsSocket;
 
-  const staticThreadData = React.useRef({});
+  const threadData = React.useContext(postCtx)?.threadData;
+  const setThreadData = React.useContext(postCtx)?.setThreadData;
+  const staticThreadData = React.useRef(threadData);
 
   React?.useEffect(() => {
     (async () => {
@@ -274,6 +274,13 @@ const SocialWall = ({}) => {
             eventId: guest?.event?.id,
             postId,
           });
+
+          new Audio("/sounds/like.mp3")?.play().catch((error) => {
+            console.log(
+              "an error has occured when trying to play The Sound",
+              error
+            );
+          });
         })
         .catch((error) => {
           console.log(
@@ -308,6 +315,13 @@ const SocialWall = ({}) => {
           socket.emit("NEW_LIKE", {
             eventId: guest?.event?.id,
             postId,
+          });
+
+          new Audio("/sounds/like.mp3")?.play().catch((error) => {
+            console.log(
+              "an error has occured when trying to play The Sound",
+              error
+            );
           });
         })
         .catch((error) => {
@@ -836,7 +850,6 @@ const SocialWall = ({}) => {
                           } else {
                             setDefaultSwippeableContent(
                               <ChatThread
-                                threadData={staticThreadData?.current}
                                 isThreaVisible={isThreaVisible}
                                 setISThreadVisisble={setISThreadVisisble}
                               />
@@ -864,7 +877,6 @@ const SocialWall = ({}) => {
         </Stack>
         {!screen660 ? (
           <ChatThread
-            threadData={staticThreadData?.current}
             isThreaVisible={isThreaVisible}
             setISThreadVisisble={setISThreadVisisble}
           />
