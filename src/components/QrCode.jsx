@@ -180,6 +180,7 @@ const QrCode = ({}) => {
                 textAlign: "right",
                 fontWeight: theme.typography.fontWeightBold,
                 fontSize: "14px",
+                mt: ".5rem",
               }}
             >
               Ben Cheick HAIDARA
