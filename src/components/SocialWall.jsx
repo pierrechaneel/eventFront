@@ -522,7 +522,7 @@ const SocialWall = ({}) => {
                 ) : (
                   <Image
                     sx={{
-                      color: theme.palette.grey[500],
+                      color: theme.palette.grey[300],
                       fontSize: "20px",
                       mx: screen870 ? ".2rem" : ".5rem",
                       cursor: "pointer",
@@ -622,7 +622,7 @@ const SocialWall = ({}) => {
                         </Typography>
                         <Typography
                           sx={{
-                            color: theme.palette.grey[700],
+                            color: theme.palette.grey[500],
                             fontWeight: theme.typography.fontWeightLight,
                             fontSize: "10px",
                           }}
@@ -758,7 +758,7 @@ const SocialWall = ({}) => {
                           </Box>
                           <Typography
                             sx={{
-                              color: theme.palette.grey[700],
+                              color: theme.palette.grey[500],
                               fontWeight: theme.typography.fontWeightRegular,
                               fontSize: "10px",
                               cursor: "pointer",
@@ -809,7 +809,7 @@ const SocialWall = ({}) => {
                           </Box>
                           <Typography
                             sx={{
-                              color: theme.palette.grey[700],
+                              color: theme.palette.grey[500],
                               fontWeight: theme.typography.fontWeightRegular,
                               fontSize: "10px",
                               cursor: "pointer",
@@ -846,7 +846,7 @@ const SocialWall = ({}) => {
                           }
                         }}
                         sx={{
-                          color: theme.palette.grey[700],
+                          color: theme.palette.grey[500],
                           fontWeight: theme.typography.fontWeightRegular,
                           fontSize: "10px",
                           cursor: "pointer",

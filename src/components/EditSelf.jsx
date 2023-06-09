@@ -69,7 +69,7 @@ const EditSelf = ({ setSecondaryMenu }) => {
       <Stack
         direction={"row"}
         sx={{
-          bgcolor: theme.palette.grey[500],
+          bgcolor: theme.palette.grey[300],
           height: "200px",
           justifyContent: "center",
           position: "relative",

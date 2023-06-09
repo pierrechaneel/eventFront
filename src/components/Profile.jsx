@@ -328,7 +328,7 @@ const Profile = ({ setSecondaryMenu }) => {
                 ) : (
                   <Typography
                     sx={{
-                      color: theme.palette.grey[500],
+                      color: theme.palette.grey[300],
                       fontWeight: theme.palette.fontWeightLight,
                       fontSize: "12px",
                       mr: ".5rem",
@@ -460,7 +460,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   <Typography
                     sx={{
                       textAlign: "center",
-                      color: theme.palette.grey[500],
+                      color: theme.palette.grey[300],
                       fontWeight: theme.typography.fontWeightLight,
                       fontSize: "12px",
                       //width: "100%",
@@ -498,7 +498,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     <Typography
                       sx={{
                         textAlign: "center",
-                        color: theme.palette.grey[500],
+                        color: theme.palette.grey[300],
                         fontWeight: theme.typography.fontWeightLight,
                         fontSize: "12px",
                         //width: "100%",
@@ -531,7 +531,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     <Typography
                       sx={{
                         textAlign: "center",
-                        color: theme.palette.grey[500],
+                        color: theme.palette.grey[300],
                         fontWeight: theme.typography.fontWeightLight,
                         fontSize: "12px",
                         //width: "100%",
@@ -564,7 +564,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     <Typography
                       sx={{
                         textAlign: "center",
-                        color: theme.palette.grey[500],
+                        color: theme.palette.grey[300],
                         fontWeight: theme.typography.fontWeightLight,
                         fontSize: "12px",
                         //width: "100%",
@@ -597,7 +597,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     <Typography
                       sx={{
                         textAlign: "center",
-                        color: theme.palette.grey[500],
+                        color: theme.palette.grey[300],
                         fontWeight: theme.typography.fontWeightLight,
                         fontSize: "12px",
                         //width: "100%",
@@ -659,7 +659,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   <Typography
                     sx={{
                       textAlign: "center",
-                      color: theme.palette.grey[500],
+                      color: theme.palette.grey[300],
                       fontWeight: theme.typography.fontWeightLight,
                       fontSize: "12px",
                       //width: "100%",
@@ -698,7 +698,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     <Typography
                       sx={{
                         textAlign: "center",
-                        color: theme.palette.grey[500],
+                        color: theme.palette.grey[300],
                         fontWeight: theme.typography.fontWeightLight,
                         fontSize: "12px",
                         //width: "100%",
@@ -731,7 +731,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     <Typography
                       sx={{
                         textAlign: "center",
-                        color: theme.palette.grey[500],
+                        color: theme.palette.grey[300],
                         fontWeight: theme.typography.fontWeightLight,
                         fontSize: "12px",
                         //width: "100%",
@@ -793,7 +793,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   <Typography
                     sx={{
                       textAlign: "center",
-                      color: theme.palette.grey[500],
+                      color: theme.palette.grey[300],
                       fontWeight: theme.typography.fontWeightLight,
                       fontSize: "12px",
                       //width: "100%",
@@ -832,7 +832,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     <Typography
                       sx={{
                         textAlign: "center",
-                        color: theme.palette.grey[500],
+                        color: theme.palette.grey[300],
                         fontWeight: theme.typography.fontWeightLight,
                         fontSize: "12px",
                         //width: "100%",
@@ -865,7 +865,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     <Typography
                       sx={{
                         textAlign: "center",
-                        color: theme.palette.grey[500],
+                        color: theme.palette.grey[300],
                         fontWeight: theme.typography.fontWeightLight,
                         fontSize: "12px",
                         //width: "100%",
@@ -898,7 +898,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     <Typography
                       sx={{
                         textAlign: "center",
-                        color: theme.palette.grey[500],
+                        color: theme.palette.grey[300],
                         fontWeight: theme.typography.fontWeightLight,
                         fontSize: "12px",
                         //width: "100%",
@@ -931,7 +931,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     <Typography
                       sx={{
                         textAlign: "center",
-                        color: theme.palette.grey[500],
+                        color: theme.palette.grey[300],
                         fontWeight: theme.typography.fontWeightLight,
                         fontSize: "12px",
                         //width: "100%",
@@ -977,7 +977,7 @@ const Profile = ({ setSecondaryMenu }) => {
           >
             <Typography
               sx={{
-                color: theme.palette.grey[500],
+                color: theme.palette.grey[300],
                 fontSize: screen660 ? "8px" : "14px",
                 fontWeight: theme.typography.fontWeightRegular,
                 textAlign: "right",

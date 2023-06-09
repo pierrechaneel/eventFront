@@ -340,7 +340,7 @@ const QrCode = ({}) => {
                 />
                 <Typography
                   sx={{
-                    color: theme.palette.grey[700],
+                    color: theme.palette.grey[500],
                     fontWeight: theme.typography.fontWeightRegular,
                     mr: screen870 ? ".2rem" : ".5rem",
                     color: theme.palette.common.white,

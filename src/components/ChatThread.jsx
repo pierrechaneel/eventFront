@@ -421,7 +421,7 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
               </Typography>
               <Typography
                 sx={{
-                  color: theme.palette.grey[700],
+                  color: theme.palette.grey[500],
                   fontWeight: theme.typography.fontWeightLight,
                   fontSize: screen870 ? "8px" : "10px",
                 }}
@@ -550,7 +550,7 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
               </Box>
               <Typography
                 sx={{
-                  color: theme.palette.grey[700],
+                  color: theme.palette.grey[500],
                   fontWeight: theme.typography.fontWeightRegular,
                   fontSize: screen870 ? "8px" : "10px",
                   cursor: "pointer",
@@ -601,7 +601,7 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
               </Box>
               <Typography
                 sx={{
-                  color: theme.palette.grey[700],
+                  color: theme.palette.grey[500],
                   fontWeight: theme.typography.fontWeightRegular,
                   fontSize: screen870 ? "8px" : "10px",
                   cursor: "pointer",
@@ -615,7 +615,7 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
       </Stack>
       <Typography
         sx={{
-          color: theme.palette.grey[700],
+          color: theme.palette.grey[500],
           fontWeight: theme.typography.fontWeightRegular,
           fontSize: screen870 ? "8px" : "10px",
           my: ".5rem",
@@ -689,7 +689,7 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
                     </Typography>
                     <Typography
                       sx={{
-                        color: theme.palette.grey[700],
+                        color: theme.palette.grey[500],
                         fontWeight: theme.typography.fontWeightLight,
                         fontSize: screen870 ? "12px" : "10px",
                       }}
@@ -821,7 +821,7 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
                       </Box>
                       <Typography
                         sx={{
-                          color: theme.palette.grey[700],
+                          color: theme.palette.grey[500],
                           fontWeight: theme.typography.fontWeightRegular,
                           fontSize: screen870 ? "8px" : "10px",
                           cursor: "pointer",
@@ -873,7 +873,7 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
                       </Box>
                       <Typography
                         sx={{
-                          color: theme.palette.grey[700],
+                          color: theme.palette.grey[500],
                           fontWeight: theme.typography.fontWeightRegular,
                           fontSize: screen870 ? "8px" : "10px",
                           cursor: "pointer",
@@ -966,7 +966,7 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
             ) : (
               <Image
                 sx={{
-                  color: theme.palette.grey[500],
+                  color: theme.palette.grey[300],
                   fontSize: "20px",
                   mx: screen870 ? ".2rem" : ".5rem",
                   cursor: "pointer",

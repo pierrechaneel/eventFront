@@ -115,7 +115,7 @@ const ContactsList = ({ screen870, screen660, setIsSwippeableVisible }) => {
               autoFocus={true}
               sx={{
                 fontSize: "12px",
-                color: theme.palette.grey[500],
+                color: theme.palette.grey[300],
                 width: "100%",
               }}
             />

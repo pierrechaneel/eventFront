@@ -66,7 +66,7 @@ END:VCARD\n`;
     >
       <Typography
         sx={{
-          color: theme.palette.grey[500],
+          color: theme.palette.grey[300],
           fontWeight: theme.typography.fontWeightRegular,
           fontSize: screen870 ? "10px" : "10px",
           textAlign: "center",

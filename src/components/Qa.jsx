@@ -114,7 +114,7 @@ const Qa = ({}) => {
                 >
                   <Typography
                     sx={{
-                      color: theme.palette.grey[700],
+                      color: theme.palette.grey[500],
                       fontSize: "9px",
                       fontWeight: theme.typography.fontWeightBold,
                       fontSize: "14px",

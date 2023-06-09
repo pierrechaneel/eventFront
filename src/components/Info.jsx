@@ -258,7 +258,7 @@ const Info = ({}) => {
                       >
                         <Typography
                           sx={{
-                            color: theme.palette.grey[500],
+                            color: theme.palette.grey[300],
                             fontSize: "12px",
                             fontWeight: theme.typography.fontWeightLight,
                           }}
@@ -291,7 +291,7 @@ const Info = ({}) => {
                       >
                         <Typography
                           sx={{
-                            color: theme.palette.grey[500],
+                            color: theme.palette.grey[300],
                             fontSize: "12px",
                             fontWeight: theme.typography.fontWeightLight,
                           }}

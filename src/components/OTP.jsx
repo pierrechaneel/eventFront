@@ -221,7 +221,7 @@ const OTP = ({}) => {
             <Box
               sx={{
                 height: "1px",
-                bgcolor: theme.palette.grey[500],
+                bgcolor: theme.palette.grey[300],
                 mr: "2rem",
                 width: "5vw",
                 minWidth: "50px",
@@ -230,7 +230,7 @@ const OTP = ({}) => {
             <Typography
               component={"h3"}
               sx={{
-                color: theme.palette.grey[500],
+                color: theme.palette.grey[300],
                 fontSize: screen870 ? "14px" : "16px",
                 fopntWeight: theme.typography.fontWeightLight,
                 m: 0,
@@ -243,7 +243,7 @@ const OTP = ({}) => {
             <Box
               sx={{
                 height: "1px",
-                bgcolor: theme.palette.grey[500],
+                bgcolor: theme.palette.grey[300],
                 ml: "2rem",
                 width: "5vw",
                 minWidth: "50px",
@@ -316,7 +316,7 @@ const OTP = ({}) => {
           </form>
           <Typography
             sx={{
-              color: theme.palette.grey[500],
+              color: theme.palette.grey[300],
               fontWeight: theme.typography.fontWeightLight,
               textAlign: "center",
               position: "absolute",

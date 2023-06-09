@@ -309,7 +309,7 @@ const Agenda = ({}) => {
                   setIsSwippeableVisible(true);
                 }}
                 sx={{
-                  color: theme.palette.grey[500],
+                  color: theme.palette.grey[300],
                   fontSize: "12px",
                   fontWeight: theme.typography.fontWeightLight,
                   "&:hover": {
@@ -488,7 +488,7 @@ const Agenda = ({}) => {
                         />
                         <Typography
                           sx={{
-                            color: theme.palette.grey[500],
+                            color: theme.palette.grey[300],
                             fontWeight: theme.typography.fontWeightRegular,
                             fontSize: "12px",
                           }}
@@ -523,7 +523,7 @@ const Agenda = ({}) => {
                     <AccordionDetails>
                       <Typography
                         sx={{
-                          color: theme.palette.grey[500],
+                          color: theme.palette.grey[300],
                           fontSize: "12px",
                           fontWeight: theme.typography.fontWeightRegular,
                         }}

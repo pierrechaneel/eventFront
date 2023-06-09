@@ -431,14 +431,14 @@ const AppLayout = ({ children }) => {
                   "&:hover": {
                     "& *": {
                       transition: `all .3s`,
-                      color: theme.palette.grey[300],
+                      color: theme.palette.grey[200],
                     },
                   },
                 }}
               >
                 <Logout
                   sx={{
-                    color: theme.palette.grey[500],
+                    color: theme.palette.grey[300],
                     fontSize: "18px",
                   }}
                 />
@@ -447,7 +447,7 @@ const AppLayout = ({ children }) => {
                 ) : (
                   <Typography
                     sx={{
-                      color: theme.palette.grey[500],
+                      color: theme.palette.grey[300],
                       fontSize: "13px",
                       ml: ".3rem",
                     }}

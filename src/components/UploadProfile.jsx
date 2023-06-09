@@ -95,7 +95,7 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
           sx={{
             width: "100%",
             p: "2rem",
-            bgcolor: theme.palette.grey[300],
+            bgcolor: theme.palette.grey[200],
             alignItems: "center",
           }}
         >
@@ -128,7 +128,7 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
               >
                 <Image
                   sx={{
-                    color: theme.palette.grey[700],
+                    color: theme.palette.grey[500],
                     fontSize: "100px",
                   }}
                 />

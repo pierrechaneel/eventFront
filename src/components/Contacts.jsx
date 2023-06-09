@@ -363,7 +363,7 @@ const Contacts = ({}) => {
                     setIsSwippeableVisible(true);
                   }}
                   sx={{
-                    color: theme.palette.grey[500],
+                    color: theme.palette.grey[300],
                     fontSize: "12px",
                     fontWeight: theme.typography.fontWeightLight,
                     "&:hover": {
@@ -413,7 +413,7 @@ const Contacts = ({}) => {
                 <Typography
                   sx={{
                     textAlign: "center",
-                    color: theme.palette.grey[700],
+                    color: theme.palette.grey[500],
                     fontWeight: theme.typography.fontWeightMedium,
                     fontSize: "14px",
                   }}
@@ -571,7 +571,7 @@ const Contacts = ({}) => {
                                       </Stack>
                                       <Typography
                                         sx={{
-                                          color: theme.palette.grey[500],
+                                          color: theme.palette.grey[300],
                                           fontSize: screen870 ? "8px" : "10px",
                                           mt: ".2rem",
                                           mx: ".5rem",
