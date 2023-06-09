@@ -639,7 +639,7 @@ const SocialWall = ({}) => {
                         </Typography>
                       </Stack>
 
-                      {post.authorPic === guest?.profile ? (
+                      {post.authorName === guest?.fullName ? (
                         <IconButton
                           onClick={(event) => {
                             console.log("post to remove from list", post);

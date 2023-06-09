@@ -437,7 +437,7 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
                 )}
               </Typography>
             </Stack>
-            {threadData.authorPic === guest?.profile ? (
+            {threadData.authorName === guest?.fullName ? (
               <IconButton
                 onClick={(event) => {
                   console.log("post to remove from list", threadData);
@@ -705,7 +705,7 @@ const ChatThread = ({ threadData, isThreaVisible, setISThreadVisisble }) => {
                       )}
                     </Typography>
                   </Stack>
-                  {post.authorPic === guest?.profile ? (
+                  {post.authorName === guest?.fullName ? (
                     <IconButton
                       onClick={(event) => {
                         console.log("post to remove from list", post);
