@@ -163,17 +163,22 @@ const OTP = ({}) => {
       <Head>
         <title>Code OTP</title>
       </Head>
-      <Box
+      <Stack
+        direction={"column"}
         sx={{
           width: "100vw",
-          height: "100%",
+          height: "max-content",
           backgroundImage: "url('/web_events_okapi.svg')",
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
+          // bacgroundAttachement: "fixed",
           minHeight: "100vh",
+          flexGrow: 1,
+          // minHeight: "100vh",
           m: 0,
           p: 0,
+          // overflow: "hidden",
         }}
       >
         <Stack
@@ -181,11 +186,17 @@ const OTP = ({}) => {
           sx={{
             bgcolor: `#000000CF`,
             width: "100%",
-            height: "100%",
+            height: "max-content",
             alignItems: "center",
             justifyContent: "center",
-            minHeight: "100vh",
-            position: "relative",
+            // maxHeight: "max-content",
+            height: "max-content",
+            minHeight: "100%",
+            //overflowY: "auto",
+            px: screen870 ? "1rem" : "2rem",
+            py: "2rem",
+            flexGrow: 1,
+            //  pt: screen660 ? "10rem" : undefined,
           }}
         >
           <Typography
@@ -228,7 +239,7 @@ const OTP = ({}) => {
                 height: "1px",
                 bgcolor: theme.palette.grey[300],
                 flexGrow: 1,
-                minWidth: "50px",
+                maxWidth: "4rem",
               }}
             ></Box>
             <Typography
@@ -250,7 +261,7 @@ const OTP = ({}) => {
                 height: "1px",
                 bgcolor: theme.palette.grey[300],
                 flexGrow: 1,
-                minWidth: "50px",
+                maxWidth: "4rem",
               }}
             ></Box>
           </Stack>
@@ -269,8 +280,8 @@ const OTP = ({}) => {
                   alignItems: "center",
                   width: "max-content",
                   border: `2px solid ${theme.palette.common.white}`,
-                  px: ".5rem",
-                  py: ".2rem",
+                  px: screen870 ? ".2rem" : ".5rem",
+                  py: screen870 ? ".1rem" : ".2rem",
                   mt: "1.5rem",
                   maxWidth: "90%",
                 }}
@@ -291,6 +302,7 @@ const OTP = ({}) => {
                   sx={{
                     color: theme.palette.common.white,
                     fontSize: "12px",
+                    width: screen870 ? "10rem" : "12rem",
                   }}
                 />
               </Stack>
@@ -305,8 +317,8 @@ const OTP = ({}) => {
                   />
                 }
                 sx={{
-                  px: "1.5rem",
-                  py: ".7rem",
+                  px: screen870 ? "1rem" : "1.5rem",
+                  py: screen870 ? ".2rem" : ".7rem",
                   bgcolor: theme.palette.common.black,
                   borderRadius: "0px",
                   mt: "1.2rem",
@@ -325,17 +337,18 @@ const OTP = ({}) => {
               color: theme.palette.grey[300],
               fontWeight: theme.typography.fontWeightLight,
               textAlign: "center",
-              position: "absolute",
-              bottom: "2rem",
+              // position: "absolute",
+              /**    bottom: "2rem",*/
               fontSize: "10px",
               maxWidth: screen870 ? "90%" : "60%",
+              pt: "2rem",
             }}
           >
-            Powered by Orange RDC Developers Team. All rights reserved
+            Powered by Orange RDC Developers Team. <br /> All rights reserved
             &copy;Orange RDC SA {new Date().getFullYear()}
           </Typography>
         </Stack>
-      </Box>
+      </Stack>
     </Box>
   );
 };

@@ -41,7 +41,7 @@ const Welcome = ({}) => {
     <Box
       sx={{
         width: "100vw",
-        height: "100vh",
+        // height: "100vh",
       }}
     >
       <Head>
@@ -50,17 +50,18 @@ const Welcome = ({}) => {
       <Box
         sx={{
           width: "100vw",
-          height: "100%",
+          height: "max-content",
           backgroundImage: "url('/web_events_okapi.svg')",
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           // bacgroundAttachement: "fixed",
-          minHeight: "100vh",
-          minHeight: "100vh",
+          minHeight: "100%",
+          flexGrow: 1,
+          // minHeight: "100vh",
           m: 0,
           p: 0,
-          overflow: "hidden",
+          // overflow: "hidden",
         }}
       >
         <Stack
@@ -68,14 +69,17 @@ const Welcome = ({}) => {
           sx={{
             bgcolor: `#000000CF`,
             width: "100%",
-            height: "100%",
+            height: "max-content",
             alignItems: "center",
             justifyContent: "center",
-            maxHeight: "100vh",
+            // maxHeight: "max-content",
+            height: "max-content",
             minHeight: "100vh",
-            overflowY: "auto",
-            px: "2rem",
-            pt: screen660 ? "10rem" : undefined,
+            //overflowY: "auto",
+            px: screen870 ? "1rem" : "2rem",
+            py: "2rem",
+            flexGrow: 1,
+            //  pt: screen660 ? "10rem" : undefined,
           }}
         >
           <Typography
@@ -118,7 +122,7 @@ const Welcome = ({}) => {
                 height: "1px",
                 bgcolor: theme.palette.grey[300],
                 flexGrow: 1,
-                minWidth: "50px",
+                maxWidth: "4rem",
               }}
             ></Box>
             <Typography
@@ -140,7 +144,7 @@ const Welcome = ({}) => {
                 height: "1px",
                 bgcolor: theme.palette.grey[300],
                 flexGrow: 1,
-                minWidth: "50px",
+                maxWidth: "4rem",
               }}
             ></Box>
           </Stack>
@@ -166,7 +170,9 @@ const Welcome = ({}) => {
                     py: screen660 ? ".5rem" : "1.2rem",
                     border: `2px solid ${theme.palette.primary.main}`,
                     alignItems: "center",
-                    minWidth: "150px",
+                    width: "30%",
+                    minWidth: "250px",
+                    maxWidth: "300px",
                     maxWidth: "300px",
                     "&:hover": {
                       transition: `all .3s`,
