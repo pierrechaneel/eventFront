@@ -152,8 +152,8 @@ const AppLayout = ({ children }) => {
         );
       })();
 
-      if (guestObj && loggedIn) {
-        // setLoggedIn(true);
+      if (Object.keys(guestObj)?.length > 3) {
+        setLoggedIn(true);
 
         setGuest(guestObj);
 
