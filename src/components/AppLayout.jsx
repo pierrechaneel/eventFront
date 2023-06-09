@@ -510,7 +510,7 @@ const AppLayout = ({ children }) => {
                   direction={"row"}
                   sx={{
                     alignItems: "center",
-                    width: "100%",
+                    width: "max-content",
                     heigth: "100%",
                   }}
                 >
@@ -526,7 +526,7 @@ const AppLayout = ({ children }) => {
                       }
                     }}
                     sx={{
-                      mr: ".3rem",
+                      mr: ".1rem",
                     }}
                   >
                     <Menu
@@ -537,14 +537,23 @@ const AppLayout = ({ children }) => {
                       }}
                     />
                   </IconButton>
-                  <img
-                    src={"/saio.png"}
-                    alt="orange zone saio"
-                    style={{
-                      width: screen660 ? "75px" : "120px",
+                  <Typography
+                    sx={{
+                      color: theme.palette.common.white,
+                      fontSize: "12px",
+                      fontWeight: theme.typography.fontWeightMedium,
                     }}
-                  />
+                  >
+                    Menu
+                  </Typography>
                 </Stack>
+                <img
+                  src={"/saio.png"}
+                  alt="orange zone saio"
+                  style={{
+                    width: screen660 ? "75px" : "120px",
+                  }}
+                />
                 {screen870 ? (
                   ""
                 ) : (
@@ -557,12 +566,14 @@ const AppLayout = ({ children }) => {
                     }}
                   >
                     <Typography
+                      component={"span"}
                       sx={{
                         color: theme.palette.primary.main,
                         fontWeight: theme.typography.fontWeightBold,
                         fontSize: "16px",
                         whiteSpace: "nowrap",
                         fontSize: screen870 ? "14px" : "16px",
+                        width: "max-content",
                       }}
                     >
                       {guest?.event?.subject
@@ -571,12 +582,14 @@ const AppLayout = ({ children }) => {
                     </Typography>
                     {"."}
                     <Typography
+                      component={"span"}
                       sx={{
                         color: theme.palette.common.white,
                         fontWeight: theme.typography.fontWeightBold,
                         fontSize: "16px",
                         whiteSpace: "nowrap",
                         fontSize: screen870 ? "14px" : "16px",
+                        width: "max-content",
                       }}
                     >
                       {guest?.event?.subject?.split(" ").slice(1)?.join(" ")}
