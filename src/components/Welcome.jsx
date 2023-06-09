@@ -56,7 +56,7 @@ const Welcome = ({}) => {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           // bacgroundAttachement: "fixed",
-          minHeight: "100%",
+          minHeight: "100vh",
           flexGrow: 1,
           // minHeight: "100vh",
           m: 0,
