@@ -435,7 +435,7 @@ const SocialWall = ({}) => {
             direction={"row"}
             sx={{
               alignItems: "center",
-              pb: "1rem",
+              pb: screen660 ? ".5rem" : "1rem",
               borderBottom: `1px solid ${theme.palette.grey[900]}`,
               justifyContent: "space-between",
             }}

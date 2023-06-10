@@ -86,10 +86,10 @@ const BottomSwippeable = (props) => {
       </StyledBox>
       <StyledBox
         sx={{
-          px: 2,
-          pb: 2,
+          px: ".1rem",
+          pb: ".3rem",
           height: "100%",
-          overflow: "auto",
+          overflow: "hidden",
         }}
       >
         {props?.defaultSwippeableContent}

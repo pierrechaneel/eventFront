@@ -38,8 +38,8 @@ const MenuItems = ({ apps }) => {
             direction={"column"}
             sx={{
               alignItems: "center",
-              mx: "1.5vw",
-              mt: ".3rem",
+              mx: ".7vw",
+              mt: "..2rem",
               minwidth: "50px",
               cursor: "pointer",
               justifyContent: "space-between",
