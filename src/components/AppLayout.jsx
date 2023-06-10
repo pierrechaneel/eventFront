@@ -79,7 +79,15 @@ const AppLayout = ({ children }) => {
     if (!loggedIn || !sentTrafficData) {
       console.log("guest is not logged in");
 
-      let guestObj = JSON.parse(window.sessionStorage.getItem("guest"));
+      let guestObj = {};
+
+      try {
+        guestObj = JSON.parse(window.sessionStorage.getItem("guest"));
+      } catch (error) {
+        console.log("no active sesssion guest data found");
+
+        router.push("/");
+      }
 
       console.log("guest object def received", guestObj);
 

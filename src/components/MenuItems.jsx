@@ -63,6 +63,11 @@ const MenuItems = ({ apps }) => {
                   : theme.palette.grey[500],
                 fontSize: "11px",
                 textAlign: "center",
+                whiteSpace: "nowrap",
+                maxWidth: "13vw",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
               }}
             >
               {target?.title}

@@ -5,6 +5,7 @@ import { SocketCtx } from "./socket";
 import configs from "../configs/generals.json";
 import axios from "axios";
 import GuestContext, { GuestCtx } from "./guest";
+import { useRouter } from "next/router";
 
 const postCtx = React.createContext({});
 
@@ -13,12 +14,22 @@ const PostContext = ({ children }) => {
 
   const posts = React.useRef([]);
 
+  const router = useRouter();
+
   const [threadData, setThreadData] = React.useState({});
 
   const socket = React.useContext(SocketCtx).subsSocket;
 
   React.useEffect(() => {
-    const guest = JSON.parse(window.sessionStorage.getItem("guest"));
+    let guest = {};
+
+    try {
+      guest = JSON.parse(window.sessionStorage.getItem("guest"));
+    } catch (error) {
+      console.log("no active sesssion guest data found");
+
+      router.push("/");
+    }
 
     console.log("current guest from posts context", guest);
 

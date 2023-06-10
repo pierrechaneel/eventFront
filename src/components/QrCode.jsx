@@ -139,7 +139,7 @@ const QrCode = ({}) => {
             l’organisation politique, administrative et territoriale. Elle est
             entourée de 9 pays frontaliers : République du Congo, République
             Centrafricaine, Sud-Soudan, Ouganda, Rwanda, Burundi, Tanzanie,
-            Zambie et Angola. Au nom du`
+            Zambie et Angola. Du fait de sa position géographique, elle est à la fois membre de la Communauté de Développement de l’Afrique Australe et de la Communauté de l’Afrique de l’Est. Au nom du`
                   : `, I welcome you to the Democratic Republic of Congo,
             a large country with immense economic resources. The Republic
             Democratic Republic of the Congo is at the center of the African continent and is
@@ -147,7 +147,7 @@ const QrCode = ({}) => {
             political, administrative and territorial organization. It is
             surrounded by 9 border countries: Republic of Congo, Republic
             Central African Republic, South Sudan, Uganda, Rwanda, Burundi, Tanzania,
-            Zambia and Angola. On behalf of the`}{" "}
+            Zambia and Angola. Due to its geographical position, it is both a member of the Southern African Development Community and the East African Community. On behalf of the`}{" "}
                 <Typography
                   component={"span"}
                   sx={{
@@ -172,16 +172,8 @@ const QrCode = ({}) => {
                   {lang === "fr" ? `collègues` : `collegues`}
                 </Typography>{" "}
                 {lang === "fr"
-                  ? ` , je vous souhaite, à toi et ta délégation, la bienvenue à Kinshasa,
-            capitale de la République Démocratique du Congo. A toutes fins
-            utiles, le Responsable de la Sécurité physique se tient à votre
-            disposition pour toute question liée à votre sécurité durant votre
-            visite chez`
-                  : `, I wish you and your delegation a warm welcome to Kinshasa,
-            capital of the Democratic Republic of Congo. For all purposes
-            useful, the Physical Security Manager is at your
-            disposal for any question related to your safety during your
-            home visit`}{" "}
+                  ? ` , je te souhaite une chaleureuse bienvenue à Kinshasa, capitale de la République Démocratique du Congo. A toutes fins utiles, la rubrique « sécurité et contacts utiles » te donne accès à des personnes ressources qui se tiendront avec plaisir à ta disposition pour rendre ta visite agréable chez`
+                  : `, I wish you a warm welcome to Kinshasa, capital of the Democratic Republic of Congo. For all intents and purposes, the "Safety and Useful contacts" menu gives you access to resource persons who will be happy to be at your disposal to make your visit pleasant at`}{" "}
                 <Typography
                   component={"span"}
                   sx={{

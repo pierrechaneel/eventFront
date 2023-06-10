@@ -45,7 +45,7 @@ const ViewportsContext = ({ children }) => {
 
   const [apps, setApps] = React.useState([
     {
-      title: lang === "fr" ? "Acceuil" : "Home",
+      title: lang === "fr" ? "Accueil" : "Home",
       link: `/guests/${guestObj?.accessKey}/qrcode`,
       icon: (props) => <Home {...props} />,
     },
@@ -60,12 +60,15 @@ const ViewportsContext = ({ children }) => {
       icon: (props) => <ViewAgenda {...props} />,
     },
     {
-      title: "Contacts",
+      title: lang === "fr" ? "Réseautage" : "Networking",
       link: `/guests/${guestObj?.accessKey}/contacts`,
       icon: (props) => <People {...props} />,
     },
     {
-      title: "Informations",
+      title:
+        lang === "fr"
+          ? "Sécurité et Contacts utiles"
+          : "Safety and Useful contacts",
       link: `/guests/${guestObj?.accessKey}/infos`,
       icon: (props) => <Info {...props} />,
     },
@@ -75,7 +78,7 @@ const ViewportsContext = ({ children }) => {
       icon: (props) => <LiveTv {...props} />,
     },
     {
-      title: "Networking",
+      title: lang === "fr" ? "Instant partage" : "Sharing",
       link: `/guests/${guestObj?.accessKey}/social-wall`,
       icon: (props) => <PostAdd {...props} />,
     },
@@ -83,12 +86,20 @@ const ViewportsContext = ({ children }) => {
 
   // console.log("current language", { lang });
   React.useEffect(() => {
-    let guestObj = JSON.parse(window.sessionStorage.getItem("guest"));
+    let guestObj = {};
+
+    try {
+      guestObj = JSON.parse(window.sessionStorage.getItem("guest"));
+    } catch (error) {
+      console.log("no active sesssion guest data found");
+
+      router.push("/");
+    }
 
     if (guestObj) {
       const menuApps = [
         {
-          title: lang === "fr" ? "Acceuil" : "Home",
+          title: lang === "fr" ? "Accueil" : "Home",
           link: `/guests/${guestObj?.accessKey}/qrcode`,
           icon: (props) => <Home {...props} />,
         },
@@ -103,12 +114,15 @@ const ViewportsContext = ({ children }) => {
           icon: (props) => <ViewAgenda {...props} />,
         },
         {
-          title: "Contacts",
+          title: lang === "fr" ? "Réseautage" : "Networking",
           link: `/guests/${guestObj?.accessKey}/contacts`,
           icon: (props) => <People {...props} />,
         },
         {
-          title: "Informations",
+          title:
+            lang === "fr"
+              ? "Sécurité et Contacts utiles"
+              : "Safety and Useful contacts",
           link: `/guests/${guestObj?.accessKey}/infos`,
           icon: (props) => <Info {...props} />,
         },
@@ -118,7 +132,7 @@ const ViewportsContext = ({ children }) => {
           icon: (props) => <LiveTv {...props} />,
         },
         {
-          title: "Networking",
+          title: lang === "fr" ? "Instant partage" : "Sharing",
           link: `/guests/${guestObj?.accessKey}/social-wall`,
           icon: (props) => <PostAdd {...props} />,
         },

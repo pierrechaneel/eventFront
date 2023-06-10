@@ -20,12 +20,22 @@ const GuestContext = ({ children }) => {
     setIsnackVisible(false);
   };
 
+  const router = useRouter();
+
   const [snackMessage, setSnackMessage] = React.useState("");
   const [isSnackVisible, setIsnackVisible] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
 
   React.useEffect(() => {
-    let guestObj = JSON.parse(window.sessionStorage.getItem("guest"));
+    let guestObj = {};
+
+    try {
+      guestObj = JSON.parse(window.sessionStorage.getItem("guest"));
+    } catch (error) {
+      console.log("no active sesssion guest data found");
+
+      router.push("/");
+    }
 
     console.log("guest oibject def received", guestObj);
 

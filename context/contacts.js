@@ -3,6 +3,7 @@
 import axios from "axios";
 import * as React from "react";
 import configs from "../configs/generals.json";
+import { useRouter } from "next/router";
 
 const contactsCtx = React.createContext({
   chatSubject: null,
@@ -24,11 +25,21 @@ const ContactsContext = ({ children }) => {
 
   const [guest, setGuest] = React.useState({});
 
+  const router = useRouter();
+
   React.useEffect(() => {
     (async () => {
       console.log("chat thread base value", chatSubject);
 
-      const guest = JSON.parse(window.sessionStorage.getItem("guest"));
+      let guest = {};
+
+      try {
+        guest = JSON.parse(window.sessionStorage.getItem("guest"));
+      } catch (error) {
+        console.log("no active sesssion guest data found");
+
+        router.push("/");
+      }
 
       setGuest(guest);
 
