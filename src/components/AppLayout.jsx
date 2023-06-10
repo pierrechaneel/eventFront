@@ -406,7 +406,8 @@ const AppLayout = ({ children }) => {
                               : theme.palette.grey[500],
                             fontSize: "12px",
                             ml: ".7rem",
-                            textAlign: "center",
+                            textAlign: "left",
+                            lineHeight: "1",
                           }}
                         >
                           {target?.title}

@@ -62,7 +62,7 @@ const MenuItems = ({ apps }) => {
                   ? theme.palette.primary.main
                   : theme.palette.grey[500],
                 fontSize: "11px",
-                textAlign: "center",
+                //textAlign: "center",
                 whiteSpace: "nowrap",
                 maxWidth: "13vw",
                 whiteSpace: "nowrap",
