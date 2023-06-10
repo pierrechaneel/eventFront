@@ -76,6 +76,10 @@ const PostContext = ({ children }) => {
               if (target?.id === result?.data?.result[0]?.id) {
                 postRows[index] = result?.data?.result[0];
 
+                if (threadData?.id === result?.data?.result[0]?.id) {
+                  setThreadData(result?.data?.result[0]);
+                }
+
                 return true;
               } else {
                 let isComment = false;
@@ -158,7 +162,7 @@ const PostContext = ({ children }) => {
       socket.off("NEW_LIKE");
       socket.off("POST_REMOVED");
     };
-  }, []);
+  }, [threadData]);
 
   return (
     <postCtx.Provider

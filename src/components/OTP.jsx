@@ -246,7 +246,7 @@ const OTP = ({}) => {
               component={"h3"}
               sx={{
                 color: theme.palette.grey[300],
-                fontSize: screen660 ? "10px" : screen870 ? "12px" : "14px",
+                fontSize: screen660 ? "11px" : screen870 ? "12px" : "14px",
                 fopntWeight: theme.typography.fontWeightLight,
                 m: 0,
                 textAlign: "center",
@@ -339,7 +339,7 @@ const OTP = ({}) => {
               textAlign: "center",
               // position: "absolute",
               /**    bottom: "2rem",*/
-              fontSize: "10px",
+              fontSize: "11px",
               maxWidth: screen870 ? "90%" : "60%",
               pt: "2rem",
             }}

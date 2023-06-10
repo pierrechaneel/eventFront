@@ -195,7 +195,7 @@ const Agenda = ({}) => {
                       currentMenu === target
                         ? theme.typography.fontWeightMedium
                         : theme.typography.fontWeightLight,
-                    fontSize: "10px",
+                    fontSize: "11px",
                     px: ".5rem",
                     py: ".5rem",
                     textTransform: "capitalize",
@@ -231,8 +231,8 @@ const Agenda = ({}) => {
         sx={{
           alignItems: "flex-end",
           px: "2rem",
-          pb: "1rem",
-          pt: "2rem",
+          pb: screen660 ? ".5rem" : "1rem",
+          pt: screen660 ? "1rem" : "2rem",
           bgcolor: theme.palette.common.black,
           width: "100%",
           borderRadius: "1.5rem",
@@ -241,11 +241,11 @@ const Agenda = ({}) => {
         <Typography
           sx={{
             color: theme.palette.common.white,
-            fontSize: "16px",
-            fontWeight: theme.typography.fontWeightThin,
+            fontSize: screen660 ? "14px" : "16px",
+            fontWeight: theme.typography.fontWeightBold,
           }}
         >
-          {lang === "fr" ? "MON AGENDA" : "MY AGENDA"}
+          {lang === "fr" ? "Mon Agenda" : "My Agenda"}
         </Typography>
       </Stack>
       <Stack
@@ -254,7 +254,7 @@ const Agenda = ({}) => {
           alignItems: "flex-start",
           width: "100%",
           flexWrap: "no-wrap",
-          mt: "1rem",
+          mt: screen660 ? ".5rem" : "1rem",
           py: "2rem",
           px: screen ? "1rem" : "2rem",
           height: "100%",
@@ -364,7 +364,7 @@ const Agenda = ({}) => {
                           alignItems: "center",
                           px: ".5rem",
                           py: ".2rem",
-                          borderRadius: "10px",
+                          borderRadius: "11px",
                           bgcolor:
                             new Date(target?.date).getTime() >= Date.now()
                               ? theme.palette.primary.main

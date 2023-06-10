@@ -439,7 +439,7 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
                 sx={{
                   color: theme.palette.grey[500],
                   fontWeight: theme.typography.fontWeightLight,
-                  fontSize: screen870 ? "8px" : "10px",
+                  fontSize: screen870 ? "8px" : "11px",
                 }}
               >
                 {new Date(threadData?.createdAt).toLocaleDateString(
@@ -476,7 +476,7 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
             sx={{
               color: theme.palette.common.white,
               fontWeight: theme.typography.fontWeightRegular,
-              fontSize: screen870 ? "10px" : "12px",
+              fontSize: screen870 ? "11px" : "12px",
             }}
           >
             {threadData?.textContent}
@@ -568,7 +568,7 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
                 sx={{
                   color: theme.palette.grey[500],
                   fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: screen870 ? "8px" : "10px",
+                  fontSize: screen870 ? "8px" : "11px",
                   cursor: "pointer",
                 }}
               >
@@ -619,7 +619,7 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
                 sx={{
                   color: theme.palette.grey[500],
                   fontWeight: theme.typography.fontWeightRegular,
-                  fontSize: screen870 ? "8px" : "10px",
+                  fontSize: screen870 ? "8px" : "11px",
                   cursor: "pointer",
                 }}
               >
@@ -633,7 +633,7 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
         sx={{
           color: theme.palette.grey[500],
           fontWeight: theme.typography.fontWeightRegular,
-          fontSize: screen870 ? "8px" : "10px",
+          fontSize: screen870 ? "8px" : "11px",
           my: ".5rem",
         }}
       >
@@ -707,7 +707,7 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
                       sx={{
                         color: theme.palette.grey[500],
                         fontWeight: theme.typography.fontWeightLight,
-                        fontSize: screen870 ? "12px" : "10px",
+                        fontSize: screen870 ? "12px" : "11px",
                       }}
                     >
                       {new Date(post?.createdAt).toLocaleDateString(
@@ -744,7 +744,7 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
                   sx={{
                     color: theme.palette.common.white,
                     fontWeight: theme.typography.fontWeightRegular,
-                    fontSize: screen870 ? "10px" : "12px",
+                    fontSize: screen870 ? "11px" : "12px",
                   }}
                 >
                   {post?.textContent}
@@ -839,7 +839,7 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
                         sx={{
                           color: theme.palette.grey[500],
                           fontWeight: theme.typography.fontWeightRegular,
-                          fontSize: screen870 ? "8px" : "10px",
+                          fontSize: screen870 ? "8px" : "11px",
                           cursor: "pointer",
                         }}
                       >
@@ -891,7 +891,7 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
                         sx={{
                           color: theme.palette.grey[500],
                           fontWeight: theme.typography.fontWeightRegular,
-                          fontSize: screen870 ? "8px" : "10px",
+                          fontSize: screen870 ? "8px" : "11px",
                           cursor: "pointer",
                         }}
                       >

@@ -29,6 +29,7 @@ const Info = ({}) => {
   const lang = React.useContext(LangCtx).lang;
 
   const screen870 = React.useContext(viewportsCtx)?.screen870;
+  const screen660 = React.useContext(viewportsCtx)?.screen660;
 
   const [expanded, setExpanded] = React.useState(false);
 
@@ -144,7 +145,7 @@ const Info = ({}) => {
           height: "max-content",
           maxHeight: "max-content",
           width: screen870 ? "100%" : "70%",
-          p: "2rem",
+          p: screen870 ? "1rem" : "2rem",
           bgcolor: theme.palette.common.black,
           overflowX: "hidden",
           borderRadius: "1.5rem",
@@ -157,8 +158,8 @@ const Info = ({}) => {
           style={{
             width: "100%",
             borderRadius: "1.5rem",
-            marginTop: "1.5rem",
-            marginBottom: "1.5rem",
+            marginTop: screen660 ? ".5rem" : screen870 ? "1rem" : "1.5rem",
+            marginBottom: screen660 ? ".5rem" : screen870 ? "1rem" : "1.5rem",
           }}
         />
         <DownloadContacts contacts={contacts} />
@@ -168,7 +169,7 @@ const Info = ({}) => {
             width: "100%",
             borderRadius: "1.5rem",
             bgcolor: "#FFFFFF10",
-            p: "2rem",
+            p: screen660 ? ".5rem" : screen870 ? "1rem" : "2rem",
           }}
         >
           <Typography
@@ -176,7 +177,7 @@ const Info = ({}) => {
               color: theme.palette.common.white,
               fontWeight: theme.typography.fontWeightRegular,
               fontSize: "14px",
-              mb: "1rem",
+              mb: screen660 ? ".5rem" : "1rem",
             }}
           >
             {lang === "fr" ? "Numéros importants" : "Imrtant phone numbers"}
@@ -323,7 +324,7 @@ const Info = ({}) => {
           bgcolor: theme.palette.common.black,
           borderRadius: "1.5rem",
           overflow: "hidden",
-          mt: screen870 ? "1.5rem" : undefined,
+          mt: screen660 ? ".5rem" : screen870 ? "1rem" : undefined,
         }}
       >
         <img
@@ -339,7 +340,7 @@ const Info = ({}) => {
           direction={"column"}
           sx={{
             alignItems: "center",
-            p: "1rem",
+            p: screen660 ? ".5rem" : "1rem",
             overflowX: "hidden",
             flexGrow: 1,
             height: "max-content",
@@ -358,6 +359,7 @@ const Info = ({}) => {
               bgcolor: "#FFFFFF10",
               m: ".5rem",
               height: "max-content",
+              mb: screen660 ? "0rem" : undefined,
             }}
           >
             <Typography
@@ -373,7 +375,7 @@ const Info = ({}) => {
               sx={{
                 color: theme.palette.common.white,
                 fontWeight: theme.typography.fontWeightThin,
-                fontSize: "10px",
+                fontSize: "11px",
               }}
             >
               {lang === "fr"
@@ -453,7 +455,7 @@ const Info = ({}) => {
                       sx={{
                         color: theme.palette.common.white,
                         fontWeight: theme.typography.fontWeightThin,
-                        fontSize: "10px",
+                        fontSize: "11px",
                         p: 0,
                         m: 0,
                       }}
@@ -517,7 +519,7 @@ const Info = ({}) => {
                       sx={{
                         color: theme.palette.common.white,
                         fontWeight: theme.typography.fontWeightThin,
-                        fontSize: "10px",
+                        fontSize: "11px",
                         p: 0,
                         m: 0,
                       }}
@@ -578,7 +580,7 @@ const Info = ({}) => {
                       sx={{
                         color: theme.palette.common.white,
                         fontWeight: theme.typography.fontWeightThin,
-                        fontSize: "10px",
+                        fontSize: "11px",
                         p: 0,
                         m: 0,
                       }}
@@ -665,7 +667,7 @@ const Info = ({}) => {
                         sx={{
                           color: theme.palette.common.white,
                           fontWeight: theme.typography.fontWeightThin,
-                          fontSize: "10px",
+                          fontSize: "11px",
                           p: 0,
                           m: 0,
                         }}
@@ -690,7 +692,7 @@ const Info = ({}) => {
                         sx={{
                           color: theme.palette.common.white,
                           fontWeight: theme.typography.fontWeightThin,
-                          fontSize: "10px",
+                          fontSize: "11px",
                           p: 0,
                           m: 0,
                         }}
@@ -715,7 +717,7 @@ const Info = ({}) => {
                         sx={{
                           color: theme.palette.common.white,
                           fontWeight: theme.typography.fontWeightThin,
-                          fontSize: "10px",
+                          fontSize: "11px",
                           p: 0,
                           m: 0,
                         }}

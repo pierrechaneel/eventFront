@@ -9,6 +9,7 @@ const DownloadContacts = ({ contacts }) => {
   const theme = useTheme();
 
   const screen870 = React.useContext(viewportsCtx)?.screen870;
+  const screen660 = React.useContext(viewportsCtx)?.screen660;
   const lang = React.useContext(LangCtx)?.lang;
 
   const handleDownloadContacts = (event) => {
@@ -55,7 +56,7 @@ END:VCARD\n`;
         p: "1rem",
         bgcolor: "#FFFFFF10",
         cursor: "pointer",
-        mb: "1.5rem",
+        mb: screen660 ? ".5rem" : screen870 ? "1rem" : "1.5rem",
         "&:hover": {
           "& p": {
             transition: "all .2s",
@@ -66,11 +67,11 @@ END:VCARD\n`;
     >
       <Typography
         sx={{
-          color: theme.palette.grey[300],
-          fontWeight: theme.typography.fontWeightRegular,
-          fontSize: screen870 ? "10px" : "10px",
+          color: theme.palette.grey[200],
+          fontWeight: theme.typography.fontWeightMedium,
+          fontSize: screen870 ? "11px" : "11px",
           textAlign: "center",
-          textTransform: "uppercase",
+          // textTransform: "uppercase",
         }}
       >
         {lang === "fr"

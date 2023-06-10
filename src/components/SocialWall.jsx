@@ -550,7 +550,7 @@ const SocialWall = ({}) => {
                   <Send
                     sx={{
                       color: theme.palette.primary.main,
-                      fontSize: "10px",
+                      fontSize: "11px",
                       width: "14px",
                     }}
                   />
@@ -638,7 +638,7 @@ const SocialWall = ({}) => {
                           sx={{
                             color: theme.palette.grey[500],
                             fontWeight: theme.typography.fontWeightLight,
-                            fontSize: "10px",
+                            fontSize: "11px",
                           }}
                         >
                           {new Date(post?.createdAt).toLocaleDateString(
@@ -774,7 +774,7 @@ const SocialWall = ({}) => {
                             sx={{
                               color: theme.palette.grey[500],
                               fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: "10px",
+                              fontSize: "11px",
                               cursor: "pointer",
                             }}
                           >
@@ -825,7 +825,7 @@ const SocialWall = ({}) => {
                             sx={{
                               color: theme.palette.grey[500],
                               fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: "10px",
+                              fontSize: "11px",
                               cursor: "pointer",
                             }}
                           >
@@ -861,7 +861,7 @@ const SocialWall = ({}) => {
                         sx={{
                           color: theme.palette.grey[500],
                           fontWeight: theme.typography.fontWeightRegular,
-                          fontSize: "10px",
+                          fontSize: "11px",
                           cursor: "pointer",
                         }}
                       >

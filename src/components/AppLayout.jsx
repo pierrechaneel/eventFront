@@ -462,7 +462,7 @@ const AppLayout = ({ children }) => {
             direction={"column"}
             sx={{
               ml: screen660
-                ? "1.5rem"
+                ? "0rem"
                 : isMenuCollapsed
                 ? "calc(50px + 1.5rem)"
                 : "250px",
@@ -472,8 +472,8 @@ const AppLayout = ({ children }) => {
               overflowX: "hidden",
               height: "100vh",
               maxHeight: "100vh",
-              pt: screen660 ? "calc(50px + 1.5rem)" : "calc(50px + 2.5rem)",
-              pr: "1.5rem",
+              pt: screen660 ? "calc(50px + 0.5rem)" : "calc(50px + 2.5rem)",
+              pr: screen660 ? "0rem" : "1.5rem",
             }}
           >
             <Stack
@@ -604,8 +604,8 @@ const AppLayout = ({ children }) => {
                 maxWidth: "100%",
                 height: "calc(100vh - 80px)",
                 maxHeight: "calc(100vh - 80px)",
-                mr: "1.5rem",
-                mb: screen660 ? "2rem" : "1.5rem",
+                mr: screen660 ? "0rem" : "1.5rem",
+                mb: screen660 ? "1rem" : "1.5rem",
                 //borderRadius: "1.5rem",
                 // p: "2rem",
                 overflow: "hidden",

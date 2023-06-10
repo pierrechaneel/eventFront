@@ -256,8 +256,9 @@ const Contacts = ({}) => {
         sx={{
           alignItems: "flex-end",
           px: "2rem",
-          pb: "1rem",
-          pt: "2rem",
+          px: "2rem",
+          pb: screen660 ? ".5rem" : "1rem",
+          pt: screen660 ? "1rem" : "2rem",
           bgcolor: theme.palette.common.black,
           width: "100%",
           borderRadius: "1.5rem",
@@ -266,11 +267,11 @@ const Contacts = ({}) => {
         <Typography
           sx={{
             color: theme.palette.common.white,
-            fontSize: "16px",
-            fontWeight: theme.typography.fontWeightThin,
+            fontSize: screen660 ? "14px" : "16px",
+            fontWeight: theme.typography.fontWeightBold,
           }}
         >
-          {lang === "fr" ? "ILS PARTICIPENT" : "THEY ARE ATTENDING"}
+          {lang === "fr" ? "Ils participent" : "They are attending"}
         </Typography>
       </Stack>
       <Stack
@@ -280,7 +281,7 @@ const Contacts = ({}) => {
           alignItems: "shrink",
           width: "100%",
           flexWrap: "no-wrap",
-          mt: "1rem",
+          mt: screen660 ? ".5rem" : "1rem",
           p: "2rem",
           height: "100%",
           overflow: "hidden",
@@ -479,7 +480,7 @@ const Contacts = ({}) => {
                                 textAlign: "center",
                                 color: theme.palette.common.white,
                                 fontWeight: theme.typography.fontWeightLight,
-                                fontSize: screen870 ? "10px" : "12px",
+                                fontSize: screen870 ? "11px" : "12px",
                                 bgcolor: "#FFFFFF10",
                                 borderRadius: "2rem",
                                 width: "max-content",
@@ -553,7 +554,7 @@ const Contacts = ({}) => {
                                         <Typography
                                           sx={{
                                             fontSize: screen870
-                                              ? "10px"
+                                              ? "11px"
                                               : "12px",
                                             fontWeight:
                                               theme.typography
@@ -572,7 +573,7 @@ const Contacts = ({}) => {
                                       <Typography
                                         sx={{
                                           color: theme.palette.grey[300],
-                                          fontSize: screen870 ? "8px" : "10px",
+                                          fontSize: screen870 ? "8px" : "11px",
                                           mt: ".2rem",
                                           mx: ".5rem",
                                           fontWeight:

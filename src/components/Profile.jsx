@@ -313,7 +313,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     color: theme.palette.common.white,
                     fontWeight: theme.typography.fontWeightRegular,
                     //textAlign: "center",
-                    fontSize: "10px",
+                    fontSize: "11px",
                   }}
                 >
                   {guest?.title}
@@ -351,14 +351,14 @@ const Profile = ({ setSecondaryMenu }) => {
                     style: {
                       paddingTop: ".1rem",
                       paddingBottom: ".1rem",
-                      fontSize: "10px",
+                      fontSize: "11px",
                       width: "70px",
                     },
                   }}
                 >
                   <MenuItem
                     sx={{
-                      fontSize: "10px",
+                      fontSize: "11px",
                     }}
                     value={"fr"}
                   >
@@ -366,7 +366,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   </MenuItem>
                   <MenuItem
                     sx={{
-                      fontSize: "10px",
+                      fontSize: "11px",
                     }}
                     value={"en"}
                   >
@@ -386,7 +386,7 @@ const Profile = ({ setSecondaryMenu }) => {
           width: "100%",
           height: "100%",
           //bgcolor: theme.palette.common.black,
-          mt: "1.5rem",
+          mt: screen660 ? ".5rem" : "1.5rem",
           flexWrap: screen660 ? "wrap" : undefined,
           alignItems: "stretch",
         }}
@@ -400,7 +400,7 @@ const Profile = ({ setSecondaryMenu }) => {
             px: "2.5rem",
             py: "2.5rem",
             mr: screen660 ? undefined : "1.5rem",
-            mb: screen660 ? "1.5rem" : undefined,
+            mb: screen660 ? ".5rem" : undefined,
             overflow: "hidden",
             borderRadius: "1.5rem",
           }}
@@ -984,7 +984,7 @@ const Profile = ({ setSecondaryMenu }) => {
                 fontWeight: theme.typography.fontWeightRegular,
                 textAlign: "right",
                 width: "100%",
-                fontSize: screen660 ? "10px" : screen870 ? "12px" : "14px",
+                fontSize: screen660 ? "11px" : screen870 ? "12px" : "14px",
               }}
             >
               {currentLanguage === "fr" ? "Mes messages" : "My messages"}
@@ -995,7 +995,7 @@ const Profile = ({ setSecondaryMenu }) => {
               sx={{
                 flexGrow: 1,
                 maxHeight: !screen870 ? "50vh" : "90%",
-                mt: "1rem",
+                mt: screen660 ? ".5rem" : "1.5rem",
                 width: "100%",
                 overflowY: "auto",
               }}
@@ -1028,7 +1028,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       sx={{
                         color: theme.palette.common.white,
                         fontWeight: theme.typography.fontWeightLight,
-                        fontSize: "10px",
+                        fontSize: "11px",
                         textAlign: "right",
                         mt: ".5rem",
                       }}

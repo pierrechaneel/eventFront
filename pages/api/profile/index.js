@@ -4,13 +4,21 @@ import axios from "axios";
 import configs from "../../../configs/generals.json";
 import logger from "../../../src/utils/logger";
 
+import https from "https";
+
 const requestHandler = async (req, res) => {
   const updateBody = req?.body;
 
   let processed = false;
 
+  const httpsAgent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+
   await axios
-    .put(`${configs?.backendUrl}/api/guests/properties`, updateBody)
+    .put(`${configs?.backendUrl}/api/guests/properties`, updateBody, {
+      httpsAgent: httpsAgent,
+    })
     .then((res) => {
       processed = true;
     })

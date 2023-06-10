@@ -43,7 +43,7 @@ const QrCode = ({}) => {
           flexWrap: "wrap",
           borderRadius: "1.5rem",
           bgcolor: theme.palette.common.black,
-          mt: "1rem",
+          mt: screen660 ? "0rem" : "1rem",
           flexGrow: 1,
           height: "max-content",
           maxHeight: "100%",
@@ -88,7 +88,7 @@ const QrCode = ({}) => {
                 height: screen660 ? "65px" : "100px",
                 marginRight: screen660 ? undefined : "1rem",
                 marginBottom: screen660 ? "1rem" : undefined,
-                border: `3px solid ${theme.palette.common.white}`,
+                border: `2px solid ${theme.palette.common.white}`,
                 borderRadius: "1rem",
               }}
               src="/ceo.jpg"
@@ -385,7 +385,7 @@ const QrCode = ({}) => {
                     fontWeight: theme.typography.fontWeightRegular,
                     mr: screen870 ? ".2rem" : ".5rem",
                     color: theme.palette.common.white,
-                    fontSize: screen870 ? "10px" : "12px",
+                    fontSize: screen870 ? "11px" : "12px",
                     textAlign: "justify",
                     width: "max-content",
                   }}
@@ -413,7 +413,7 @@ const QrCode = ({}) => {
                   sx={{
                     color: theme.palette.grey[200],
                     fontWeight: theme.typography.fontWeightRegular,
-                    fontSize: screen870 ? "10px" : "12px",
+                    fontSize: screen870 ? "11px" : "12px",
                     whiteSpace: "no-wrap",
                     textAlign: "justify",
                     width: "max-content",
@@ -426,7 +426,7 @@ const QrCode = ({}) => {
 
                       color: theme.palette.grey[200],
                       fontWeight: theme.typography.fontWeightRegular,
-                      fontSize: screen870 ? "10px" : "12px",
+                      fontSize: screen870 ? "11px" : "12px",
                       whiteSpace: "no-wrap",
                       textAlign: "center",
                     }}
@@ -448,7 +448,7 @@ const QrCode = ({}) => {
                       textTransform: "capitalize",
                       color: theme.palette.grey[200],
                       fontWeight: theme.typography.fontWeightRegular,
-                      fontSize: screen870 ? "10px" : "12px",
+                      fontSize: screen870 ? "11px" : "12px",
                       whiteSpace: "no-wrap",
                       textAlign: "center",
                     }}

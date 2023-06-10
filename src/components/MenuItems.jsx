@@ -61,7 +61,7 @@ const MenuItems = ({ apps }) => {
                 color: router?.asPath?.includes(target?.link)
                   ? theme.palette.primary.main
                   : theme.palette.grey[500],
-                fontSize: "10px",
+                fontSize: "11px",
                 textAlign: "center",
               }}
             >
