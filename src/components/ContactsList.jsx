@@ -59,7 +59,7 @@ const ContactsList = ({ screen870, screen660, setIsSwippeableVisible }) => {
         mx: screen870 ? ".5rem" : "1rem",
         minWidth: "150px",
         height: "max-content",
-        maxHeight: screen660 ? "60%" : "50%",
+        maxHeight: screen660 ? "70%" : "100%",
         minHeight: screen660 ? "60%" : undefined,
         overflowY: screen660 ? "auto" : "auto",
         width: screen660 ? "90%" : "25%",
