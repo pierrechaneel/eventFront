@@ -6,6 +6,8 @@ import logger from "../../../src/utils/logger";
 
 import https from "https";
 
+// decommissionned
+
 const requestHandler = async (req, res) => {
   const updateBody = req?.body;
 

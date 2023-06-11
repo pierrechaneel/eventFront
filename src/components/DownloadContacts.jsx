@@ -63,6 +63,7 @@ END:VCARD\n`;
             color: theme.palette.common.white,
           },
         },
+        mt: screen660 ? ".5rem" : undefined,
       }}
     >
       <Typography

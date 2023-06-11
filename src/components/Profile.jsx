@@ -73,11 +73,9 @@ const Profile = ({ setSecondaryMenu }) => {
         console.log("submit obj for profile update", submitObject);
 
         await axios
-          .post(`/api/profile?author=${"BQJR9400"}`, submitObject, {
+          .put(`${configs?.backendUrl}/api/guests/properties`, submitObject, {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `bearer ${"BQJR9400"}`,
-              user: "BQJR9400",
             },
           })
           .then(async (res) => {

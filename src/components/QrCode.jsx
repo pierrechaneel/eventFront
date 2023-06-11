@@ -149,7 +149,6 @@ const QrCode = ({}) => {
                     ? [
                         `, Je te souhaite la bienvenue en République Démocratique du Congo,
             un grand pays avec d’immenses ressources économiques. `,
-                        <br />,
                         `La République
             Démocratique du Congo est au centre du continent africain et se
             subdivise en 26 Provinces issues de la profonde réforme de
@@ -166,7 +165,6 @@ const QrCode = ({}) => {
                     : [
                         `, I welcome you to the Democratic Republic of Congo,
             a large country with immense economic resources. `,
-                        <br />,
                         `The Republic
             Democratic Republic of the Congo is at the center of the African continent and is
             subdivided into 26 Provinces resulting from the profound reform of
