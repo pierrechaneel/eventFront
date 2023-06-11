@@ -177,7 +177,7 @@ const ViewportsContext = ({ children }) => {
                   maxHeight: "80vh!important",
                   overflowY: "auto!important",
                   //backgroundColor: theme.palette.common.black,
-                  minHeight: "10px",
+                  minHeight: "12px",
                   bgcolor: "transparent",
                 },
               }}

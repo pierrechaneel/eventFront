@@ -128,7 +128,7 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
               >
                 <Image
                   sx={{
-                    color: theme.palette.grey[500],
+                    color: theme.palette.grey[400],
                     fontSize: "100px",
                   }}
                 />

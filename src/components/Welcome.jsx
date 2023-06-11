@@ -129,8 +129,8 @@ const Welcome = ({}) => {
               component={"h3"}
               sx={{
                 color: theme.palette.grey[300],
-                fontSize: screen660 ? "11px" : screen870 ? "12px" : "14px",
-                fopntWeight: theme.typography.fontWeightLight,
+                fontSize: screen660 ? "12px" : screen870 ? "12px" : "14px",
+                fopntWeight: theme.typography.fontWeightRegular,
                 m: 0,
                 textAlign: "center",
                 mx: screen870 ? ".5rem" : "1rem",
@@ -211,9 +211,9 @@ const Welcome = ({}) => {
           <Typography
             sx={{
               color: theme.palette.grey[300],
-              fontWeight: theme.typography.fontWeightLight,
+              fontWeight: theme.typography.fontWeightRegular,
               textAlign: "center",
-              fontSize: "11px",
+              fontSize: "12px",
               maxWidth: screen870 ? "95%" : "60%",
               my: "1rem",
             }}

@@ -368,7 +368,7 @@ const Contacts = ({}) => {
                   sx={{
                     color: theme.palette.grey[300],
                     fontSize: "12px",
-                    fontWeight: theme.typography.fontWeightLight,
+                    fontWeight: theme.typography.fontWeightRegular,
                     "&:hover": {
                       transition: `all .2s`,
                       color: theme.palette.common.white,
@@ -416,7 +416,7 @@ const Contacts = ({}) => {
                 <Typography
                   sx={{
                     textAlign: "center",
-                    color: theme.palette.grey[500],
+                    color: theme.palette.grey[400],
                     fontWeight: theme.typography.fontWeightMedium,
                     fontSize: "14px",
                   }}
@@ -481,8 +481,8 @@ const Contacts = ({}) => {
                               sx={{
                                 textAlign: "center",
                                 color: theme.palette.common.white,
-                                fontWeight: theme.typography.fontWeightLight,
-                                fontSize: screen870 ? "11px" : "12px",
+                                fontWeight: theme.typography.fontWeightRegular,
+                                fontSize: screen870 ? "12px" : "12px",
                                 bgcolor: "#FFFFFF10",
                                 borderRadius: "2rem",
                                 width: "max-content",
@@ -556,7 +556,7 @@ const Contacts = ({}) => {
                                         <Typography
                                           sx={{
                                             fontSize: screen870
-                                              ? "11px"
+                                              ? "12px"
                                               : "12px",
                                             fontWeight:
                                               theme.typography
@@ -575,7 +575,7 @@ const Contacts = ({}) => {
                                       <Typography
                                         sx={{
                                           color: theme.palette.grey[300],
-                                          fontSize: screen870 ? "8px" : "11px",
+                                          fontSize: screen870 ? "8px" : "12px",
                                           mt: ".2rem",
                                           mx: ".5rem",
                                           fontWeight:

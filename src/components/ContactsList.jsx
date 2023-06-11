@@ -230,7 +230,7 @@ const ContactsList = ({ screen870, screen660, setIsSwippeableVisible }) => {
                         target?.id === chatSubject?.id
                           ? theme.palette.primary.main
                           : theme.palette.common.white,
-                      fontWeight: theme.typography.fontWeightThin,
+                      fontWeight: theme.typography.fontWeightRegular,
                       fontSize: "12px",
                     }}
                   >

@@ -550,7 +550,7 @@ const SocialWall = ({}) => {
                   <Send
                     sx={{
                       color: theme.palette.primary.main,
-                      fontSize: "11px",
+                      fontSize: "12px",
                       width: "14px",
                     }}
                   />
@@ -636,9 +636,9 @@ const SocialWall = ({}) => {
                         </Typography>
                         <Typography
                           sx={{
-                            color: theme.palette.grey[500],
-                            fontWeight: theme.typography.fontWeightLight,
-                            fontSize: "11px",
+                            color: theme.palette.grey[400],
+                            fontWeight: theme.typography.fontWeightRegular,
+                            fontSize: "12px",
                           }}
                         >
                           {new Date(post?.createdAt).toLocaleDateString(
@@ -772,9 +772,9 @@ const SocialWall = ({}) => {
                           </Box>
                           <Typography
                             sx={{
-                              color: theme.palette.grey[500],
+                              color: theme.palette.grey[400],
                               fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: "11px",
+                              fontSize: "12px",
                               cursor: "pointer",
                             }}
                           >
@@ -823,9 +823,9 @@ const SocialWall = ({}) => {
                           </Box>
                           <Typography
                             sx={{
-                              color: theme.palette.grey[500],
+                              color: theme.palette.grey[400],
                               fontWeight: theme.typography.fontWeightRegular,
-                              fontSize: "11px",
+                              fontSize: "12px",
                               cursor: "pointer",
                             }}
                           >
@@ -859,9 +859,9 @@ const SocialWall = ({}) => {
                           }
                         }}
                         sx={{
-                          color: theme.palette.grey[500],
+                          color: theme.palette.grey[400],
                           fontWeight: theme.typography.fontWeightRegular,
-                          fontSize: "11px",
+                          fontSize: "12px",
                           cursor: "pointer",
                         }}
                       >

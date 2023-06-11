@@ -194,8 +194,8 @@ const Agenda = ({}) => {
                     fontWeight:
                       currentMenu === target
                         ? theme.typography.fontWeightMedium
-                        : theme.typography.fontWeightLight,
-                    fontSize: "11px",
+                        : theme.typography.fontWeightRegular,
+                    fontSize: "12px",
                     px: ".5rem",
                     py: ".5rem",
                     textTransform: "capitalize",
@@ -311,7 +311,7 @@ const Agenda = ({}) => {
                 sx={{
                   color: theme.palette.grey[300],
                   fontSize: "12px",
-                  fontWeight: theme.typography.fontWeightLight,
+                  fontWeight: theme.typography.fontWeightRegular,
                   "&:hover": {
                     transition: `all .2s`,
                     color: theme.palette.common.white,
@@ -364,7 +364,7 @@ const Agenda = ({}) => {
                           alignItems: "center",
                           px: ".5rem",
                           py: ".2rem",
-                          borderRadius: "11px",
+                          borderRadius: "12px",
                           bgcolor:
                             new Date(target?.date).getTime() >= Date.now()
                               ? theme.palette.primary.main

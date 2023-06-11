@@ -55,7 +55,7 @@ const EmbededYt = ({}) => {
       >
         <Typography
           sx={{
-            color: theme.palette.grey[500],
+            color: theme.palette.grey[400],
             fontSize: "12px",
             fontWeight: theme.typography.fontWeightRegular,
             width: "100%",

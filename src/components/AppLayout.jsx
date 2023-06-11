@@ -683,8 +683,8 @@ const AppLayout = ({ children }) => {
                         component={"span"}
                         sx={{
                           color: theme.palette.grey[300],
-                          fontSize: "10px",
-                          fontWeight: theme.typography.fontWeightLight,
+                          fontSize: "12px",
+                          fontWeight: theme.typography.fontWeightRegular,
                           ml: ".1rem",
                         }}
                       >

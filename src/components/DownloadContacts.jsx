@@ -70,7 +70,7 @@ END:VCARD\n`;
         sx={{
           color: theme.palette.grey[200],
           fontWeight: theme.typography.fontWeightMedium,
-          fontSize: screen870 ? "11px" : "11px",
+          fontSize: screen870 ? "12px" : "12px",
           textAlign: "center",
           // textTransform: "uppercase",
         }}

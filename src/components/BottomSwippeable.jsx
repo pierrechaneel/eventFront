@@ -83,7 +83,7 @@ const BottomSwippeable = (props) => {
           right: 0,
           left: 0,
           bgcolor: theme.palette.common.black,
-          height: "10px",
+          height: "12px",
         }}
       >
         <Puller />

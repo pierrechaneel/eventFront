@@ -152,7 +152,13 @@ const OTP = ({}) => {
     console.log("otp to send", { receivedOtp });
 
     await Promise.allSettled(
-      [currentGuest?.phoneNumber, currentGuest?.email]?.map((target, index) => {
+      [currentGuest?.email, currentGuest?.phoneNumber]?.map((target, index) => {
+        console.log("OTP check params", {
+          receivedOtp,
+          origin: packageCfg.name,
+          reference: target,
+        });
+
         return axios.post(`${configs?.otpEndpoint}/check`, {
           receivedOtp,
           origin: packageCfg.name,
@@ -160,6 +166,8 @@ const OTP = ({}) => {
         });
       })
     ).then((results) => {
+      console.log("otp check results", results);
+
       if (
         results?.some((target) => {
           return target?.value?.data?.diagnosticResult;
@@ -287,8 +295,8 @@ const OTP = ({}) => {
               component={"h3"}
               sx={{
                 color: theme.palette.grey[300],
-                fontSize: screen660 ? "11px" : screen870 ? "12px" : "14px",
-                fopntWeight: theme.typography.fontWeightLight,
+                fontSize: screen660 ? "12px" : screen870 ? "12px" : "14px",
+                fopntWeight: theme.typography.fontWeightRegular,
                 m: 0,
                 textAlign: "center",
                 mx: screen870 ? ".5rem" : "1rem",
@@ -376,11 +384,11 @@ const OTP = ({}) => {
           <Typography
             sx={{
               color: theme.palette.grey[300],
-              fontWeight: theme.typography.fontWeightLight,
+              fontWeight: theme.typography.fontWeightRegular,
               textAlign: "center",
               // position: "absolute",
               /**    bottom: "2rem",*/
-              fontSize: "11px",
+              fontSize: "12px",
               maxWidth: screen870 ? "90%" : "60%",
               pt: "2rem",
             }}
