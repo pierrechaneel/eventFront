@@ -72,10 +72,10 @@ const OTP = ({}) => {
             [guestDatum?.phoneNumber, guestDatum?.email]?.map(
               (target, index, tab) => {
                 console.log("generation params", {
-                  reference: target,
+                  /** reference: target,
                   origin: packageCfg?.name,
                   senderName: otpCodeSenders[index],
-                  tab,
+                  tab, */
                 });
 
                 return axios
@@ -97,24 +97,30 @@ const OTP = ({}) => {
           ).then((results) => {
             console.log("ORP generation results", results);
 
-            results?.forEach((result, index) => {
-              if (result?.status === "fulfilled") {
-                if (index === 1) {
-                  setSnackMessage("OTP envoyé à votre mail");
-                  setSeverity("info");
-                  setIsnackVisible(true);
-                } else {
-                  setSnackMessage("OTP envoyé à votre téléphone");
-                  setSeverity("info");
-                  setIsnackVisible(true);
-                }
-              }
-            });
-
             if (results?.every((target) => target?.status === "rejected")) {
               setSnackMessage("Désolé, veuillez recharger");
               setSeverity("error");
               setIsnackVisible(true);
+            } else if (
+              results?.every((target) => target?.status === "fulfilled")
+            ) {
+              setSnackMessage("SMS et Email envoyés");
+              setSeverity("info");
+              setIsnackVisible(true);
+            } else {
+              results?.forEach((result, index) => {
+                if (result?.status === "fulfilled") {
+                  if (index === 1) {
+                    setSnackMessage("OTP envoyé à votre mail");
+                    setSeverity("info");
+                    setIsnackVisible(true);
+                  } else {
+                    setSnackMessage("OTP envoyé à votre téléphone");
+                    setSeverity("info");
+                    setIsnackVisible(true);
+                  }
+                }
+              });
             }
 
             window.sessionStorage.setItem("guest", JSON.stringify(guestDatum));
