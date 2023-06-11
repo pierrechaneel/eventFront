@@ -4,11 +4,14 @@ import * as React from "react";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import { GuestCtx } from "../../context/guest";
 import { LangCtx } from "../../context/lang";
+import { viewportsCtx } from "../../context/viewports";
 
 const EmbededYt = ({}) => {
   const theme = useTheme();
 
   const guest = React.useContext(GuestCtx).guest;
+
+  const screen660 = React.useContext(viewportsCtx)?.screen660;
 
   const lang = React.useContext(LangCtx).lang;
 
@@ -56,8 +59,9 @@ const EmbededYt = ({}) => {
             fontSize: "12px",
             fontWeight: theme.typography.fontWeightRegular,
             width: "100%",
-            my: "1rem",
+            my: screen660 ? ".3rem" : "1rem",
             textAlign: "center",
+            pb: screen660 ? "1.6rem" : undefined,
           }}
         >
           {lang === "fr"

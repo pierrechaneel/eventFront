@@ -12,7 +12,7 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { Stack, useTheme } from "@mui/material";
 import { useRouter } from "next/router";
 
-const drawerBleeding = 75;
+const drawerBleeding = 5;
 
 const Root = styled("div")(({ theme }) => ({
   height: "100%",
@@ -32,6 +32,7 @@ const Puller = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: 8,
   left: "calc(50% - 15px)",
+  display: "none",
 }));
 
 const BottomSwippeable = (props) => {
@@ -68,18 +69,21 @@ const BottomSwippeable = (props) => {
       ModalProps={{
         keepMounted: true,
       }}
+      sx={{
+        bgcolor: "transparent!important",
+      }}
     >
       <StyledBox
         sx={{
           position: "absolute",
           top: -drawerBleeding,
-          borderTopLeftRadius: 8,
-          borderTopRightRadius: 8,
+          borderTopLeftRadius: "1.5rem",
+          borderTopRightRadius: "1.5rem",
           visibility: "visible",
           right: 0,
           left: 0,
           bgcolor: theme.palette.common.black,
-          height: "30px",
+          height: "10px",
         }}
       >
         <Puller />
@@ -87,9 +91,12 @@ const BottomSwippeable = (props) => {
       <StyledBox
         sx={{
           px: ".1rem",
-          pb: ".3rem",
+          pb: ".1rem",
           height: "100%",
           overflow: "hidden",
+          borderRadius: `.5rem .5rem 0rem 0rem`,
+          borderTop: `.5px solid ${theme.palette.grey[500]}`,
+          bgcolor: theme.palette.common.black,
         }}
       >
         {props?.defaultSwippeableContent}

@@ -46,6 +46,11 @@ const OTP = ({}) => {
   const [isSnackVisible, setIsnackVisible] = React.useState(false);
   const [severity, setSeverity] = React.useState("");
 
+  const otpCodeSenders = {
+    0: configs?.otpSenderName,
+    1: configs.notificationSenderEmail,
+  };
+
   React.useEffect(() => {
     (async () => {
       window.sessionStorage.clear();
@@ -63,34 +68,61 @@ const OTP = ({}) => {
 
           setGuest(guestDatum);
 
-          await axios
-            .post(`${configs?.otpEndpoint}/generate`, {
-              reference: guestDatum?.phoneNumber,
-              origin: packageCfg?.name,
-              senderName: configs?.otpSenderName,
-            })
-            .then((results) => {
-              setSnackMessage("Veuillez entrer le code réçu");
-              setSeverity("info");
-              setIsnackVisible(true);
+          await Promise.allSettled(
+            [currentGuest?.phoneNumber, currentGuest?.email]?.map(
+              (target, index) => {
+                console.log("generation params", {
+                  /** reference: target,
+                  origin: packageCfg?.name,
+                  senderName: otpCodeSenders[index], */
+                });
 
-              window.sessionStorage.setItem(
-                "guest",
-                JSON.stringify(guestDatum)
-              );
-            })
-            .catch((error) => {
-              console.log("an error has occured when sending OTP code", error);
+                return axios
+                  .post(`${configs?.otpEndpoint}/generate`, {
+                    reference: target,
+                    origin: packageCfg?.name,
+                    senderName: otpCodeSenders[index],
+                  })
+                  .catch((error) => {
+                    console.log(
+                      "an error has occured when generating OTP code",
+                      error
+                    );
 
+                    throw new Error("processing crashed");
+                  });
+              }
+            )
+          ).then((results) => {
+            console.log("ORP generation results", results);
+
+            results?.forEach((result, index) => {
+              if (result?.status === "fulfilled") {
+                if (index === 0) {
+                  setSnackMessage("OTP envoyé à votre téléphone");
+                  setSeverity("info");
+                  setIsnackVisible(true);
+                } else {
+                  setSnackMessage("OTP envoyé à votre mail");
+                  setSeverity("info");
+                  setIsnackVisible(true);
+                }
+              }
+            });
+
+            if (results?.every((target) => target?.status === "rejected")) {
               setSnackMessage("Désolé, veuillez recharger");
               setSeverity("error");
               setIsnackVisible(true);
-            });
+            }
+
+            window.sessionStorage.setItem("guest", JSON.stringify(guestDatum));
+          });
         })
         .catch((error) => {
           console.log("an error has occured when fetching guest info", error);
 
-          setSnackMessage("Désolé ! Veuillez recharger la page");
+          setSnackMessage("Demandez l'activation de ce compte");
           setSeverity("error");
           setIsnackVisible(true);
         });
@@ -112,33 +144,35 @@ const OTP = ({}) => {
 
     console.log("otp to send", { receivedOtp });
 
-    await axios
-      .post(`${configs?.otpEndpoint}/check`, {
-        receivedOtp,
-        origin: packageCfg.name,
-        reference: currentGuest?.phoneNumber,
+    await Promise.allSettled(
+      [currentGuest?.phoneNumber, currentGuest?.email]?.map((target, index) => {
+        return axios.post(`${configs?.otpEndpoint}/check`, {
+          receivedOtp,
+          origin: packageCfg.name,
+          reference: target,
+        });
       })
-      .then((results) => {
-        if (results?.data?.diagnosticResult) {
-          setLoggedIn(true);
+    ).then((results) => {
+      if (
+        results?.some((target) => {
+          return target?.value?.data?.diagnosticResult;
+        })
+      ) {
+        setLoggedIn(true);
 
-          window.location.pathname = `guests/${router.query?.guest}/qrcode`;
-        } else {
-          setIsnackVisible(true);
-          setSnackMessage("Le code OTP entré n'est pas correct");
-          setSeverity("error");
-        }
-      })
-      .catch((error) => {
-        console.log(
-          "an error has occured when trying to check OTP code",
-          error
-        );
+        window.location.pathname = `guests/${router.query?.guest}/qrcode`;
+      }
 
+      if (
+        results?.every((target) => {
+          return !target?.value?.data?.diagnosticResult;
+        })
+      ) {
         setIsnackVisible(true);
         setSnackMessage("Le code OTP entré n'est pas correct");
         setSeverity("error");
-      });
+      }
+    });
   };
 
   const screen870 = React.useContext(viewportsCtx)?.screen870;

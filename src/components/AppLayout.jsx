@@ -541,47 +541,95 @@ const AppLayout = ({ children }) => {
                   mr: screen660 ? "0rem" : "1.5rem",
                 }}
               >
-                <Stack
-                  direction={"row"}
-                  sx={{
-                    alignItems: "center",
-                    width: "max-content",
-                    heigth: "100%",
-                  }}
-                >
-                  <IconButton
-                    onClick={(event) => {
-                      event?.preventDefault();
-
-                      if (screen660) {
-                        setDefaultSwippeableContent(<MenuItems apps={apps} />);
-                        setIsSwippeableVisible(true);
-                      } else {
-                        setIsMenuCollapsed(!isMenuCollapsed);
-                      }
-                    }}
+                {screen660 ? (
+                  <Stack
+                    direction={"row"}
                     sx={{
-                      mr: ".1rem",
+                      alignItems: "flex-start",
+                      width: "max-content",
+                      mr: "1.5rem",
                     }}
                   >
-                    <Menu
+                    <Typography
+                      component={"span"}
                       sx={{
-                        fontSize: "18px",
-                        color: theme.palette.common.white,
-                        cursor: "pointer",
+                        color: theme.palette.primary.main,
+                        fontWeight: theme.typography.fontWeightBold,
+                        fontSize: "16px",
+                        whiteSpace: "nowrap",
+                        fontSize: screen870 ? "14px" : "16px",
+                        width: "max-content",
                       }}
-                    />
-                  </IconButton>
-                  <Typography
+                    >
+                      {guest?.event?.subject
+                        ? guest?.event?.subject?.split(" ")[0] + " "
+                        : ""}
+                    </Typography>
+                    {"."}
+                    <Typography
+                      component={"span"}
+                      sx={{
+                        color: theme.palette.common.white,
+                        fontWeight: theme.typography.fontWeightBold,
+                        fontSize: "16px",
+                        whiteSpace: "nowrap",
+                        fontSize: screen870 ? "14px" : "16px",
+                        width: "max-content",
+                      }}
+                    >
+                      {guest?.event?.subject?.split(" ").slice(1)?.join(" ")}
+                    </Typography>
+                  </Stack>
+                ) : (
+                  ""
+                )}
+                {screen660 ? (
+                  ""
+                ) : (
+                  <Stack
+                    direction={"row"}
                     sx={{
-                      color: theme.palette.common.white,
-                      fontSize: "12px",
-                      fontWeight: theme.typography.fontWeightMedium,
+                      alignItems: "center",
+                      width: "max-content",
+                      heigth: "100%",
                     }}
                   >
-                    Menu
-                  </Typography>
-                </Stack>
+                    <IconButton
+                      onClick={(event) => {
+                        event?.preventDefault();
+
+                        if (screen660) {
+                          setDefaultSwippeableContent(
+                            <MenuItems apps={apps} />
+                          );
+                          setIsSwippeableVisible(true);
+                        } else {
+                          setIsMenuCollapsed(!isMenuCollapsed);
+                        }
+                      }}
+                      sx={{
+                        mr: ".1rem",
+                      }}
+                    >
+                      <Menu
+                        sx={{
+                          fontSize: "18px",
+                          color: theme.palette.common.white,
+                          cursor: "pointer",
+                        }}
+                      />
+                    </IconButton>
+                    <Typography
+                      sx={{
+                        color: theme.palette.common.white,
+                        fontSize: "12px",
+                        fontWeight: theme.typography.fontWeightMedium,
+                      }}
+                    >
+                      Menu
+                    </Typography>
+                  </Stack>
+                )}
                 <img
                   src={"/saio.png"}
                   alt="orange zone saio"
@@ -640,7 +688,7 @@ const AppLayout = ({ children }) => {
                 height: "calc(100vh - 80px)",
                 maxHeight: "calc(100vh - 80px)",
                 mr: screen660 ? "0rem" : "1.5rem",
-                mb: screen660 ? ".5rem" : screen870 ? "1rem" : "1.5rem",
+                mb: screen660 ? ".01rem" : screen870 ? ".5rem" : "1.5rem",
                 //borderRadius: "1.5rem",
                 // p: "2rem",
                 overflow: "hidden",

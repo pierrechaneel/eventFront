@@ -148,7 +148,7 @@ const ViewportsContext = ({ children }) => {
   const [isSwippeableVisible, setIsSwippeableVisible] = React.useState(false);
 
   const [defaultSwippeableContent, setDefaultSwippeableContent] =
-    React.useState(<MenuItems apps={apps} />);
+    React.useState(<></>);
 
   const drawerBleeding = 56;
 
@@ -167,29 +167,48 @@ const ViewportsContext = ({ children }) => {
     >
       {children}
       {screen660 && loggedIn ? (
-        <Box sx={{}}>
-          <CssBaseline />
-          <Global
-            styles={{
-              ".MuiDrawer-root > .MuiPaper-root": {
-                height: `max-content!important`,
-                maxHeight: "80vh!important",
-                overflowY: "auto!important",
-                backgroundColor: theme.palette.common.black,
-                minHeight: "30px",
-              },
-            }}
-          />
-          <BottomSwippeable
-            defaultSwippeableContent={defaultSwippeableContent}
-            apps={apps}
-            open={isSwippeableVisible}
-            setOpen={setIsSwippeableVisible}
+        <>
+          <Box sx={{}}>
+            <CssBaseline />
+            <Global
+              styles={{
+                ".MuiDrawer-root > .MuiPaper-root": {
+                  height: `max-content!important`,
+                  maxHeight: "80vh!important",
+                  overflowY: "auto!important",
+                  //backgroundColor: theme.palette.common.black,
+                  minHeight: "10px",
+                  bgcolor: "transparent",
+                },
+              }}
+            />
+            <BottomSwippeable
+              defaultSwippeableContent={defaultSwippeableContent}
+              apps={apps}
+              open={isSwippeableVisible}
+              setOpen={setIsSwippeableVisible}
+              sx={{
+                bgcolor: theme.palette.common.black,
+                "& > *": {
+                  bgcolor: "transparent!important",
+                },
+              }}
+            />
+          </Box>
+          <Box
+            position={"fixed"}
             sx={{
+              right: 0,
+              left: 0,
+              bottom: 0,
               bgcolor: theme.palette.common.black,
+              borderRadius: `.5rem .5rem 0rem 0rem`,
+              borderTop: `.5px solid ${theme.palette.grey[500]}`,
             }}
-          />
-        </Box>
+          >
+            <MenuItems apps={apps} />
+          </Box>
+        </>
       ) : (
         ""
       )}

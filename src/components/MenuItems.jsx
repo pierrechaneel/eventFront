@@ -14,9 +14,8 @@ const MenuItems = ({ apps }) => {
       direction={"row"}
       sx={{
         alignItems: "center",
-        mt: "1.3rem",
+        my: ".5rem",
         justifyContent: "center",
-        mb: "1.2rem",
         width: "100%",
         overflowX: "auto",
       }}

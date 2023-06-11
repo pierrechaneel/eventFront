@@ -313,7 +313,9 @@ const Contacts = ({}) => {
             border: `1px solid ${theme.palette.grey[900]}`,
             width: screen660 ? "100%" : "73%",
             maxWidth: screen660 ? "100%" : "73%",
+            // pb: screen660 && chatSubject !== {} ? "10rem" : undefined,
             overflowX: "auto",
+            pb: screen660 ? "1rem" : undefined,
             boxShadow:
               "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
           }}

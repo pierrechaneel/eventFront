@@ -192,6 +192,7 @@ const Profile = ({ setSecondaryMenu }) => {
         // pb: "5rem",
         overflowY: "auto",
         pt: screen870 ? "0rem" : "0rem",
+        pb: screen660 ? "18.5rem" : undefined,
       }}
     >
       {isSnackVisible ? (
