@@ -406,7 +406,7 @@ const Profile = ({ setSecondaryMenu }) => {
           <Stack
             direction={"row"}
             sx={{
-              height: "100%",
+              height: "max-content",
               alignItems: "flex-start",
               flexWrap: "wrap",
               maxHeight: "100%",

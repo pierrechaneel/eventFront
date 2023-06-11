@@ -282,7 +282,7 @@ const Contacts = ({}) => {
           width: "100%",
           flexWrap: "no-wrap",
           mt: screen660 ? ".5rem" : "1rem",
-          p: "2rem",
+          p: screen660 ? ".5rem" : screen870 ? "1rem" : "2rem",
           height: "100%",
           overflow: "hidden",
           bgcolor: theme.palette.common.black,

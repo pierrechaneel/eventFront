@@ -640,7 +640,7 @@ const AppLayout = ({ children }) => {
                 height: "calc(100vh - 80px)",
                 maxHeight: "calc(100vh - 80px)",
                 mr: screen660 ? "0rem" : "1.5rem",
-                mb: screen660 ? "1rem" : "1.5rem",
+                mb: screen660 ? ".5rem" : screen870 ? "1rem" : "1.5rem",
                 //borderRadius: "1.5rem",
                 // p: "2rem",
                 overflow: "hidden",
