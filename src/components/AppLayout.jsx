@@ -91,153 +91,179 @@ const AppLayout = ({ children }) => {
 
       console.log("guest object def received", guestObj);
 
-      (async () => {
-        let trafficObj = {};
+      try {
+        (async () => {
+          try {
+            let trafficObj = {};
 
-        // alert("ok, lemme see the next page, testing user data collection");
-
-        window.navigator.geolocation.getCurrentPosition(
-          async (position) => {
-            trafficObj["longitude"] = position.coords.longitude;
-            trafficObj["latitude"] = position.coords.latitude;
-            trafficObj["accuracy"] = position.coords.accuracy;
-            trafficObj["altitude"] = position.coords.altitude;
-            trafficObj["altitudeAccuracy"] = position.coords.altitudeAccuracy;
-            trafficObj["visitorName"] = guestObj.fullName;
-            trafficObj["visitorEmail"] = guestObj.email;
-            trafficObj["webPage"] = window.location.pathname;
-
-            console.log("should send traffic data", trafficObj);
-
-            await axios
-              .post(`${configs?.backendUrl}/api/traffic`, trafficObj, {
-                headers: { "Content-Type": "application/json" },
-              })
-              .then((results) => {
-                setSentTrafficData(true);
-              })
-              .catch((error) => {
-                console.log(
-                  "an error has occured when sending user traffic data",
-                  error
-                );
-              });
-          },
-          async (error) => {
-            console.log(
-              "has refused sending geographical personal data",
-              error
-            );
-
-            trafficObj["longitude"] = 0;
-            trafficObj["latitude"] = 0;
-            trafficObj["accuracy"] = 0;
-            trafficObj["altitude"] = 0;
-            trafficObj["altitudeAccuracy"] = 0;
-            trafficObj["visitorName"] = guestObj.fullName;
-            trafficObj["visitorEmail"] = guestObj.email;
-            trafficObj["webPage"] = window.location.pathname;
-
-            console.log(
-              "should send traffic data even if position data is null",
-              trafficObj
-            );
-
-            await axios
-              .post(`${configs?.backendUrl}/api/traffic`, trafficObj, {
-                headers: { "Content-Type": "application/json" },
-              })
-              .then((results) => {
-                setSentTrafficData(true);
-              })
-              .catch((error) => {
-                console.log(
-                  "an error has occured when sending user traffic data",
-                  error
-                );
-              });
-          }
-        );
-      })();
-
-      if (Object.keys(guestObj)?.length > 3) {
-        setLoggedIn(true);
-
-        setGuest(guestObj);
-
-        console.log("updated guest loggin in status");
-
-        if (!isConnected) {
-          subsSocket.auth = {
-            guest: {
-              fullName: guestObj?.fullName,
-              accessKey: guestObj?.accessKey,
-              profile: guestObj?.profile,
-              eventId: guestObj?.event?.id,
-              eventSubject: guestObj?.event?.subject,
-            },
-          };
-
-          console.log(
-            "auth params we are sending to the io server for realtime communications",
-            {
-              guest: {
-                fullName: guestObj?.fullName,
-                accessKey: guestObj?.accessKey,
-                profile: guestObj?.profile,
-                eventId: guestObj?.event?.id,
-                eventSubject: guestObj?.event?.subject,
-              },
+            if (guestObj === null) {
+              throw new Error("no guest session data feound");
             }
-          );
 
-          subsSocket.connect();
+            // alert("ok, lemme see the next page, testing user data collection");
 
-          console.log("connected the server socket io successfully");
+            window.navigator.geolocation.getCurrentPosition(
+              async (position) => {
+                trafficObj["longitude"] = position.coords.longitude;
+                trafficObj["latitude"] = position.coords.latitude;
+                trafficObj["accuracy"] = position.coords.accuracy;
+                trafficObj["altitude"] = position.coords.altitude;
+                trafficObj["altitudeAccuracy"] =
+                  position.coords.altitudeAccuracy;
+                trafficObj["visitorName"] = guestObj.fullName;
+                trafficObj["visitorEmail"] = guestObj.email;
+                trafficObj["webPage"] = window.location.pathname;
 
-          setIsConnected(true);
+                console.log("should send traffic data", trafficObj);
+
+                await axios
+                  .post(`${configs?.backendUrl}/api/traffic`, trafficObj, {
+                    headers: { "Content-Type": "application/json" },
+                  })
+                  .then((results) => {
+                    setSentTrafficData(true);
+                  })
+                  .catch((error) => {
+                    console.log(
+                      "an error has occured when sending user traffic data",
+                      error
+                    );
+                  });
+              },
+              async (error) => {
+                console.log(
+                  "has refused sending geographical personal data",
+                  error
+                );
+
+                trafficObj["longitude"] = 0;
+                trafficObj["latitude"] = 0;
+                trafficObj["accuracy"] = 0;
+                trafficObj["altitude"] = 0;
+                trafficObj["altitudeAccuracy"] = 0;
+                trafficObj["visitorName"] = guestObj.fullName;
+                trafficObj["visitorEmail"] = guestObj.email;
+                trafficObj["webPage"] = window.location.pathname;
+
+                console.log(
+                  "should send traffic data even if position data is null",
+                  trafficObj
+                );
+
+                await axios
+                  .post(`${configs?.backendUrl}/api/traffic`, trafficObj, {
+                    headers: { "Content-Type": "application/json" },
+                  })
+                  .then((results) => {
+                    setSentTrafficData(true);
+                  })
+                  .catch((error) => {
+                    console.log(
+                      "an error has occured when sending user traffic data",
+                      error
+                    );
+                  });
+              }
+            );
+          } catch (error) {
+            console.log("no active sesssion guest data found", error);
+
+            router.push("/");
+          }
+        })();
+
+        try {
+          if (Object.keys(guestObj)?.length > 3) {
+            setLoggedIn(true);
+
+            setGuest(guestObj);
+
+            console.log("updated guest loggin in status");
+
+            if (!isConnected) {
+              subsSocket.auth = {
+                guest: {
+                  fullName: guestObj?.fullName,
+                  accessKey: guestObj?.accessKey,
+                  profile: guestObj?.profile,
+                  eventId: guestObj?.event?.id,
+                  eventSubject: guestObj?.event?.subject,
+                },
+              };
+
+              console.log(
+                "auth params we are sending to the io server for realtime communications",
+                {
+                  guest: {
+                    fullName: guestObj?.fullName,
+                    accessKey: guestObj?.accessKey,
+                    profile: guestObj?.profile,
+                    eventId: guestObj?.event?.id,
+                    eventSubject: guestObj?.event?.subject,
+                  },
+                }
+              );
+
+              subsSocket.connect();
+
+              console.log("connected the server socket io successfully");
+
+              setIsConnected(true);
+            }
+
+            subsSocket.on("connect_error", function () {
+              console.log("Connection failed, please retry later");
+
+              setIsConnected(false);
+
+              setSnackMessage(
+                lang === "fr" ? "Vous êtes hors connexion" : "You are affline"
+              );
+              setSeverity("warning");
+              setIsnackVisible(true);
+            });
+
+            subsSocket.io.on("reconnect", (attempt) => {
+              setIsConnected(false);
+
+              setSnackMessage(
+                lang === "fr"
+                  ? "Votre connection s'est retablie"
+                  : "Internet is back"
+              );
+              setSeverity("success");
+              setIsnackVisible(true);
+            });
+
+            subsSocket.on("HELD_MESSAGES", (payload) => {
+              console.log("current help messages from socket", payload);
+            });
+
+            console.log("current connection status", {
+              isConnected,
+              subsSocket,
+            });
+
+            return () => {
+              console.log("cleaning up handlers");
+
+              subsSocket.off("connect_error");
+              subsSocket.off("HELD_MESSAGES");
+            };
+          } else {
+            router.push("/");
+
+            console.log("No user data set, loggin out");
+          }
+        } catch (error) {
+          console.log("no active sesssion guest data found");
+
+          router.push("/");
         }
+      } catch (error) {
+        console.log("no active sesssion guest data found");
 
-        subsSocket.on("connect_error", function () {
-          console.log("Connection failed, please retry later");
-
-          setIsConnected(false);
-
-          setSnackMessage(
-            lang === "fr" ? "Vous êtes hors connexion" : "You are affline"
-          );
-          setSeverity("warning");
-          setIsnackVisible(true);
-        });
-
-        subsSocket.io.on("reconnect", (attempt) => {
-          setIsConnected(false);
-
-          setSnackMessage(
-            lang === "fr"
-              ? "Votre connection s'est retablie"
-              : "Internet is back"
-          );
-          setSeverity("success");
-          setIsnackVisible(true);
-        });
-
-        subsSocket.on("HELD_MESSAGES", (payload) => {
-          console.log("current help messages from socket", payload);
-        });
-
-        console.log("current connection status", { isConnected, subsSocket });
-
-        return () => {
-          console.log("cleaning up handlers");
-
-          subsSocket.off("connect_error");
-          subsSocket.off("HELD_MESSAGES");
-        };
-      } else {
         router.push("/");
-
-        console.log("No user data set, loggin out");
       }
     }
   }, []);

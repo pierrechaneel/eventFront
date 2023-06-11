@@ -118,6 +118,8 @@ const QrCode = ({}) => {
                   color: theme.palette.common.white,
                   fontWeight: theme.typography.fontWeightLight,
                   fontSize: "12px",
+                  textAlign: "justify",
+                  lineHeight: "1.2",
                 }}
               >
                 {lang === "fr" ? "Cher" : "Dear"}{" "}
@@ -127,33 +129,68 @@ const QrCode = ({}) => {
                     color: theme.palette.primary.main,
                     fontWeight: theme.typography.fontWeightRegular,
                     fontSize: "12px",
+                    textAlign: "justify",
+                    lineHeight: "1.2",
                   }}
                 >
                   {guest?.fullName}
                 </Typography>
-                {lang === "fr"
-                  ? `, Je te souhaite la bienvenue en République Démocratique du Congo,
-            un grand pays avec d’immenses ressources économiques. La République
+                <Typography
+                  sx={{
+                    color: theme.palette.common.white,
+                    fontWeight: theme.typography.fontWeightLight,
+                    fontSize: "12px",
+                    textAlign: "justify",
+                    lineHeight: "1.2",
+                  }}
+                  component={"span"}
+                >
+                  {lang === "fr"
+                    ? [
+                        `, Je te souhaite la bienvenue en République Démocratique du Congo,
+            un grand pays avec d’immenses ressources économiques. `,
+                        <br />,
+                        `La République
             Démocratique du Congo est au centre du continent africain et se
             subdivise en 26 Provinces issues de la profonde réforme de
-            l’organisation politique, administrative et territoriale. Elle est
+            l’organisation politique, administrative et territoriale. `,
+                        `Elle est
             entourée de 9 pays frontaliers : République du Congo, République
             Centrafricaine, Sud-Soudan, Ouganda, Rwanda, Burundi, Tanzanie,
-            Zambie et Angola. Du fait de sa position géographique, elle est à la fois membre de la Communauté de Développement de l’Afrique Australe et de la Communauté de l’Afrique de l’Est. Au nom du`
-                  : `, I welcome you to the Democratic Republic of Congo,
-            a large country with immense economic resources. The Republic
+            Zambie et Angola.`,
+                        `Du fait de sa position géographique, elle est à la fois membre de la Communauté de Développement de l’Afrique Australe et de la Communauté de l’Afrique de l’Est. `,
+                        <br />,
+                        <br />,
+                        `Au nom du `,
+                      ]
+                    : [
+                        `, I welcome you to the Democratic Republic of Congo,
+            a large country with immense economic resources. `,
+                        <br />,
+                        `The Republic
             Democratic Republic of the Congo is at the center of the African continent and is
             subdivided into 26 Provinces resulting from the profound reform of
-            political, administrative and territorial organization. It is
+            political, administrative and territorial organization. `,
+                        `It is
             surrounded by 9 border countries: Republic of Congo, Republic
             Central African Republic, South Sudan, Uganda, Rwanda, Burundi, Tanzania,
-            Zambia and Angola. Due to its geographical position, it is both a member of the Southern African Development Community and the East African Community. On behalf of the`}{" "}
+            Zambia and Angola.`,
+                        `Due to its geographical position, it is both a member of the Southern African Development Community and the East African Community.
+           `,
+                        <br />,
+                        <br />,
+                        `On behalf of the`,
+                        ` `,
+                      ]}
+                </Typography>
                 <Typography
                   component={"span"}
                   sx={{
                     color: theme.palette.primary.main,
                     fontWeight: theme.typography.fontWeightRegular,
                     fontSize: "12px",
+                    textAlign: "justify",
+                    lineHeight: "1.2",
                   }}
                 >
                   {lang === "fr"
@@ -167,19 +204,33 @@ const QrCode = ({}) => {
                     color: theme.palette.primary.main,
                     fontWeight: theme.typography.fontWeightRegular,
                     fontSize: "12px",
+                    textAlign: "justify",
+                    lineHeight: "1.2",
                   }}
                 >
                   {lang === "fr" ? `collègues` : `collegues`}
                 </Typography>{" "}
                 {lang === "fr"
-                  ? ` , je te souhaite une chaleureuse bienvenue à Kinshasa, capitale de la République Démocratique du Congo. A toutes fins utiles, la rubrique « sécurité et contacts utiles » te donne accès à des personnes ressources qui se tiendront avec plaisir à ta disposition pour rendre ta visite agréable chez`
-                  : `, I wish you a warm welcome to Kinshasa, capital of the Democratic Republic of Congo. For all intents and purposes, the "Safety and Useful contacts" menu gives you access to resource persons who will be happy to be at your disposal to make your visit pleasant at`}{" "}
+                  ? [
+                      ` , je te souhaite une chaleureuse bienvenue à Kinshasa, capitale de la République Démocratique du Congo.`,
+                      <br />,
+                      <br />,
+                      ` A toutes fins utiles, la rubrique « sécurité et contacts utiles » te donne accès à des personnes ressources qui se tiendront avec plaisir à ta disposition pour rendre ta visite agréable chez `,
+                    ]
+                  : [
+                      `, I wish you a warm welcome to Kinshasa, capital of the Democratic Republic of Congo.`,
+                      <br />,
+                      <br />,
+                      ` For all intents and purposes, the "Safety and Useful contacts" menu gives you access to resource persons who will be happy to be at your disposal to make your visit pleasant at`,
+                    ]}
                 <Typography
                   component={"span"}
                   sx={{
                     color: theme.palette.primary.main,
                     fontWeight: theme.typography.fontWeightRegular,
                     fontSize: "12px",
+                    textAlign: "justify",
+                    lineHeight: "1.2",
                   }}
                 >
                   {lang === "fr" ? " Orange RDC" : "Orange DRC"}

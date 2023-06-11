@@ -418,7 +418,7 @@ const Profile = ({ setSecondaryMenu }) => {
               justifyContent: "center",
             }}
           >
-            {guest?.arrivalDate ? (
+            {guest?.arrivalTemperature != 0 ? (
               <Stack
                 direction={"column"}
                 sx={{
@@ -617,7 +617,7 @@ const Profile = ({ setSecondaryMenu }) => {
             ) : (
               ""
             )}
-            {guest?.dinerDate ? (
+            {guest?.dinerTemperature != 0 ? (
               <Stack
                 direction={"column"}
                 sx={{
@@ -751,7 +751,7 @@ const Profile = ({ setSecondaryMenu }) => {
             ) : (
               ""
             )}{" "}
-            {guest?.departureDate ? (
+            {guest?.departureTemperature != 0 ? (
               <Stack
                 direction={"column"}
                 sx={{
