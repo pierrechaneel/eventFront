@@ -60,7 +60,7 @@ const ViewportsContext = ({ children }) => {
       icon: (props) => <ViewAgenda {...props} />,
     },
     {
-      title: lang === "fr" ? "Réseautage" : "Networking",
+      title: lang === "fr" ? "Networking" : "Networking",
       link: `/guests/${guestObj?.accessKey}/contacts`,
       icon: (props) => <People {...props} />,
     },
@@ -114,7 +114,7 @@ const ViewportsContext = ({ children }) => {
           icon: (props) => <ViewAgenda {...props} />,
         },
         {
-          title: lang === "fr" ? "Réseautage" : "Networking",
+          title: lang === "fr" ? "Networking" : "Networking",
           link: `/guests/${guestObj?.accessKey}/contacts`,
           icon: (props) => <People {...props} />,
         },
