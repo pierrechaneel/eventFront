@@ -193,8 +193,8 @@ const Agenda = ({}) => {
                     color: theme.palette.primary.main,
                     fontWeight:
                       currentMenu === target
-                        ? theme.typography.fontWeightMedium
-                        : theme.typography.fontWeightRegular,
+                        ? theme.typography.fontWeightBold
+                        : theme.typography.fontWeightBold,
                     fontSize: "12px",
                     px: ".5rem",
                     py: ".5rem",
@@ -311,7 +311,7 @@ const Agenda = ({}) => {
                 sx={{
                   color: theme.palette.grey[300],
                   fontSize: "12px",
-                  fontWeight: theme.typography.fontWeightRegular,
+                  fontWeight: theme.typography.fontWeightBold,
                   "&:hover": {
                     transition: `all .2s`,
                     color: theme.palette.common.white,
@@ -382,7 +382,7 @@ const Agenda = ({}) => {
                         <Typography
                           sx={{
                             color: theme.palette.common.white,
-                            fontSize: "9px",
+                            fontSize: "12px",
                           }}
                         >
                           {target?.label}
@@ -404,7 +404,7 @@ const Agenda = ({}) => {
                           sx={{
                             fontSize: "12px",
                             color: theme.palette.common.white,
-                            fontWeight: theme.typography.fontWeightMedium,
+                            fontWeight: theme.typography.fontWeightBold,
                           }}
                         >
                           {`${new Date(target?.date)?.toLocaleTimeString(
@@ -441,7 +441,7 @@ const Agenda = ({}) => {
                           sx={{
                             fontSize: "12px",
                             color: theme.palette.common.white,
-                            fontWeight: theme.typography.fontWeightMedium,
+                            fontWeight: theme.typography.fontWeightBold,
                           }}
                         >
                           {target?.place}
@@ -489,7 +489,7 @@ const Agenda = ({}) => {
                         <Typography
                           sx={{
                             color: theme.palette.grey[300],
-                            fontWeight: theme.typography.fontWeightRegular,
+                            fontWeight: theme.typography.fontWeightBold,
                             fontSize: "12px",
                           }}
                         >
@@ -525,7 +525,7 @@ const Agenda = ({}) => {
                         sx={{
                           color: theme.palette.grey[300],
                           fontSize: "12px",
-                          fontWeight: theme.typography.fontWeightRegular,
+                          fontWeight: theme.typography.fontWeightBold,
                         }}
                       >
                         {target?.description}

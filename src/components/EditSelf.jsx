@@ -99,7 +99,7 @@ const EditSelf = ({ setSecondaryMenu }) => {
         <Typography
           sx={{
             color: theme.palette.common.white,
-            fontWeight: theme.typography.fontWeightRegular,
+            fontWeight: theme.typography.fontWeightBold,
             textAlign: "center",
             fontSize: "24px",
           }}
@@ -109,7 +109,7 @@ const EditSelf = ({ setSecondaryMenu }) => {
         <Typography
           sx={{
             color: theme.palette.common.white,
-            fontWeight: theme.typography.fontWeightRegular,
+            fontWeight: theme.typography.fontWeightBold,
             textAlign: "center",
             fontSize: "14px",
           }}

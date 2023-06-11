@@ -69,7 +69,7 @@ END:VCARD\n`;
       <Typography
         sx={{
           color: theme.palette.grey[200],
-          fontWeight: theme.typography.fontWeightMedium,
+          fontWeight: theme.typography.fontWeightBold,
           fontSize: screen870 ? "12px" : "12px",
           textAlign: "center",
           // textTransform: "uppercase",

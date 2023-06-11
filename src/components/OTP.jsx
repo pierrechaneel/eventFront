@@ -296,7 +296,7 @@ const OTP = ({}) => {
               sx={{
                 color: theme.palette.grey[300],
                 fontSize: screen660 ? "12px" : screen870 ? "12px" : "14px",
-                fopntWeight: theme.typography.fontWeightRegular,
+                fopntWeight: theme.typography.fontWeightBold,
                 m: 0,
                 textAlign: "center",
                 mx: screen870 ? ".5rem" : "1rem",
@@ -384,7 +384,7 @@ const OTP = ({}) => {
           <Typography
             sx={{
               color: theme.palette.grey[300],
-              fontWeight: theme.typography.fontWeightRegular,
+              fontWeight: theme.typography.fontWeightBold,
               textAlign: "center",
               // position: "absolute",
               /**    bottom: "2rem",*/

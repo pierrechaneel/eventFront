@@ -428,7 +428,7 @@ const AppLayout = ({ children }) => {
                         <Typography
                           component={"span"}
                           sx={{
-                            fontWeight: theme.typography.fontWeightMedium,
+                            fontWeight: theme.typography.fontWeightBold,
                             color: router?.asPath?.includes(target?.link)
                               ? theme.palette.common.white
                               : theme.palette.grey[500],
@@ -625,7 +625,7 @@ const AppLayout = ({ children }) => {
                       sx={{
                         color: theme.palette.common.white,
                         fontSize: "12px",
-                        fontWeight: theme.typography.fontWeightMedium,
+                        fontWeight: theme.typography.fontWeightBold,
                       }}
                     >
                       Menu
@@ -684,7 +684,7 @@ const AppLayout = ({ children }) => {
                         sx={{
                           color: theme.palette.grey[300],
                           fontSize: "12px",
-                          fontWeight: theme.typography.fontWeightRegular,
+                          fontWeight: theme.typography.fontWeightBold,
                           ml: ".1rem",
                         }}
                       >

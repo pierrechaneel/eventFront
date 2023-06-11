@@ -9,9 +9,9 @@ import { ThemeProvider, createTheme } from "@mui/material";
  * 
 import helveticaNewBold from "../fonts/bold.ttf";
 import helveticaNewBlack from "../fonts/black.ttf";
-import helveticaNewLight from "../fonts/light.ttf";
+import helveticaNewBold from "../fonts/light.ttf";
 import helveticaNewThin from "../fonts/thin.ttf";
-import helveticaNewMedium from "../fonts/medium.ttf";
+import helveticaNewBold from "../fonts/medium.ttf";
 import helveticaNewRegular from "../fonts/regular.ttf";
  */
 

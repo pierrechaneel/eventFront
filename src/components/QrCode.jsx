@@ -116,7 +116,7 @@ const QrCode = ({}) => {
               <Typography
                 sx={{
                   color: theme.palette.common.white,
-                  fontWeight: theme.typography.fontWeightRegular,
+                  fontWeight: theme.typography.fontWeightBold,
                   fontSize: "12px",
                   textAlign: "justify",
                   lineHeight: "1.2",
@@ -127,7 +127,7 @@ const QrCode = ({}) => {
                   component={"span"}
                   sx={{
                     color: theme.palette.primary.main,
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     fontSize: "12px",
                     textAlign: "justify",
                     lineHeight: "1.2",
@@ -138,7 +138,7 @@ const QrCode = ({}) => {
                 <Typography
                   sx={{
                     color: theme.palette.common.white,
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     fontSize: "12px",
                     textAlign: "justify",
                     lineHeight: "1.2",
@@ -181,7 +181,7 @@ const QrCode = ({}) => {
                   component={"span"}
                   sx={{
                     color: theme.palette.primary.main,
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     fontSize: "12px",
                     textAlign: "justify",
                     lineHeight: "1.2",
@@ -196,7 +196,7 @@ const QrCode = ({}) => {
                   component={"span"}
                   sx={{
                     color: theme.palette.primary.main,
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     fontSize: "12px",
                     textAlign: "justify",
                     lineHeight: "1.2",
@@ -221,7 +221,7 @@ const QrCode = ({}) => {
                   component={"span"}
                   sx={{
                     color: theme.palette.primary.main,
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     fontSize: "12px",
                     textAlign: "justify",
                     lineHeight: "1.2",
@@ -252,7 +252,7 @@ const QrCode = ({}) => {
                   sx={{
                     color: theme.palette.common.white,
                     textAlign: "right",
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     fontSize: "12px",
                   }}
                 >
@@ -319,7 +319,7 @@ const QrCode = ({}) => {
               {/**<Typography
             sx={{
               color: theme.palette.common.white,
-              fontWeight: theme.t(ypography.fontWeightMedium,
+              fontWeight: theme.t(ypography.fontWeightBold,
               fontSize: "14px",
               fontStyle: "italic",
               mt: "1rem",
@@ -419,7 +419,7 @@ const QrCode = ({}) => {
                 <Typography
                   sx={{
                     color: theme.palette.grey[400],
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     mr: screen870 ? ".2rem" : ".5rem",
                     color: theme.palette.common.white,
                     fontSize: screen870 ? "12px" : "12px",
@@ -449,7 +449,7 @@ const QrCode = ({}) => {
                 <Typography
                   sx={{
                     color: theme.palette.grey[200],
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     fontSize: screen870 ? "12px" : "12px",
                     whiteSpace: "no-wrap",
                     textAlign: "justify",
@@ -462,7 +462,7 @@ const QrCode = ({}) => {
                       textTransform: "capitalize",
 
                       color: theme.palette.grey[200],
-                      fontWeight: theme.typography.fontWeightRegular,
+                      fontWeight: theme.typography.fontWeightBold,
                       fontSize: screen870 ? "12px" : "12px",
                       whiteSpace: "no-wrap",
                       textAlign: "center",
@@ -484,7 +484,7 @@ const QrCode = ({}) => {
                     sx={{
                       textTransform: "capitalize",
                       color: theme.palette.grey[200],
-                      fontWeight: theme.typography.fontWeightRegular,
+                      fontWeight: theme.typography.fontWeightBold,
                       fontSize: screen870 ? "12px" : "12px",
                       whiteSpace: "no-wrap",
                       textAlign: "center",

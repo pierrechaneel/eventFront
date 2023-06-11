@@ -56,7 +56,7 @@ const MenuItems = ({ apps }) => {
             <Typography
               component={"span"}
               sx={{
-                fontWeight: theme.typography.fontWeightMedium,
+                fontWeight: theme.typography.fontWeightBold,
                 color: router?.asPath?.includes(target?.link)
                   ? theme.palette.primary.main
                   : theme.palette.grey[500],

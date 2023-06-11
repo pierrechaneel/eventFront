@@ -637,7 +637,7 @@ const SocialWall = ({}) => {
                         <Typography
                           sx={{
                             color: theme.palette.grey[400],
-                            fontWeight: theme.typography.fontWeightRegular,
+                            fontWeight: theme.typography.fontWeightBold,
                             fontSize: "12px",
                           }}
                         >
@@ -675,7 +675,7 @@ const SocialWall = ({}) => {
                     <Typography
                       sx={{
                         color: theme.palette.common.white,
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                       }}
                     >
@@ -704,7 +704,7 @@ const SocialWall = ({}) => {
                             sx={{
                               textAlign: "center",
                               fontSize: "14px",
-                              fontWeight: theme.typography.fontWeightRegular,
+                              fontWeight: theme.typography.fontWeightBold,
                               color: theme.palette.common.white,
                             }}
                           >
@@ -773,7 +773,7 @@ const SocialWall = ({}) => {
                           <Typography
                             sx={{
                               color: theme.palette.grey[400],
-                              fontWeight: theme.typography.fontWeightRegular,
+                              fontWeight: theme.typography.fontWeightBold,
                               fontSize: "12px",
                               cursor: "pointer",
                             }}
@@ -824,7 +824,7 @@ const SocialWall = ({}) => {
                           <Typography
                             sx={{
                               color: theme.palette.grey[400],
-                              fontWeight: theme.typography.fontWeightRegular,
+                              fontWeight: theme.typography.fontWeightBold,
                               fontSize: "12px",
                               cursor: "pointer",
                             }}
@@ -860,7 +860,7 @@ const SocialWall = ({}) => {
                         }}
                         sx={{
                           color: theme.palette.grey[400],
-                          fontWeight: theme.typography.fontWeightRegular,
+                          fontWeight: theme.typography.fontWeightBold,
                           fontSize: "12px",
                           cursor: "pointer",
                         }}

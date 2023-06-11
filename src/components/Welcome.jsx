@@ -130,7 +130,7 @@ const Welcome = ({}) => {
               sx={{
                 color: theme.palette.grey[300],
                 fontSize: screen660 ? "12px" : screen870 ? "12px" : "14px",
-                fopntWeight: theme.typography.fontWeightRegular,
+                fopntWeight: theme.typography.fontWeightBold,
                 m: 0,
                 textAlign: "center",
                 mx: screen870 ? ".5rem" : "1rem",
@@ -180,7 +180,7 @@ const Welcome = ({}) => {
                       borderColor: theme.palette.common.black,
                       "& p": {
                         color: theme.palette.primary.main,
-                        //  fontWeight: theme.typography.fontWeightMedium,
+                        //  fontWeight: theme.typography.fontWeightBold,
                       },
                     },
                     m: "1vw",
@@ -197,7 +197,7 @@ const Welcome = ({}) => {
                   <Typography
                     sx={{
                       color: theme.palette.common.white,
-                      fontWeight: theme.typography.fontWeightRegular,
+                      fontWeight: theme.typography.fontWeightBold,
                       fontSize: "14px",
                       textAlign: "center",
                     }}
@@ -211,7 +211,7 @@ const Welcome = ({}) => {
           <Typography
             sx={{
               color: theme.palette.grey[300],
-              fontWeight: theme.typography.fontWeightRegular,
+              fontWeight: theme.typography.fontWeightBold,
               textAlign: "center",
               fontSize: "12px",
               maxWidth: screen870 ? "95%" : "60%",

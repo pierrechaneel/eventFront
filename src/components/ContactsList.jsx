@@ -90,7 +90,7 @@ const ContactsList = ({ screen870, screen660, setIsSwippeableVisible }) => {
           <Typography
             sx={{
               color: theme.palette.common.white,
-              fontWeight: theme.typography.fontWeightRegular,
+              fontWeight: theme.typography.fontWeightBold,
               fontSize: "12px",
               mr: ".2rem",
             }}
@@ -217,7 +217,7 @@ const ContactsList = ({ screen870, screen660, setIsSwippeableVisible }) => {
                         target?.id === chatSubject?.id
                           ? theme.palette.primary.main
                           : theme.palette.common.white,
-                      fontWeight: theme.typography.fontWeightRegular,
+                      fontWeight: theme.typography.fontWeightBold,
                       fontSize: "14px",
                       mb: ".2rem",
                     }}
@@ -230,7 +230,7 @@ const ContactsList = ({ screen870, screen660, setIsSwippeableVisible }) => {
                         target?.id === chatSubject?.id
                           ? theme.palette.primary.main
                           : theme.palette.common.white,
-                      fontWeight: theme.typography.fontWeightRegular,
+                      fontWeight: theme.typography.fontWeightBold,
                       fontSize: "12px",
                     }}
                   >

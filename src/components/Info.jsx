@@ -175,7 +175,7 @@ const Info = ({}) => {
           <Typography
             sx={{
               color: theme.palette.common.white,
-              fontWeight: theme.typography.fontWeightRegular,
+              fontWeight: theme.typography.fontWeightBold,
               fontSize: "14px",
               mb: screen660 ? ".5rem" : "1rem",
             }}
@@ -224,7 +224,7 @@ const Info = ({}) => {
                         width: "50%",
                         fontSize: "12px",
                         color: theme.palette.common.white,
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                       }}
                     >
                       {target?.title}
@@ -233,7 +233,7 @@ const Info = ({}) => {
                       sx={{
                         fontSize: "12px",
                         color: theme.palette.common.white,
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                       }}
                     >
                       {target?.name}
@@ -261,7 +261,7 @@ const Info = ({}) => {
                           sx={{
                             color: theme.palette.grey[300],
                             fontSize: "12px",
-                            fontWeight: theme.typography.fontWeightRegular,
+                            fontWeight: theme.typography.fontWeightBold,
                           }}
                         >
                           Téléphone
@@ -270,7 +270,7 @@ const Info = ({}) => {
                           sx={{
                             color: theme.palette.common.white,
                             fontSize: "12px",
-                            fontWeight: theme.typography.fontWeightMedium,
+                            fontWeight: theme.typography.fontWeightBold,
                           }}
                         >
                           {target?.phoneNumber}
@@ -294,7 +294,7 @@ const Info = ({}) => {
                           sx={{
                             color: theme.palette.grey[300],
                             fontSize: "12px",
-                            fontWeight: theme.typography.fontWeightRegular,
+                            fontWeight: theme.typography.fontWeightBold,
                           }}
                         >
                           Addresse Email
@@ -303,7 +303,7 @@ const Info = ({}) => {
                           sx={{
                             color: theme.palette.common.white,
                             fontSize: "12px",
-                            fontWeight: theme.typography.fontWeightMedium,
+                            fontWeight: theme.typography.fontWeightBold,
                           }}
                         >
                           {target?.emailAdress}
@@ -365,7 +365,7 @@ const Info = ({}) => {
             <Typography
               sx={{
                 color: theme.palette.common.white,
-                fontWeight: theme.typography.fontWeightRegular,
+                fontWeight: theme.typography.fontWeightBold,
                 fontSize: "12px",
               }}
             >
@@ -374,7 +374,7 @@ const Info = ({}) => {
             <Typography
               sx={{
                 color: theme.palette.common.white,
-                fontWeight: theme.typography.fontWeightRegular,
+                fontWeight: theme.typography.fontWeightBold,
                 fontSize: "12px",
               }}
             >
@@ -407,7 +407,7 @@ const Info = ({}) => {
             <Typography
               sx={{
                 color: theme.palette.common.white,
-                fontWeight: theme.typography.fontWeightRegular,
+                fontWeight: theme.typography.fontWeightBold,
                 fontSize: "12px",
               }}
             >
@@ -454,7 +454,7 @@ const Info = ({}) => {
                     <Typography
                       sx={{
                         color: theme.palette.common.white,
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         p: 0,
                         m: 0,
@@ -483,7 +483,7 @@ const Info = ({}) => {
             <Typography
               sx={{
                 color: theme.palette.common.white,
-                fontWeight: theme.typography.fontWeightRegular,
+                fontWeight: theme.typography.fontWeightBold,
                 fontSize: "12px",
               }}
             >
@@ -518,7 +518,7 @@ const Info = ({}) => {
                     <Typography
                       sx={{
                         color: theme.palette.common.white,
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         p: 0,
                         m: 0,
@@ -547,7 +547,7 @@ const Info = ({}) => {
             <Typography
               sx={{
                 color: theme.palette.common.white,
-                fontWeight: theme.typography.fontWeightRegular,
+                fontWeight: theme.typography.fontWeightBold,
                 fontSize: "12px",
               }}
             >
@@ -579,7 +579,7 @@ const Info = ({}) => {
                     <Typography
                       sx={{
                         color: theme.palette.common.white,
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         p: 0,
                         m: 0,
@@ -608,7 +608,7 @@ const Info = ({}) => {
             <Typography
               sx={{
                 color: theme.palette.common.white,
-                fontWeight: theme.typography.fontWeightRegular,
+                fontWeight: theme.typography.fontWeightBold,
                 fontSize: "12px",
               }}
             >
@@ -666,7 +666,7 @@ const Info = ({}) => {
                       <Typography
                         sx={{
                           color: theme.palette.common.white,
-                          fontWeight: theme.typography.fontWeightRegular,
+                          fontWeight: theme.typography.fontWeightBold,
                           fontSize: "12px",
                           p: 0,
                           m: 0,
@@ -691,7 +691,7 @@ const Info = ({}) => {
                       <Typography
                         sx={{
                           color: theme.palette.common.white,
-                          fontWeight: theme.typography.fontWeightRegular,
+                          fontWeight: theme.typography.fontWeightBold,
                           fontSize: "12px",
                           p: 0,
                           m: 0,
@@ -716,7 +716,7 @@ const Info = ({}) => {
                       <Typography
                         sx={{
                           color: theme.palette.common.white,
-                          fontWeight: theme.typography.fontWeightRegular,
+                          fontWeight: theme.typography.fontWeightBold,
                           fontSize: "12px",
                           p: 0,
                           m: 0,

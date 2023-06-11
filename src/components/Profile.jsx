@@ -192,7 +192,7 @@ const Profile = ({ setSecondaryMenu }) => {
         // pb: "5rem",
         overflowY: "auto",
         pt: screen870 ? "0rem" : "0rem",
-        pb: screen660 ? "18.5rem" : undefined,
+        pb: screen660 ? "5.5rem" : undefined,
       }}
     >
       {isSnackVisible ? (
@@ -310,7 +310,7 @@ const Profile = ({ setSecondaryMenu }) => {
                 <Typography
                   sx={{
                     color: theme.palette.common.white,
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     //textAlign: "center",
                     fontSize: "12px",
                   }}
@@ -330,7 +330,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   <Typography
                     sx={{
                       color: theme.palette.grey[300],
-                      fontWeight: theme.palette.fontWeightLight,
+                      fontWeight: theme.palette.fontWeightBold,
                       fontSize: "12px",
                       mr: ".5rem",
                     }}
@@ -394,8 +394,8 @@ const Profile = ({ setSecondaryMenu }) => {
           sx={{
             width: screen660 ? "100%" : "70%",
             bgcolor: theme?.palette.common.black,
-            height: "100%",
-            maxHeight: "100%",
+            height: screen660 ? "max-content" : "100%",
+            maxHeight: screen660 ? "max-content" : "100%",
             px: "2.5rem",
             py: "2.5rem",
             mr: screen660 ? undefined : "1.5rem",
@@ -410,11 +410,12 @@ const Profile = ({ setSecondaryMenu }) => {
               height: "max-content",
               alignItems: "flex-start",
               flexWrap: "wrap",
-              maxHeight: "100%",
-              overflowX: "hidden",
+              maxHeight: screen660 ? "max-content" : "100%",
+              overflowX: screen660 ? undefined : "hidden",
               overflowY: "auto",
               width: "100%",
               justifyContent: "center",
+              // minHeight: screen660 ? "60vh" : undefined,
             }}
           >
             {guest?.arrivalTemperature != 0 ? (
@@ -430,6 +431,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   borderRadius: "1rem",
                   overflow: "hidden",
                   m: ".3rem",
+                  height: screen660 ? "max-content" : undefined,
                 }}
               >
                 <Typography
@@ -437,7 +439,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     color: theme.palette.common.white,
                     textAlign: "center",
                     fontSize: "14px",
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     mb: "1rem",
                   }}
                 >
@@ -462,7 +464,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     sx={{
                       textAlign: "center",
                       color: theme.palette.grey[300],
-                      fontWeight: theme.typography.fontWeightRegular,
+                      fontWeight: theme.typography.fontWeightBold,
                       fontSize: "12px",
                       //width: "100%",
                       p: 0,
@@ -500,7 +502,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       sx={{
                         textAlign: "center",
                         color: theme.palette.grey[300],
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         //width: "100%",
                         p: 0,
@@ -533,7 +535,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       sx={{
                         textAlign: "center",
                         color: theme.palette.grey[300],
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         //width: "100%",
                         p: 0,
@@ -566,7 +568,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       sx={{
                         textAlign: "center",
                         color: theme.palette.grey[300],
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         //width: "100%",
                         p: 0,
@@ -599,7 +601,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       sx={{
                         textAlign: "center",
                         color: theme.palette.grey[300],
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         //width: "100%",
                         p: 0,
@@ -636,7 +638,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     color: theme.palette.common.white,
                     textAlign: "center",
                     fontSize: "14px",
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     mb: "1rem",
                   }}
                 >
@@ -661,7 +663,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     sx={{
                       textAlign: "center",
                       color: theme.palette.grey[300],
-                      fontWeight: theme.typography.fontWeightRegular,
+                      fontWeight: theme.typography.fontWeightBold,
                       fontSize: "12px",
                       //width: "100%",
                       p: 0,
@@ -700,7 +702,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       sx={{
                         textAlign: "center",
                         color: theme.palette.grey[300],
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         //width: "100%",
                         p: 0,
@@ -733,7 +735,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       sx={{
                         textAlign: "center",
                         color: theme.palette.grey[300],
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         //width: "100%",
                         p: 0,
@@ -770,7 +772,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     color: theme.palette.common.white,
                     textAlign: "center",
                     fontSize: "14px",
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     mb: "1rem",
                   }}
                 >
@@ -795,7 +797,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     sx={{
                       textAlign: "center",
                       color: theme.palette.grey[300],
-                      fontWeight: theme.typography.fontWeightRegular,
+                      fontWeight: theme.typography.fontWeightBold,
                       fontSize: "12px",
                       //width: "100%",
                       p: 0,
@@ -834,7 +836,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       sx={{
                         textAlign: "center",
                         color: theme.palette.grey[300],
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         //width: "100%",
                         p: 0,
@@ -867,7 +869,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       sx={{
                         textAlign: "center",
                         color: theme.palette.grey[300],
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         //width: "100%",
                         p: 0,
@@ -900,7 +902,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       sx={{
                         textAlign: "center",
                         color: theme.palette.grey[300],
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         //width: "100%",
                         p: 0,
@@ -933,7 +935,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       sx={{
                         textAlign: "center",
                         color: theme.palette.grey[300],
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         //width: "100%",
                         p: 0,
@@ -979,8 +981,8 @@ const Profile = ({ setSecondaryMenu }) => {
             <Typography
               sx={{
                 color: theme.palette.grey[300],
-                fontSize: screen660 ? "8px" : "14px",
-                fontWeight: theme.typography.fontWeightRegular,
+                fontSize: screen660 ? "12px" : "14px",
+                fontWeight: theme.typography.fontWeightBold,
                 textAlign: "right",
                 width: "100%",
                 fontSize: screen660 ? "12px" : screen870 ? "12px" : "14px",
@@ -993,7 +995,11 @@ const Profile = ({ setSecondaryMenu }) => {
               direction={"column"}
               sx={{
                 flexGrow: 1,
-                maxHeight: !screen870 ? "50vh" : "90%",
+                maxHeight: screen660
+                  ? "max-content"
+                  : !screen870
+                  ? "50vh"
+                  : "90%",
                 mt: screen660 ? ".5rem" : "1.5rem",
                 width: "100%",
                 overflowY: "auto",
@@ -1014,7 +1020,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       component={"p"}
                       sx={{
                         color: theme.palette.common.white,
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: screen870 ? "12px" : "12px",
                         textAlign: "left",
                         width: "100%",
@@ -1026,7 +1032,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     <Typography
                       sx={{
                         color: theme.palette.common.white,
-                        fontWeight: theme.typography.fontWeightRegular,
+                        fontWeight: theme.typography.fontWeightBold,
                         fontSize: "12px",
                         textAlign: "right",
                         mt: ".5rem",

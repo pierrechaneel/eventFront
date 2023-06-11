@@ -115,7 +115,7 @@ const Qa = ({}) => {
                   <Typography
                     sx={{
                       color: theme.palette.grey[400],
-                      fontSize: "9px",
+                      fontSize: "12px",
                       fontWeight: theme.typography.fontWeightBold,
                       fontSize: "14px",
                       my: ".5rem",
@@ -128,8 +128,8 @@ const Qa = ({}) => {
                   <Typography
                     sx={{
                       color: theme.palette.common.black,
-                      fontSize: "9px",
-                      fontWeight: theme.typography.fontWeightRegular,
+                      fontSize: "12px",
+                      fontWeight: theme.typography.fontWeightBold,
                       fontSize: "14px",
                       my: ".5rem",
                     }}

@@ -143,7 +143,7 @@ const Plugins = ({ collapsedPlugin, setCollapsedPlugin, handleEditSelf }) => {
                   <Typography
                     component={"span"}
                     sx={{
-                      fontWeight: theme.typography.fontWeightMedium,
+                      fontWeight: theme.typography.fontWeightBold,
                       color: theme.palette.common.white,
                       fontSize: "14px",
                       textAlign: "center",

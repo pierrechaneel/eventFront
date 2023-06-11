@@ -76,7 +76,7 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
             sx={{
               color: theme.palette.common.black,
               fontSize: "14px",
-              fontWeight: theme.typography.fontWeightMedium,
+              fontWeight: theme.typography.fontWeightBold,
             }}
           >
             {lang === "fr" ? "Modifier le profile" : "Update profile"}
@@ -135,7 +135,7 @@ const UploadProfile = ({ onClose, handleSubmit }) => {
                 <Typography
                   sx={{
                     color: theme.palette.common.black,
-                    fontWeight: theme.typography.fontWeightRegular,
+                    fontWeight: theme.typography.fontWeightBold,
                     textAlign: "center",
                     mt: ".5rem",
                   }}
