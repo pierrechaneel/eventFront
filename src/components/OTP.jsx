@@ -69,12 +69,13 @@ const OTP = ({}) => {
           setGuest(guestDatum);
 
           await Promise.allSettled(
-            [currentGuest?.phoneNumber, currentGuest?.email]?.map(
-              (target, index) => {
+            [guestDatum?.phoneNumber, guestDatum?.email]?.map(
+              (target, index, tab) => {
                 console.log("generation params", {
-                  /** reference: target,
+                  reference: target,
                   origin: packageCfg?.name,
-                  senderName: otpCodeSenders[index], */
+                  senderName: otpCodeSenders[index],
+                  tab,
                 });
 
                 return axios
@@ -98,12 +99,12 @@ const OTP = ({}) => {
 
             results?.forEach((result, index) => {
               if (result?.status === "fulfilled") {
-                if (index === 0) {
-                  setSnackMessage("OTP envoyé à votre téléphone");
+                if (index === 1) {
+                  setSnackMessage("OTP envoyé à votre mail");
                   setSeverity("info");
                   setIsnackVisible(true);
                 } else {
-                  setSnackMessage("OTP envoyé à votre mail");
+                  setSnackMessage("OTP envoyé à votre téléphone");
                   setSeverity("info");
                   setIsnackVisible(true);
                 }

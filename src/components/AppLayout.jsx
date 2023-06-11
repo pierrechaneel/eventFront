@@ -281,6 +281,8 @@ const AppLayout = ({ children }) => {
 
     window.sessionStorage.clear();
 
+    setLoggedIn(false);
+
     router.push("/");
   };
 
@@ -630,13 +632,69 @@ const AppLayout = ({ children }) => {
                     </Typography>
                   </Stack>
                 )}
-                <img
-                  src={"/saio.png"}
-                  alt="orange zone saio"
-                  style={{
-                    width: screen660 ? "75px" : "120px",
+                <Stack
+                  direction={"row"}
+                  sx={{
+                    alignItems: "center",
+                    width: "max-content",
                   }}
-                />
+                >
+                  {" "}
+                  <img
+                    src={"/saio.png"}
+                    alt="orange zone saio"
+                    style={{
+                      width: screen660 ? "75px" : "120px",
+                    }}
+                  />
+                  {screen660 ? (
+                    <Stack
+                      onClick={handleLogout}
+                      direction={"row"}
+                      sx={{
+                        alignItems: "center",
+                        width: "max-content",
+                        bottom: "1.5rem",
+                        justifyContent: "center",
+                        mx: "auto",
+                        bgcolor: "#FFFFFF10",
+                        py: ".3rem",
+                        px: ".3rem",
+                        borderRadius: "1.5rem",
+                        overflow: "hidden",
+                        cursor: "pointer",
+                        ml: "1rem",
+                        "&:hover": {
+                          "& *": {
+                            transition: `all .3s`,
+                            color: theme.palette.grey[200],
+                          },
+                        },
+                      }}
+                    >
+                      <Logout
+                        sx={{
+                          color: theme.palette.grey[300],
+                          fontSize: "12px",
+                        }}
+                      />
+
+                      <Typography
+                        component={"span"}
+                        sx={{
+                          color: theme.palette.grey[300],
+                          fontSize: "10px",
+                          fontWeight: theme.typography.fontWeightLight,
+                          ml: ".1rem",
+                        }}
+                      >
+                        Déconnexion
+                      </Typography>
+                    </Stack>
+                  ) : (
+                    ""
+                  )}
+                </Stack>
                 {screen870 ? (
                   ""
                 ) : (
