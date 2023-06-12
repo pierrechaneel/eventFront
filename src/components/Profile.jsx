@@ -192,7 +192,7 @@ const Profile = ({ setSecondaryMenu }) => {
         // pb: "5rem",
         overflowY: "auto",
         pt: screen870 ? "0rem" : "0rem",
-        pb: screen660 ? "5.5rem" : undefined,
+        mb: screen660 ? "10rem" : undefined,
       }}
     >
       {isSnackVisible ? (
@@ -388,6 +388,7 @@ const Profile = ({ setSecondaryMenu }) => {
           mt: screen660 ? ".5rem" : "1.5rem",
           flexWrap: screen660 ? "wrap" : undefined,
           alignItems: "stretch",
+          mb: screen660 ? "2.4rem" : undefined,
         }}
       >
         <Stack
@@ -1002,7 +1003,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   : "90%",
                 mt: screen660 ? ".5rem" : "1.5rem",
                 width: "100%",
-                overflowY: "auto",
+                height: screen660 ? "max-content" : !screen870 ? "50vh" : "90%",
               }}
             >
               {smsMessages?.map((target) => {

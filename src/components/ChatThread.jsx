@@ -328,7 +328,7 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
             : "30%"
           : "0px",
         height: "100%",
-        maxHeight: "100%",
+        maxHeight: screen660 ? "70vh" : "100%",
         maxWidth: screen660 ? "100%" : screen870 ? "40%" : "30%",
         overflowY: "auto",
         borderLeft: screen660 ? "none" : `1px solid ${theme.palette.grey[900]}`,
@@ -647,7 +647,7 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
           maxWidth: "100%",
           height: "100%",
           maxHeight: "100%",
-          overflowX: "auto",
+          overflowY: "auto",
           flexGrow: 1,
           overflowX: "hidden",
           pr: "1rem",

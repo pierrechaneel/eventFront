@@ -398,6 +398,7 @@ const SocialWall = ({}) => {
         m: 0,
         height: "100%",
         flexGrow: 1,
+        pb: screen660 ? "2.4rem" : undefined,
       }}
     >
       {isSnackVisible ? (

@@ -224,6 +224,7 @@ const Agenda = ({}) => {
         alignItems: "flex-start",
         width: "100%",
         height: "100%",
+        pb: screen660 ? "2.4rem" : undefined,
       }}
     >
       <Stack
@@ -278,7 +279,6 @@ const Agenda = ({}) => {
             borderRadius: "1.5rem",
             overflowY: "auto",
             border: `1px solid ${theme.palette.grey[900]}`,
-            pb: screen660 ? "10rem" : undefined,
           }}
         >
           {screen660 ? (

@@ -32,6 +32,7 @@ const QrCode = ({}) => {
         height: "100%",
         maxHeight: "100%",
         overflowY: "auto",
+        pb: screen660 ? "2.4rem" : undefined,
       }}
     >
       <Stack
@@ -310,12 +311,31 @@ const QrCode = ({}) => {
                 src={"/okapisaio.png"}
                 alt="qrcode"
                 style={{
-                  width: screen870 ? "200px" : "350px",
+                  width: screen870 ? "150px" : "300px",
                   mx: "auto",
                   animation: "bump 3s linear infinite",
                 }}
               />
-
+              <Typography
+                sx={{
+                  color: theme.palette.grey[200],
+                  fontWeight: theme.typography.fontWeightBold,
+                  textAlign: "center",
+                  fontSize: screen660 ? "12px" : "12px",
+                }}
+              >
+                Code Wifi
+              </Typography>
+              <Typography
+                sx={{
+                  color: theme.palette.common.white,
+                  fontWeight: theme.typography.fontWeightBlack,
+                  textAlign: "center",
+                  fontSize: screen660 ? "16px" : "18px",
+                }}
+              >
+                {guest?.event?.wifiCode}
+              </Typography>
               {/**<Typography
             sx={{
               color: theme.palette.common.white,

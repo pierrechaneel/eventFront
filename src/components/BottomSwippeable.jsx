@@ -70,7 +70,9 @@ const BottomSwippeable = (props) => {
         keepMounted: true,
       }}
       sx={{
-        bgcolor: "transparent!important",
+        bgcolor: "#FFFFFF",
+        height: "max-content",
+        maxHeight: "80vh",
       }}
     >
       <StyledBox
@@ -84,6 +86,7 @@ const BottomSwippeable = (props) => {
           left: 0,
           bgcolor: theme.palette.common.black,
           height: "12px",
+          display: "none",
         }}
       >
         <Puller />
@@ -93,8 +96,9 @@ const BottomSwippeable = (props) => {
           px: ".1rem",
           pb: ".1rem",
           height: "100%",
+          mexHeight: "100%",
           overflow: "hidden",
-          borderRadius: `.5rem .5rem 0rem 0rem`,
+          borderRadius: `1rem 1rem 0rem 0rem`,
           borderTop: `.5px solid ${theme.palette.grey[500]}`,
           bgcolor: theme.palette.common.black,
         }}

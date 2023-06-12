@@ -239,6 +239,7 @@ const Contacts = ({}) => {
         alignItems: "flex-start",
         width: "100%",
         height: "100%",
+        pb: screen660 ? "2.2rem" : undefined,
       }}
     >
       {" "}
@@ -315,7 +316,7 @@ const Contacts = ({}) => {
             maxWidth: screen660 ? "100%" : "73%",
             // pb: screen660 && chatSubject !== {} ? "10rem" : undefined,
             overflowX: "auto",
-            pb: screen660 ? "1rem" : undefined,
+            // pb: screen660 ? "1rem" : undefined,
             boxShadow:
               "0px 8px 28px -6px rgba(24, 39, 75, 0.12), 0px 18px 88px -4px rgba(24, 39, 75, 0.14)",
           }}
