@@ -504,37 +504,41 @@ const QrCode = ({}) => {
                   </Typography>
                 </Typography>
               </Stack>
-              <Stack
-                direction={"row"}
-                sx={{
-                  alignItems: "center",
-                  width: "100%",
-                  justifyContent: "center",
-                  mb: screen870 ? ".3rem" : ".5rem",
-                }}
-              >
-                <Wifi
+              {guest?.event?.wifiCode?.length >= 1 ? (
+                <Stack
+                  direction={"row"}
                   sx={{
-                    color: theme.palette.common.white,
-                    fontSize: screen870 ? "14px" : "20px",
-                    mr: screen870 ? ".2rem" : ".5rem",
-                  }}
-                />
-                <Typography
-                  sx={{
-                    color: theme.palette.grey[400],
-                    fontWeight: theme.typography.fontWeightBold,
-                    mr: screen870 ? ".2rem" : ".5rem",
-                    color: theme.palette.common.white,
-                    fontSize: screen870 ? "12px" : "12px",
-                    textAlign: "justify",
-                    width: "max-content",
-                    transition: "3s all",
+                    alignItems: "center",
+                    width: "100%",
+                    justifyContent: "center",
+                    mb: screen870 ? ".3rem" : ".5rem",
                   }}
                 >
-                  {guest?.event?.wifiCode}
-                </Typography>
-              </Stack>
+                  <Wifi
+                    sx={{
+                      color: theme.palette.common.white,
+                      fontSize: screen870 ? "14px" : "20px",
+                      mr: screen870 ? ".2rem" : ".5rem",
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      color: theme.palette.grey[400],
+                      fontWeight: theme.typography.fontWeightBold,
+                      mr: screen870 ? ".2rem" : ".5rem",
+                      color: theme.palette.common.white,
+                      fontSize: screen870 ? "12px" : "12px",
+                      textAlign: "justify",
+                      width: "max-content",
+                      transition: "3s all",
+                    }}
+                  >
+                    {guest?.event?.wifiCode}
+                  </Typography>
+                </Stack>
+              ) : (
+                ""
+              )}
             </Stack>
           </Stack>
         </Stack>
