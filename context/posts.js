@@ -207,6 +207,7 @@ const PostContext = ({ children }) => {
       socket.off("NEW_COMMENT");
       socket.off("NEW_LIKE");
       socket.off("POST_REMOVED");
+      socket.off("WIFI_CODE");
     };
   }, [threadData]);
 
