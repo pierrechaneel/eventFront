@@ -325,7 +325,7 @@ const QrCode = ({}) => {
                   fontSize: screen660 ? "12px" : "12px",
                 }}
               >
-                Code Wi-fi
+                Code Wi-Fi
               </Typography>
               <Typography
                 sx={{
