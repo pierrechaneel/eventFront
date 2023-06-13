@@ -195,10 +195,10 @@ const ChatThread = ({ isThreaVisible, setISThreadVisisble }) => {
           setCommentText("");
           setCommentFileBlob(null);
           setCommentFileSelected(null);
-
+          /**
           setSnackMessage("Commentaire ajoutée avec succès");
           setSeverity("success");
-          setIsnackVisible(true);
+          setIsnackVisible(true); */
         })
         .catch((error) => {
           console.error(

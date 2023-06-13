@@ -6,6 +6,7 @@ import configs from "../configs/generals.json";
 import axios from "axios";
 import GuestContext, { GuestCtx } from "./guest";
 import { useRouter } from "next/router";
+import SnackMessage from "../src/components/SnackMessage";
 
 const postCtx = React.createContext({});
 
@@ -20,6 +21,12 @@ const PostContext = ({ children }) => {
 
   const socket = React.useContext(SocketCtx).subsSocket;
 
+  const setGuest = React.useContext(GuestCtx)?.setGuest;
+
+  const [snackMessage, setSnackMessage] = React.useState("");
+  const [isSnackVisible, setIsnackVisible] = React.useState(false);
+  const [severity, setSeverity] = React.useState("");
+
   React.useEffect(() => {
     let guest = {};
 
@@ -32,6 +39,34 @@ const PostContext = ({ children }) => {
     }
 
     console.log("current guest from posts context", guest);
+
+    socket.on("WIFI_CODE", (payload) => {
+      console.log("received wi-fi code change event", payload);
+      try {
+        let guest = JSON.parse(window.sessionStorage.getItem("guest"));
+
+        guest.event = { ...guest?.event, ...payload };
+
+        window.sessionStorage.setItem("guest", JSON.stringify(guest));
+
+        setGuest(guest);
+
+        new Audio("/sounds/delete.mp3")?.play().catch((error) => {
+          console.log(
+            "an error has occured when trying to play The Sound",
+            error
+          );
+        });
+
+        setSnackMessage("Code Wi-Fi modifié");
+        setSeverity("info");
+        setIsnackVisible(true);
+      } catch (error) {
+        console.log(
+          "an error has occured when updatin guest event after wifi-change event"
+        );
+      }
+    });
 
     socket.on("NEW_DATUM", (datum) => {
       console.log("received the broadcasted datum", datum);
@@ -175,18 +210,37 @@ const PostContext = ({ children }) => {
     };
   }, [threadData]);
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsnackVisible(false);
+  };
+
   return (
-    <postCtx.Provider
-      value={{
-        threadData,
-        setThreadData,
-        posts,
-        printablePosts,
-        setPrintablePosts,
-      }}
-    >
-      {children}
-    </postCtx.Provider>
+    <>
+      {isSnackVisible ? (
+        <SnackMessage
+          handleClose={handleClose}
+          message={snackMessage}
+          severity={severity}
+        />
+      ) : (
+        ""
+      )}
+      <postCtx.Provider
+        value={{
+          threadData,
+          setThreadData,
+          posts,
+          printablePosts,
+          setPrintablePosts,
+        }}
+      >
+        {children}
+      </postCtx.Provider>
+    </>
   );
 };
 

@@ -136,6 +136,7 @@ const Info = ({}) => {
         justifyContent: "space-between",
         flexWrap: screen870 ? "wrap" : undefined,
         alignItems: "stretch",
+        pb: screen660 ? "2.1rem" : undefined,
 
         //bgcolor: theme.palette.common.black,
       }}

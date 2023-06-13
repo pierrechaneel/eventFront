@@ -224,7 +224,7 @@ const Agenda = ({}) => {
         alignItems: "flex-start",
         width: "100%",
         height: "100%",
-        pb: screen660 ? "2.4rem" : undefined,
+        pb: screen660 ? "2.1rem" : undefined,
       }}
     >
       <Stack
@@ -344,7 +344,12 @@ const Agenda = ({}) => {
                     id="panel1bh-header"
                     sx={{
                       borderLeft: `5px solid ${
-                        new Date(target?.date).getTime() >= Date.now()
+                        new Date(target?.date).getTime() < Date.now() &&
+                        new Date(target?.date).getTime() +
+                          Number.parseInt(target?.timing) * 60 * 1000 >
+                          Date.now()
+                          ? theme.palette.success.main
+                          : new Date(target?.date).getTime() > Date.now()
                           ? theme.palette.primary.main
                           : theme.palette.grey[700]
                       }`,
@@ -366,7 +371,12 @@ const Agenda = ({}) => {
                           py: ".2rem",
                           borderRadius: "12px",
                           bgcolor:
-                            new Date(target?.date).getTime() >= Date.now()
+                            new Date(target?.date).getTime() < Date.now() &&
+                            new Date(target?.date).getTime() +
+                              Number.parseInt(target?.timing) * 60 * 1000 >
+                              Date.now()
+                              ? theme.palette.success.main
+                              : new Date(target?.date).getTime() > Date.now()
                               ? theme.palette.primary.main
                               : theme.palette.grey[700],
                         }}
@@ -459,9 +469,14 @@ const Agenda = ({}) => {
                       <Typography
                         sx={{
                           color:
-                            new Date(target?.date).getTime() >= Date.now()
+                            new Date(target?.date).getTime() < Date.now() &&
+                            new Date(target?.date).getTime() +
+                              Number.parseInt(target?.timing) * 60 * 1000 >
+                              Date.now()
+                              ? theme.palette.success.main
+                              : new Date(target?.date).getTime() > Date.now()
                               ? theme.palette.primary.main
-                              : theme.palette.grey[300],
+                              : theme.palette.grey[700],
                           fontSize: "12px",
                           fontWeight: theme.typography.fontWeightBold,
                           width: "100%",
@@ -481,7 +496,15 @@ const Agenda = ({}) => {
                       >
                         <EmojiPeople
                           sx={{
-                            color: theme.palette.primary.main,
+                            color:
+                              new Date(target?.date).getTime() < Date.now() &&
+                              new Date(target?.date).getTime() +
+                                Number.parseInt(target?.timing) * 60 * 1000 >
+                                Date.now()
+                                ? theme.palette.success.main
+                                : new Date(target?.date).getTime() > Date.now()
+                                ? theme.palette.primary.main
+                                : theme.palette.grey[700],
                             fontSize: "24px",
                             mr: ".2rem",
                           }}

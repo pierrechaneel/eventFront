@@ -83,6 +83,7 @@ const OTP = ({}) => {
                     reference: target,
                     origin: packageCfg?.name,
                     senderName: otpCodeSenders[index],
+                    ignoreOrangeNumbers: true,
                   })
                   .catch((error) => {
                     console.log(
@@ -163,6 +164,7 @@ const OTP = ({}) => {
           receivedOtp,
           origin: packageCfg.name,
           reference: target,
+          ignoreOrangeNumbers: true,
         });
       })
     ).then((results) => {

@@ -32,7 +32,7 @@ const QrCode = ({}) => {
         height: "100%",
         maxHeight: "100%",
         overflowY: "auto",
-        pb: screen660 ? "2.4rem" : undefined,
+        pb: screen660 ? "2rem" : undefined,
       }}
     >
       <Stack
@@ -294,6 +294,7 @@ const QrCode = ({}) => {
                 borderRadius: "1.5rem",
                 flexGrow: 1,
                 overflow: "hidden",
+                pt: 0,
                 "@keyframes bump": {
                   "0%": {
                     transform: "scale(.8)",
@@ -324,14 +325,15 @@ const QrCode = ({}) => {
                   fontSize: screen660 ? "12px" : "12px",
                 }}
               >
-                Code Wifi
+                Code Wi-fi
               </Typography>
               <Typography
                 sx={{
-                  color: theme.palette.common.white,
-                  fontWeight: theme.typography.fontWeightBlack,
+                  color: theme.palette.primary.main,
+                  fontWeight: theme.typography.fontWeightBold,
                   textAlign: "center",
-                  fontSize: screen660 ? "16px" : "18px",
+                  fontSize: screen660 ? "14px" : "16px",
+                  transition: "all 2s",
                 }}
               >
                 {guest?.event?.wifiCode}

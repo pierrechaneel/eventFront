@@ -25,6 +25,7 @@ const EmbededYt = ({}) => {
         flexGrow: 1,
         borderRadius: "1.5rem",
         overflow: "hidden",
+        pb: screen660 ? "2.1rem" : undefined,
       }}
     >
       <Box
@@ -61,7 +62,8 @@ const EmbededYt = ({}) => {
             width: "100%",
             my: screen660 ? ".3rem" : "1rem",
             textAlign: "center",
-            pb: screen660 ? "1.6rem" : undefined,
+            pb: screen660 ? ".8rem" : undefined,
+            pt: screen660 ? ".8rem" : undefined,
           }}
         >
           {lang === "fr"

@@ -388,7 +388,7 @@ const Profile = ({ setSecondaryMenu }) => {
           mt: screen660 ? ".5rem" : "1.5rem",
           flexWrap: screen660 ? "wrap" : undefined,
           alignItems: "stretch",
-          mb: screen660 ? "2.4rem" : undefined,
+          mb: screen660 ? "7.6rem" : undefined,
         }}
       >
         <Stack
