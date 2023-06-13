@@ -11,6 +11,7 @@ import { GuestCtx } from "../../context/guest";
 import { LangCtx } from "../../context/lang";
 import { viewportsCtx } from "../../context/viewports";
 import axios from "axios";
+import { Wifi } from "@mui/icons-material";
 
 const QrCode = ({}) => {
   const theme = useTheme();
@@ -312,32 +313,11 @@ const QrCode = ({}) => {
                 src={"/okapisaio.png"}
                 alt="qrcode"
                 style={{
-                  width: screen870 ? "150px" : "300px",
+                  width: screen870 ? "200px" : "350px",
                   mx: "auto",
                   animation: "bump 3s linear infinite",
                 }}
               />
-              <Typography
-                sx={{
-                  color: theme.palette.grey[200],
-                  fontWeight: theme.typography.fontWeightBold,
-                  textAlign: "center",
-                  fontSize: screen660 ? "12px" : "12px",
-                }}
-              >
-                Code Wi-Fi
-              </Typography>
-              <Typography
-                sx={{
-                  color: theme.palette.primary.main,
-                  fontWeight: theme.typography.fontWeightBold,
-                  textAlign: "center",
-                  fontSize: screen660 ? "14px" : "16px",
-                  transition: "all 2s",
-                }}
-              >
-                {guest?.event?.wifiCode}
-              </Typography>
               {/**<Typography
             sx={{
               color: theme.palette.common.white,
@@ -382,7 +362,7 @@ const QrCode = ({}) => {
                   sx={{
                     color: theme.palette.primary.main,
                     fontSize: screen870 ? "24px" : "44px",
-                    mb: "1rem",
+                    mb: ".5rem",
                   }}
                 />
               </Stack>
@@ -391,7 +371,7 @@ const QrCode = ({}) => {
                 sx={{
                   alignItems: "center",
                   width: "100%",
-                  mb: screen870 ? ".5rem" : "1.5rem",
+                  mb: screen870 ? ".3rem" : ".5rem",
                   justifyContent: "center",
                 }}
               >
@@ -428,7 +408,7 @@ const QrCode = ({}) => {
                 sx={{
                   alignItems: "center",
                   justifyContent: "center",
-                  mb: "1rem",
+                  mb: screen870 ? ".3rem" : ".5rem",
                 }}
               >
                 <LocationOn
@@ -457,7 +437,7 @@ const QrCode = ({}) => {
                 sx={{
                   alignItems: "center",
                   justifyContent: "center",
-                  mb: "1rem",
+                  mb: screen870 ? ".3rem" : ".5rem",
                   width: "100%",
                 }}
               >
@@ -522,6 +502,37 @@ const QrCode = ({}) => {
                       }
                     )}
                   </Typography>
+                </Typography>
+              </Stack>
+              <Stack
+                direction={"row"}
+                sx={{
+                  alignItems: "center",
+                  width: "100%",
+                  justifyContent: "center",
+                  mb: screen870 ? ".3rem" : ".5rem",
+                }}
+              >
+                <Wifi
+                  sx={{
+                    color: theme.palette.common.white,
+                    fontSize: screen870 ? "14px" : "20px",
+                    mr: screen870 ? ".2rem" : ".5rem",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    color: theme.palette.grey[400],
+                    fontWeight: theme.typography.fontWeightBold,
+                    mr: screen870 ? ".2rem" : ".5rem",
+                    color: theme.palette.common.white,
+                    fontSize: screen870 ? "12px" : "12px",
+                    textAlign: "justify",
+                    width: "max-content",
+                    transition: "3s all",
+                  }}
+                >
+                  {guest?.event?.wifiCode}
                 </Typography>
               </Stack>
             </Stack>
