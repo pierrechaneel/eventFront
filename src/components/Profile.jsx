@@ -17,8 +17,10 @@ import Close from "@mui/icons-material/Close";
 import { GuestCtx } from "../../context/guest";
 import SnackMessage from "./SnackMessage";
 import UploadProfile from "./UploadProfile";
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import GroupsIcon from '@mui/icons-material/Groups';
 import axios from "axios";
-
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import configs from "../../configs/generals.json";
 import { LangCtx } from "../../context/lang";
 import {
@@ -374,6 +376,7 @@ const Profile = ({ setSecondaryMenu }) => {
                 </Select>
               </Stack>
             </form>
+           
           </Stack>
         </Stack>
       </Stack>
@@ -391,6 +394,7 @@ const Profile = ({ setSecondaryMenu }) => {
           mb: screen660 ? "7.6rem" : undefined,
         }}
       >
+        
         <Stack
           sx={{
             width: screen660 ? "100%" : "70%",
@@ -405,6 +409,19 @@ const Profile = ({ setSecondaryMenu }) => {
             borderRadius: "1.5rem",
           }}
         >
+          <Typography
+                sx={{
+                  color: theme.palette.common.white,
+                  fontWeight: theme.typography.fontWeightBold,
+                  fontSize: "14px",
+                  textAlign: "center",
+                  mb: "1rem",
+                }}
+              >
+                {currentLanguage === "fr"
+                  ? "Code vestimentaire"
+                  : "Dress Code"}
+              </Typography>
           <Stack
             direction={"row"}
             sx={{
@@ -419,7 +436,8 @@ const Profile = ({ setSecondaryMenu }) => {
               // minHeight: screen660 ? "60vh" : undefined,
             }}
           >
-            {guest?.arrivalTemperature != 0 ? (
+            
+            {(
               <Stack
                 direction={"column"}
                 sx={{
@@ -435,6 +453,123 @@ const Profile = ({ setSecondaryMenu }) => {
                   height: screen660 ? "max-content" : undefined,
                 }}
               >
+                 <img
+          src="/j1.png"
+          alt="Visite Terrain"
+          style={{
+            width: "100%",
+            height: "max-content",
+          }} />
+                <Typography
+                  sx={{
+                    color: theme.palette.common.white,
+                    textAlign: "center",
+                    fontSize: "10px",
+                    fontWeight: theme.typography.fontWeightBold,
+                    mb: "1rem",
+                  }}
+                >
+                  {currentLanguage === "fr" ? "Visite Terrain -  27 Septembre 2023" : "Field visit - September 27, 2023"}
+                </Typography>
+              </Stack>
+            )}
+            {(
+              <Stack
+                direction={"column"}
+                sx={{
+                  alignItem: "center",
+                  width: screen660 ? "100%" : "30%",
+                  minWidth: "150px",
+                  p: "1rem",
+                  bgcolor: theme.palette.common.black,
+                  border: `1px solid ${theme.palette.grey[900]}`,
+                  borderRadius: "1rem",
+                  overflow: "hidden",
+                  m: ".3rem",
+                }}
+              >
+                <img
+          src="/j2.png"
+          alt="Kin the best"
+          style={{
+            width: "100%",
+            height: "max-content",
+          }} />
+                <Typography
+                  sx={{
+                    color: theme.palette.common.white,
+                    textAlign: "center",
+                    fontSize: "10px",
+                    fontWeight: theme.typography.fontWeightBold,
+                    mb: "1rem",
+                  }}
+                >
+                  {currentLanguage === "fr" ? "Team building - 29 Septembre 2023" : "Team building - 29 Septembre 2023"}
+                </Typography>
+              </Stack>
+            )}
+          </Stack>
+      
+        </Stack>
+        <Stack
+          sx={{
+            width: screen660 ? "100%" : "70%",
+            bgcolor: theme?.palette.common.black,
+            height: screen660 ? "max-content" : "100%",
+            maxHeight: screen660 ? "max-content" : "100%",
+            px: "2.5rem",
+            py: "2.5rem",
+            mr: screen660 ? undefined : "1.5rem",
+            mb: screen660 ? ".5rem" : undefined,
+            overflow: "hidden",
+            borderRadius: "1.5rem",
+          }}
+        >
+          <Typography
+                sx={{
+                  color: theme.palette.common.white,
+                  fontWeight: theme.typography.fontWeightBold,
+                  fontSize: "14px",
+                  textAlign: "center",
+                  mb: "1rem",
+                }}
+              >
+                {currentLanguage === "fr"
+                  ? "Activités"
+                  : "Activities"}
+              </Typography>
+          <Stack
+            direction={"row"}
+            sx={{
+              height: "max-content",
+              alignItems: "flex-start",
+              flexWrap: "wrap",
+              maxHeight: screen660 ? "max-content" : "100%",
+              overflowX: screen660 ? undefined : "hidden",
+              overflowY: "auto",
+              width: "100%",
+              justifyContent: "center",
+              // minHeight: screen660 ? "60vh" : undefined,
+            }}
+          >
+            
+            {guest?.arrivalTemperature !== "0" ? (
+              <Stack
+                direction={"column"}
+                sx={{
+                  alignItem: "center",
+                  width: screen660 ? "100%" : "30%",
+                  minWidth: "150px",
+                  p: "1rem",
+                  bgcolor: theme.palette.common.black,
+                  border: `1px solid ${theme.palette.grey[900]}`,
+                  borderRadius: "1rem",
+                  overflow: "hidden",
+                  m: ".3rem",
+                  height: screen660 ? "max-content" : undefined,
+                }}
+              >
+               
                 <Typography
                   sx={{
                     color: theme.palette.common.white,
@@ -444,7 +579,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     mb: "1rem",
                   }}
                 >
-                  {currentLanguage === "fr" ? "Arrivée" : "Arrival"}
+                  {currentLanguage === "fr" ? "Départ" : "Departure"}
                 </Typography>
                 <Stack
                   direction={"row"}
@@ -484,7 +619,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   </Typography>
                 </Stack>
 
-                {guest?.arrivalAirline ? (
+                {/* guest?.arrivalAirline ? (
                   <Stack
                     direction={"row"}
                     sx={{
@@ -515,7 +650,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   </Stack>
                 ) : (
                   ""
-                )}
+                )*/}
                 {guest?.arrivalAirport ? (
                   <Stack
                     direction={"row"}
@@ -526,7 +661,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       my: ".3rem",
                     }}
                   >
-                    <LocalAirport
+                    <DirectionsCarIcon
                       sx={{
                         color: theme.palette.primary.main,
                         fontSize: "16px",
@@ -592,7 +727,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       my: ".3rem",
                     }}
                   >
-                    <Thermostat
+                    <PhoneIphoneIcon
                       sx={{
                         color: theme.palette.primary.main,
                         fontSize: "16px",
@@ -609,7 +744,7 @@ const Profile = ({ setSecondaryMenu }) => {
                         ml: "0.3rem",
                       }}
                     >
-                      {guest?.arrivalTemperature} &#x2103;
+                      {guest?.arrivalTemperature} 
                     </Typography>
                   </Stack>
                 ) : (
@@ -619,7 +754,7 @@ const Profile = ({ setSecondaryMenu }) => {
             ) : (
               ""
             )}
-            {guest?.dinerTemperature != 0 ? (
+            {guest?.dinerTemperature !== "0" ? (
               <Stack
                 direction={"column"}
                 sx={{
@@ -643,7 +778,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     mb: "1rem",
                   }}
                 >
-                  {currentLanguage === "fr" ? "Dîner" : "Dinner"}
+                  {currentLanguage === "fr" ? "Visite sur Terrain" : "Field Visit"}
                 </Typography>
                 <Stack
                   direction={"row"}
@@ -693,7 +828,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       my: ".3rem",
                     }}
                   >
-                    <Restaurant
+                    <GroupsIcon
                       sx={{
                         color: theme.palette.primary.main,
                         fontSize: "16px",
@@ -726,7 +861,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       my: ".3rem",
                     }}
                   >
-                    <Thermostat
+                    <PhoneIphoneIcon
                       sx={{
                         color: theme.palette.primary.main,
                         fontSize: "16px",
@@ -743,7 +878,7 @@ const Profile = ({ setSecondaryMenu }) => {
                         ml: "0.3rem",
                       }}
                     >
-                      {guest?.dinerTemperature} &#x2103;
+                      {guest?.dinerTemperature}
                     </Typography>
                   </Stack>
                 ) : (
@@ -777,7 +912,7 @@ const Profile = ({ setSecondaryMenu }) => {
                     mb: "1rem",
                   }}
                 >
-                  {currentLanguage === "fr" ? "Départ" : "Departure"}
+                  {currentLanguage === "fr" ? "Retour" : "Back"}
                 </Typography>
                 <Stack
                   direction={"row"}
@@ -817,7 +952,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   </Typography>
                 </Stack>
 
-                {guest?.departureAirline ? (
+                {/*guest?.departureAirline ? (
                   <Stack
                     direction={"row"}
                     sx={{
@@ -849,7 +984,7 @@ const Profile = ({ setSecondaryMenu }) => {
                   </Stack>
                 ) : (
                   ""
-                )}
+                )*/}
                 {guest?.departureAirport ? (
                   <Stack
                     direction={"row"}
@@ -860,7 +995,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       my: ".3rem",
                     }}
                   >
-                    <LocalAirport
+                    <DirectionsCarIcon
                       sx={{
                         color: theme.palette.primary.main,
                         fontSize: "16px",
@@ -926,7 +1061,7 @@ const Profile = ({ setSecondaryMenu }) => {
                       my: ".3rem",
                     }}
                   >
-                    <Thermostat
+                    <PhoneIphoneIcon
                       sx={{
                         color: theme.palette.primary.main,
                         fontSize: "16px",
@@ -943,7 +1078,7 @@ const Profile = ({ setSecondaryMenu }) => {
                         ml: "0.3rem",
                       }}
                     >
-                      {guest?.departureTemperature} &#x2103;
+                      {guest?.departureTemperature} 
                     </Typography>
                   </Stack>
                 ) : (

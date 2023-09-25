@@ -68,16 +68,7 @@ const Plugins = ({ collapsedPlugin, setCollapsedPlugin, handleEditSelf }) => {
       link: `/guests/${router?.query?.guest}/chat`,
       icon: (props) => <Chat {...props} />,
     },
-    {
-      title: "Meeting",
-      link: `/guests/${router?.query?.guest}/meeting`,
-      icon: (props) => <MeetingRoom {...props} />,
-    },
-    {
-      title: "Publications",
-      link: `/guests/${router?.query?.guest}/meeting`,
-      icon: (props) => <LiveTv {...props} />,
-    },
+   
   ];
 
   return (

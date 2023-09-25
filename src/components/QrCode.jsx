@@ -149,33 +149,21 @@ const QrCode = ({}) => {
                 >
                   {lang === "fr"
                     ? [
-                        `, Je te souhaite la bienvenue en République Démocratique
-                du Congo, un pays avec beaucoup de ressources naturelles
-                (Diamant, Cobalt, Cuivre, Or, Coltant etc…). `,
-                        `La République
-                Démocratique du Congo (RDC) est organisée en 26 Provinces
-                administratives et entourée de 9 pays frontaliers : République
-                du Congo, République Centrafricaine, Sud-Soudan, Ouganda,
-                Rwanda, Burundi, Tanzanie, Zambie et Angola.`,
-                        `Du fait de sa position géographique, elle est à la fois membre de la Communauté de Développement de l’Afrique Australe et de la Communauté de l’Afrique de l’Est. `,
+                        `, je suis très heureux de t’accueillir pour le 2ème Séminaire Codir de l’année  que nous avons baptisé « Séminaire KIAMBOTE  » au village éponyme « Mbuela », situé dans la province du Kongo Central, Secteur de Kisantu.`,
+                        ``,
+                        ` `,
                         <br />,
                         <br />,
-                        `Au nom du `,
+                        ``,
                       ]
                     : [
-                        `, I welcome you to the Democratic Republic
-                of the Congo, a country with many natural resources
-                (Diamond, Cobalt, Copper, Gold, Coltant etc…). `,
-                        `The Republic
-                Democratic Republic of the Congo (DRC) is organized into 26 Provinces
-                administrative and surrounded by 9 border countries: Republic
-                of Congo, Central African Republic, South Sudan, Uganda,
-                Rwanda, Burundi, Tanzania, Zambia and Angola.`,
-                        `Due to its geographical position, it is both a member of the Southern African Development Community and the East African Community.
+                        `, i am very happy to welcome you for the 2nd Codir Seminar of the year which we have named “KIAMBOTE Seminar” in the eponymous village “Mbuela”, located in the province of Kongo Central, Kisantu Sector.`,
+                        ``,
+                        `
            `,
                         <br />,
                         <br />,
-                        `On behalf of the`,
+                        ``,
                         ` `,
                       ]}
                 </Typography>
@@ -190,10 +178,10 @@ const QrCode = ({}) => {
                   }}
                 >
                   {lang === "fr"
-                    ? `Comité de Direction d’Orange RDC`
-                    : `Orange DRC Management Committee`}
+                    ? ``
+                    : ``}
                 </Typography>{" "}
-                {lang === "fr" ? ` et de tous les` : `and all the`}{" "}
+                {lang === "fr" ? ` ` : ``}{" "}
                 <Typography
                   component={"span"}
                   sx={{
@@ -204,20 +192,27 @@ const QrCode = ({}) => {
                     lineHeight: "1.2",
                   }}
                 >
-                  {lang === "fr" ? `collègues` : `collegues`}
+                  {lang === "fr" ? `` : ``}
                 </Typography>{" "}
                 {lang === "fr"
                   ? [
-                      ` , je te souhaite une chaleureuse bienvenue à Kinshasa, capitale de la République Démocratique du Congo.`,
+                      `Je me réjouis d’avance de la qualité des échanges que nous aurons au sein de ce complexe agrotouristique où  j’en suis sûr au solde des ces quelques jours de communion, en ressortiront enrichis de belles nouvelles idées pour nos challenges et défis à venir.`,
                       <br />,
                       <br />,
-                      ` A toutes fins utiles, la rubrique « Sécurité et contacts utiles » te donne accès à des personnes ressources qui se tiendront avec plaisir à ta disposition pour rendre ta visite agréable chez `,
+                      `Je te souhaite la bienvenue à Kisantu. Nous découvrirons ensemble l'un des plus anciens jardin botanique d'Afrique centrale, domaine de 225 hectares abritant plus de 3 000 espèces lors de notre  team building !!`,
+                      <br />,
+                      <br />,
+                      ``,
+                  
                     ]
                   : [
-                      `, I wish you a warm welcome to Kinshasa, capital of the Democratic Republic of Congo.`,
+                      `I am looking forward to the quality of the exchanges that we will have within this agrotourism complex where I am sure that at the end of  these few of communion, we will emerge enriched with great new ideas for our challenges and challenges to come.`,
                       <br />,
                       <br />,
-                      ` For all intents and purposes, the "Safety and useful contacts" menu gives you access to resource persons who will be happy to be at your disposal to make your visit pleasant at `,
+                      `I welcome you to Kisantu. Together we will discover one of the oldest botanical gardens in Central Africa, an area of ​​225 hectares housing more than 3,000 species during our team building!!`, 
+                      <br />,
+                      <br />,
+                      ``,
                     ]}
                 <Typography
                   component={"span"}
@@ -229,7 +224,7 @@ const QrCode = ({}) => {
                     lineHeight: "1.2",
                   }}
                 >
-                  {lang === "fr" ? " Orange RDC" : "Orange DRC"}
+                  {lang === "fr" ? "Kuisa Kiamboté" : "Kuisa Kiamboté"}
                 </Typography>{" "}
                 .
               </Typography>

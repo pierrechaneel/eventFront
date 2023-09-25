@@ -39,84 +39,49 @@ const Info = ({}) => {
 
   const contacts = [
     {
-      name: "Ben Cheick HAIDARA",
-      title: lang === "fr" ? `Directeur Général` : `CEO`,
-      phoneNumber: "+243 852 400 045",
-      emailAdress: "Ben-Cheick.HAIDARA@orange.com",
-    },
-    {
-      name: "Nancy  MBUNGU",
-      title:
-        lang === "fr"
-          ? "Directrice des Ressources Humaines et Sécurité"
-          : "Head of Human Ressources and Security",
-      phoneNumber: "+243 898 900 257",
-      emailAdress: "Nancy.MBUNGU@orange.com",
-    },
-    {
-      name: "Julie KOFFI",
-      title: lang === "fr" ? "PMO du Directeur Général" : "PMO Officer",
-      phoneNumber: "+243 898 900 018",
-      emailAdress: "julie.KOFFI@orange.com",
-    },
-    {
-      name: "Samantha MUKENGE",
-      title:
-        lang === "fr" ? "Assistante du Directeur Général" : "CEO's Assistant",
-      phoneNumber: "+243 898900566",
-      emailAdress: "SMukenge.ext@orange.com",
-    },
-    {
-      name: "Richard MUKENDI",
-      title: lang === "fr" ? "Chauffeur du DG" : "CEO's Driver",
-      phoneNumber: "+243 852 100 223",
-      emailAdress: "Richard.MUKENDI@orange.com",
-    },
-    {
-      name: "Dieumerci MUEMBO",
-      title:
-        lang === "fr"
-          ? "Officier de sûreté / sécurité (OSS)"
-          : "Security Officer",
-      phoneNumber: "+243 898 900 910",
-      emailAdress: "DMUEMBO.ext@orange.com",
-    },
-    {
-      name: "Jules KWETUTUKA",
-      title: lang === "fr" ? "Responsable Protocole" : "Protocol Manager",
-      phoneNumber: "+243 894 448 767",
-      emailAdress: "JKWETUTUKA.ext@orange.com",
-    },
-    {
-      name: "Guelord MAKITU",
-      title: lang === "fr" ? "Responsable charroi" : "Transportation Manager",
-      phoneNumber: "+243 898 900 557",
-      emailAdress: "GMAKITU.ext@orange.com",
-    },
-    {
       name: "Numéro Vert",
-      title: lang === "fr" ? "Urgence Santé" : "Health Emergency",
+      title: lang === "fr" ? `Urgence Santé` : `Health Emergency`,
       phoneNumber: "+243 851 727 547",
       emailAdress: "",
     },
     {
-      name: "Junior BILO",
-      title: lang === "fr" ? "IT/Connectivité" : "IT/Internet",
-      phoneNumber: "+243 898 900 362",
-      emailAdress: "",
+      name: "Dieu Merci MUEMBO",
+      title:
+        lang === "fr"
+          ? "Sécurité physique et Sureté"
+          : "Head of Human Ressources and Security",
+      phoneNumber: "+243 898 900 910",
+      emailAdress: "dmuembo.ext@orange.com",
     },
     {
-      name: "Godefroid GONDA",
-      title: lang === "fr" ? "Moyens Généraux" : "General services",
-      phoneNumber: "+243 848 410 167",
-      emailAdress: "",
+      name: "Guelord MAKITU",
+      title: lang === "fr" ? "Responsable charroi" : "Transport manager",
+      phoneNumber: "+243 898 900 557",
+      emailAdress: "Gmakitu.ext@orange.com",
     },
     {
-      name: "Helpdesk",
-      title: "Helpdesk",
+      name: "Toto ",
+      title:
+        lang === "fr" ? "Président du comité" : "Committee Chairman",
+      phoneNumber: "+243 844 275 050",
+      emailAdress: "SMukenge.ext@orange.com",
+    },
+    {
+      name: "Julie KOFFI",
+      title: lang === "fr" ? "Coordination" : "Coordination",
+      phoneNumber: "+243 898 900 018",
+      emailAdress: "Richard.MUKENDI@orange.com",
+    },
+    {
+      name: "HelpDesk",
+      title:
+        lang === "fr"
+          ? "HelpDesk"
+          : "HelpDesk",
       phoneNumber: "500",
       emailAdress: "",
     },
+   
   ];
 
   return (
@@ -154,7 +119,7 @@ const Info = ({}) => {
         }}
       >
         <img
-          src="/kinSafeZones.png"
+          src="/carte.jpg"
           alt="safe zones"
           style={{
             width: "100%",
@@ -329,7 +294,7 @@ const Info = ({}) => {
         }}
       >
         <img
-          src="/kinCity.png"
+          src="/kongo.jpeg"
           alt="Kin the best"
           style={{
             width: "100%",
@@ -380,11 +345,11 @@ const Info = ({}) => {
               }}
             >
               {lang === "fr"
-                ? ` Vous serez pris en charge à l’aéroport par le protocole ORDC. En
+                ? `En
               cas de problème, contactez les personnes en charge de la sécurité
               (Responsable de la Sécurité, Protocole ou Assistante du Directeur
               Général).`
-                : `You will be picked up at the airport by the ORDC protocol. In
+                : `In
               in the event of a problem, contact the people in charge of security
               (Head of Security, Protocol or Assistant to the Director
               General).`}
@@ -417,27 +382,37 @@ const Info = ({}) => {
             <Stack>
               {[
                 lang === "fr"
-                  ? "Ne prenez jamais de taxi. Des véhicules seront mis à votre disposition"
-                  : `Never take a taxi. Vehicles will be made available to you`,
+                  ? "Quitter la ville de Kinshasa avant 6 heures du matin pour éviter les embouteillages et surtout sur la route Matadi Kibala, Mitendi et celle du péage de Kasangulu"
+                  : `Leave the city of Kinshasa before 6 a.m. to avoid traffic jams and especially on the Matadi Kibala, Mitendi and Kasangulu toll roads`,
                 lang === "fr"
-                  ? "Portez votre ceinture de sécurité en voiture et verrouillez vos portières"
+                  ? "Portez votre ceinture de sécurité en voiture et verrouillez vos portières "
                   : "Wear your seat belt in the car and lock your doors",
                 lang === "fr"
-                  ? "Ne vous déplacez jamais seul(e) mais accompagné(e) d’un chauffeur ou d’un collaborateur de Orange RDC"
-                  : "Never travel alone but accompanied by a driver or an Orange DRC employee",
+                  ? "Toujours circuler à bord des véhicules vitres fermées et portes verrouillées"
+                  : "Always travel in vehicles with windows closed and doors locked",
                 lang === "fr"
-                  ? "Pour tout trajet vers un site non RDC, informez le Responsable de la Sécurité ou le DG ORDC"
-                  : "For any trip to a non-RDC site, inform the Security Manager or the CEO ORDC",
+                  ? "Eviter si possible les déplacements de nuit "
+                  : "Avoid traveling at night if possible",
                 lang === "fr"
-                  ? "Mémorisez les adresses clés (hébergement, siège de la société, Ambassade de France, etc.) "
-                  : "Memorize the key addresses (accommodation, company headquarters, French Embassy, ​​etc.)",
+                  ? "Eviter les déplacements à pied et ce, même sur une distance courte "
+                  : "Avoid traveling on foot, even over a short distance",
                 lang === "fr"
-                  ? "Ayez toujours sur vous une copie de vos documents d’identité (passeport muni du visa, billet d’avion, etc.) et ayez une copie électronique de votre passeport sur votre smartphone"
-                  : "Always carry a copy of your identity documents with you (passport with visa, plane ticket, etc.) and have an electronic copy of your passport on your smartphone",
+                  ? "En cas de sortie véhiculée hors des limites de la ville, essayez de partir à plusieurs véhicules "
+                  : "In the event of a vehicle exit outside the city limits, try to leave with several vehicles",
                 lang === "fr"
+                  ? "Eviter de vous déplacer avec des sommes d’argent importante pour éviter la convoitise, ne porter pas de signes ostentatoires (bijoux, montre de valeur)."
+                  : "Avoid carrying large sums of money to avoid covetousness, do not wear ostentatious symbols (jewelry, valuable watches).",
+              
+                  lang === "fr"
+                  ? "Pour la visite des marchés se faire toujours accompagner par les éléments PNC/Delta."
+                  : "When visiting the markets, always be accompanied by PNC/Delta elements.",
+                  lang === "fr"
+                  ? "Ayez toujours sur vous une copie de vos documents d’identité (Carte d’électeur, passeport muni du visa, billet d’avion, etc.) et ayez une copie électronique de vos cartes d’identités sur votre smartphone "
+                  : "Always carry a copy of your identity documents with you (voter card, passport with visa, plane ticket, etc.) and have an electronic copy of your identity cards on your smartphone",
+                  lang === "fr"
                   ? "Ayez toujours avec vous vos médicaments"
-                  : "Always have your medication with you",
-              ]?.map((target) => {
+                  : "Always have your medications with you",
+                ]?.map((target) => {
                 return (
                   <Stack
                     direction={"row"}
@@ -493,14 +468,17 @@ const Info = ({}) => {
             <Stack>
               {[
                 lang === "fr"
-                  ? "Respectez strictement les lois en vigueur dans le pays. Certaines interdictions sont strictement réprimées (usage de stupéfiants et commerce de pierres précieuses). En cas de doute, questionnez le Responsable de la Sécurité"
-                  : "Strictly respect the laws in force in the country. Certain prohibitions are strictly repressed (use of narcotics and trade in precious stones). If in doubt, ask the Security Manager",
+                  ? "Ne laisser aucune personne inconnue entrer dans votre habitation, recevez- les à la porte"
+                  : "Do not let any unknown person enter your home, receive them at the door",
                 lang === "fr"
+                  ? "Lorsque vous quittez vos locaux ou habitations, pensez à fermer toutes les portes et fenêtres"
+                  : "When you leave your premises or homes, remember to close all doors and windows",
+                lang === "fr"
+                  ? "Vérifiez régulièrement, les issues et systèmes de fermetures ainsi que la sécurité passive de vos sites (serrure, fenêtre, porte etc.)"
+                  : "Regularly check the exits and closing systems as well as the passive security of your sites (lock, window, door, etc.)",
+                  lang === "fr"
                   ? "Restez maître de vous en cas de contrôle et n’élevez jamais le ton"
-                  : "Stay in control in case of control and never raise your voice",
-                lang === "fr"
-                  ? "La prise de photographies du palais présidentiel, aéroports, sites militaires, maisons d’arrêt, centrales d’énergie, cérémonies et cortèges officiels où est présent le Chef de l’Etat peut entraîner une arrestation. La prise de clichés de scènes de mendicité ou obscènes peut également entraîner des poursuites"
-                  : "Taking photographs of the presidential palace, airports, military sites, remand prisons, power stations, ceremonies and official processions where the Head of State is present may lead to an arrest. Taking pictures of scenes of begging or obscene may also result in prosecution",
+                  : "Remain in control if controlled and never raise your voice",
               ]?.map((target) => {
                 return (
                   <Stack
@@ -545,53 +523,8 @@ const Info = ({}) => {
               height: "max-content",
             }}
           >
-            <Typography
-              sx={{
-                color: theme.palette.common.white,
-                fontWeight: theme.typography.fontWeightBold,
-                fontSize: "12px",
-              }}
-            >
-              {lang === "fr" ? "En cas de danger" : "In case of danger"}
-            </Typography>
-            <Stack>
-              {[
-                lang === "fr"
-                  ? "Si vous êtes seul(e) et que vous vous sentez en danger, rejoignez l’un des points connus (hébergement, siège de la société, Ambassade de France) et prévenez le plus vite possible le Responsable de la Sécurité ou votre contact local"
-                  : "If you are alone and you feel in danger, go to one of the known points (accommodation, company headquarters, French Embassy) and notify the Security Manager or your local contact as soon as possible. ",
-                lang === "fr"
-                  ? "Appliquez immédiatement et strictement les consignes qui peuvent vous être données par le Responsable de la Sécurité ou par votre contact à Orange RDC"
-                  : "Appliquez immédiatement et strictement les consignes qui peuvent vous être données par le Responsable de la Sécurité ou par votre contact à Orange RDC",
-              ]?.map((target) => {
-                return (
-                  <Stack
-                    direction={"row"}
-                    sx={{
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                      my: ".5rem",
-                    }}
-                  >
-                    <ArrowRightAlt
-                      sx={{
-                        color: theme.palette.common.white,
-                      }}
-                    />
-                    <Typography
-                      sx={{
-                        color: theme.palette.common.white,
-                        fontWeight: theme.typography.fontWeightBold,
-                        fontSize: "12px",
-                        p: 0,
-                        m: 0,
-                      }}
-                    >
-                      {target}
-                    </Typography>
-                  </Stack>
-                );
-              })}
-            </Stack>
+          
+          
           </Stack>
           <Stack
             direction={"column"}
@@ -613,7 +546,7 @@ const Info = ({}) => {
                 fontSize: "12px",
               }}
             >
-              Addresses
+            
             </Typography>
 
             <Stack
@@ -621,7 +554,8 @@ const Info = ({}) => {
                 p: "1rem",
               }}
             >
-              {[
+              {/*
+              [
                 {
                   name: "Fleuve Congo Hôtel",
                   addresse: "119 Bd Colonel Tshatshi, Kinshasa",
@@ -728,7 +662,9 @@ const Info = ({}) => {
                     </Stack>
                   </Stack>
                 );
-              })}
+              })
+              
+              */}
             </Stack>
           </Stack>
         </Stack>

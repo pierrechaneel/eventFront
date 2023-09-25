@@ -640,13 +640,7 @@ const AppLayout = ({ children }) => {
                   }}
                 >
                   {" "}
-                  <img
-                    src={"/saio.png"}
-                    alt="orange zone saio"
-                    style={{
-                      width: screen660 ? "75px" : "120px",
-                    }}
-                  />
+                  
                   {screen660 ? (
                     <Stack
                       onClick={handleLogout}

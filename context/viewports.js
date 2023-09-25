@@ -73,11 +73,6 @@ const ViewportsContext = ({ children }) => {
       icon: (props) => <Info {...props} />,
     },
     {
-      title: "Live",
-      link: `/guests/${guestObj?.accessKey}/meeting`,
-      icon: (props) => <LiveTv {...props} />,
-    },
-    {
       title: lang === "fr" ? "Instant partage" : "Sharing",
       link: `/guests/${guestObj?.accessKey}/social-wall`,
       icon: (props) => <PostAdd {...props} />,
@@ -125,11 +120,6 @@ const ViewportsContext = ({ children }) => {
               : "Safety and Useful contacts",
           link: `/guests/${guestObj?.accessKey}/infos`,
           icon: (props) => <Info {...props} />,
-        },
-        {
-          title: "Live",
-          link: `/guests/${guestObj?.accessKey}/meeting`,
-          icon: (props) => <LiveTv {...props} />,
         },
         {
           title: lang === "fr" ? "Instant partage" : "Sharing",
