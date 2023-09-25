@@ -196,7 +196,7 @@ const QrCode = ({}) => {
                 </Typography>{" "}
                 {lang === "fr"
                   ? [
-                      `Je me réjouis d’avance de la qualité des échanges que nous aurons au sein de ce complexe agrotouristique où  j’en suis sûr au solde des ces quelques jours de communion, en ressortiront enrichis de belles nouvelles idées pour nos challenges et défis à venir.`,
+                      `Je me réjouis d’avance de la qualité des échanges que nous aurons au sein de ce complexe agrotouristique où  j’en suis sûr au solde des ces quelques jours de communion, nous en ressortirons enrichis de belles nouvelles idées pour nos challenges et défis à venir.`,
                       <br />,
                       <br />,
                       `Je te souhaite la bienvenue à Kisantu. Nous découvrirons ensemble l'un des plus anciens jardin botanique d'Afrique centrale, domaine de 225 hectares abritant plus de 3 000 espèces lors de notre  team building !!`,
