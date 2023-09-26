@@ -64,13 +64,13 @@ const Info = ({}) => {
       title:
         lang === "fr" ? "Président du comité" : "Committee Chairman",
       phoneNumber: "+243 844 275 050",
-      emailAdress: "SMukenge.ext@orange.com",
+      emailAdress: "Toto.sumpi@orange.com",
     },
     {
       name: "Julie KOFFI",
       title: lang === "fr" ? "Coordination" : "Coordination",
       phoneNumber: "+243 898 900 018",
-      emailAdress: "Richard.MUKENDI@orange.com",
+      emailAdress: "Julie.koffi@orange.com",
     },
     {
       name: "HelpDesk",
